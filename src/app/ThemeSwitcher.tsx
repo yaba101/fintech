@@ -25,7 +25,7 @@ const ThemeSwitcher = () => {
   }, [setTheme]);
   console.log({ currentTheme });
   return (
-    <div className="space-x-3">
+    <div className="space-x-3 mt-0.5">
       <div
         className="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
         onClick={toggleTheme}

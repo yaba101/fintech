@@ -24,6 +24,8 @@ import Column from "./column";
 import ThemeSwitcher from "./ThemeSwitcher";
 import Toggle from "./Toggle";
 import DropDown from "./DropDown";
+import HalfDonutChart from "./HalfPieChart";
+import { data } from "../../data";
 const userNavigation = [
   { name: "Your profile", href: "#" },
   { name: "Sign out", href: "#" },
@@ -203,10 +205,9 @@ export default function Example() {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-          {/* Sidebar component, swap this element with another sidebar if you like */}
+        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-56 lg:flex-col">
           <div
-            className="flex grow flex-col gap-y-5 overflow-y-hidden border-r border-gray-900 shadow-md shadow-black rounded-lg dark:text-gray-50 px-6 my-2"
+            className="flex grow flex-col gap-y-2 overflow-y-hidden border-r border-gray-900 shadow-md shadow-black rounded-lg dark:text-gray-50 px-6 my-2"
             style={{ background: "#1d1d41" }}
           >
             <nav className="flex flex-1 flex-col mt-8">
@@ -220,7 +221,7 @@ export default function Example() {
                           className={classNames(
                             item.current
                               ? "bg-indigo-600 text-gray-100"
-                              : "text-gray-300 hover:text-gray-300 hover:bg-gray-50",
+                              : "dark:text-gray-100 hover:text-gray-800 hover:bg-gray-300",
                             "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                           )}
                         >
@@ -249,7 +250,7 @@ export default function Example() {
                           className={classNames(
                             item.current
                               ? "bg-indigo-600 text-gray-100"
-                              : "text-gray-300 hover:text-gray-200 hover:bg-gray-50",
+                              : "dark:text-gray-100 hover:text-gray-800 hover:bg-gray-300",
                             "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                           )}
                         >
@@ -269,7 +270,7 @@ export default function Example() {
                     <li>
                       <a
                         className={
-                          "cursor-pointer text-gray-300 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                          "cursor-pointer text-gray-300 group flex gap-x-2 rounded-md p-2 text-sm leading-6 font-semibold"
                         }
                       >
                         <MoonIcon className="h-6 w-6 shrink-0 text-gray-100 dark:text-gray-400" />
@@ -319,7 +320,7 @@ export default function Example() {
           </a>
         </div>
 
-        <main className="py-10 lg:pl-72">
+        <main className="py-10  lg:pl-72 ">
           <div className="px-4 sm:px-6 lg:px-8">
             <Column />
           </div>
