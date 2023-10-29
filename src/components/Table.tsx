@@ -32,9 +32,9 @@ const Item = [
 
 export default function Table() {
   return (
-    <div style={{ background: "#1d1d41" }}>
+    <div className="rounded-md" style={{ background: "#1d1d41" }}>
       <div className="flex my-3 items-center shadow-xl  ">
-        <h4 className="mr-5 text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap">
+        <h4 className="mr-5  text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2">
           Recent Transactions
         </h4>
         <DatePicker />
