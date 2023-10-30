@@ -11,7 +11,7 @@ export default function Stats({
 }) {
   return (
     <>
-      <div className="flex items-end justify-between space-x-6 rounded-lg border dark:border-gray-900 shadow-lg p-4  dark:bg-dark bg-gray-50">
+      <div className="flex flex-grow items-end justify-between space-x-6 rounded-lg border dark:border-gray-900 shadow-lg p-4 dark:bg-dark bg-gray-50">
         <div className="flex items-center gap-3">
           <span
             className={`hidden rounded-xl ${iconBgColor} p-2 dark:text-gray-100 sm:block`}

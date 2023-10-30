@@ -1,10 +1,8 @@
 "use client";
 import { Fragment, useState } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
-  CalendarIcon,
-  ChartPieIcon,
   BuildingStorefrontIcon,
   FolderIcon,
   HomeIcon,
@@ -12,24 +10,15 @@ import {
   XMarkIcon,
   MoonIcon,
   WalletIcon,
-  ArrowUpTrayIcon,
   Cog6ToothIcon,
   LockClosedIcon,
   ChatBubbleBottomCenterTextIcon,
-  ChevronDownIcon,
-  ArrowLongUpIcon,
   ArrowLeftIcon,
 } from "@heroicons/react/24/outline";
-import Column from "./column";
-import ThemeSwitcher from "./ThemeSwitcher";
-import Toggle from "./Toggle";
-import DropDown from "./DropDown";
-import HalfDonutChart from "./HalfPieChart";
-import { data } from "../../data";
-const userNavigation = [
-  { name: "Your profile", href: "#" },
-  { name: "Sign out", href: "#" },
-];
+import Column from "../components/ColumnContainer";
+import ThemeSwitcher from "../components/ThemeSwitcher";
+import DropDown from "../components/SideBarDropDown";
+
 const FirstNavSection = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
   { name: "Account", href: "#", icon: UsersIcon, current: false },
@@ -120,15 +109,7 @@ export default function Example() {
                       </button>
                     </div>
                   </Transition.Child>
-                  {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex grow flex-col gap-y-5 overflow-y-hidden dark:bg-dark bg-slate-50 dark:text-gray-50 px-6 pb-2">
-                    {/* <div className="flex h-16 shrink-0 items-center">
-                      <img
-                        className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                        alt="Your Company"
-                      />
-                    </div> */}
                     <nav className="flex flex-1 flex-col">
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
                         <li>

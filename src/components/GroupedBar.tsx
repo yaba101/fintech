@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import React from "react";
-import Drop from "./Drop";
+import Drop from "./DropDown";
 
 export interface IData {
   label: string;
@@ -110,7 +110,7 @@ export default function GroupedBarChart({ data }: Props) {
 
   return (
     <div className=" dark:bg-dark rounded-md  px-2 py-2 bg-gray-50 my-3 shadow-lg">
-      <div className="flex my-3 py-3 items-center   ">
+      <div className="flex my-3 py-3 items-center ">
         <h4 className="mr-5  text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2">
           Insights
         </h4>
@@ -125,7 +125,7 @@ export default function GroupedBarChart({ data }: Props) {
         </div>
       </div>
       <svg
-        className="w-full h-full"
+        className="w-full h-full text-center"
         width={width + margin.left + margin.right}
         height={height + margin.top + margin.bottom}
       >

@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { data } from "../../data";
 import HalfDonutChart from "./HalfPieChart";
-import Drop from "./Drop";
+import Drop from "./DropDown";
 
 export default function DetailCard({
   colors,

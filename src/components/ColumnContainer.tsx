@@ -1,19 +1,11 @@
-import {
-  ArrowDownLeftIcon,
-  ArrowUpRightIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/20/solid";
-import { data } from "../../data";
-import AddAccountCard, { SkeletonAddAccountCard } from "./AddAccountCard";
-import Card, { SkeletonCard } from "./Card";
-import DetailCard, { DetailCardSkeleton } from "./DetailCard";
-import Stats, { SkeletonStats } from "./Stats";
-import DatePicker from "@/components/DatePicker";
-import SearchInput, { SearchInputSkeleton } from "@/components/SearchInput";
-import Table, { TableSkeleton } from "@/components/Table";
-import ArrowTopRightOnSquareIcon from "@heroicons/react/20/solid/esm/ArrowTopRightOnSquareIcon";
+import { ArrowDownLeftIcon, ArrowUpRightIcon } from "@heroicons/react/20/solid";
+import AddAccountCard from "./SummaryCard";
+import Card from "./Card";
+import DetailCard from "./DetailCard";
+import Stats from "./Stats";
+import SearchInput from "@/components/SearchInput";
+import Table from "@/components/Table";
 import GroupedBarChart, { IGroupedData } from "./GroupedBar";
-import Drop from "./Drop";
 const colors = [
   { color: "#146f43", title: "Salary" },
   { color: "#2d23c2", title: "Profit" },
@@ -42,7 +34,6 @@ export default function Column() {
             Availability
           </h1>
           <Card title="Net Worth" text="$45,032.00" buttonText="View Details" />
-          {/* <SkeletonCard /> */}
 
           <Stats
             icon={
@@ -52,7 +43,7 @@ export default function Column() {
             textBgColor="bg-green-300"
             textColor="text-emerald-400"
           />
-          {/* <SkeletonStats /> */}
+
           <DetailCard colors={colors} title="Cash in Activity" />
         </div>
         <div className="column-3 flex-grow w-full h-full my-2 rounded-md mx-1">
@@ -62,7 +53,7 @@ export default function Column() {
           <p className="leading-7 text-center m-0 text-gray-400">
             Here is {"what's"} up with your finances today
           </p>
-          <div className="flex mt-5 flex-grow space-x-1 w-full">
+          <div className="flex mt-5 space-x-1 flex-grow flex-1">
             <Stats
               icon={
                 <ArrowDownLeftIcon className="h-6 w-6 shrink-0 text-gray-100 dark:text-gray-100" />
@@ -80,20 +71,16 @@ export default function Column() {
               textColor="text-red-400"
             />
           </div>
+
           <div className="w-full">
             <GroupedBarChart data={GROUPED_BAR_CHART_DATA} />
             <Table />
           </div>
-          {/* <TableSkeleton /> */}
         </div>
 
         <div className="column-3 flex-grow  h-full my-8 rounded-md px-1.5 ">
           <SearchInput />
-
           <AddAccountCard />
-
-          {/* <SearchInputSkeleton /> */}
-          {/* <SkeletonAddAccountCard /> */}
           <Stats
             icon={
               <ArrowUpRightIcon className="h-6 w-6 shrink-0 text-gray-100 dark:text-gray-100" />
@@ -103,7 +90,6 @@ export default function Column() {
             textColor="text-red-400"
           />
           <DetailCard colors={colors2} title="Cash out Activity" />
-          {/* <DetailCardSkeleton /> */}
         </div>
       </div>
     </div>

@@ -33,8 +33,8 @@ const Item = [
 export default function Table() {
   return (
     <div className="rounded-md dark:bg-dark w-full bg-gray-50 shadow-lg">
-      <div className="flex my-3 py-3 items-center ">
-        <h4 className="mr-5  text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2">
+      <div className="flex my-3 py-3 items-center flex-grow">
+        <h4 className="mr-5 text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2">
           Recent Transactions
         </h4>
         <DatePicker />
@@ -42,6 +42,7 @@ export default function Table() {
           <SearchInput />
         </div>
       </div>
+
       <div className="px-4 sm:px-6 lg:px-8 shadow-xl rounded-md ">
         <div className="mt-8 flow-root">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
