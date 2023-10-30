@@ -51,7 +51,7 @@ function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function SideBar({ children }: { children?: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -183,7 +183,7 @@ export default function Example() {
                             <li>
                               <a
                                 className={
-                                  "cursor-pointer dark:text-gray-300 group mb-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold mt-6"
+                                  "cursor-pointerdark:text-gray-300 group mb-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold mt-6"
                                 }
                               >
                                 <ArrowLeftIcon className="h-6 w-6 shrink-0 text-gray-400 dark:text-gray-400" />
@@ -284,7 +284,7 @@ export default function Example() {
                     </li>
                   </ul>
                 </li>
-                <li className="mb-4">
+                <li className="mb-4 bottom-0">
                   <SideBarDropDown />
                 </li>
               </ul>
@@ -316,11 +316,8 @@ export default function Example() {
             Logout
           </a>
         </div>
-
         <main className="py-10 lg:pl-60 ">
-          <div className="px-4 sm:px-6 lg:px-8">
-            <ColumnContainer />
-          </div>
+          <div className="px-4 sm:px-6 lg:px-8">{children}</div>
         </main>
       </div>
     </>

@@ -1,6 +1,6 @@
+"use client";
 import * as d3 from "d3";
 import { MouseEvent, useEffect, useRef, useState } from "react";
-import React from "react";
 import Drop from "./DropDown";
 
 export interface IData {

@@ -1,3 +1,4 @@
+"use client";
 import { ArrowDownLeftIcon, ArrowUpRightIcon } from "@heroicons/react/20/solid";
 import AddAccountCard from "@/components/SummaryCard";
 import Card from "@/components/Card";
@@ -6,26 +7,23 @@ import Stats from "@/components/Stats";
 import SearchInput from "@/components/SearchInput";
 import Table from "@/components/Table";
 import GroupedBarChart, { IGroupedData } from "./GroupedBar";
-const colors = [
-  { color: "#146f43", title: "Salary" },
-  { color: "#2d23c2", title: "Profit" },
-];
-const colors2 = [
-  { color: "#cf3747", title: "Rent" },
-  { color: "#bf6a74", title: "Subscription" },
-];
-const GROUPED_BAR_CHART_DATA: IGroupedData[] = [
-  { label: "January", values: [60, 80] },
-  { label: "February", values: [160, 200] },
-  { label: "March", values: [60, 40] },
-  { label: "April", values: [80, 120] },
-  { label: "May", values: [90, 100] },
-  { label: "June", values: [70, 110] },
-  { label: "July", values: [50, 70] },
-  { label: "August", values: [40, 60] },
-];
+import DetailCardSkeleton from "./skeleton/DetailCardSkeleton";
+import { Suspense, useTransition } from "react";
 
-export default function Column() {
+type CashProps = {
+  color: string;
+  title: string;
+};
+
+export default function Column({
+  bargraphData,
+  cashInData,
+  cashOutData,
+}: {
+  bargraphData: IGroupedData[];
+  cashInData: CashProps[];
+  cashOutData: CashProps[];
+}) {
   return (
     <div className="flex flex-row ">
       <div className="flex flex-col md:flex-row w-11/12">
@@ -44,7 +42,8 @@ export default function Column() {
             textColor="text-emerald-400"
           />
 
-          <DetailCard colors={colors} title="Cash in Activity" />
+          <DetailCard colors={cashInData} title="Cash in Activity" />
+          {/* <Suspense fallback={<DetailCardSkeleton />}></Suspense> */}
         </div>
         <div className="column-3 flex-grow w-full h-full my-2 rounded-md mx-1">
           <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center">
@@ -73,7 +72,7 @@ export default function Column() {
           </div>
 
           <div className="w-full">
-            <GroupedBarChart data={GROUPED_BAR_CHART_DATA} />
+            <GroupedBarChart data={bargraphData} />
             <Table />
           </div>
         </div>
@@ -89,7 +88,8 @@ export default function Column() {
             textBgColor="bg-red-400"
             textColor="text-red-400"
           />
-          <DetailCard colors={colors2} title="Cash out Activity" />
+
+          <DetailCard colors={cashOutData} title="Cash out Activity" />
         </div>
       </div>
     </div>
