@@ -38,7 +38,7 @@ export default function Table() {
           Recent Transactions
         </h4>
         <DatePicker />
-        <div className="w-full">
+        <div className="px-2">
           <SearchInput />
         </div>
       </div>

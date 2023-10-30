@@ -80,14 +80,16 @@ export default function Column() {
               textColor="text-red-400"
             />
           </div>
+          <GroupedBarChart data={GROUPED_BAR_CHART_DATA} />
           <Table />
           {/* <TableSkeleton /> */}
-
-          <GroupedBarChart data={GROUPED_BAR_CHART_DATA} />
         </div>
 
-        <div className="column-3 flex-grow w-auto h-full  my-8 rounded-md">
-          <SearchInput />
+        <div className="column-3 flex-grow w-auto h-full my-8 rounded-md">
+          <div className="px-3">
+            <SearchInput />
+          </div>
+
           {/* <SearchInputSkeleton /> */}
           <AddAccountCard />
           {/* <SkeletonAddAccountCard /> */}

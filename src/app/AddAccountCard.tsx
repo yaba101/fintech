@@ -28,10 +28,10 @@ const AddAccountCard = () => {
           </div>
         </div>
         <div className="flex justify-between space-x-3">
-          <button className="bg-green-500 hover:bg-green-700 dark:text-white text-sm font-medium py-1 px-4 rounded-lg whitespace-nowrap">
+          <button className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-1 px-4 rounded-lg whitespace-nowrap">
             View All
           </button>
-          <button className="bg-violet-500 hover:bg-violet-700 dark:text-white text-sm font-medium py-1 px-4 rounded-lg whitespace-nowrap">
+          <button className="bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium py-1 px-4 rounded-lg whitespace-nowrap">
             Add Account
           </button>
         </div>

@@ -224,7 +224,7 @@ export default function Example() {
                           className={classNames(
                             item.current
                               ? "bg-indigo-600 text-gray-100"
-                              : "dark:text-gray-100 hover:text-gray-800 hover:bg-gray-300",
+                              : "dark:text-gray-100 hover:text-gray-900 dark:hover:bg-slate-500 hover:bg-gray-300 ",
                             "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                           )}
                         >
@@ -253,7 +253,7 @@ export default function Example() {
                           className={classNames(
                             item.current
                               ? "bg-indigo-600 text-gray-100"
-                              : "dark:text-gray-100 hover:text-gray-800 hover:bg-gray-300",
+                              : "dark:text-gray-100 hover:text-gray-800 dark:hover:bg-slate-500 hover:bg-gray-300",
                             "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                           )}
                         >
