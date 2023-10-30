@@ -1,9 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-[data-theme="dark"],
-[data-theme="dark"] body {
-  color: #fff;
-  background: #141332;
-}

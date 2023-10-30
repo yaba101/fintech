@@ -67,14 +67,6 @@ export default function Example() {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-50">
-        <body class="h-full">
-        ```
-      */}
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
@@ -91,7 +83,7 @@ export default function Example() {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="fixed inset-0 bg-gray-900/80" />
+              <div className="fixed inset-0 bg-gray-900/80 dark:text-gray-200" />
             </Transition.Child>
 
             <div className="fixed inset-0 flex">
@@ -129,7 +121,7 @@ export default function Example() {
                     </div>
                   </Transition.Child>
                   {/* Sidebar component, swap this element with another sidebar if you like */}
-                  <div className="flex grow flex-col gap-y-5 overflow-y-hidden bg-white dark:bg-slate-950 dark:text-gray-50 px-6 pb-2">
+                  <div className="flex grow flex-col gap-y-5 overflow-y-hidden dark:bg-dark dark:text-gray-50 px-6 pb-2">
                     {/* <div className="flex h-16 shrink-0 items-center">
                       <img
                         className="h-8 w-auto"
@@ -140,7 +132,10 @@ export default function Example() {
                     <nav className="flex flex-1 flex-col">
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
                         <li>
-                          <ul role="list" className="-mx-2 space-y-1">
+                          <ul
+                            role="list"
+                            className="-mx-2 space-y-1 dark:text-gray-200"
+                          >
                             {FirstNavSection.map((item) => (
                               <li key={item.name}>
                                 <a
@@ -206,10 +201,7 @@ export default function Example() {
 
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-56 lg:flex-col">
-          <div
-            className="flex grow flex-col gap-y-2 overflow-y-hidden border-r border-gray-900 shadow-md shadow-black rounded-lg dark:text-gray-50 px-6 my-2"
-            style={{ background: "#1d1d41" }}
-          >
+          <div className="flex grow flex-col gap-y-2 overflow-y-hidden border-r border-gray-900 shadow-md shadow-black rounded-lg dark:text-gray-50 px-6 my-2 dark:bg-dark bg-gray-50">
             <nav className="flex flex-1 flex-col mt-8">
               <ul role="list" className="flex flex-1 flex-col gap-y-3">
                 <li>
@@ -270,10 +262,10 @@ export default function Example() {
                     <li>
                       <a
                         className={
-                          "cursor-pointer text-gray-300 group flex gap-x-2 rounded-md p-2 text-sm leading-6 font-semibold"
+                          "cursor-pointer dark:text-gray-300 group flex gap-x-2 rounded-md p-2 text-sm leading-6 font-semibold"
                         }
                       >
-                        <MoonIcon className="h-6 w-6 shrink-0 text-gray-100 dark:text-gray-400" />
+                        <MoonIcon className="h-6 w-6 shrink-0 text-gray-400" />
                         Dark Mode
                         <ThemeSwitcher />
                       </a>
@@ -281,10 +273,10 @@ export default function Example() {
                     <li>
                       <a
                         className={
-                          "cursor-pointer text-gray-300 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold mt-6"
+                          "cursor-pointer dark:text-gray-300 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold mt-6"
                         }
                       >
-                        <ArrowLeftIcon className="h-6 w-6 shrink-0 text-gray-100 dark:text-gray-400" />
+                        <ArrowLeftIcon className="h-6 w-6 shrink-0 text-gray-400 dark:text-gray-400" />
                         Logout
                       </a>
                     </li>
@@ -298,16 +290,19 @@ export default function Example() {
           </div>
         </div>
 
-        <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+        <div className="sticky top-0 z-40 flex items-center gap-x-6 dark:bg-dark px-4 py-4 shadow-sm sm:px-6 lg:hidden">
           <button
             type="button"
             className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            <Bars3Icon
+              className="h-6 w-6 dark:text-gray-200"
+              aria-hidden="true"
+            />
           </button>
-          <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
+          <div className="flex-1 text-sm font-semibold leading-6 dark:text-gray-100">
             Dashboard
           </div>
           <a href="#">

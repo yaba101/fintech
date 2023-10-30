@@ -8,28 +8,37 @@ function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Stats({ icon, color }: { icon: any; color: string }) {
+export default function Stats({
+  icon,
+  iconBgColor,
+  textBgColor,
+  textColor,
+}: {
+  icon: any;
+  iconBgColor: string;
+  textBgColor: string;
+  textColor: string;
+}) {
   return (
     <>
-      <article
-        className="flex items-end justify-between rounded-lg border border-gray-900  p-3 mx-3 "
-        style={{ background: "#1d1d41" }}
-      >
+      <article className="flex items-end justify-between rounded-lg border dark:border-gray-900 shadow-lg p-3 mx-3 dark:bg-dark bg-gray-50">
         <div className="flex items-center gap-4">
           <span
-            className={`hidden rounded-xl ${color} p-2 text-gray-100 sm:block`}
+            className={`hidden rounded-xl ${iconBgColor} p-2 dark:text-gray-100 sm:block`}
           >
             {icon}
           </span>
 
           <div>
-            <p className="text-sm text-gray-500">Totla Income</p>
+            <p className="text-sm dark:text-gray-400">Totla Income</p>
 
-            <p className="text-2xl font-medium text-gray-200">$632.00</p>
+            <p className="text-2xl font-medium dark:text-gray-200">$632.00</p>
           </div>
         </div>
 
-        <div className="inline-flex gap-2 rounded bg-green-200 p-1 text-green-600">
+        <div
+          className={`inline-flex gap-2 rounded  p-1 ${textColor} ${textBgColor} bg-opacity-40`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4"
@@ -51,3 +60,30 @@ export default function Stats({ icon, color }: { icon: any; color: string }) {
     </>
   );
 }
+
+export const SkeletonStats = () => {
+  return (
+    <>
+      <article
+        className="flex items-end justify-between rounded-lg border border-gray-900 p-3 mx-3 animate-pulse"
+        style={{ background: "#1d1d41" }}
+      >
+        <div className="flex items-center gap-4">
+          <div className="h-11 w-11 bg-gray-400 rounded-xl" />
+
+          <div>
+            <div className="text-sm text-gray-400 bg-gray-400 h-4 w-20 rounded mb-3" />
+
+            <div className="text-2xl font-medium text-gray-400 bg-gray-400 h-8 w-32 rounded" />
+          </div>
+        </div>
+
+        <div className="inline-flex gap-2 rounded bg-gray-400 p-1 h-8 w-16">
+          <div className="h-4 w-4 bg-gray-400 rounded" />
+
+          <div className="text-xs font-medium bg-gray-400 h-4 w-12" />
+        </div>
+      </article>
+    </>
+  );
+};

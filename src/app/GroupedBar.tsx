@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import React from "react";
+import Drop from "./Drop";
 
 export interface IData {
   label: string;
@@ -41,7 +42,7 @@ function Bar({
   onMouseEnter,
   onMouseLeave,
 }: BarProps) {
-  const radius = height === 0 ? 0 : width * 0.65;
+  const radius = height === 0 ? 0 : width * 0.5;
 
   return (
     <path
@@ -74,29 +75,55 @@ export default function GroupedBarChart({ data }: Props) {
   const sublabels = Object.keys(data[0].values);
   const values = data.map(({ values }) => values).flat();
 
-  const scaleX = d3.scaleBand().domain(labels).range([0, width]).padding(0.5);
   const scaleY = d3
     .scaleLinear()
     .domain([0, Math.max(...values)])
     .range([height, 0]);
+
+  const scaleX = d3.scaleBand().domain(labels).range([0, width]).padding(0.5);
   const subscaleX = d3
     .scaleBand()
     .domain(sublabels)
     .range([0, scaleX.bandwidth()])
     .padding(0.3);
 
+  const yAxis = d3.axisLeft(scaleY).tickFormat((d) => `${Math.abs(d)}k`);
+
+  const numDashedLines = 10; // Change as needed
+  const dashedLineInterval = scaleY.domain()[1] / numDashedLines;
+
   useEffect(() => {
     if (axisBottomRef.current) {
-      d3.select(axisBottomRef.current).call(d3.axisBottom(scaleX));
+      d3.select(axisBottomRef.current)
+        .call(d3.axisBottom(scaleX))
+        .selectAll("path")
+        .style("stroke-dasharray", "5,5");
     }
 
     if (axisLeftRef.current) {
-      d3.select(axisLeftRef.current).call(d3.axisLeft(scaleY));
+      d3.select(axisLeftRef.current)
+        .call(yAxis)
+        .select("path")
+        .style("display", "none"); // Hide the y-axis line
     }
-  }, [scaleX, scaleY]);
+  }, [scaleX, yAxis]);
 
   return (
-    <>
+    <div className=" dark:bg-dark rounded-md  px-2 py-2 bg-gray-50 my-3 shadow-lg">
+      <div className="flex my-3 py-3 items-center   ">
+        <h4 className="mr-5  text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2">
+          Insights
+        </h4>
+        <div className="flex justify-around">
+          <button className=" text-white font-medium bg-green-600 rounded-full w-4 h-4 mx-3 mt-2" />
+          <p className="mt-1">Income</p>
+          <button className="text-white font-medium rounded-full bg-red-600 w-4 h-4 mx-3 mt-2" />
+          <p className="mt-1">Expenses</p>
+        </div>
+        <div className="w-full text-end px-1">
+          <Drop />
+        </div>
+      </div>
       <svg
         className="w-full h-full"
         width={width + margin.left + margin.right}
@@ -130,32 +157,34 @@ export default function GroupedBarChart({ data }: Props) {
               ))}
             </g>
           ))}
+
+          {/* Add horizontal dashed lines above the axes */}
+          {Array.from({ length: numDashedLines }, (_, i) => (
+            <line
+              key={`dashed-line-${i}`}
+              x1="0"
+              x2={width}
+              y1={scaleY(dashedLineInterval * (i + 1))}
+              y2={scaleY(dashedLineInterval * (i + 1))}
+              stroke="#555" // Gray color
+              strokeDasharray="5,5" // Make the lines dashedstyle={{ display: "none" }} // Hide the lines next to the y-axis labels
+            />
+          ))}
         </g>
       </svg>
       {tooltip !== null ? (
         <div
-          className="fixed pointer-events-none p-3 bg-white text-teal-900 rounded shadow-md text-sm"
-          style={{ top: tooltip.y, left: tooltip.x }}
+          className="fixed pointer-events-none py-1 px-3 text-gray-100 rounded shadow-md  text-sm"
+          style={{ top: tooltip.y, left: tooltip.x, background: "#454687" }}
         >
-          <span className="block mb-2 font-bold">{labels[tooltip.index]}</span>
-          <table className="w-full text-left">
-            <thead>
-              <tr>
-                <td>Value 1</td>
-                <td>Value 2</td>
-                <td>Value 3</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{data[tooltip.index].values[0]}</td>
-                <td>{data[tooltip.index].values[1]}</td>
-                <td>{data[tooltip.index].values[2]}</td>
-              </tr>
-            </tbody>
-          </table>
+          <span className="block mb-2 font-medium text-xs">
+            {labels[tooltip.index]} 2023
+          </span>
+          <span className="block mb-2 font-medium text-xs">
+            ${data[tooltip.index].values[0] * 100}.34
+          </span>
         </div>
       ) : null}
-    </>
+    </div>
   );
 }

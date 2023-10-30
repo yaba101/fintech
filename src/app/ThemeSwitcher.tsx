@@ -6,7 +6,9 @@ const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
   const isDarkMode = theme === "dark";
   const [currentTheme, setCurrentTheme] = useState(
-    localStorage.getItem("theme") ?? "light"
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("theme") ?? "light"
+      : "light"
   );
 
   const toggleTheme = () => {
@@ -23,7 +25,7 @@ const ThemeSwitcher = () => {
       setCurrentTheme(storedTheme);
     }
   }, [setTheme]);
-  console.log({ currentTheme });
+
   return (
     <div className="space-x-3 mt-0.5">
       <div
