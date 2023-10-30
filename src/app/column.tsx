@@ -87,7 +87,7 @@ export default function Column() {
           {/* <TableSkeleton /> */}
         </div>
 
-        <div className="column-3 flex-grow w-full h-full my-8 rounded-md px-1.5 ">
+        <div className="column-3 flex-grow  h-full my-8 rounded-md px-1.5 ">
           <SearchInput />
 
           <AddAccountCard />

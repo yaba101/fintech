@@ -222,7 +222,7 @@ export default function Example() {
 
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-56 lg:flex-col">
-          <div className="flex grow flex-col gap-y-2 overflow-y-hidden border-r border-gray-900 shadow-md shadow-black rounded-lg dark:text-gray-50 px-6 my-2 dark:bg-dark bg-gray-50">
+          <div className="flex grow flex-col gap-y-2 overflow-y-hidden border-r dark:border-gray-900 shadow-md  rounded-lg dark:text-gray-50 px-6 my-2 dark:bg-dark bg-gray-50">
             <nav className="flex flex-1 flex-col mt-8">
               <ul role="list" className="flex flex-1 flex-col gap-y-3">
                 <li>
