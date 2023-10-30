@@ -1,3 +1,6 @@
+import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
+import { ArrowUpLeft } from "lucide-react";
+
 export default function Stats({
   icon,
   iconBgColor,
@@ -11,10 +14,10 @@ export default function Stats({
 }) {
   return (
     <>
-      <div className="flex flex-grow items-end justify-between space-x-6 rounded-lg border dark:border-gray-900 shadow-lg p-4 dark:bg-dark bg-gray-50">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-grow items-end justify-between space-x-6 rounded-lg border dark:border-gray-900 shadow-lg py-2 px-1 dark:bg-dark bg-gray-50">
+        <div className="flex items-center gap-1">
           <span
-            className={`hidden rounded-xl ${iconBgColor} p-2 dark:text-gray-100 sm:block`}
+            className={`hidden rounded-lg ${iconBgColor} p-1.5 dark:text-gray-100 sm:block`}
           >
             {icon}
           </span>
@@ -29,7 +32,7 @@ export default function Stats({
         </div>
 
         <div
-          className={`flex gap-2 rounded p-1 ${textColor} ${textBgColor} bg-opacity-40`}
+          className={`flex gap-1 rounded py-0.5  ${textColor} ${textBgColor} bg-opacity-40`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

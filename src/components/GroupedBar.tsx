@@ -111,23 +111,24 @@ export default function GroupedBarChart({ data }: Props) {
   }, [scaleX, yAxis]);
 
   return (
-    <div className=" dark:bg-dark rounded-md  px-2 py-2 bg-gray-50 my-3 shadow-lg">
-      <div className="flex my-3 py-3 items-center ">
-        <h4 className="mr-5  text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2">
+    <div className=" dark:bg-dark rounded-md py-1 bg-gray-50 my-3 shadow-lg overflow-x-auto ">
+      <div className="flex my-3 py-1  w-full ">
+        <h4 className="mt-1 mr-5 text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2 sm:text-sm lg:text-base">
           Insights
         </h4>
         <div className="flex justify-around">
-          <button className=" text-white font-medium bg-green-600 rounded-full w-4 h-4 mx-3 mt-2" />
-          <p className="mt-1">Income</p>
+          <button className="text-white font-medium bg-green-600 rounded-full w-4 h-4 mx-3 mt-2" />
+          <p className="mt-1 text-sm lg:text-base">Income</p>
           <button className="text-white font-medium rounded-full bg-red-600 w-4 h-4 mx-3 mt-2" />
-          <p className="mt-1">Expenses</p>
+          <p className="mt-1 text-sm lg:text-base">Expenses</p>
         </div>
-        <div className="w-full text-end px-1">
+        <div className="w-full px-5">
           <Drop />
         </div>
       </div>
+
       <svg
-        className="w-full h-full text-center"
+        className="min-w-max overflow-x-auto "
         width={width + margin.left + margin.right}
         height={height + margin.top + margin.bottom}
       >

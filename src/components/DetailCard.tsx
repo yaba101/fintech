@@ -20,8 +20,9 @@ export default function DetailCard({
         </div>
         <Drop />
       </div>
-
-      <HalfDonutChart data={data} width={350} height={400} colors={colors} />
+      <div className=" -mx-7">
+        <HalfDonutChart data={data} width={350} height={400} colors={colors} />
+      </div>
       <div className="flex justify-between -mt-28 mb-3">
         <div className="flex items-center ml-4">
           <button
@@ -44,8 +45,10 @@ export default function DetailCard({
       </div>
 
       <button className="flex items-center justify-between border dark:border-gray-100 dark:text-white font-semibold py-2 px-10 rounded-xl w-full ">
-        <span className="text-center px-10">View All Activity</span>
-        <ArrowRightIcon className="h-6 w-6 shrink-0 dark:text-gray-100 " />
+        <span className="text-center px-10 whitespace-nowrap">
+          View All Activity
+        </span>
+        <ArrowRightIcon className="h-6 w-6 shrink dark:text-gray-100 " />
       </button>
     </div>
   );

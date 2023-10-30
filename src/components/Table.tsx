@@ -32,8 +32,8 @@ const Item = [
 
 export default function Table() {
   return (
-    <div className="rounded-md dark:bg-dark w-full bg-gray-50 shadow-lg">
-      <div className="flex my-3 py-3 items-center flex-grow">
+    <div className="rounded-md dark:bg-dark  bg-gray-50 shadow-lg">
+      <div className="hidden sm:flex my-3 py-3 items-center flex-grow">
         <h4 className="mr-5 text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2">
           Recent Transactions
         </h4>
@@ -47,7 +47,7 @@ export default function Table() {
         <div className="mt-8 flow-root">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-              <table className="min-w-full divide-y divide-gray-300">
+              <table className="min-w-full divide-y divide-gray-300 ">
                 <tbody>
                   {Item.map((item) => (
                     <tr key={item.name}>

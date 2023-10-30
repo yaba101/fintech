@@ -9,6 +9,7 @@ import Table from "@/components/Table";
 import GroupedBarChart, { IGroupedData } from "./GroupedBar";
 import DetailCardSkeleton from "./skeleton/DetailCardSkeleton";
 import { Suspense, useTransition } from "react";
+import AnotherCard from "./AnotherCard";
 
 type CashProps = {
   color: string;
@@ -26,11 +27,20 @@ export default function Column({
 }) {
   return (
     <div className="flex flex-row ">
-      <div className="flex flex-col md:flex-row w-11/12">
-        <div className="column-2 flex-grow h-full my-2 rounded-md px-1.5">
-          <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center mb-5 ">
+      <div className="flex flex-col md:flex-row max-w-fit overflow-y-hidden">
+        <div className="column-2 flex-grow h-full my-2 rounded-md px-3">
+          <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center mb-5 hidden lg:block">
             Availability
           </h1>
+          <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center lg:hidden sm:block">
+            Welcome Back, Issac👋!
+          </h1>
+          <p className="leading-7 text-center mb-3 text-gray-400 lg:hidden sm:block">
+            Here is {"what's"} up with your finances today
+          </p>
+          <div className="block lg:hidden mb-3">
+            <SearchInput />
+          </div>
           <Card title="Net Worth" text="$45,032.00" buttonText="View Details" />
 
           <Stats
@@ -43,19 +53,18 @@ export default function Column({
           />
 
           <DetailCard colors={cashInData} title="Cash in Activity" />
-          {/* <Suspense fallback={<DetailCardSkeleton />}></Suspense> */}
         </div>
-        <div className="column-3 flex-grow w-full h-full my-2 rounded-md mx-1">
-          <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center">
+        <div className="column-3 flex-grow max-w-fit h-full my-2 rounded-md ">
+          <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center hidden lg:block">
             Welcome Back, Issac👋!
           </h1>
-          <p className="leading-7 text-center m-0 text-gray-400">
+          <p className="leading-7 text-center m-0 text-gray-400 hidden lg:block">
             Here is {"what's"} up with your finances today
           </p>
-          <div className="flex mt-5 space-x-1 flex-grow flex-1">
+          <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-1 sm:gap-6 lg:grid-cols-2">
             <Stats
               icon={
-                <ArrowDownLeftIcon className="h-6 w-6 shrink-0 text-gray-100 dark:text-gray-100" />
+                <ArrowDownLeftIcon className="h-6 w-6 text-gray-100 dark:text-gray-100" />
               }
               iconBgColor="bg-green-600"
               textBgColor="bg-green-400"
@@ -71,13 +80,11 @@ export default function Column({
             />
           </div>
 
-          <div className="w-full">
-            <GroupedBarChart data={bargraphData} />
-            <Table />
-          </div>
+          <GroupedBarChart data={bargraphData} />
+          <Table />
         </div>
 
-        <div className="column-3 flex-grow  h-full my-8 rounded-md px-1.5 ">
+        <div className="column-2 flex-grow h-full max-w-fit my-8 rounded-md px-3 ">
           <SearchInput />
           <AddAccountCard />
           <Stats
@@ -88,7 +95,6 @@ export default function Column({
             textBgColor="bg-red-400"
             textColor="text-red-400"
           />
-
           <DetailCard colors={cashOutData} title="Cash out Activity" />
         </div>
       </div>
