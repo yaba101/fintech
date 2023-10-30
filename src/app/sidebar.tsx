@@ -199,6 +199,16 @@ export default function Example() {
                                 <ThemeSwitcher />
                               </a>
                             </li>
+                            <li>
+                              <a
+                                className={
+                                  "cursor-pointer dark:text-gray-300 group mb-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold mt-6"
+                                }
+                              >
+                                <ArrowLeftIcon className="h-6 w-6 shrink-0 text-gray-400 dark:text-gray-400" />
+                                Logout
+                              </a>
+                            </li>
                           </ul>
                         </li>
                       </ul>
@@ -284,7 +294,7 @@ export default function Example() {
                     <li>
                       <a
                         className={
-                          "cursor-pointer dark:text-gray-300 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold mt-6"
+                          "cursor-pointer dark:text-gray-300 group mb-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold mt-6"
                         }
                       >
                         <ArrowLeftIcon className="h-6 w-6 shrink-0 text-gray-400 dark:text-gray-400" />
@@ -293,7 +303,7 @@ export default function Example() {
                     </li>
                   </ul>
                 </li>
-                <li className="mt-auto mb-4">
+                <li className="mb-4">
                   <DropDown />
                 </li>
               </ul>
@@ -301,7 +311,7 @@ export default function Example() {
           </div>
         </div>
 
-        <div className="sticky top-0 z-40 flex items-center gap-x-6 dark:bg-dark px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+        <div className="sticky top-0 z-40 flex items-center gap-x-6 dark:bg-dark bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
           <button
             type="button"
             className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
@@ -326,7 +336,7 @@ export default function Example() {
           </a>
         </div>
 
-        <main className="py-10 lg:pl-72 ">
+        <main className="py-10 lg:pl-60 ">
           <div className="px-4 sm:px-6 lg:px-8">
             <Column />
           </div>

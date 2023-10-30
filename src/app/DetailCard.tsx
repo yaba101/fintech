@@ -11,7 +11,7 @@ export default function DetailCard({
   title: string;
 }) {
   return (
-    <div className="max-w-lg p-4 shadow-md dark:text-gray-100 border dark:border-gray-900 rounded-md mx-3 my-3 dark:bg-dark bg-gray-50">
+    <div className="p-4 shadow-md dark:text-gray-100 border dark:border-gray-900 rounded-md  my-3 dark:bg-dark bg-gray-50">
       <div className="flex justify-between border-bottom">
         <div className="flex items-center">
           <p className="mb-0 capitalize dark:text-gray-100 font-bold">

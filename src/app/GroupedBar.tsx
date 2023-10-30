@@ -144,7 +144,7 @@ export default function GroupedBarChart({ data }: Props) {
                   y={scaleY(value)}
                   width={subscaleX.bandwidth()}
                   height={height - scaleY(value)}
-                  color={barIndex === 0 ? "green" : "red"}
+                  color={barIndex === 0 ? "#27674a" : "#df2433"}
                   onMouseEnter={(event) => {
                     setTooltip({
                       x: event.clientX,

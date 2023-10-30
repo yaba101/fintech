@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = ({ title, text, buttonText }: any) => {
   return (
-    <div className="max-w-sm mx-auto overflow-hidden shadow-lg dark:border-gray-900 border rounded-lg mb-3 dark:bg-dark bg-gray-50">
+    <div className=" mx-auto overflow-hidden shadow-lg dark:border-gray-900 border rounded-lg mb-3 dark:bg-dark bg-gray-50">
       <div className="text-center px-6 py-4">
         <h4 className="text-md font-semibold dark:text-gray-100">{title}</h4>
         <p className="dark:text-gray-300 text-xl font-semibold my-3">{text}</p>

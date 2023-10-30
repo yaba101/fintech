@@ -2,7 +2,7 @@ import React from "react";
 
 const AddAccountCard = () => {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg border dark:border-gray-900 mx-3 my-3 dark:bg-dark bg-gray-50">
+    <div className="rounded overflow-hidden shadow-lg border dark:border-gray-900 my-3 dark:bg-dark bg-gray-50">
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2 text-center">
           Account Summary
@@ -28,10 +28,10 @@ const AddAccountCard = () => {
           </div>
         </div>
         <div className="flex justify-between space-x-3">
-          <button className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-1 px-4 rounded-lg whitespace-nowrap">
+          <button className="bg-[#27674a] hover:bg-[#133425] text-white text-sm font-medium py-1 px-4 rounded-lg whitespace-nowrap">
             View All
           </button>
-          <button className="bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium py-1 px-4 rounded-lg whitespace-nowrap">
+          <button className="bg-[#5e54e6] hover:bg-[#4941b3] text-white text-sm font-medium py-1 px-4 rounded-lg whitespace-nowrap">
             Add Account
           </button>
         </div>

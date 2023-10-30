@@ -35,9 +35,9 @@ const GROUPED_BAR_CHART_DATA: IGroupedData[] = [
 
 export default function Column() {
   return (
-    <div className="flex flex-row">
-      <div className="flex flex-col md:flex-row w-11/12 space-x-1">
-        <div className="column-2 flex-grow w-auto h-full my-2 rounded-md">
+    <div className="flex flex-row ">
+      <div className="flex flex-col md:flex-row w-11/12">
+        <div className="column-2 flex-grow h-full my-2 rounded-md px-1.5">
           <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center mb-5 ">
             Availability
           </h1>
@@ -55,14 +55,14 @@ export default function Column() {
           {/* <SkeletonStats /> */}
           <DetailCard colors={colors} title="Cash in Activity" />
         </div>
-        <div className="column-3 flex-grow w-full h-full my-2 rounded-md">
+        <div className="column-3 flex-grow w-full h-full my-2 rounded-md mx-1">
           <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center">
             Welcome Back, Issac👋!
           </h1>
           <p className="leading-7 text-center m-0 text-gray-400">
             Here is {"what's"} up with your finances today
           </p>
-          <div className="flex mt-5 flex-grow w-full">
+          <div className="flex mt-5 flex-grow space-x-1 w-full">
             <Stats
               icon={
                 <ArrowDownLeftIcon className="h-6 w-6 shrink-0 text-gray-100 dark:text-gray-100" />
@@ -80,18 +80,19 @@ export default function Column() {
               textColor="text-red-400"
             />
           </div>
-          <GroupedBarChart data={GROUPED_BAR_CHART_DATA} />
-          <Table />
+          <div className="w-full">
+            <GroupedBarChart data={GROUPED_BAR_CHART_DATA} />
+            <Table />
+          </div>
           {/* <TableSkeleton /> */}
         </div>
 
-        <div className="column-3 flex-grow w-auto h-full my-8 rounded-md">
-          <div className="px-3">
-            <SearchInput />
-          </div>
+        <div className="column-3 flex-grow w-full h-full my-8 rounded-md px-1.5 ">
+          <SearchInput />
+
+          <AddAccountCard />
 
           {/* <SearchInputSkeleton /> */}
-          <AddAccountCard />
           {/* <SkeletonAddAccountCard /> */}
           <Stats
             icon={
