@@ -1,8 +1,8 @@
 import { ArrowDownLeftIcon, ArrowUpRightIcon } from "@heroicons/react/20/solid";
-import AddAccountCard from "./SummaryCard";
-import Card from "./Card";
-import DetailCard from "./DetailCard";
-import Stats from "./Stats";
+import AddAccountCard from "@/components/SummaryCard";
+import Card from "@/components/Card";
+import DetailCard from "@/components/DetailCard";
+import Stats from "@/components/Stats";
 import SearchInput from "@/components/SearchInput";
 import Table from "@/components/Table";
 import GroupedBarChart, { IGroupedData } from "./GroupedBar";

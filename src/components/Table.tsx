@@ -3,8 +3,8 @@ import {
   BuildingLibraryIcon,
 } from "@heroicons/react/20/solid";
 import ArrowDownCircleIcon from "@heroicons/react/24/outline/esm/ArrowDownCircleIcon";
-import DatePicker from "./DatePicker";
-import SearchInput from "./SearchInput";
+import DatePicker from "@/components/DatePicker";
+import SearchInput from "@/components/SearchInput";
 
 const Item = [
   {

@@ -15,9 +15,9 @@ import {
   ChatBubbleBottomCenterTextIcon,
   ArrowLeftIcon,
 } from "@heroicons/react/24/outline";
-import Column from "../components/ColumnContainer";
-import ThemeSwitcher from "../components/ThemeSwitcher";
-import DropDown from "../components/SideBarDropDown";
+import ColumnContainer from "@/components/ColumnContainer";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
+import SideBarDropDown from "@/components/SideBarDropDown";
 
 const FirstNavSection = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -285,7 +285,7 @@ export default function Example() {
                   </ul>
                 </li>
                 <li className="mb-4">
-                  <DropDown />
+                  <SideBarDropDown />
                 </li>
               </ul>
             </nav>
@@ -319,7 +319,7 @@ export default function Example() {
 
         <main className="py-10 lg:pl-60 ">
           <div className="px-4 sm:px-6 lg:px-8">
-            <Column />
+            <ColumnContainer />
           </div>
         </main>
       </div>

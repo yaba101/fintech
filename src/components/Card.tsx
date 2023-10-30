@@ -1,5 +1,3 @@
-import React from "react";
-
 const Card = ({ title, text, buttonText }: any) => {
   return (
     <div className=" mx-auto overflow-hidden shadow-lg dark:border-gray-900 border rounded-lg mb-3 dark:bg-dark bg-gray-50">

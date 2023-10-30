@@ -87,7 +87,9 @@ export default function GroupedBarChart({ data }: Props) {
     .range([0, scaleX.bandwidth()])
     .padding(0.3);
 
-  const yAxis = d3.axisLeft(scaleY).tickFormat((d) => `${Math.abs(d)}k`);
+  const yAxis = d3
+    .axisLeft(scaleY)
+    .tickFormat((d) => `${Math.abs(d as number)}k`);
 
   const numDashedLines = 10;
   const dashedLineInterval = scaleY.domain()[1] / numDashedLines;

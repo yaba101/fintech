@@ -38,11 +38,13 @@ const HalfDonutChart = ({ width, height, data, colors }: DonutChartProps) => {
             const path = arc({
               startAngle: (startAngle * Math.PI) / 180,
               endAngle: (endAngle * Math.PI) / 180,
+              innerRadius: 0,
+              outerRadius: 0,
             });
 
             startAngle = endAngle;
 
-            return <path key={i} d={path} fill={colors[i].color} />;
+            return <path key={i} d={path!} fill={colors[i].color} />;
           })}
         </g>
       </svg>
