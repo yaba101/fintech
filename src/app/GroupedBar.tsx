@@ -89,7 +89,7 @@ export default function GroupedBarChart({ data }: Props) {
 
   const yAxis = d3.axisLeft(scaleY).tickFormat((d) => `${Math.abs(d)}k`);
 
-  const numDashedLines = 10; // Change as needed
+  const numDashedLines = 10;
   const dashedLineInterval = scaleY.domain()[1] / numDashedLines;
 
   useEffect(() => {
@@ -104,7 +104,7 @@ export default function GroupedBarChart({ data }: Props) {
       d3.select(axisLeftRef.current)
         .call(yAxis)
         .select("path")
-        .style("display", "none"); // Hide the y-axis line
+        .style("display", "none");
     }
   }, [scaleX, yAxis]);
 
@@ -166,8 +166,8 @@ export default function GroupedBarChart({ data }: Props) {
               x2={width}
               y1={scaleY(dashedLineInterval * (i + 1))}
               y2={scaleY(dashedLineInterval * (i + 1))}
-              stroke="#555" // Gray color
-              strokeDasharray="5,5" // Make the lines dashedstyle={{ display: "none" }} // Hide the lines next to the y-axis labels
+              stroke="#555"
+              strokeDasharray="5,5"
             />
           ))}
         </g>

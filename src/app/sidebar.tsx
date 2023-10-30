@@ -121,7 +121,7 @@ export default function Example() {
                     </div>
                   </Transition.Child>
                   {/* Sidebar component, swap this element with another sidebar if you like */}
-                  <div className="flex grow flex-col gap-y-5 overflow-y-hidden dark:bg-dark dark:text-gray-50 px-6 pb-2">
+                  <div className="flex grow flex-col gap-y-5 overflow-y-hidden dark:bg-dark bg-slate-50 dark:text-gray-50 px-6 pb-2">
                     {/* <div className="flex h-16 shrink-0 items-center">
                       <img
                         className="h-8 w-auto"
@@ -134,7 +134,7 @@ export default function Example() {
                         <li>
                           <ul
                             role="list"
-                            className="-mx-2 space-y-1 dark:text-gray-200"
+                            className="-mx-2 space-y-1 dark:text-gray-200 text-gray-800"
                           >
                             {FirstNavSection.map((item) => (
                               <li key={item.name}>
@@ -142,8 +142,8 @@ export default function Example() {
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? "bg-gray-900 text-indigo-600"
-                                      : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
+                                      ? " mt-4 bg-gray-800 text-indigo-600"
+                                      : "dark:text-gray-200 hover:text-indigo-600 dark:hover:bg-gray-500  ",
                                     "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   )}
                                 >
@@ -151,7 +151,7 @@ export default function Example() {
                                     className={classNames(
                                       item.current
                                         ? "text-indigo-600"
-                                        : "text-gray-400 group-hover:text-indigo-600",
+                                        : "dark:text-gray-200 text-gray-800 group-hover:text-indigo-600",
                                       "h-6 w-6 shrink-0"
                                     )}
                                     aria-hidden="true"
@@ -163,15 +163,15 @@ export default function Example() {
                           </ul>
                         </li>
                         <li>
-                          <ul role="list" className="-mx-2 space-y-1">
+                          <ul role="list" className="-mx-2 space-y-1 ">
                             {SecondNavSection.map((item) => (
                               <li key={item.name}>
                                 <a
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? "bg-gray-900 text-indigo-600"
-                                      : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
+                                      ? "dark:bg-gray-900 bg-slate-50 text-indigo-600"
+                                      : "dark:text-gray-100 text-gray-800 hover:text-indigo-600 dark:hover:bg-gray-500 ",
                                     "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   )}
                                 >
@@ -179,7 +179,7 @@ export default function Example() {
                                     className={classNames(
                                       item.current
                                         ? "text-indigo-600"
-                                        : "text-gray-400 group-hover:text-indigo-600",
+                                        : "dark:text-gray-200 text-gray-800 group-hover:text-indigo-600",
                                       "h-6 w-6 shrink-0"
                                     )}
                                     aria-hidden="true"
@@ -188,6 +188,17 @@ export default function Example() {
                                 </a>
                               </li>
                             ))}
+                            <li>
+                              <a
+                                className={
+                                  "cursor-pointer dark:text-gray-200 group flex gap-x-2 rounded-md p-2 text-sm leading-6 font-semibold"
+                                }
+                              >
+                                <MoonIcon className="h-6 w-6 shrink-0 dark:text-gray-300" />
+                                Dark Mode
+                                <ThemeSwitcher />
+                              </a>
+                            </li>
                           </ul>
                         </li>
                       </ul>
@@ -305,17 +316,17 @@ export default function Example() {
           <div className="flex-1 text-sm font-semibold leading-6 dark:text-gray-100">
             Dashboard
           </div>
-          <a href="#">
-            <span className="sr-only">Your profile</span>
-            <img
-              className="h-8 w-8 rounded-full bg-gray-50"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
-            />
+          <a
+            className={
+              "cursor-pointer dark:text-gray-300 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold "
+            }
+          >
+            <ArrowLeftIcon className="h-6 w-6 shrink-0 text-gray-400 dark:text-gray-400" />
+            Logout
           </a>
         </div>
 
-        <main className="py-10  lg:pl-72 ">
+        <main className="py-10 lg:pl-72 ">
           <div className="px-4 sm:px-6 lg:px-8">
             <Column />
           </div>
