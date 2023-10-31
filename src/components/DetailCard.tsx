@@ -20,11 +20,11 @@ export default function DetailCard({
         </div>
         <Dropdown />
       </div>
-      <div className=" -mx-7">
+      <div className=" -mx-3">
         <HalfDonutChart data={data} width={350} height={400} colors={colors} />
       </div>
       <div className="flex justify-between -mt-28 mb-3">
-        <div className="flex items-center ml-4">
+        <div className="flex items-center ml-5">
           <button
             className=" text-white font-medium rounded-full w-4 h-4 mr-2"
             style={{ background: colors[0].color.toString() }}

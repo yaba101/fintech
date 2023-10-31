@@ -28,7 +28,7 @@ const HalfDonutChart = ({ width, height, data, colors }: DonutChartProps) => {
       <svg
         width={width}
         height={height}
-        className="-mb-20 -pl-15"
+        className="-mb-16 "
         style={{ display: "inline-block" }}
       >
         <g transform={`translate(${width / 2}, ${height / 2})`}>

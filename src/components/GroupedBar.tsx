@@ -112,23 +112,23 @@ export default function GroupedBarChart({ data }: Props) {
 
   return (
     <div className=" dark:bg-dark rounded-md py-1 bg-gray-50 my-3 shadow-lg overflow-x-auto ">
-      <div className="flex my-3 py-1 px-2  w-full ">
-        <h4 className="mt-1 mr-5 text-lg font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-1 sm:text-sm lg:text-base">
+      <div className="flex my-3 py-1 px-3 justify-between min-w-fit">
+        <h4 className="mt-1 mr-5 text-xl font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-1 sm:text-sm lg:text-xl">
           Insights
         </h4>
-        <div className="flex justify-around space-x-1 ">
+        <div className="flex justify-around mt-1 mr-5">
           <button className="text-white font-medium bg-green-600 rounded-full w-4 h-4 mx-3 mt-2" />
           <p className="mt-1 text-sm lg:text-base">Income</p>
           <button className="text-white font-medium rounded-full bg-red-600 w-4 h-4 mx-3 mt-2" />
           <p className="mt-1 text-sm lg:text-base">Expenses</p>
         </div>
-        <div className="w-full text-end px-3">
+        <div className=" ml-10">
           <Dropdown />
         </div>
       </div>
 
       <svg
-        className="w-full px-6 overflow-x-auto "
+        className="min-w-full px-2 verflow-x-auto "
         width={width + margin.left + margin.right}
         height={height + margin.top + margin.bottom}
       >

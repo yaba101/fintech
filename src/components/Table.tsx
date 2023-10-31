@@ -32,22 +32,22 @@ const Item = [
 
 export default function Table() {
   return (
-    <div className="rounded-md dark:bg-dark  bg-gray-50 shadow-lg">
-      <div className=" sm:flex my-3 py-3 items-center flex-grow ">
-        <h4 className="mr-5 text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2 py-2">
+    <div className="rounded-md dark:bg-dark  bg-gray-50 shadow-lg overflow-x-auto overflow-y-hidden">
+      <div className=" flex my-3 py-3 items-center flex-grow space-x-2">
+        <h4 className=" text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2 py-2">
           Recent Transactions
         </h4>
         <div className="text-center">
           <DatePicker />
         </div>
-        <div className=" py-3 px-1">
+        <div className="min-w-fit">
           <SearchInput />
         </div>
       </div>
 
       <div className="px-4 sm:px-6 lg:px-8 shadow-xl rounded-md ">
         <div className="mt-8 flow-root">
-          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="-mx-4 -my-2  sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               <table className="min-w-full divide-y divide-gray-300 ">
                 <tbody>
