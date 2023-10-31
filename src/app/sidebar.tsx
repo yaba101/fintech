@@ -181,16 +181,6 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                                 <ThemeSwitcher />
                               </a>
                             </li>
-                            <li>
-                              <path
-                                className={
-                                  "cursor-pointerdark:text-gray-300 group mb-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold mt-6"
-                                }
-                              >
-                                <ArrowLeftIcon className="h-6 w-6 shrink-0 text-gray-400 dark:text-gray-400" />
-                                Logout
-                              </path>
-                            </li>
                           </ul>
                         </li>
                       </ul>
@@ -318,7 +308,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
           <MobileDropdown />
         </div>
         <main className="py-10 lg:pl-60 ">
-          <div className="px-4 sm:px-6 lg:px-8 overflow-y-auto">{children}</div>
+          <div className="px-4 sm:px-6 lg:px-8 overflow-auto">{children}</div>
         </main>
       </div>
     </>

@@ -26,7 +26,7 @@ export default function Column({
 }) {
   return (
     <div className="flex flex-row ">
-      <div className="flex flex-col md:flex-row mx-auto overflow-y-hidden lg:space-x-4">
+      <div className="flex flex-col md:flex-row mx-auto overflow-y-hidden lg:space-x-4 overflow-x-hidden">
         <div className="column-2 flex-grow h-full my-2 rounded-md">
           <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center mb-5 hidden lg:block">
             Availability
