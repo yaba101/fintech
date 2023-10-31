@@ -85,7 +85,9 @@ export default function Column({
         </div>
 
         <div className="column-2 flex-grow h-full max-w-fit my-8 rounded-md px-3 ">
-          <SearchInput />
+          <div className="hidden lg:block">
+            <SearchInput />
+          </div>
           <AddAccountCard />
           <Stats
             icon={
