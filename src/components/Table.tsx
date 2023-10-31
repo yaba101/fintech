@@ -40,7 +40,7 @@ export default function Table() {
         <div className="text-center">
           <DatePicker />
         </div>
-        <div className="px-2 py-3">
+        <div className=" py-3 px-1">
           <SearchInput />
         </div>
       </div>
