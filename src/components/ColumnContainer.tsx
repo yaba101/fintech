@@ -9,7 +9,6 @@ import Table from "@/components/Table";
 import GroupedBarChart, { IGroupedData } from "./GroupedBar";
 import DetailCardSkeleton from "./skeleton/DetailCardSkeleton";
 import { Suspense, useTransition } from "react";
-import AnotherCard from "./AnotherCard";
 
 type CashProps = {
   color: string;
@@ -27,8 +26,8 @@ export default function Column({
 }) {
   return (
     <div className="flex flex-row ">
-      <div className="flex flex-col md:flex-row max-w-fit overflow-y-hidden">
-        <div className="column-2 flex-grow h-full my-2 rounded-md px-3">
+      <div className="flex flex-col md:flex-row mx-auto overflow-y-hidden lg:space-x-4">
+        <div className="column-2 flex-grow h-full my-2 rounded-md">
           <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center mb-5 hidden lg:block">
             Availability
           </h1>
@@ -54,7 +53,7 @@ export default function Column({
 
           <DetailCard colors={cashInData} title="Cash in Activity" />
         </div>
-        <div className="column-3 flex-grow max-w-fit h-full my-2 rounded-md ">
+        <div className="column-3 flex-grow h-full my-2 rounded-md ">
           <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center hidden lg:block">
             Welcome Back, Issac👋!
           </h1>
@@ -84,7 +83,7 @@ export default function Column({
           <Table />
         </div>
 
-        <div className="column-2 flex-grow h-full max-w-fit my-8 rounded-md px-3 ">
+        <div className="column-2 flex-grow h-full  my-8 rounded-md  ">
           <div className="hidden lg:block">
             <SearchInput />
           </div>
