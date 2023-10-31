@@ -284,10 +284,10 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                     </li>
                   </ul>
                 </li>
-                <li className="mb-4 bottom-0">
-                  <SideBarDropDown />
-                </li>
               </ul>
+              <p className="mb-4">
+                <SideBarDropDown />
+              </p>
             </nav>
           </div>
         </div>

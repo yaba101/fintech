@@ -33,12 +33,14 @@ const Item = [
 export default function Table() {
   return (
     <div className="rounded-md dark:bg-dark  bg-gray-50 shadow-lg">
-      <div className="hidden sm:flex my-3 py-3 items-center flex-grow">
-        <h4 className="mr-5 text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2">
+      <div className=" sm:flex my-3 py-3 items-center flex-grow ">
+        <h4 className="mr-5 text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2 py-2">
           Recent Transactions
         </h4>
-        <DatePicker />
-        <div className="px-2">
+        <div className="text-center">
+          <DatePicker />
+        </div>
+        <div className="px-2 py-3">
           <SearchInput />
         </div>
       </div>

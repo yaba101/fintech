@@ -33,10 +33,11 @@ export default function DropDown() {
                     active ? "text-indigo-600" : "hover:text-indigo-600 "
                   }`}
                 >
-                  Signed in as
+                  Setting
                 </p>
               )}
             </Menu.Item>
+
             <Menu.Item>
               {({ active }) => (
                 <p
@@ -44,7 +45,7 @@ export default function DropDown() {
                     active ? "text-indigo-600" : "hover:text-indigo-600"
                   }`}
                 >
-                  IssacJacob
+                  Logout
                 </p>
               )}
             </Menu.Item>
