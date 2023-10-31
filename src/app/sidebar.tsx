@@ -18,6 +18,7 @@ import {
 import ColumnContainer from "@/components/ColumnContainer";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import SideBarDropDown from "@/components/SideBarDropDown";
+import MobileDropdown from "@/components/MobileDropdown";
 
 const FirstNavSection = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -307,13 +308,14 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
           <div className="flex-1 text-sm font-semibold leading-6 dark:text-gray-100">
             Dashboard
           </div>
-          <p
+          {/* <p
             className={
               "cursor-pointer dark:text-gray-300 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold "
             }
           >
             Issac
-          </p>
+          </p> */}
+          <MobileDropdown />
         </div>
         <main className="py-10 lg:pl-60 ">
           <div className="px-4 sm:px-6 lg:px-8 overflow-y-auto">{children}</div>
