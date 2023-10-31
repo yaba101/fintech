@@ -1,3 +1,10 @@
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  ChevronDownIcon,
+  ChevronUpDownIcon,
+  ChevronUpIcon,
+} from "@heroicons/react/24/outline";
 import { useState, useRef, useEffect } from "react";
 
 const DropDown = () => {
@@ -23,16 +30,21 @@ const DropDown = () => {
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="inline-flex justify-between w-full rounded-md border dark:border-gray-700 border-gray-300 dark:bg-dark bg-white px-4 py-3 mt-2 text-sm font-medium dark:text-gray-100 text-gray-700"
+          className="inline-flex justify-between w-32  rounded-md border dark:border-gray-700 border-gray-300 dark:bg-dark bg-white px-4 py-3 mt-2 text-sm font-medium dark:text-gray-100 text-gray-700"
           id="options-menu"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
         >
           Issac
+          {isOpen ? (
+            <ChevronDownIcon className="w-3 h-3 text-end mt-1 ml-1" />
+          ) : (
+            <ChevronUpIcon className="w-3 h-3 text-end mt-1 ml-1" />
+          )}
         </button>
       </div>
       {isOpen && (
-        <div className="origin-top-left absolute -top-20  w-32 rounded-md shadow-lg bg-white dark:bg-dark border dark:border-gray-700 border-gray-300 overflow-y-auto max-h-60">
+        <div className="origin-bottom-left absolute -top-20 w-32 rounded-md shadow-lg bg-white dark:bg-dark border dark:border-gray-700 border-gray-300 overflow-y-auto max-h-60">
           <div
             className="py-1 0"
             role="menu"
