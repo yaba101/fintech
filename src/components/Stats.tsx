@@ -6,18 +6,20 @@ export default function Stats({
   iconBgColor,
   textBgColor,
   textColor,
+  signIcon,
 }: {
   icon: any;
   iconBgColor: string;
   textBgColor: string;
   textColor: string;
+  signIcon: any;
 }) {
   return (
     <>
-      <div className="flex flex-grow items-end justify-between space-x-6 rounded-lg border dark:border-gray-900 shadow-lg py-2 px-1 dark:bg-dark bg-gray-50">
-        <div className="flex items-center gap-1">
+      <div className="flex flex-grow items-end justify-between space-x-6 rounded-lg border dark:border-gray-900 shadow-lg py-4 px-2 dark:bg-dark bg-gray-50">
+        <div className="flex items-center gap-3">
           <span
-            className={`hidden rounded-lg ${iconBgColor} p-1.5 dark:text-gray-100 sm:block`}
+            className={`hidden rounded-lg ${iconBgColor} p-3 dark:text-gray-100 sm:block`}
           >
             {icon}
           </span>
@@ -34,20 +36,7 @@ export default function Stats({
         <div
           className={`flex gap-1 rounded py-0.5  ${textColor} ${textBgColor} bg-opacity-40`}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth=""
-              d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-            />
-          </svg>
+          {signIcon}
 
           <span className="text-xs font-medium">67.81%</span>
         </div>

@@ -9,6 +9,7 @@ import Table from "@/components/Table";
 import GroupedBarChart, { IGroupedData } from "./GroupedBar";
 import DetailCardSkeleton from "./skeleton/DetailCardSkeleton";
 import { Suspense, useTransition } from "react";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 type CashProps = {
   color: string;
@@ -49,6 +50,9 @@ export default function Column({
             iconBgColor="bg-green-600"
             textBgColor="bg-green-300"
             textColor="text-emerald-400"
+            signIcon={
+              <PlusIcon className="h-4 w-4 shrink-0 text-green-600 dark:text-green-600" />
+            }
           />
 
           <DetailCard colors={cashInData} title="Cash in Activity" />
@@ -69,6 +73,9 @@ export default function Column({
                 iconBgColor="bg-green-600"
                 textBgColor="bg-green-400"
                 textColor="text-emerald-400"
+                signIcon={
+                  <PlusIcon className="h-4 w-4 shrink-0 text-green-600 dark:text-green-600" />
+                }
               />
               <Stats
                 icon={
@@ -77,6 +84,9 @@ export default function Column({
                 iconBgColor="bg-red-600"
                 textBgColor="bg-red-400"
                 textColor="text-red-400"
+                signIcon={
+                  <MinusIcon className="h-4 w-4 shrink-0 text-red-600 dark:text-red-600" />
+                }
               />
             </div>
 
@@ -97,6 +107,9 @@ export default function Column({
             iconBgColor="bg-red-600"
             textBgColor="bg-red-400"
             textColor="text-red-400"
+            signIcon={
+              <MinusIcon className="h-4 w-4 shrink-0 text-red-600 dark:text-red-600" />
+            }
           />
           <DetailCard colors={cashOutData} title="Cash out Activity" />
         </div>
