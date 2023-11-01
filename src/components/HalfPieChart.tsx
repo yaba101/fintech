@@ -1,19 +1,20 @@
+import React from "react";
 import * as d3 from "d3";
 
 type DataItem = {
-  name: string;
+  title: string;
   value: number;
 };
 type DonutChartProps = {
   width: number;
   height: number;
-  colors: any[];
   data: DataItem[];
 };
 
 const MARGIN = 40;
 
-const HalfDonutChart = ({ width, height, data, colors }: DonutChartProps) => {
+const HalfDonutChart = ({ width, height, data }: DonutChartProps) => {
+  const colors = ["#146f43", "#2d23c2", "#b3a641", "#146f43"];
   const radius = Math.min(width, height) / 2 - MARGIN;
 
   const arc = d3.arc().innerRadius(90).outerRadius(radius);
@@ -27,7 +28,7 @@ const HalfDonutChart = ({ width, height, data, colors }: DonutChartProps) => {
       <svg
         width={width}
         height={height}
-        className="-mb-16 "
+        className="-mb-16"
         style={{ display: "inline-block" }}
       >
         <g transform={`translate(${width / 2}, ${height / 2})`}>
@@ -43,11 +44,12 @@ const HalfDonutChart = ({ width, height, data, colors }: DonutChartProps) => {
 
             startAngle = endAngle;
 
-            return <path key={i} d={path!} fill={colors[i]?.color} />;
+            return <path key={i} d={path!} fill={colors[i]} />;
           })}
         </g>
       </svg>
     </>
   );
 };
+
 export default HalfDonutChart;
