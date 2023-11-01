@@ -5,6 +5,7 @@ import {
 import ArrowDownCircleIcon from "@heroicons/react/24/outline/esm/ArrowDownCircleIcon";
 import DatePicker from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
+import Image from "next/image";
 
 const Item = [
   {
@@ -74,24 +75,21 @@ export default async function Table() {
                     <tr key={item.company}>
                       <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                         <div className="flex items-center">
-                          <div className="h-8 w-8 flex-shrink-0">
+                          <div className=" px-5">
                             {item.icon === "" ? (
-                              <svg
-                                clipRule="evenodd"
-                                fillRule="evenodd"
-                                strokeLinejoin="round"
-                                strokeMiterlimit="2"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="m3 17v3c0 .621.52 1 1 1h3v-1.5h-2.5v-2.5zm8.5 4h-3.5v-1.5h3.5zm4.5 0h-3.5v-1.5h3.5zm5-4h-1.5v2.5h-2.5v1.5h3c.478 0 1-.379 1-1zm-1.5-1v-3.363h1.5v3.363zm-15-3.363v3.363h-1.5v-3.363zm15-1v-3.637h1.5v3.637zm-15-3.637v3.637h-1.5v-3.637zm12.5-5v1.5h2.5v2.5h1.5v-3c0-.478-.379-1-1-1zm-10 0h-3c-.62 0-1 .519-1 1v3h1.5v-2.5h2.5zm4.5 1.5h-3.5v-1.5h3.5zm4.5 0h-3.5v-1.5h3.5z"
-                                  fillRule="nonzero"
-                                  className="dark:fill-white"
-                                />
-                              </svg>
+                              <div className="w-10"></div>
                             ) : (
-                              item.icon
+                              <div className="rounded-full">
+                                <Image
+                                  src={item.icon}
+                                  alt={item.icon}
+                                  width={40}
+                                  height={20}
+                                  loading="lazy"
+                                  objectFit="cover"
+                                  className="rounded-full"
+                                />
+                              </div>
                             )}
                           </div>
                           <div className="ml-4">
