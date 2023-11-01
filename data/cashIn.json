@@ -1,4 +1,6 @@
 [
   { "color": "#146f43", "title": "Salary" },
-  { "color": "#2d23c2", "title": "Profit" }
+  { "color": "#2d23c2", "title": "Profit" },
+  { "color": "#bf6a74", "title": "Subscription" },
+  { "color": "#bf6a94", "title": "Subscription" }
 ]

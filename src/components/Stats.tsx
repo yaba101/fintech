@@ -1,6 +1,3 @@
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { ArrowUpLeft } from "lucide-react";
-
 export default function Stats({
   icon,
   iconBgColor,

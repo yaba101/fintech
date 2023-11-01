@@ -1,4 +1,6 @@
 [
   { "color": "#cf3747", "title": "Rent" },
-  { "color": "#bf6a74", "title": "Subscription" }
+  { "color": "#bf6a74", "title": "Subscription" },
+  { "color": "#bf6a74", "title": "Subscription" },
+  { "color": "#cf6a79", "title": "Subscription" }
 ]

@@ -1,4 +1,5 @@
-const AddAccountCard = () => {
+const AddAccountCard = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 4000));
   return (
     <div className="rounded overflow-hidden shadow-lg border dark:border-gray-900 my-3 dark:bg-dark bg-gray-50">
       <div className="px-6 py-4">

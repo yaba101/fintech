@@ -48,9 +48,15 @@ export default async function Home() {
   const bargraphData = await getBarGraphData();
   const cashInData = await getCashInData();
   const cashOutData = await getCashOutData();
+  await delay(6000);
 
   return (
     <>
+      {/* <div className="mx-auto w-96">
+        <Suspense fallback={<DetailCardSkeleton />}>
+          <DetailCard colors={cashInData} title="Cash in Activity" />
+        </Suspense>
+      </div> */}
       <SideBar>
         <ColumnContainer
           bargraphData={bargraphData}

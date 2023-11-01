@@ -6,5 +6,8 @@
   { "label": "May", "values": [90, 100] },
   { "label": "June", "values": [70, 110] },
   { "label": "July", "values": [50, 70] },
-  { "label": "August", "values": [40, 60] }
+  { "label": "August", "values": [40, 60] },
+  { "label": "September", "values": [40, 60] },
+  { "label": "October", "values": [40, 60] },
+  { "label": "December", "values": [40, 60] }
 ]

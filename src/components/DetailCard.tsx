@@ -3,7 +3,7 @@ import { data } from "../../data";
 import HalfDonutChart from "@/components/HalfPieChart";
 import Dropdown from "./Dropdown";
 
-export default function DetailCard({
+export default async function DetailCard({
   colors,
   title,
 }: {
@@ -27,16 +27,16 @@ export default function DetailCard({
         <div className="flex items-center ml-5">
           <button
             className=" text-white font-medium rounded-full w-4 h-4 mr-2"
-            style={{ background: colors[0].color.toString() }}
+            style={{ background: colors[0]?.color?.toString() }}
           />
-          <h4 className="dark:text-gray-200">{colors[0].title.toString()}</h4>
+          <h4 className="dark:text-gray-200">{colors[0]?.title.toString()}</h4>
         </div>
         <div className="flex items-center">
           <button
             className=" hover-bg-blue-700 text-white font-medium rounded-full w-4 h-4 mr-2"
-            style={{ background: colors[1].color.toString() }}
+            style={{ background: colors[1]?.color?.toString() }}
           />
-          <h4 className="dark:text-gray-200">{colors[1].title.toString()}</h4>
+          <h4 className="dark:text-gray-200">{colors[1]?.title?.toString()}</h4>
         </div>
       </div>
       <div className="flex justify-between mb-6 ml-6">

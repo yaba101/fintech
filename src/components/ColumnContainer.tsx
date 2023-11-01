@@ -1,4 +1,3 @@
-"use client";
 import { ArrowDownLeftIcon, ArrowUpRightIcon } from "@heroicons/react/20/solid";
 import AddAccountCard from "@/components/SummaryCard";
 import Card from "@/components/Card";
@@ -8,15 +7,31 @@ import SearchInput from "@/components/SearchInput";
 import Table from "@/components/Table";
 import GroupedBarChart, { IGroupedData } from "./GroupedBar";
 import DetailCardSkeleton from "./skeleton/DetailCardSkeleton";
-import { Suspense, useTransition } from "react";
+import { Suspense } from "react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 type CashProps = {
   color: string;
   title: string;
 };
+// async function delay(ms: number) {
+//   return new Promise((resolve) => setTimeout(resolve, ms));
+// }
 
-export default function Column({
+// async function getCashInData() {
+//   // await delay(2000);
+//   const response = await fetch(process.env.URL + "/api/cashin", {
+//     method: "GET",
+//     cache: "no-store",
+//   });
+//   if (response.ok) {
+//     const data = await response.json();
+//     return data;
+//   }
+//   return [];
+// }
+
+export default async function Column({
   bargraphData,
   cashInData,
   cashOutData,
@@ -25,6 +40,7 @@ export default function Column({
   cashInData: CashProps[];
   cashOutData: CashProps[];
 }) {
+  // const data = await getCashInData();
   return (
     <div className="flex flex-row lg:pl-24 mx-auto ">
       <div className="flex flex-col md:flex-row mx-auto overflow-y-hidden lg:space-x-8 overflow-x-auto">

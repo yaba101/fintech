@@ -67,13 +67,14 @@ export default function GroupedBarChart({ data }: Props) {
   const axisBottomRef = useRef<SVGGElement>(null);
   const axisLeftRef = useRef<SVGGElement>(null);
 
-  const margin = { top: 10, right: 0, bottom: 20, left: 30 };
-  const width = 500 - margin.left - margin.right;
+  const margin = { top: 10, right: 50, bottom: 20, left: 20 };
+  const width = 750 - margin.left - margin.right;
   const height = 300 - margin.top - margin.bottom;
 
-  const labels = data.map(({ label }) => label);
-  const sublabels = Object.keys(data[0].values);
-  const values = data.map(({ values }) => values).flat();
+  const labels = data?.map(({ label }) => label);
+  const sublabels = data[0]?.values ? Object.keys(data[0].values) : [];
+
+  const values = data?.map(({ values }) => values).flat();
 
   const scaleY = d3
     .scaleLinear()
@@ -128,7 +129,7 @@ export default function GroupedBarChart({ data }: Props) {
       </div>
 
       <svg
-        className="min-w-full px-2 verflow-x-auto "
+        className="min-w-full px-6 verflow-x-auto "
         width={width + margin.left + margin.right}
         height={height + margin.top + margin.bottom}
       >

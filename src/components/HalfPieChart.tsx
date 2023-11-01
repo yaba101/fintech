@@ -1,4 +1,3 @@
-"use client";
 import * as d3 from "d3";
 
 type DataItem = {
@@ -44,7 +43,7 @@ const HalfDonutChart = ({ width, height, data, colors }: DonutChartProps) => {
 
             startAngle = endAngle;
 
-            return <path key={i} d={path!} fill={colors[i].color} />;
+            return <path key={i} d={path!} fill={colors[i]?.color} />;
           })}
         </g>
       </svg>
