@@ -52,7 +52,7 @@ async function getRecentTransactionData() {
 export default async function Table() {
   const data = await getRecentTransactionData();
   return (
-    <div className="rounded-md dark:bg-dark  bg-gray-50 shadow-lg overflow-x-auto overflow-y-hidden">
+    <div className="rounded-md dark:bg-dark bg-gray-50 shadow-lg overflow-x-auto overflow-y-hidden">
       <div className=" flex my-3 py-3 items-center px-2 justify-between flex-grow space-x-2">
         <h4 className=" text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2 py-2">
           Recent Transactions
