@@ -25,9 +25,9 @@ export default async function Column({
   cashOutData: CashProps[];
 }) {
   return (
-    <div className="flex flex-col mx-auto lg:pl-24 2xl:flex-row 2xl:space-x-8">
-      <div className="column-2 flex-grow h-full my-2 rounded-md lg:space-y-5 ">
-        <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center mb-5 hidden 2xl:block">
+    <div className="flex flex-col mx-auto lg:pl-24 2xl:flex-row xl:flex-row xl:space-x-3 2xl:space-x-8 overflow-x-hidden ">
+      <div className="column-2 flex-grow h-full my-2 rounded-md lg:space-y-5 xl:w-1/6">
+        <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl  text-center mb-5 hidden 2xl:block">
           Availability
         </h1>
         <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center xl:hidden lg:block">
@@ -55,7 +55,7 @@ export default async function Column({
 
         <DetailCard colors={cashInData} title="Cash in Activity" />
       </div>
-      <div className="column-2 flex-grow my-2 rounded-md ">
+      <div className="column-2 flex-grow my-2 rounded-md xl:w-2/5">
         <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center hidden xl:block">
           Welcome Back, Issac👋!
         </h1>
@@ -93,7 +93,7 @@ export default async function Column({
         </div>
       </div>
 
-      <div className="2xl:flex 2xl:flex-row 2xl:space-x-8 ">
+      <div className="2xl:flex 2xl:flex-row 2xl:space-x-8 xl:w-1/4">
         <div className="column-3 flex-grow rounded-md my-12 2xl:space-y-5">
           <div className="hidden xl:block">
             <SearchInput />

@@ -298,13 +298,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
           <div className="flex-1 text-sm font-semibold leading-6 dark:text-gray-100">
             Dashboard
           </div>
-          {/* <p
-            className={
-              "cursor-pointer dark:text-gray-300 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold "
-            }
-          >
-            Issac
-          </p> */}
+
           <MobileDropdown />
         </div>
         <main className="py-10  lg:pl-40 xl:pl-28">

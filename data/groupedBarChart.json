@@ -1,13 +1,13 @@
 [
-  { "label": "January", "values": [60, 80] },
-  { "label": "February", "values": [160, 200] },
-  { "label": "March", "values": [60, 40] },
-  { "label": "April", "values": [80, 120] },
+  { "label": "Jan", "values": [60, 80] },
+  { "label": "Feb", "values": [160, 200] },
+  { "label": "Mar", "values": [60, 40] },
+  { "label": "Apr", "values": [80, 120] },
   { "label": "May", "values": [90, 100] },
-  { "label": "June", "values": [70, 110] },
-  { "label": "July", "values": [50, 70] },
-  { "label": "August", "values": [40, 60] },
-  { "label": "September", "values": [40, 60] },
-  { "label": "October", "values": [40, 60] },
-  { "label": "December", "values": [40, 60] }
+  { "label": "Jun", "values": [70, 110] },
+  { "label": "Jul", "values": [50, 70] },
+  { "label": "Aug", "values": [40, 60] },
+  { "label": "Sep", "values": [40, 60] },
+  { "label": "Oct", "values": [40, 60] },
+  { "label": "Dec", "values": [40, 60] }
 ]

@@ -25,21 +25,21 @@ export default async function DetailCard({
         </div>
         <Dropdown />
       </div>
-      <div className="min-w-fit text-center">
-        <HalfDonutChart data={top4Data} width={360} height={400} />
+      <div className="min-w-full text-center xs:-ml-11 xl:-ml-10 ">
+        <HalfDonutChart data={top4Data} width={340} height={400} />
       </div>
       <div className="flex flex-wrap justify-center items-center -mt-28 mb-3 ">
         {CurrentColors.map((color, index) => (
           <div key={index} className="w-1/2 p-2 ">
-            <div className="flex items-center justify-center space-x-2">
+            <div className="flex items-center justify-center space-x-2 flex-wrap">
               <button
-                className="text-white font-medium rounded-full w-4 h-4 mr-2"
+                className="text-white font-medium rounded-full w-4 h-4 mr-2 xl:text-xs"
                 style={{ background: color }}
               />
-              <h4 className="dark:text-gray-200">
+              <h4 className="dark:text-gray-200 xl:text-xs whitespace-nowrap">
                 {top4Data[index]?.title.toString()}
               </h4>
-              <h4 className="dark:text-gray-400 text-sm">
+              <h4 className="dark:text-gray-400 xl:text-xs  ">
                 {(
                   (top4Data[index]?.value /
                     top4Data.reduce((acc, item) => acc + item.value, 0)) *

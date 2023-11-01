@@ -67,12 +67,12 @@ export default function GroupedBarChart({ data }: Props) {
   const axisBottomRef = useRef<SVGGElement>(null);
   const axisLeftRef = useRef<SVGGElement>(null);
 
-  const margin = { top: 10, right: 50, bottom: 20, left: 20 };
-  const width = 750 - margin.left - margin.right;
+  const margin = { top: 10, right: 0, bottom: 20, left: 30 };
+  const width = 700 - margin.left - margin.right;
   const height = 300 - margin.top - margin.bottom;
 
   const labels = data?.map(({ label }) => label);
-  const sublabels = data[0]?.values ? Object.keys(data[0].values) : [];
+  const sublabels = Object.keys(data[0].values);
 
   const values = data?.map(({ values }) => values).flat();
 
@@ -112,26 +112,29 @@ export default function GroupedBarChart({ data }: Props) {
   }, [scaleX, yAxis]);
 
   return (
-    <div className=" dark:bg-dark rounded-md py-1 bg-gray-50 my-3 shadow-lg overflow-x-auto ">
-      <div className="flex my-3 py-1 px-3 justify-between min-w-fit">
-        <h4 className="mt-1 mr-5 text-xl font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-1 sm:text-sm lg:text-xl">
+    <div className=" dark:bg-dark rounded-md py-1 bg-gray-50 my-3 shadow-lg overflow-x-hidden ">
+      <div className="flex my-3 py-1 md:px-3 justify-between min-w-fit">
+        <h4 className="mt-1 md:mr-5 text-xl font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-1 sm:text-sm lg:text-xl">
           Insights
         </h4>
-        <div className="flex justify-around mt-1 mr-5">
+        <div className="flex justify-around mt-1 md:mr-5">
           <button className="text-white font-medium bg-green-600 rounded-full w-4 h-4 mx-3 mt-2" />
           <p className="mt-1 text-sm lg:text-base">Income</p>
           <button className="text-white font-medium rounded-full bg-red-600 w-4 h-4 mx-3 mt-2" />
           <p className="mt-1 text-sm lg:text-base">Expenses</p>
         </div>
-        <div className=" ml-10">
+        <div className="xs:mr-1">
           <Dropdown />
         </div>
       </div>
 
       <svg
-        className="min-w-full px-6 verflow-x-auto "
-        width={width + margin.left + margin.right}
-        height={height + margin.top + margin.bottom}
+        className="w-auto px-3 overflow-x-hidden "
+        viewBox={`0 0 ${width + margin.left + margin.right} ${
+          height + margin.top + margin.bottom
+        }`}
+        preserveAspectRatio="xMidYMid meet"
+        style={{ width: "100%", height: "auto" }}
       >
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           <g ref={axisBottomRef} transform={`translate(0, ${height})`} />
