@@ -29,8 +29,27 @@ const Item = [
     textColor: "text-green-600",
   },
 ];
+type RecentTransactionData = {
+  icon?: any;
+  company: string;
+  date: string;
+  amount: string;
+};
 
-export default function Table() {
+async function getRecentTransactionData() {
+  // await delay(2000);
+  const response = await fetch(process.env.URL + "/api/recent-transaction", {
+    method: "GET",
+    cache: "no-store",
+  });
+  if (response.ok) {
+    const data = await response.json();
+    return data;
+  }
+  return [];
+}
+export default async function Table() {
+  const data = await getRecentTransactionData();
   return (
     <div className="rounded-md dark:bg-dark  bg-gray-50 shadow-lg overflow-x-auto overflow-y-hidden">
       <div className=" flex my-3 py-3 items-center px-2 justify-between flex-grow space-x-2">
@@ -51,30 +70,45 @@ export default function Table() {
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               <table className="min-w-full divide-y divide-gray-300 ">
                 <tbody>
-                  {Item.map((item) => (
-                    <tr key={item.name}>
+                  {data.map((item: RecentTransactionData) => (
+                    <tr key={item.company}>
                       <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                         <div className="flex items-center">
                           <div className="h-8 w-8 flex-shrink-0">
-                            {item.icon}
+                            {item.icon === "" ? (
+                              <svg
+                                clipRule="evenodd"
+                                fillRule="evenodd"
+                                strokeLinejoin="round"
+                                strokeMiterlimit="2"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="m3 17v3c0 .621.52 1 1 1h3v-1.5h-2.5v-2.5zm8.5 4h-3.5v-1.5h3.5zm4.5 0h-3.5v-1.5h3.5zm5-4h-1.5v2.5h-2.5v1.5h3c.478 0 1-.379 1-1zm-1.5-1v-3.363h1.5v3.363zm-15-3.363v3.363h-1.5v-3.363zm15-1v-3.637h1.5v3.637zm-15-3.637v3.637h-1.5v-3.637zm12.5-5v1.5h2.5v2.5h1.5v-3c0-.478-.379-1-1-1zm-10 0h-3c-.62 0-1 .519-1 1v3h1.5v-2.5h2.5zm4.5 1.5h-3.5v-1.5h3.5zm4.5 0h-3.5v-1.5h3.5z"
+                                  fillRule="nonzero"
+                                  className="dark:fill-white"
+                                />
+                              </svg>
+                            ) : (
+                              item.icon
+                            )}
                           </div>
                           <div className="ml-4">
-                            <div
-                              className={`font-medium dark:text-gray-100 ${item.textColor}`}
-                            >
-                              {item.name}
+                            <div className={`font-medium dark:text-gray-100`}>
+                              {item.company}
                             </div>
                           </div>
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                        <div className={`${item.textColor}`}>{item.title}</div>
+                        <div className={``}>{item.date}</div>
                       </td>
-                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-300">
                         <span
-                          className={`inline-flex items-center rounded-md px-2 py-1 text-sm font-medium ${item.textColor}`}
+                          className={`inline-flex items-center rounded-md px-2 py-1 text-sm font-medium`}
                         >
-                          {item.role}
+                          {item.amount}
                         </span>
                       </td>
                     </tr>

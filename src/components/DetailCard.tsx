@@ -10,7 +10,7 @@ export default async function DetailCard({
   colors: any[];
   title: string;
 }) {
-  const CurrentColors = ["#146f43", "#2d23c2", "#b3a641", "#146f43"];
+  const CurrentColors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
   const sortedData = [...colors].sort((a, b) => b.value - a.value);
 
   const top4Data = sortedData.slice(0, 4);

@@ -14,7 +14,7 @@ type DonutChartProps = {
 const MARGIN = 40;
 
 const HalfDonutChart = ({ width, height, data }: DonutChartProps) => {
-  const colors = ["#146f43", "#2d23c2", "#b3a641", "#146f43"];
+  const colors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
   const radius = Math.min(width, height) / 2 - MARGIN;
 
   const arc = d3.arc().innerRadius(90).outerRadius(radius);
