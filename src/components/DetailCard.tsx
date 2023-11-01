@@ -16,7 +16,7 @@ export default async function DetailCard({
   const top4Data = sortedData.slice(0, 4);
 
   return (
-    <div className="p-4 shadow-md dark:text-gray-100 border dark:border-gray-900 rounded-md  my-3 dark:bg-dark bg-gray-50">
+    <div className="p-4 shadow-md dark:text-gray-100 border dark:border-gray-900 rounded-md my-3 dark:bg-dark bg-gray-50">
       <div className="flex justify-between border-bottom">
         <div className="flex items-center">
           <p className="mb-0 capitalize dark:text-gray-100 font-bold">
@@ -39,7 +39,14 @@ export default async function DetailCard({
               <h4 className="dark:text-gray-200">
                 {top4Data[index]?.title.toString()}
               </h4>
-              <h4 className="dark:text-gray-400 text-sm">34%</h4>
+              <h4 className="dark:text-gray-400 text-sm">
+                {(
+                  (top4Data[index]?.value /
+                    top4Data.reduce((acc, item) => acc + item.value, 0)) *
+                  100
+                ).toFixed(2)}
+                %
+              </h4>
             </div>
           </div>
         ))}
