@@ -5,11 +5,7 @@ import { useTheme } from "next-themes";
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
   const isDarkMode = theme === "dark";
-  const [currentTheme, setCurrentTheme] = useState(
-    typeof window !== "undefined"
-      ? window.localStorage.getItem("theme") ?? "light"
-      : "light"
-  );
+  const [currentTheme, setCurrentTheme] = useState("light");
 
   const toggleTheme = () => {
     const newTheme = isDarkMode ? "light" : "dark";
@@ -19,10 +15,12 @@ const ThemeSwitcher = () => {
   };
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme) {
-      setTheme(storedTheme);
-      setCurrentTheme(storedTheme);
+    if (typeof window !== "undefined") {
+      const storedTheme = localStorage.getItem("theme");
+      if (storedTheme) {
+        setTheme(storedTheme);
+        setCurrentTheme(storedTheme);
+      }
     }
   }, [setTheme]);
 
