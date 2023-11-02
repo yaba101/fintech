@@ -31,6 +31,6 @@ const config: Config = {
       // => @media (min-width: 1536px) { ... }
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-debug-screens")],
 };
 export default config;
