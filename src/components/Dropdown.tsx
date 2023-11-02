@@ -52,7 +52,6 @@ const Dropdown = () => {
           aria-expanded={isOpen}
         >
           {selectedMonth}
-
           {isOpen ? (
             <ArrowUpIcon className="w-3 h-3 text-end mt-1 ml-1" />
           ) : (
@@ -61,7 +60,7 @@ const Dropdown = () => {
         </button>
       </div>
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-dark border dark:border-gray-700 border-gray-300 overflow-y-auto max-h-60">
+        <div className="origin-top-right absolute right-0 mt-2 w-auto px-3 max-h-40  rounded-md shadow-lg bg-white dark:bg-dark border dark:border-gray-700 border-gray-300 overflow-y-auto">
           <div
             className="py-1"
             role="menu"
