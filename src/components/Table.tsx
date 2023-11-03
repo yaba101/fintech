@@ -37,7 +37,7 @@ export default async function Table() {
           <SearchInput />
         </div>
       </div>
-      <div className="flex w-1/2 md:hidden px-1 ml-auto ">
+      <div className="flex w-5/6 mx-auto md:hidden px-1  ">
         <SearchInput />
       </div>
 
