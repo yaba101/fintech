@@ -25,9 +25,7 @@ export default async function DetailCard({
         </div>
         <Dropdown />
       </div>
-      <div className="min-w-full text-center xs:-ml-11 xl:-ml-10 ">
-        <HalfDonutChart data={top4Data} width={340} height={400} />
-      </div>
+      <HalfDonutChart data={top4Data} width={360} height={400} />
       <div className="flex flex-wrap justify-center items-center -mt-28 mb-3 ">
         {CurrentColors.map((color, index) => (
           <div key={index} className="w-1/2 p-2 ">
