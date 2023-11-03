@@ -28,15 +28,18 @@ export default async function Table() {
   return (
     <div className="rounded-md dark:bg-dark bg-gray-50 shadow-lg overflow-x-hidden overflow-y-hidden">
       <div className="flex my-3 py-3 items-center px-2 xs:pr-5 justify-between flex-grow space-x-2">
-        <h4 className="tracking-tight md:text-lg xs:text-sm xs:text-bold font-bold text-center whitespace-nowrap px-2 py-2">
+        <h4 className="tracking-tight md:text-lg xs:text-lg xs:text-bold font-bold text-center whitespace-nowrap px-2 py-2 xs:mx-auto sm:mx-0">
           Recent Transactions
         </h4>
-        <div className="text-center">
+        <div className="min-w-fit hidden md:block">
           <DatePicker />
         </div>
         <div className="min-w-fit hidden md:block">
           <SearchInput />
         </div>
+      </div>
+      <div className="flex w-4/6 mx-auto md:hidden px-1 mb-3 ">
+        <DatePicker />
       </div>
       <div className="flex w-5/6 mx-auto md:hidden px-1  ">
         <SearchInput />
