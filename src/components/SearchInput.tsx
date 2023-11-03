@@ -2,7 +2,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 export default function SearchInput() {
   return (
-    <div className="w-full">
+    <div className="">
       <label htmlFor="desktop-search" className="sr-only">
         Search
       </label>
