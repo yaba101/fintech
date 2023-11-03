@@ -1,5 +1,6 @@
 import DatePicker from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
+import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 type RecentTransactionData = {
@@ -25,9 +26,9 @@ async function getRecentTransactionData() {
 export default async function Table() {
   const data = await getRecentTransactionData();
   return (
-    <div className="rounded-md dark:bg-dark bg-gray-50 shadow-lg overflow-x-auto overflow-y-hidden">
-      <div className="flex my-3 py-3 items-center px-2 justify-between flex-grow space-x-2">
-        <h4 className="text-medium font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-2 py-2">
+    <div className="rounded-md dark:bg-dark bg-gray-50 shadow-lg overflow-x-hidden overflow-y-hidden">
+      <div className="flex my-3 py-3 items-center px-2 xs:pr-5 justify-between flex-grow space-x-2">
+        <h4 className="tracking-tight md:text-lg xs:text-sm xs:text-bold font-bold text-center whitespace-nowrap px-2 py-2">
           Recent Transactions
         </h4>
         <div className="text-center">
@@ -41,51 +42,43 @@ export default async function Table() {
         <SearchInput />
       </div>
 
-      <div className="px-4 sm:px-6 lg:px-8 shadow-xl rounded-md">
+      <div className="px-4 xs:px-1 sm:px-6 lg:px-8 rounded-md">
         <div className="mt-8 flow-root">
           <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-              <div className="overflow-x-auto">
+            <div className="inline-block min-w-full py-2 align-middle  sm:px-6 lg:px-8">
+              <div className="overflow-x-hidden">
                 <table className="min-w-full divide-y divide-gray-300">
                   <tbody>
                     {data.map((item: RecentTransactionData) => (
                       <tr key={item.company}>
                         <td className="whitespace-nowrap py-3 sm:py-2 pl-4 pr-3 sm:pl-0">
                           <div className="flex items-center">
-                            <div className="px-4 sm:px-2">
+                            <div className="px-4 xs:px-0 sm:px-2">
                               {item.icon === "" ? (
-                                <div className="w-8 sm:w-10"></div>
+                                <div className="xs:w-6 w-8 sm:w-10"></div>
                               ) : (
                                 <div className="rounded-full">
-                                  <Image
-                                    src={item.icon}
-                                    alt={item.icon}
-                                    width={30}
-                                    height={15}
-                                    loading="lazy"
-                                    objectFit="cover"
-                                    className="rounded-full"
-                                  />
+                                  <ArrowDownCircleIcon className="w-6 h-6" />
                                 </div>
                               )}
                             </div>
                             <div className="ml-4">
                               <div
-                                className={`font-medium dark:text-gray-100 text-sm sm:text-base`}
+                                className={`font-medium dark:text-gray-100 xs:text-xs text-sm sm:text-base`}
                               >
                                 {item.company}
                               </div>
                             </div>
                           </div>
                         </td>
-                        <td className="whitespace-nowrap px-3 py-3 sm:py-2 text-sm text-gray-500">
-                          <div className="text-sm sm:text-base">
+                        <td className="whitespace-nowrap xs:px-1 px-3 py-3 xs:text-xs sm:py-2 text-sm text-gray-500">
+                          <div className="xs:text-xs text-sm sm:text-base">
                             {item.date}
                           </div>
                         </td>
-                        <td className="whitespace-nowrap px-3 py-3 sm:py-2 text-sm text-gray-300">
+                        <td className="whitespace-nowrap xs:px-1 px-3 py-3 sm:py-2 text-sm text-gray-300">
                           <span
-                            className={`inline-flex items-center rounded-md px-2 py-1 text-sm font-medium sm:text-base`}
+                            className={`inline-flex items-center rounded-md px-2 py-1 xs:text-xs text-sm font-medium sm:text-base`}
                           >
                             {item.amount}
                           </span>
