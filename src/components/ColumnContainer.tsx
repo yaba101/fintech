@@ -27,7 +27,7 @@ export default async function Column({
   return (
     <div className="flex flex-col mx-auto lg:pl-24 2xl:flex-row xl:flex-row xl:space-x-3 2xl:space-x-8 overflow-x-hidden ">
       <div className="column-2 flex-grow h-full my-2 rounded-md lg:space-y-5 xl:w-1/6">
-        <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl  text-center mb-5 hidden 2xl:block">
+        <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl  text-center mb-5 hidden xl:block">
           Availability
         </h1>
         <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center xl:hidden lg:block">
