@@ -6,8 +6,8 @@ const AddAccountCard = async () => {
         <div className="font-bold text-xl mb-2 text-center">
           Account Summary
         </div>
-        <div className="my-6">
-          <div className="my-5">
+        <div className="my-6 w-3/4 mx-auto">
+          <div className="my-5 ">
             <div className="flex justify-between">
               <span>Savings</span>
               <span className="font-medium text-sm">$597.39</span>
@@ -26,7 +26,7 @@ const AddAccountCard = async () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-between space-x-3">
+        <div className="flex justify-between space-x-3 w-3/4 mx-auto">
           <button className="bg-[#27674a] hover:bg-[#133425] text-white text-sm font-medium py-1 px-4 rounded-lg whitespace-nowrap">
             View All
           </button>
