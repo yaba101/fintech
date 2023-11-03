@@ -33,13 +33,13 @@ export default async function DetailCard({
           <div key={index} className="w-1/2 p-2 ">
             <div className="flex items-center justify-center space-x-2 flex-wrap">
               <button
-                className="text-white font-medium rounded-full w-4 h-4 mr-2 xl:text-xs"
+                className="text-white font-medium rounded-full w-4 h-4 mr-2 xl:text-xs xs:w-3 xs:h-3"
                 style={{ background: color }}
               />
               <h4 className="dark:text-gray-200 xl:text-xs whitespace-nowrap xs:text-sm">
                 {top4Data[index]?.title.toString()}
               </h4>
-              <h4 className="dark:text-gray-400 xl:text-xs xs:text-xs xs:pl-5 xs:py-1 pl-0">
+              <h4 className="dark:text-gray-400 xl:text-xs xs:text-xs xs:pl-5 xs:py-1 pl-0 ">
                 {(
                   (top4Data[index]?.value /
                     top4Data.reduce((acc, item) => acc + item.value, 0)) *

@@ -55,7 +55,7 @@ export default async function Table() {
                           <div className="flex items-center">
                             <div className="px-4 xs:px-0 sm:px-2">
                               {item.icon === "" ? (
-                                <div className="xs:w-6 w-8 sm:w-10"></div>
+                                <div className="xs:w-6 w-8 sm:w-10 lg:w-6"></div>
                               ) : (
                                 <div className="rounded-full">
                                   <ArrowDownCircleIcon className="w-6 h-6" />
