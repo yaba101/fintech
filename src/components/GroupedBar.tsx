@@ -114,16 +114,16 @@ export default function GroupedBarChart({ data }: Props) {
   return (
     <div className=" dark:bg-dark rounded-md py-1 bg-gray-50 my-3 shadow-lg overflow-x-hidden ">
       <div className="flex my-3 py-1 md:px-3 justify-between min-w-fit">
-        <h4 className="mt-1 md:mr-5 text-xl font-medium tracking-tight lg:text-medium text-center whitespace-nowrap px-1 sm:text-sm lg:text-xl">
+        <h4 className="mt-1 md:mr-5 text-xl font-medium tracking-tight xs:text-sm lg:text-medium text-center whitespace-nowrap px-1 sm:text-sm lg:text-xl">
           Insights
         </h4>
-        <div className="flex justify-around mt-1 md:mr-5">
-          <button className="text-white font-medium bg-green-600 rounded-full w-4 h-4 mx-3 mt-2" />
-          <p className="mt-1 text-sm lg:text-base">Income</p>
-          <button className="text-white font-medium rounded-full bg-red-600 w-4 h-4 mx-3 mt-2" />
-          <p className="mt-1 text-sm lg:text-base">Expenses</p>
+        <div className="flex justify-between mt-1 md:mr-5 ">
+          <button className="text-white font-medium bg-green-600 rounded-full w-4 h-4 mx-3 xs:mx-1 mt-2 xs:w-2 xs:h-2" />
+          <p className="mt-1 text-sm xs:text-xs  lg:text-base">Income</p>
+          <button className="text-white font-medium rounded-full bg-red-600 w-4 h-4 mx-3 xs:mx-1 mt-2 xs:w-2 xs:h-2" />
+          <p className="mt-1 text-sm xs:text-xs lg:text-base">Expenses</p>
         </div>
-        <div className="xs:mr-1">
+        <div className="xs:mr-l">
           <Dropdown />
         </div>
       </div>
