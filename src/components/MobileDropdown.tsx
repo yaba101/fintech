@@ -45,7 +45,7 @@ const MobileDropdown = () => {
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="inline-flex justify-between w-full rounded-md border dark:border-gray-700 border-gray-300 dark:bg-dark bg-white px-4 py-2 text-sm font-medium dark:text-gray-100 text-gray-700"
+          className="inline-flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md dark:border-gray-700 dark:bg-dark dark:text-gray-100"
           id="options-menu"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
@@ -54,7 +54,7 @@ const MobileDropdown = () => {
         </button>
       </div>
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white dark:bg-dark border dark:border-gray-700 border-gray-300 overflow-y-auto max-h-60">
+        <div className="absolute right-0 w-24 mt-2 overflow-y-auto origin-top-right bg-white border border-gray-300 rounded-md shadow-lg dark:bg-dark dark:border-gray-700 max-h-60">
           <div
             className="py-1"
             role="menu"
@@ -68,7 +68,7 @@ const MobileDropdown = () => {
             >
               Issac
             </button>
-            <hr className="text-gray-50 mx-2" />
+            <hr className="mx-2 text-gray-50" />
             <button
               //   onClick={() => handleMonthChange(month)}
               className={`block px-4 py-2 text-sm dark:text-gray-100 text-gray-700 w-full text-left hover:bg-gray-100 hover:dark:bg-slate-800 hover:text-gray-900 dark:hover:bg-dark dark:hover:text-gray-100 focus:outline-none `}

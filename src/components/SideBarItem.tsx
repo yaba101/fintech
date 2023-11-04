@@ -22,7 +22,7 @@ const SidebarItem = ({
         
         ${
           active
-            ? "bg-indigo-600 text-gray-200"
+            ? "bg-[#5e54e6] text-gray-200"
             : "hover-bg-indigo-50 text-gray-400"
         }
     `}
@@ -41,18 +41,6 @@ const SidebarItem = ({
             isExpanded ? "" : "top-2"
           }`}
         />
-      )}
-      {!isExpanded && (
-        <div
-          className={`
-          absolute left-full rounded-md px-2 py-1 ml-6
-          bg-indigo-100 text-indigo-800 text-sm
-          invisible opacity-20 -translate-x-3 transition-all duration-300 ease-in-out
-          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
-      `}
-        >
-          {text}
-        </div>
       )}
     </li>
   );

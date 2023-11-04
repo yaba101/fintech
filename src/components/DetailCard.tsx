@@ -16,28 +16,28 @@ export default async function DetailCard({
   const top4Data = sortedData.slice(0, 4);
 
   return (
-    <div className="p-4 shadow-md dark:text-gray-100 border dark:border-gray-900 rounded-md my-3 dark:bg-dark bg-gray-50">
+    <div className="p-4 my-3 border rounded-md shadow-md dark:text-gray-100 dark:border-gray-900 dark:bg-dark bg-gray-50">
       <div className="flex justify-between border-bottom">
         <div className="flex items-center">
-          <p className="mb-0 capitalize dark:text-gray-100 font-bold">
+          <p className="mb-0 font-bold capitalize dark:text-gray-100">
             {title}
           </p>
         </div>
         <Dropdown />
       </div>
       <HalfDonutChart data={top4Data} width={360} height={400} />
-      <div className="flex flex-wrap justify-center items-center -mt-28 mb-3 ">
+      <div className="flex flex-wrap items-center justify-center mb-3 -mt-28 ">
         {CurrentColors.map((color, index) => (
           <div key={index} className="w-1/2 p-2 ">
-            <div className="flex items-center justify-center space-x-2 flex-wrap">
+            <div className="flex flex-wrap items-center justify-center space-x-2">
               <button
-                className="text-white font-medium rounded-full w-4 h-4 mr-2 xl:text-xs xs:w-3 xs:h-3"
+                className="w-4 h-4 mr-2 font-medium text-white rounded-full xl:text-xs xs:w-3 xs:h-3"
                 style={{ background: color }}
               />
               <h4 className="dark:text-gray-200 xl:text-xs whitespace-nowrap xs:text-sm">
                 {top4Data[index]?.title.toString()}
               </h4>
-              <h4 className="dark:text-gray-400 xl:text-xs xs:text-xs xs:pl-5 xs:py-1 pl-0 ">
+              <h4 className="pl-0 dark:text-gray-400 xl:text-xs xs:text-xs xs:pl-5 xs:py-1 ">
                 {(
                   (top4Data[index]?.value /
                     top4Data.reduce((acc, item) => acc + item.value, 0)) *
@@ -51,10 +51,10 @@ export default async function DetailCard({
       </div>
 
       <Button variant="outline" className="w-full">
-        <span className="text-center px-10 whitespace-nowrap">
+        <span className="px-10 text-center whitespace-nowrap">
           View All Activity
         </span>
-        <ArrowRightIcon className="h-6 w-6 shrink dark:text-gray-100 " />
+        <ArrowRightIcon className="w-6 h-6 shrink dark:text-gray-100 " />
       </Button>
     </div>
   );

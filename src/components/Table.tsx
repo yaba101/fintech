@@ -1,7 +1,6 @@
 import DatePicker from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
 import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
 
 type RecentTransactionData = {
   icon?: any;
@@ -26,37 +25,37 @@ async function getRecentTransactionData() {
 export default async function Table() {
   const data = await getRecentTransactionData();
   return (
-    <div className="rounded-md dark:bg-dark bg-gray-50 shadow-lg overflow-x-hidden overflow-y-hidden">
-      <div className="flex my-3 py-3 items-center px-2 xs:pr-5 justify-between flex-grow space-x-2">
-        <h4 className="tracking-tight md:text-lg xs:text-lg xs:text-bold font-bold text-center whitespace-nowrap px-2 py-2 sm:mx-auto xs:mx-auto md:mx-0">
+    <div className="overflow-x-hidden overflow-y-hidden rounded-md shadow-lg dark:bg-dark bg-gray-50">
+      <div className="flex items-center justify-between flex-grow px-2 py-3 my-3 space-x-2 xs:pr-5">
+        <h4 className="px-2 py-2 font-bold tracking-tight text-center md:text-lg xs:text-lg xs:text-bold whitespace-nowrap sm:mx-auto xs:mx-auto md:mx-0">
           Recent Transactions
         </h4>
-        <div className="min-w-fit hidden md:block">
+        <div className="hidden min-w-fit md:block">
           <DatePicker />
         </div>
-        <div className=" w-2/5 hidden md:block">
+        <div className="hidden w-2/5 md:block">
           <SearchInput />
         </div>
       </div>
       <div className="flex w-full ">
-        <div className=" w-1/2 mx-auto md:hidden px-1 mb-3 ">
+        <div className="w-1/2 px-1 mx-auto mb-3 md:hidden">
           <DatePicker />
         </div>
-        <div className=" w-1/2 mx-auto md:hidden px-1  ">
+        <div className="w-1/2 px-1 mx-auto md:hidden">
           <SearchInput />
         </div>
       </div>
 
-      <div className="px-4 xs:px-1 sm:px-6 lg:px-8 rounded-md">
-        <div className="mt-8 flow-root">
+      <div className="px-4 rounded-md xs:px-1 sm:px-6 lg:px-8">
+        <div className="flow-root mt-8">
           <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 align-middle  sm:px-6 lg:px-8">
+            <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               <div className="overflow-x-hidden">
                 <table className="min-w-full divide-y divide-gray-300">
                   <tbody>
                     {data.map((item: RecentTransactionData) => (
                       <tr key={item.company}>
-                        <td className="whitespace-nowrap py-3 sm:py-2 pl-4 pr-3 sm:pl-0">
+                        <td className="py-3 pl-4 pr-3 whitespace-nowrap sm:py-2 sm:pl-0">
                           <div className="flex items-center">
                             <div className="px-4 xs:px-0 sm:px-2">
                               {item.icon === "" ? (
@@ -76,12 +75,12 @@ export default async function Table() {
                             </div>
                           </div>
                         </td>
-                        <td className="whitespace-nowrap xs:px-1 px-3 py-3 xs:text-xs sm:py-2 text-sm text-gray-500">
-                          <div className="xs:text-xs text-sm sm:text-base">
+                        <td className="px-3 py-3 text-sm text-gray-500 whitespace-nowrap xs:px-1 xs:text-xs sm:py-2">
+                          <div className="text-sm xs:text-xs sm:text-base">
                             {item.date}
                           </div>
                         </td>
-                        <td className="whitespace-nowrap xs:px-1 px-3 py-3 sm:py-2 text-sm text-gray-300">
+                        <td className="px-3 py-3 text-sm text-gray-300 whitespace-nowrap xs:px-1 sm:py-2">
                           <span
                             className={`inline-flex items-center rounded-md px-2 py-1 xs:text-xs text-sm font-medium sm:text-base`}
                           >
@@ -94,8 +93,8 @@ export default async function Table() {
                 </table>
               </div>
             </div>
-            <div className="text-center pb-5">
-              <button className="bg-green-500 hover:bg-green-700 text-white font-medium py-1 px-4 rounded-lg">
+            <div className="pb-5 text-center">
+              <button className="px-4 py-1 font-medium text-white bg-green-500 rounded-lg hover:bg-green-700">
                 View More
               </button>
             </div>

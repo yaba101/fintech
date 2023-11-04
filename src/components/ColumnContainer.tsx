@@ -25,65 +25,65 @@ export default async function Column({
   cashOutData: CashProps[];
 }) {
   return (
-    <div className="flex flex-col mx-auto lg:pl-24 2xl:flex-row xl:flex-row xl:space-x-3 2xl:space-x-8 overflow-x-hidden ">
-      <div className="column-2 flex-grow h-full my-2 rounded-md lg:space-y-5 xl:w-1/6">
-        <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl  text-center mb-5 hidden xl:block">
+    <div className="flex flex-col mx-auto overflow-x-hidden lg:pl-24 2xl:flex-row xl:flex-row xl:space-x-3 2xl:space-x-8 ">
+      <div className="flex-grow h-full my-2 rounded-md column-2 lg:space-y-5 xl:w-1/6">
+        <h1 className="hidden mb-5 text-2xl font-bold tracking-tight text-center scroll-m-20 lg:text-2xl xl:block">
           Availability
         </h1>
-        <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center xl:hidden lg:block">
+        <h1 className="text-2xl font-bold tracking-tight text-center scroll-m-20 lg:text-2xl xl:hidden lg:block">
           Welcome Back, Issac👋!
         </h1>
-        <p className="leading-7 text-center mb-3 text-gray-400 xl:hidden lg:block">
+        <p className="mb-3 leading-7 text-center text-gray-400 xl:hidden lg:block">
           Here is {"what's"} up with your finances today
         </p>
-        <div className="block xl:hidden mb-3">
+        <div className="block mb-3 xl:hidden">
           <SearchInput />
         </div>
         <Card title="Net Worth" text="$45,032.00" buttonText="View Details" />
 
         <Stats
           icon={
-            <ArrowDownLeftIcon className="h-6 w-6 shrink-0 text-gray-100 dark:text-gray-100" />
+            <ArrowDownLeftIcon className="w-6 h-6 text-gray-100 shrink-0 dark:text-gray-100" />
           }
           iconBgColor="bg-green-600"
           textBgColor="bg-green-300"
           textColor="text-emerald-400"
           signIcon={
-            <PlusIcon className="h-4 w-4 shrink-0 text-green-600 dark:text-green-600" />
+            <PlusIcon className="w-4 h-4 text-green-600 shrink-0 dark:text-green-600" />
           }
         />
 
         <DetailCard colors={cashInData} title="Cash in Activity" />
       </div>
-      <div className="column-2 flex-grow my-2 rounded-md xl:w-2/5">
-        <h1 className="scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl text-center hidden xl:block">
+      <div className="flex-grow my-2 rounded-md column-2 xl:w-2/5">
+        <h1 className="hidden text-2xl font-bold tracking-tight text-center scroll-m-20 lg:text-2xl xl:block">
           Welcome Back, Issac👋!
         </h1>
-        <p className="leading-7 text-center m-0 text-gray-400 hidden xl:block">
+        <p className="hidden m-0 leading-7 text-center text-gray-400 xl:block">
           Here is {"what's"} up with your finances today
         </p>
         <div className="lg:space-y-5">
-          <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-1 sm:gap-6 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-2 mt-3 sm:grid-cols-1 sm:gap-6 lg:grid-cols-2">
             <Stats
               icon={
-                <ArrowDownLeftIcon className="h-6 w-6 text-gray-100 dark:text-gray-100" />
+                <ArrowDownLeftIcon className="w-6 h-6 text-gray-100 dark:text-gray-100" />
               }
               iconBgColor="bg-green-600"
               textBgColor="bg-green-400"
               textColor="text-emerald-400"
               signIcon={
-                <PlusIcon className="h-4 w-4 shrink-0 text-green-600 dark:text-green-600" />
+                <PlusIcon className="w-4 h-4 text-green-600 shrink-0 dark:text-green-600" />
               }
             />
             <Stats
               icon={
-                <ArrowUpRightIcon className="h-6 w-6 shrink-0 text-gray-100 dark:text-gray-100" />
+                <ArrowUpRightIcon className="w-6 h-6 text-gray-100 shrink-0 dark:text-gray-100" />
               }
               iconBgColor="bg-red-600"
               textBgColor="bg-red-400"
               textColor="text-red-400"
               signIcon={
-                <MinusIcon className="h-4 w-4 shrink-0 text-red-600 dark:text-red-600" />
+                <MinusIcon className="w-4 h-4 text-red-600 shrink-0 dark:text-red-600" />
               }
             />
           </div>
@@ -94,20 +94,20 @@ export default async function Column({
       </div>
 
       <div className="2xl:flex 2xl:flex-row 2xl:space-x-8 xl:w-1/4">
-        <div className="column-3 flex-grow rounded-md my-12 2xl:space-y-5">
+        <div className="flex-grow my-12 rounded-md column-3 2xl:space-y-5">
           <div className="hidden xl:block">
             <SearchInput />
           </div>
           <AddAccountCard />
           <Stats
             icon={
-              <ArrowUpRightIcon className="h-6 w-6 text-gray-100 dark:text-gray-100" />
+              <ArrowUpRightIcon className="w-6 h-6 text-gray-100 dark:text-gray-100" />
             }
             iconBgColor="bg-red-600"
             textBgColor="bg-red-400"
             textColor="text-red-400"
             signIcon={
-              <MinusIcon className="h-4 w-4 text-red-600 dark:text-red-600" />
+              <MinusIcon className="w-4 h-4 text-red-600 dark:text-red-600" />
             }
           />
           <DetailCard colors={cashOutData} title="Cash out Activity" />

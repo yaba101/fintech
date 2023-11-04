@@ -112,15 +112,15 @@ export default function GroupedBarChart({ data }: Props) {
   }, [scaleX, yAxis]);
 
   return (
-    <div className=" dark:bg-dark rounded-md py-1 bg-gray-50 my-3 shadow-lg overflow-x-hidden ">
-      <div className="flex my-3 py-1 md:px-3 justify-between min-w-fit">
-        <h4 className="mt-1 md:mr-5 tracking-tight xs:text-sm lg:text-medium text-center whitespace-nowrap px-1 sm:text-sm lg:text-xl font-bold">
+    <div className="py-1 my-3 overflow-x-hidden rounded-md shadow-lg dark:bg-dark bg-gray-50">
+      <div className="flex justify-between py-1 my-3 md:px-3 min-w-fit">
+        <h4 className="px-1 mt-1 font-bold tracking-tight text-center md:mr-5 xs:text-sm lg:text-medium whitespace-nowrap sm:text-sm lg:text-xl">
           Insights
         </h4>
         <div className="flex justify-between mt-1 md:mr-5 ">
-          <button className="text-white font-medium bg-green-600 rounded-full w-4 h-4 sm:mx-3 xs:mx-1 mt-2 xs:w-2 xs:h-2" />
-          <p className="mt-1 text-sm xs:text-xs  lg:text-base">Income</p>
-          <button className="text-white font-medium rounded-full bg-red-600 w-4 h-4 sm:mx-3 xs:mx-1 mt-2 xs:w-2 xs:h-2" />
+          <button className="w-4 h-4 mt-2 font-medium text-white bg-green-600 rounded-full sm:mx-3 xs:mx-1 xs:w-2 xs:h-2" />
+          <p className="mt-1 text-sm xs:text-xs lg:text-base">Income</p>
+          <button className="w-4 h-4 mt-2 font-medium text-white bg-red-600 rounded-full sm:mx-3 xs:mx-1 xs:w-2 xs:h-2" />
           <p className="mt-1 text-sm xs:text-xs lg:text-base">Expenses</p>
         </div>
         <div className="xs:mr-l">
@@ -181,13 +181,13 @@ export default function GroupedBarChart({ data }: Props) {
       </svg>
       {tooltip !== null ? (
         <div
-          className="fixed pointer-events-none py-1 px-3 text-gray-100 rounded shadow-md  text-sm"
+          className="fixed px-3 py-1 text-sm text-gray-100 rounded shadow-md pointer-events-none"
           style={{ top: tooltip.y, left: tooltip.x, background: "#454687" }}
         >
-          <span className="block mb-2 font-medium text-xs">
+          <span className="block mb-2 text-xs font-medium">
             {labels[tooltip.index]} 2023
           </span>
-          <span className="block mb-2 font-medium text-xs">
+          <span className="block mb-2 text-xs font-medium">
             ${data[tooltip.index].values[0] * 100}.34
           </span>
         </div>

@@ -60,7 +60,7 @@ const Dropdown = () => {
         </button>
       </div>
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 md:w-48  px-3 md:max-h-40 xs:max-h-24 rounded-md shadow-lg bg-white dark:bg-dark border dark:border-gray-700 border-gray-300 overflow-y-auto">
+        <div className="absolute right-0 px-3 mt-2 overflow-y-auto origin-top-right bg-white border border-gray-300 rounded-md shadow-lg md:w-48 md:max-h-40 xs:max-h-24 dark:bg-dark dark:border-gray-700">
           <div
             className="py-1"
             role="menu"

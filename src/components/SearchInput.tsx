@@ -6,9 +6,9 @@ export default function SearchInput() {
       <label htmlFor="desktop-search" className="sr-only">
         Search
       </label>
-      <div className="relative dark:text-white dark:focus-within:text-gray-300 border border-gray-300 dark:border-gray-700 rounded-md">
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-          <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
+      <div className="relative border border-gray-300 rounded-md dark:text-white dark:focus-within:text-gray-300 dark:border-gray-700">
+        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+          <MagnifyingGlassIcon className="w-5 h-5" aria-hidden="true" />
         </div>
         <input
           id="desktop-search"
@@ -30,7 +30,7 @@ export default function SearchInput() {
 export function SearchInputSkeleton() {
   return (
     <div className="w-full animate-pulse">
-      <div className="h-8 w-48 bg-gray-300 rounded-md mx-auto"></div>
+      <div className="w-48 h-8 mx-auto bg-gray-300 rounded-md"></div>
     </div>
   );
 }

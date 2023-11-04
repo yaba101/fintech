@@ -101,7 +101,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <Dialog.Panel className="relative mr-16 flex w-full max-w-xs flex-1">
+                <Dialog.Panel className="relative flex flex-1 w-full max-w-xs mr-16">
                   <Transition.Child
                     as={Fragment}
                     enter="ease-in-out duration-300"
@@ -111,7 +111,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
-                    <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
+                    <div className="absolute top-0 flex justify-center w-16 pt-5 left-full">
                       <button
                         type="button"
                         className="-m-2.5 p-2.5"
@@ -119,19 +119,19 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                       >
                         <span className="sr-only">Close sidebar</span>
                         <XMarkIcon
-                          className="h-6 w-6 text-white"
+                          className="w-6 h-6 text-white"
                           aria-hidden="true"
                         />
                       </button>
                     </div>
                   </Transition.Child>
-                  <div className="flex grow flex-col gap-y-5 overflow-y-hidden dark:bg-dark bg-slate-50 dark:text-gray-50 px-6 pb-2">
-                    <nav className="flex flex-1 flex-col">
-                      <ul role="list" className="flex flex-1 flex-col gap-y-7">
+                  <div className="flex flex-col px-6 pb-2 overflow-y-hidden grow gap-y-5 dark:bg-dark bg-slate-50 dark:text-gray-50">
+                    <nav className="flex flex-col flex-1">
+                      <ul role="list" className="flex flex-col flex-1 gap-y-7">
                         <li>
                           <ul
                             role="list"
-                            className="-mx-2 space-y-1 dark:text-gray-200 text-gray-800"
+                            className="-mx-2 space-y-1 text-gray-800 dark:text-gray-200"
                           >
                             {FirstNavSection.map((item) => (
                               <li key={item.text}>
@@ -191,7 +191,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                                   "cursor-pointer dark:text-gray-200 group flex gap-x-2 rounded-md p-2 text-sm leading-6 font-semibold"
                                 }
                               >
-                                <MoonIcon className="h-6 w-6 shrink-0 dark:text-gray-300" />
+                                <MoonIcon className="w-6 h-6 shrink-0 dark:text-gray-300" />
                                 Dark Mode
                                 <ThemeSwitcher />
                               </a>
@@ -234,7 +234,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
           </div>
         </div>
 
-        <div className="sticky top-0 z-40 flex items-center gap-x-6 dark:bg-dark bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+        <div className="sticky top-0 z-40 flex items-center px-4 py-4 bg-white shadow-sm gap-x-6 dark:bg-dark sm:px-6 lg:hidden">
           <button
             type="button"
             className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
@@ -242,7 +242,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
           >
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon
-              className="h-6 w-6 dark:text-gray-200"
+              className="w-6 h-6 dark:text-gray-200"
               aria-hidden="true"
             />
           </button>
@@ -257,7 +257,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
             isExpanded ? "lg:pl-40 xl:pl-28" : "lg:pl-10 xl:pl-0"
           } `}
         >
-          <div className=" px-4 sm:px-6 overflow-auto">{children}</div>
+          <div className="px-4 overflow-auto sm:px-6">{children}</div>
         </main>
       </div>
     </>

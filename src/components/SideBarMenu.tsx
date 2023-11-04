@@ -49,7 +49,7 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
       <nav
         className={` dark:bg-dark  h-full flex flex-col shadow-sm absolute top-0 transition-all duration-300 ease-in-out`}
       >
-        <div className="p-4 pb-2 flex justify-between items-center">
+        <div className="flex items-center justify-between p-4 pb-2">
           {/* <BuildingOffice2Icon
             className={`overflow-hidden transition-all duration-300 ease-in-out dark:text-gray-100 text-gray-900 ${
               expanded ? "w-32" : "w-0"
@@ -60,9 +60,9 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
             className="p-1.5 rounded-lg "
           >
             {isExpanded ? (
-              <ChevronFirst className="dark:text-slate-100 font-bold" />
+              <ChevronFirst className="font-bold dark:text-slate-100" />
             ) : (
-              <ChevronLast className="dark:text-slate-100 font-bold" />
+              <ChevronLast className="font-bold dark:text-slate-100" />
             )}
           </button>
         </div>
@@ -81,8 +81,8 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
               alert={false}
               text={"Dark Mode"}
             />
-            <div className="flex dark:text-gray-100 flex-nowrap mx-auto ">
-              <span className="whitespace-nowrap mr-4 font-medium">
+            <div className="flex mx-auto dark:text-gray-100 flex-nowrap ">
+              <span className="mr-4 font-medium whitespace-nowrap">
                 Dark Mode
               </span>
               <ThemeSwitcher />
@@ -100,13 +100,13 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
               alert={false}
               text={"Log Out"}
             />
-            <span className="whitespace-nowrap font-medium mr-auto">
+            <span className="mr-auto font-medium whitespace-nowrap">
               Log Out
             </span>
           </div>
         </ul>
 
-        <div className="border-t flex p-3">
+        <div className="flex p-3 border-t">
           <BuildingOffice2Icon className="w-10 h-10 rounded-md" />
           <div
             className={`flex justify-between items-center overflow-hidden transition-all duration-300 ease-in-out ${
