@@ -60,7 +60,7 @@ const Dropdown = () => {
         </button>
       </div>
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-auto px-3 max-h-40 xs:max-h-24 rounded-md shadow-lg bg-white dark:bg-dark border dark:border-gray-700 border-gray-300 overflow-y-auto">
+        <div className="origin-top-right absolute right-0 mt-2 md:w-48  px-3 md:max-h-40 xs:max-h-24 rounded-md shadow-lg bg-white dark:bg-dark border dark:border-gray-700 border-gray-300 overflow-y-auto">
           <div
             className="py-1"
             role="menu"
@@ -71,7 +71,7 @@ const Dropdown = () => {
               <button
                 key={index}
                 onClick={() => handleMonthChange(month)}
-                className={`block px-4 py-2 text-sm xs:text-xs dark:text-gray-100 text-gray-700 w-full text-left hover:bg-gray-100 hover:dark:bg-slate-800 hover:text-gray-900 dark:hover:bg-dark dark:hover:text-gray-100 focus:outline-none ${
+                className={`block px-4 py-2 lg:text-sm xs:text-xs dark:text-gray-100 text-gray-700 w-full text-left hover:bg-gray-100 hover:dark:bg-slate-800 hover:text-gray-900 dark:hover:bg-dark dark:hover:text-gray-100 focus:outline-none ${
                   selectedMonth === month
                     ? "bg-gray-100 text-gray-900 dark:bg-dark dark:text-gray-100 xs:text-xs"
                     : ""

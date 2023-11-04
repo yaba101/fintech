@@ -6,20 +6,18 @@ import {
   Moon,
   MoreVertical,
 } from "lucide-react";
-import React, { Children, useEffect, useState } from "react";
+import React, { Children, useContext, useEffect, useState } from "react";
 import SidebarItem from "./SideBarItem";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { ExpandContext } from "@/components/ExpandProvider";
 
 const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
-  const [expanded, setExpanded] = useState(false);
-
-  const handleMouseEnter = () => {
-    setExpanded(true);
-  };
-
-  const handleMouseLeave = () => {
-    setExpanded(false);
-  };
+  const {
+    isExpanded = false,
+    handleMouseEnter = () => {},
+    handleMouseLeave = () => {},
+    setIsExpanded = () => {},
+  } = useContext(ExpandContext) || {};
 
   useEffect(() => {
     const sidebarContainer = document.getElementById("sidebar-container");
@@ -35,33 +33,33 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
         sidebarContainer.removeEventListener("mouseleave", handleMouseLeave);
       }
     };
-  }, []);
+  }, [handleMouseEnter, handleMouseLeave]);
 
   const renderChildren = Children.map(children, (child, index) =>
-    React.cloneElement(child as any, { key: index, expanded })
+    React.cloneElement(child as any, { key: index, isExpanded })
   );
 
   return (
     <div
       id="sidebar-container"
       className={`h-screen dark:bg-dark relative transition-all duration-300 ease-in-out  ${
-        expanded ? "w-30 space-y-4" : "w-20"
+        isExpanded ? "w-30 space-y-4" : "w-20"
       }`}
     >
       <nav
         className={` dark:bg-dark  h-full flex flex-col shadow-sm absolute top-0 transition-all duration-300 ease-in-out`}
       >
         <div className="p-4 pb-2 flex justify-between items-center">
-          <BuildingOffice2Icon
+          {/* <BuildingOffice2Icon
             className={`overflow-hidden transition-all duration-300 ease-in-out dark:text-gray-100 text-gray-900 ${
               expanded ? "w-32" : "w-0"
             }`}
-          />
+          /> */}
           <button
-            onClick={() => setExpanded((curr) => !curr)}
+            onClick={() => setIsExpanded((curr) => !curr)}
             className="p-1.5 rounded-lg "
           >
-            {expanded ? (
+            {isExpanded ? (
               <ChevronFirst className="dark:text-slate-100 font-bold" />
             ) : (
               <ChevronLast className="dark:text-slate-100 font-bold" />
@@ -73,7 +71,7 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
 
           <div
             className={`flex justify-between items-center overflow-hidden  ${
-              expanded ? "xl:w-40 lg:w-44" : "w-0"
+              isExpanded ? "xl:w-40 lg:w-44" : "w-0"
             }`}
           >
             <SidebarItem
@@ -92,7 +90,7 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
           </div>
           <div
             className={`flex justify-between items-center overflow-hidden ${
-              expanded ? "" : "w-0"
+              isExpanded ? "" : "w-0"
             }`}
           >
             <SidebarItem
@@ -112,7 +110,7 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
           <BuildingOffice2Icon className="w-10 h-10 rounded-md" />
           <div
             className={`flex justify-between items-center overflow-hidden transition-all duration-300 ease-in-out ${
-              expanded ? "xl:w-32 lg:w-44 ml-3" : "w-0"
+              isExpanded ? "xl:w-32 lg:w-44 ml-3" : "w-0"
             }`}
           >
             <MoreVertical size={20} className="ml-auto cursor-pointer" />

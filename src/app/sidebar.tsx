@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon, MoonIcon } from "@heroicons/react/24/outline";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import SideBarMenu from "@/components/SideBarMenu";
 import SidebarItem from "@/components/SideBarItem";
+import { ExpandContext } from "@/components/ExpandProvider";
 
 const FirstNavSection = [
   {
@@ -67,6 +68,7 @@ function classNames(...classes: any[]) {
 
 export default function SideBar({ children }: { children?: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { isExpanded = false } = useContext(ExpandContext) || {};
 
   return (
     <>
@@ -250,7 +252,11 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
 
           <MobileDropdown />
         </div>
-        <main className="py-10 lg:pl-40 xl:pl-28">
+        <main
+          className={`py-10 ${
+            isExpanded ? "lg:pl-40 xl:pl-28" : "lg:pl-10 xl:pl-0"
+          } `}
+        >
           <div className=" px-4 sm:px-6 overflow-auto">{children}</div>
         </main>
       </div>

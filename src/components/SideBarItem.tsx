@@ -5,13 +5,13 @@ const SidebarItem = ({
   text,
   active,
   alert,
-  expanded,
+  isExpanded,
 }: {
   icon: any;
   text: string;
   active: boolean;
   alert: boolean;
-  expanded?: boolean;
+  isExpanded?: boolean;
 }) => {
   return (
     <li
@@ -30,7 +30,7 @@ const SidebarItem = ({
       {icon}
       <h4
         className={`overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap  dark:text-gray-100 text-gray-900 ${
-          expanded ? "w-32 ml-3" : "w-0"
+          isExpanded ? "w-32 ml-3" : "w-0"
         }`}
       >
         {text}
@@ -38,11 +38,11 @@ const SidebarItem = ({
       {alert && (
         <div
           className={`absolute right-2 w-2 h-2 rounded bg-indigo-200 ${
-            expanded ? "" : "top-2"
+            isExpanded ? "" : "top-2"
           }`}
         />
       )}
-      {!expanded && (
+      {!isExpanded && (
         <div
           className={`
           absolute left-full rounded-md px-2 py-1 ml-6
