@@ -34,7 +34,7 @@ export default async function DetailCard({
                 className="w-4 h-4 mr-2 font-medium text-white rounded-full xl:text-xs xs:w-3 xs:h-3"
                 style={{ background: color }}
               />
-              <h4 className="dark:text-gray-200 xl:text-xs whitespace-nowrap xs:text-sm">
+              <h4 className="dark:text-gray-200 xl:text-sm whitespace-nowrap xs:text-sm">
                 {top4Data[index]?.title.toString()}
               </h4>
               <h4 className="pl-0 dark:text-gray-400 xl:text-xs xs:text-xs xs:pl-5 xs:py-1 ">
