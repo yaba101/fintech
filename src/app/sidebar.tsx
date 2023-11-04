@@ -1,50 +1,63 @@
 "use client";
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import {
-  Bars3Icon,
-  BuildingStorefrontIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
-  XMarkIcon,
-  MoonIcon,
-  WalletIcon,
-  Cog6ToothIcon,
-  LockClosedIcon,
-  ChatBubbleBottomCenterTextIcon,
-  ArrowLeftIcon,
-} from "@heroicons/react/24/outline";
-import ColumnContainer from "@/components/ColumnContainer";
+import { Bars3Icon, XMarkIcon, MoonIcon } from "@heroicons/react/24/outline";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
-import SideBarDropDown from "@/components/SideBarDropDown";
 import MobileDropdown from "@/components/MobileDropdown";
+import {
+  LayoutDashboard,
+  LockIcon,
+  MessageCircle,
+  Settings,
+  User,
+  Wallet2Icon,
+  Activity,
+  Banknote,
+} from "lucide-react";
+import SideBarMenu from "@/components/SideBarMenu";
+import SidebarItem from "@/components/SideBarItem";
 
 const FirstNavSection = [
-  { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-  { name: "Account", href: "#", icon: UsersIcon, current: false },
-  { name: "Analytics", href: "#", icon: FolderIcon, current: false },
-  { name: "My Bill", href: "#", icon: WalletIcon, current: false },
   {
-    name: "My Budgets",
+    text: "Dashboard",
+    active: true,
+    icon: LayoutDashboard,
+    alert: true,
     href: "#",
-    icon: BuildingStorefrontIcon,
-    current: false,
   },
-  { name: "Settings", href: "#", icon: Cog6ToothIcon, current: false },
+  { text: "Account", active: false, icon: User, alert: false, href: "#" },
+  { text: "Analytics", active: false, icon: Activity, alert: false, href: "#" },
+  {
+    text: "My Bill",
+    active: false,
+    icon: Wallet2Icon,
+    alert: false,
+    href: "#",
+  },
+  {
+    text: "My Budgets",
+    active: false,
+    icon: Banknote,
+    alert: false,
+    href: "#",
+  },
+  { text: "Settings", active: false, icon: Settings, alert: false, href: "#" },
 ];
+
 const SecondNavSection = [
   {
-    name: "Security",
+    text: "Security",
+    active: false,
+    icon: LockIcon,
+    alert: false,
     href: "#",
-    icon: LockClosedIcon,
-    current: false,
   },
   {
-    name: "Help Center",
+    text: "Help Center",
+    active: false,
+    icon: MessageCircle,
+    alert: false,
     href: "#",
-    icon: ChatBubbleBottomCenterTextIcon,
-    current: false,
   },
 ];
 
@@ -119,11 +132,11 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                             className="-mx-2 space-y-1 dark:text-gray-200 text-gray-800"
                           >
                             {FirstNavSection.map((item) => (
-                              <li key={item.name}>
+                              <li key={item.text}>
                                 <a
                                   href={item.href}
                                   className={classNames(
-                                    item.current
+                                    item.active
                                       ? " mt-4 bg-gray-800 text-indigo-600"
                                       : "dark:text-gray-200 hover:text-indigo-600 dark:hover:bg-gray-500  ",
                                     "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
@@ -131,14 +144,14 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                                 >
                                   <item.icon
                                     className={classNames(
-                                      item.current
+                                      item.active
                                         ? "text-indigo-600"
                                         : "dark:text-gray-200 text-gray-800 group-hover:text-indigo-600",
                                       "h-6 w-6 shrink-0"
                                     )}
                                     aria-hidden="true"
                                   />
-                                  {item.name}
+                                  {item.text}
                                 </a>
                               </li>
                             ))}
@@ -147,11 +160,11 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                         <li>
                           <ul role="list" className="-mx-2 space-y-1 ">
                             {SecondNavSection.map((item) => (
-                              <li key={item.name}>
+                              <li key={item.text}>
                                 <a
                                   href={item.href}
                                   className={classNames(
-                                    item.current
+                                    item.active
                                       ? "dark:bg-gray-900 bg-slate-50 text-indigo-600"
                                       : "dark:text-gray-100 text-gray-800 hover:text-indigo-600 dark:hover:bg-gray-500 ",
                                     "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
@@ -159,14 +172,14 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                                 >
                                   <item.icon
                                     className={classNames(
-                                      item.current
+                                      item.active
                                         ? "text-indigo-600"
                                         : "dark:text-gray-200 text-gray-800 group-hover:text-indigo-600",
                                       "h-6 w-6 shrink-0"
                                     )}
                                     aria-hidden="true"
                                   />
-                                  {item.name}
+                                  {item.text}
                                 </a>
                               </li>
                             ))}
@@ -193,93 +206,29 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 xl:w-52 lg:flex-col ">
-          <div className="flex grow flex-col gap-y-2 overflow-y-hidden border-r dark:border-gray-900 shadow-md  rounded-lg dark:text-gray-50 px-6 my-2 dark:bg-dark bg-gray-50">
-            <nav className="flex flex-1 flex-col mt-8">
-              <ul role="list" className="flex flex-1 flex-col gap-y-3">
-                <li>
-                  <ul role="list" className="-mx-2 space-y-1">
-                    {FirstNavSection.map((item) => (
-                      <li key={item.name}>
-                        <a
-                          href={item.href}
-                          className={classNames(
-                            item.current
-                              ? "bg-indigo-600 text-gray-100"
-                              : "dark:text-gray-100 hover:text-gray-900 dark:hover:bg-slate-500 hover:bg-gray-300 ",
-                            "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                          )}
-                        >
-                          <item.icon
-                            className={classNames(
-                              item.current
-                                ? "dark:text-gray-100 text-gray-900"
-                                : "text-gray-400 group-hover:text-indigo-600",
-                              "h-6 w-6 shrink-0"
-                            )}
-                            aria-hidden="true"
-                          />
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-                <hr className="text-gray-100" />
-                <li>
-                  <ul role="list" className="-mx-2 space-y-1">
-                    {SecondNavSection.map((item) => (
-                      <li key={item.name}>
-                        <a
-                          href={item.href}
-                          className={classNames(
-                            item.current
-                              ? "bg-indigo-600 text-gray-100"
-                              : "dark:text-gray-100 hover:text-gray-800 dark:hover:bg-slate-500 hover:bg-gray-300",
-                            "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                          )}
-                        >
-                          <item.icon
-                            className={classNames(
-                              item.current
-                                ? "text-indigo-600"
-                                : "text-gray-400 group-hover:text-indigo-600",
-                              "h-6 w-6 shrink-0"
-                            )}
-                            aria-hidden="true"
-                          />
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                    <li>
-                      <a
-                        className={
-                          "cursor-pointer dark:text-gray-300 group flex gap-x-2 rounded-md p-2 text-sm leading-6 font-semibold"
-                        }
-                      >
-                        <MoonIcon className="h-6 w-6 shrink-0 text-gray-400" />
-                        Dark Mode
-                        <ThemeSwitcher />
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className={
-                          "cursor-pointer dark:text-gray-300 group mb-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold mt-6"
-                        }
-                      >
-                        <ArrowLeftIcon className="h-6 w-6 shrink-0 text-gray-400 dark:text-gray-400" />
-                        Logout
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-              <div className="mb-4">
-                <SideBarDropDown />
-              </div>
-            </nav>
+        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 xl:w-42 lg:flex-co">
+          <div className="flex min-h-screen w-30 ">
+            <SideBarMenu>
+              {FirstNavSection.map((item) => (
+                <SidebarItem
+                  key={item.text}
+                  icon={<item.icon size={20} />}
+                  alert={item.alert}
+                  text={item.text}
+                  active={item.active}
+                />
+              ))}
+              <hr className="text-gray-100" />
+              {SecondNavSection.map((item) => (
+                <SidebarItem
+                  key={item.text}
+                  icon={<item.icon size={20} />}
+                  alert={item.alert}
+                  text={item.text}
+                  active={item.active}
+                />
+              ))}
+            </SideBarMenu>
           </div>
         </div>
 
@@ -301,7 +250,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
 
           <MobileDropdown />
         </div>
-        <main className="py-10  lg:pl-40 xl:pl-28">
+        <main className="py-10 lg:pl-40 xl:pl-28">
           <div className=" px-4 sm:px-6 overflow-auto">{children}</div>
         </main>
       </div>

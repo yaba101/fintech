@@ -38,7 +38,7 @@ const DropDown = () => {
         </button>
       </div>
       {isOpen && (
-        <div className="origin-bottom-left absolute -top-20 w-32 rounded-md shadow-lg bg-white dark:bg-dark border dark:border-gray-700 border-gray-300 overflow-y-auto max-h-60">
+        <div className=" relative -top-20 w-32 rounded-md shadow-lg bg-white dark:bg-dark border dark:border-gray-700 border-gray-300 overflow-y-auto max-h-60">
           <div
             className="py-1 0"
             role="menu"
