@@ -1,6 +1,6 @@
 const Card = ({ title, text, buttonText }: any) => {
   return (
-    <div className="mx-auto mb-3 overflow-hidden border rounded-lg shadow-lg dark:border-gray-900 dark:bg-dark bg-gray-50">
+    <div className="py-2 mx-auto mb-3 overflow-hidden border rounded-lg shadow-lg  dark:border-gray-900 dark:bg-dark bg-gray-50">
       <div className="px-6 py-4 text-center">
         <h4 className="font-semibold text-md dark:text-gray-100">{title}</h4>
         <p className="my-3 text-xl font-semibold dark:text-gray-300">{text}</p>

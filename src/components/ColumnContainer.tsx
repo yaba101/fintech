@@ -25,93 +25,88 @@ export default async function Column({
   cashOutData: CashProps[];
 }) {
   return (
-    <div className="flex flex-col mx-auto overflow-x-hidden lg:pl-24 2xl:flex-row xl:flex-row xl:space-x-3 2xl:space-x-8 ">
-      <div className="flex-grow h-full my-2 rounded-md column-2 lg:space-y-5 xl:w-1/6">
+    <div className="flex flex-row flex-wrap mx-auto lg:pl-20 overflow-hidden">
+      <div className="w-full px-2 md:w-3/5 mx-auto xl:w-1/4 xs:-order-5 xl:order-none">
         <h1 className="hidden mb-5 text-2xl font-bold tracking-tight text-center scroll-m-20 lg:text-2xl xl:block">
           Availability
         </h1>
-        <h1 className="text-2xl font-bold tracking-tight text-center scroll-m-20 lg:text-2xl xl:hidden lg:block">
-          Welcome Back, Issac👋!
-        </h1>
-        <p className="mb-3 leading-7 text-center text-gray-400 xl:hidden lg:block">
-          Here is {"what's"} up with your finances today
-        </p>
-        <div className="block mb-3 xl:hidden">
-          <SearchInput />
-        </div>
         <Card title="Net Worth" text="$45,032.00" buttonText="View Details" />
-
-        <Stats
-          icon={
-            <ArrowDownLeftIcon className="w-6 h-6 text-gray-100 shrink-0 dark:text-gray-100" />
-          }
-          iconBgColor="bg-green-600"
-          textBgColor="bg-green-300"
-          textColor="text-emerald-400"
-          signIcon={
-            <PlusIcon className="w-4 h-4 text-green-600 shrink-0 dark:text-green-600" />
-          }
-        />
-
-        <DetailCard colors={cashInData} title="Cash in Activity" />
       </div>
-      <div className="flex-grow my-2 rounded-md column-2 xl:w-2/5">
-        <h1 className="hidden text-2xl font-bold tracking-tight text-center scroll-m-20 lg:text-2xl xl:block">
-          Welcome Back, Issac👋!
-        </h1>
-        <p className="hidden m-0 leading-7 text-center text-gray-400 xl:block">
-          Here is {"what's"} up with your finances today
-        </p>
-        <div className="lg:space-y-5">
-          <div className="grid grid-cols-1 gap-2 mt-3 sm:grid-cols-1 sm:gap-6 lg:grid-cols-2">
-            <Stats
-              icon={
-                <ArrowDownLeftIcon className="w-6 h-6 text-gray-100 dark:text-gray-100" />
-              }
-              iconBgColor="bg-green-600"
-              textBgColor="bg-green-400"
-              textColor="text-emerald-400"
-              signIcon={
-                <PlusIcon className="w-4 h-4 text-green-600 shrink-0 dark:text-green-600" />
-              }
-            />
-            <Stats
-              icon={
-                <ArrowUpRightIcon className="w-6 h-6 text-gray-100 shrink-0 dark:text-gray-100" />
-              }
-              iconBgColor="bg-red-600"
-              textBgColor="bg-red-400"
-              textColor="text-red-400"
-              signIcon={
-                <MinusIcon className="w-4 h-4 text-red-600 shrink-0 dark:text-red-600" />
-              }
-            />
-          </div>
-
-          <GroupedBarChart data={bargraphData} />
-          <Table />
+      <div className="w-full px-2 xl:w-1/2 h-fit xs:order-first xl:order-none">
+        <div className="">
+          <h1 className="text-2xl font-bold tracking-tight text-center scroll-m-20 lg:text-2xl">
+            Welcome Back, Issac👋!
+          </h1>
+          <p className="m-0 leading-7 text-center text-gray-400 ">
+            Here is {"what's"} up with your finances today
+          </p>
         </div>
-      </div>
-
-      <div className="2xl:flex 2xl:flex-row 2xl:space-x-8 xl:w-1/4">
-        <div className="flex-grow my-12 rounded-md column-3 2xl:space-y-5">
-          <div className="hidden xl:block">
-            <SearchInput />
-          </div>
-          <AddAccountCard />
+        <div className="grid grid-cols-1 gap-2 mt-3 mb-6 xl:mb-0 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2">
           <Stats
             icon={
-              <ArrowUpRightIcon className="w-6 h-6 text-gray-100 dark:text-gray-100" />
+              <ArrowDownLeftIcon className="text-gray-100 md:w-8 md:h-8 sm:w-4 sm:h-4 dark:text-gray-100" />
+            }
+            iconBgColor="bg-green-600"
+            textBgColor="bg-green-400"
+            textColor="text-emerald-400"
+            signIcon={
+              <PlusIcon className="text-green-600 md:w-4 md:h-4 sm:h-2 sm:w-2 dark:text-green-600" />
+            }
+          />
+          <Stats
+            icon={
+              <ArrowUpRightIcon className="text-gray-100 md:w-8 md:h-8 sm:w-4 sm:h-4 dark:text-gray-100" />
             }
             iconBgColor="bg-red-600"
             textBgColor="bg-red-400"
             textColor="text-red-400"
             signIcon={
-              <MinusIcon className="w-4 h-4 text-red-600 dark:text-red-600" />
+              <MinusIcon className="text-red-600 md:w-4 md:h-4 sm:w-2 sm:h-2 dark:text-red-600" />
             }
           />
-          <DetailCard colors={cashOutData} title="Cash out Activity" />
         </div>
+      </div>
+      <div className="w-full px-2 md:w-3/5 mx-auto lg:grid xl:w-1/4 xl:mt-12 xs:-order-4 xl:order-none">
+        <SearchInput />
+        <AddAccountCard />
+      </div>
+      <div className="w-full px-2 xl:w-1/4 xl:-mt-20 xs:-order-2 xl:order-none space-y-10 md:w-3/5 mx-auto">
+        <Stats
+          icon={
+            <ArrowDownLeftIcon className="text-gray-100 md:w-8 md:h-8 sm:w-4 sm:h-4 dark:text-gray-100" />
+          }
+          iconBgColor="bg-green-600"
+          textBgColor="bg-green-400"
+          textColor="text-emerald-400"
+          signIcon={
+            <PlusIcon className="text-green-600 md:w-4 md:h-4 sm:h-2 sm:w-2 dark:text-green-600" />
+          }
+        />
+        <DetailCard colors={cashInData} title="Cash in Activity" />
+      </div>
+      <div className="w-full px-2 xl:w-1/2 xl:-mt-40 xs:-order-3 xl:order-none">
+        <GroupedBarChart data={bargraphData} />
+        <div className="hidden xl:block w-full mx-auto h-fit xs:order-last xl:order-none mt-10">
+          <Table />
+        </div>
+      </div>
+      <div className="w-full px-2 xl:mt-6 xl:w-1/4 h-fit xl:-mb-64 space-y-10 xs:mt-8 md:w-3/5 mx-auto">
+        <Stats
+          icon={
+            <ArrowUpRightIcon className="text-gray-100 md:w-8 md:h-8 sm:w-4 sm:h-4 dark:text-gray-100" />
+          }
+          iconBgColor="bg-red-600"
+          textBgColor="bg-red-400"
+          textColor="text-red-400"
+          signIcon={
+            <MinusIcon className="text-red-600 md:w-4 md:h-4 sm:w-2 sm:h-2 dark:text-red-600" />
+          }
+        />
+        <DetailCard colors={cashOutData} title="Cash out Activity" />
+      </div>
+
+      <div className="xl:hidden block w-full px-2 mx-auto xl:w-1/2 h-fit xs:order-last xl:order-none mt-8">
+        <Table />
       </div>
     </div>
   );

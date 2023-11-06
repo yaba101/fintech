@@ -43,18 +43,13 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
     <div
       id="sidebar-container"
       className={`h-screen dark:bg-dark relative transition-all duration-300 ease-in-out  ${
-        isExpanded ? "w-30 space-y-4" : "w-20"
+        isExpanded ? "w-30 space-y-4 " : "w-20"
       }`}
     >
       <nav
-        className={` dark:bg-dark  h-full flex flex-col shadow-sm absolute top-0 transition-all duration-300 ease-in-out`}
+        className={` dark:bg-dark  h-full flex flex-col absolute top-0 transition-all duration-300 ease-in-out `}
       >
         <div className="flex items-center justify-between p-4 pb-2">
-          {/* <BuildingOffice2Icon
-            className={`overflow-hidden transition-all duration-300 ease-in-out dark:text-gray-100 text-gray-900 ${
-              expanded ? "w-32" : "w-0"
-            }`}
-          /> */}
           <button
             onClick={() => setIsExpanded((curr) => !curr)}
             className="p-1.5 rounded-lg "

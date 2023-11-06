@@ -208,8 +208,8 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 xl:w-42 lg:flex-co">
-          <div className="flex min-h-screen w-30 ">
+        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 xl:w-42 ">
+          <div className="flex min-h-screen w-30  shadow-md shadow-slate-500">
             <SideBarMenu>
               {FirstNavSection.map((item) => (
                 <SidebarItem

@@ -12,32 +12,31 @@ export default function Stats({
   signIcon: any;
 }) {
   return (
-    <>
-      <div className="flex items-end justify-between flex-grow px-3 py-4 space-x-6 rounded-lg shadow-lg dark:bg-dark bg-gray-50 ">
-        <div className="flex items-center gap-3">
-          <span
-            className={`hidden rounded-lg ${iconBgColor} p-3 dark:text-gray-100 sm:block`}
-          >
-            {icon}
-          </span>
-
-          <div>
-            <p className="text-sm sm:text-xs dark:text-gray-400 whitespace-nowrap">
-              Total Income
-            </p>
-
-            <p className="text-lg font-medium dark:text-gray-200">$632.00</p>
-          </div>
-        </div>
-
-        <div
-          className={`flex gap-1 rounded py-0.5  ${textColor} ${textBgColor} bg-opacity-40`}
+    <div className="flex items-end justify-between flex-grow px-4 py-6 rounded-lg shadow-lg md:py-6 sm:py-4 sm:px-1 dark:bg-dark bg-gray-50">
+      <div className="flex gap-2 md:gap-4">
+        <span
+          className={`hidden rounded-lg ${iconBgColor} md:p-3 dark:text-gray-100 my-auto sm:py-3 sm:block sm:p-2`}
         >
-          {signIcon}
+          {icon}
+        </span>
 
-          <span className="text-xs font-medium">67.81%</span>
+        <div>
+          <p className="md:text-lg sm:text-xs dark:text-gray-400 whitespace-nowrap">
+            Total Income
+          </p>
+
+          <p className="font-medium md:text-xl sm:text-sm dark:text-gray-200">
+            $632.00
+          </p>
         </div>
       </div>
-    </>
+
+      <div
+        className={`flex rounded py-0.5 ${textColor} ${textBgColor} bg-opacity-40 `}
+      >
+        {signIcon}
+        <span className="text-xs font-medium ">67.81%</span>
+      </div>
+    </div>
   );
 }

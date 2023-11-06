@@ -22,11 +22,11 @@ export default function DatePicker() {
         <Button
           variant={"outline"}
           className={cn(
-            "w-full justify-start text-left font-normal ",
+            "w-full justify-start text-left font-normal text-xs md:text-sm ",
             !date && "text-muted-foreground"
           )}
         >
-          <CalendarIcon className="w-4 h-4 mr-2 dark:text-gray-50 " />
+          <CalendarIcon className="w-4 h-4 mr-2 -ml-3 dark:text-gray-50" />
           {date ? format(date, "PPP") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
