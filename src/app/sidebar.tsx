@@ -139,15 +139,15 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                                   href={item.href}
                                   className={classNames(
                                     item.active
-                                      ? " mt-4 bg-gray-800 text-indigo-600"
-                                      : "dark:text-gray-200 hover:text-indigo-600 dark:hover:bg-gray-500  ",
+                                      ? " mt-4 bg-indigo-800 text-gray-100"
+                                      : "dark:text-gray-200 hover:text-indigo-600 dark:hover:bg-indigo-500  ",
                                     "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   )}
                                 >
                                   <item.icon
                                     className={classNames(
                                       item.active
-                                        ? "text-indigo-600"
+                                        ? "text-gray-300"
                                         : "dark:text-gray-200 text-gray-800 group-hover:text-indigo-600",
                                       "h-6 w-6 shrink-0"
                                     )}
