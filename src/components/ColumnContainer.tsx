@@ -6,7 +6,6 @@ import Stats from "@/components/Stats";
 import SearchInput from "@/components/SearchInput";
 import Table from "@/components/Table";
 import GroupedBarChart, { IGroupedData } from "./GroupedBar";
-import DetailCardSkeleton from "./skeleton/DetailCardSkeleton";
 import { Suspense } from "react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
@@ -66,11 +65,11 @@ export default async function Column({
           />
         </div>
       </div>
-      <div className="w-full px-2 md:w-3/5 mx-auto lg:grid xl:w-1/4 xl:mt-12 xs:-order-4 xl:order-none">
+      <div className="w-full px-2 md:w-3/5 mx-auto lg:grid xl:w-1/4 xl:mt-12 xs:-order-4 xl:order-none xs:mt-4 ">
         <SearchInput />
         <AddAccountCard />
       </div>
-      <div className="w-full px-2 xl:w-1/4 xl:-mt-20 xs:-order-2 xl:order-none space-y-10 md:w-3/5 mx-auto">
+      <div className="w-full px-2 xl:w-1/4 xl:-mt-20 xs:-order-2 xl:order-none space-y-10 md:w-3/5 mx-auto xs:mt-4">
         <Stats
           icon={
             <ArrowDownLeftIcon className="text-gray-100 w-5 h-5 md:w-8 md:h-8 dark:text-gray-100" />

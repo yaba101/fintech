@@ -15,21 +15,3 @@ const Card = ({ title, text, buttonText }: any) => {
 };
 
 export default Card;
-
-export const SkeletonCard = () => {
-  return (
-    <div
-      className="max-w-sm mx-auto mb-3 overflow-hidden border border-gray-900 rounded-lg shadow-lg animate-pulse"
-      style={{ background: "#1d1d41" }}
-    >
-      <div className="flex flex-col items-center justify-center px-6 py-4">
-        <div className="w-24 h-4 mb-4 bg-gray-500 rounded " />
-        <div className="w-32 h-8 mb-4 bg-gray-400 rounded" />
-      </div>
-      <div className="py-2 text-center">
-        <div className="w-24 h-10 mx-auto bg-gray-500 rounded"></div>{" "}
-        {/* Button Skeleton */}
-      </div>
-    </div>
-  );
-};

@@ -5,6 +5,8 @@ async function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+export const dynamic = "force-dynamic";
+
 async function getBarGraphData() {
   // await delay(2000);
   const response = await fetch(process.env.URL + "/api/barchart", {
