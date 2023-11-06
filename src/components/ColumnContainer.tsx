@@ -44,24 +44,24 @@ export default async function Column({
         <div className="grid grid-cols-1 gap-2 mt-3 mb-6 xl:mb-0 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2">
           <Stats
             icon={
-              <ArrowDownLeftIcon className="text-gray-100 md:w-8 md:h-8 sm:w-4 sm:h-4 dark:text-gray-100" />
+              <ArrowDownLeftIcon className="text-gray-100 md:w-8 md:h-8 xs:w-4 xs:h-4 dark:text-gray-100" />
             }
             iconBgColor="bg-green-600"
             textBgColor="bg-green-400"
             textColor="text-emerald-400"
             signIcon={
-              <PlusIcon className="text-green-600 md:w-4 md:h-4 sm:h-2 sm:w-2 dark:text-green-600" />
+              <PlusIcon className="text-green-600 w-2 h-4  dark:text-green-600" />
             }
           />
           <Stats
             icon={
-              <ArrowUpRightIcon className="text-gray-100 md:w-8 md:h-8 sm:w-4 sm:h-4 dark:text-gray-100" />
+              <ArrowUpRightIcon className="text-gray-100 md:w-8 md:h-8 xs:w-4 xs:h-4 dark:text-gray-100" />
             }
             iconBgColor="bg-red-600"
             textBgColor="bg-red-400"
             textColor="text-red-400"
             signIcon={
-              <MinusIcon className="text-red-600 md:w-4 md:h-4 sm:w-2 sm:h-2 dark:text-red-600" />
+              <MinusIcon className="text-red-600 w-2 h-4  dark:text-red-600" />
             }
           />
         </div>
@@ -73,13 +73,13 @@ export default async function Column({
       <div className="w-full px-2 xl:w-1/4 xl:-mt-20 xs:-order-2 xl:order-none space-y-10 md:w-3/5 mx-auto">
         <Stats
           icon={
-            <ArrowDownLeftIcon className="text-gray-100 md:w-8 md:h-8 sm:w-4 sm:h-4 dark:text-gray-100" />
+            <ArrowDownLeftIcon className="text-gray-100 w-5 h-5 md:w-8 md:h-8 dark:text-gray-100" />
           }
           iconBgColor="bg-green-600"
           textBgColor="bg-green-400"
           textColor="text-emerald-400"
           signIcon={
-            <PlusIcon className="text-green-600 md:w-4 md:h-4 sm:h-2 sm:w-2 dark:text-green-600" />
+            <PlusIcon className="text-green-600 w-4 h-4 dark:text-green-600" />
           }
         />
         <DetailCard colors={cashInData} title="Cash in Activity" />
@@ -90,16 +90,16 @@ export default async function Column({
           <Table />
         </div>
       </div>
-      <div className="w-full px-2 xl:mt-6 xl:w-1/4 h-fit xl:-mb-64 space-y-10 xs:mt-8 md:w-3/5 mx-auto">
+      <div className="w-full px-2 xl:mt-6 xl:w-1/4 h-full space-y-10 xs:mt-8 md:w-3/5 mx-auto">
         <Stats
           icon={
-            <ArrowUpRightIcon className="text-gray-100 md:w-8 md:h-8 sm:w-4 sm:h-4 dark:text-gray-100" />
+            <ArrowUpRightIcon className="text-gray-100 w-5 h-5 md:w-8 md:h-8  dark:text-gray-100" />
           }
           iconBgColor="bg-red-600"
           textBgColor="bg-red-400"
           textColor="text-red-400"
           signIcon={
-            <MinusIcon className="text-red-600 md:w-4 md:h-4 sm:w-2 sm:h-2 dark:text-red-600" />
+            <MinusIcon className="text-red-600 w-4 h-4 dark:text-red-600" />
           }
         />
         <DetailCard colors={cashOutData} title="Cash out Activity" />
