@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="debug-screens">
+      <body className="debug-screens dark:bg-[#141332]">
         <ExpandProvider>
           <Provider>{children}</Provider>
         </ExpandProvider>
