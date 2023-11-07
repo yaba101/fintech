@@ -11,7 +11,7 @@ import SidebarItem from "./SideBarItem";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { SidebarContext } from "@/components/SidebarProvider";
 
-const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
+const SideBarMenu = ({ children }: { children: React.ReactNode }) => {
   const {
     isExpanded = false,
     handleMouseEnter = () => {},
@@ -34,13 +34,6 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
       }
     };
   }, [handleMouseEnter, handleMouseLeave]);
-
-  const renderChildren = Children.map(children, (child, index) =>
-    React.cloneElement(child as any, {
-      key: index,
-      isExpanded,
-    })
-  );
 
   return (
     <div
@@ -67,26 +60,21 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
           </button>
         </div>
         <ul className="flex-1 px-3 space-y-5">
-          {renderChildren}
-
+          {children}
           <div
             className={`flex justify-between items-center overflow-hidden  ${
               isExpanded ? "xl:w-40 lg:w-44" : "w-0"
             }`}
           >
             <SidebarItem
-              key="Dark Mode"
               icon={<Moon size={0} />}
               active={false}
               alert={false}
               text={"Dark Mode"}
-            />
-            <div className="flex mx-auto dark:text-gray-100 flex-nowrap ">
-              <span className="mr-4 font-medium whitespace-nowrap">
-                Dark Mode
-              </span>
+              isExpanded={isExpanded}
+            >
               <ThemeSwitcher />
-            </div>
+            </SidebarItem>
           </div>
           <div
             className={`flex justify-between items-center overflow-hidden ${
@@ -94,15 +82,12 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
             }`}
           >
             <SidebarItem
-              key="Logout"
               icon={<LogOut size={20} />}
               active={false}
               alert={false}
               text={"Log Out"}
+              isExpanded={isExpanded}
             />
-            <span className="mr-auto font-medium whitespace-nowrap">
-              Log Out
-            </span>
           </div>
         </ul>
 

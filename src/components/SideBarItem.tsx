@@ -6,12 +6,14 @@ const SidebarItem = ({
   active,
   alert,
   isExpanded,
+  children,
 }: {
   icon: any;
   text: string;
   active: boolean;
   alert: boolean;
-  isExpanded?: boolean;
+  isExpanded: boolean;
+  children?: React.ReactNode;
 }) => {
   return (
     <li
@@ -28,13 +30,17 @@ const SidebarItem = ({
     `}
     >
       {icon}
-      <h4
-        className={`overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap  dark:text-gray-100 text-gray-900 ${
-          isExpanded ? "w-32 ml-3" : "w-0"
-        }`}
-      >
-        {text}
-      </h4>
+
+      <div className="flex">
+        <h4
+          className={`overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap  dark:text-gray-100 text-gray-900 ${
+            isExpanded ? "w-32 ml-3" : "w-0"
+          }`}
+        >
+          {text}
+        </h4>
+        <span className="-ml-8">{children}</span>
+      </div>
       {alert && (
         <div
           className={`absolute right-2 w-2 h-2 rounded bg-indigo-200 ${

@@ -218,6 +218,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                   alert={item.alert}
                   text={item.text}
                   active={item.active}
+                  isExpanded={isExpanded}
                 />
               ))}
               <hr className="text-gray-100" />
@@ -228,6 +229,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                   alert={item.alert}
                   text={item.text}
                   active={item.active}
+                  isExpanded={isExpanded}
                 />
               ))}
             </SideBarMenu>
