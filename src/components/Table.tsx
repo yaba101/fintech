@@ -9,20 +9,33 @@ type RecentTransactionData = {
   amount: string;
 };
 
-async function getRecentTransactionData() {
-  const response = await fetch(process.env.URL + "/api/recent-transaction", {
-    method: "GET",
-    cache: "no-store",
-  });
-  if (response.ok) {
-    const data = await response.json();
-    return data;
-  }
-  return [];
+async function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+const getRecentTransactionData = async (url: string) => {
+  try {
+    await delay(2000);
+    const response = await fetch(url, {
+      method: "GET",
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error while fetching data:", error);
+    return [];
+  }
+};
+
 export default async function Table() {
-  const data = await getRecentTransactionData();
+  const data = await getRecentTransactionData(
+    `${process.env.URL}/api/recent-transaction`
+  );
   return (
     <div className="overflow-x-hidden overflow-y-hidden rounded-md shadow-lg dark:bg-dark bg-gray-50">
       <div className="flex items-center justify-between flex-grow px-2 py-3 my-3 space-x-2 xs:pr-5">
