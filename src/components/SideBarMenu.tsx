@@ -38,7 +38,7 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
   const renderChildren = Children.map(children, (child, index) =>
     React.cloneElement(child as any, {
       key: index,
-      isexpanded: isExpanded,
+      isExpanded,
     })
   );
 
