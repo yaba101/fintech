@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import SideBarMenu from "@/components/SideBarMenu";
 import SidebarItem from "@/components/SideBarItem";
-import { ExpandContext } from "@/components/ExpandProvider";
+import { SidebarContext } from "@/components/SidebarProvider";
 
 const FirstNavSection = [
   {
@@ -68,7 +68,7 @@ function classNames(...classes: any[]) {
 
 export default function SideBar({ children }: { children?: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { isExpanded = false } = useContext(ExpandContext) || {};
+  const { isExpanded = false } = useContext(SidebarContext) || {};
 
   return (
     <>

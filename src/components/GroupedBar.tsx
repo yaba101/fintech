@@ -72,7 +72,7 @@ export default function GroupedBarChart({ data }: Props) {
   const height = 300 - margin.top - margin.bottom;
 
   const labels = data?.map(({ label }) => label);
-  const sublabels = Object.keys(data[0].values);
+  const sublabels = Object.keys(data[0]?.values);
 
   const values = data?.map(({ values }) => values).flat();
 
@@ -165,7 +165,6 @@ export default function GroupedBarChart({ data }: Props) {
             </g>
           ))}
 
-          {/* Add horizontal dashed lines above the axes */}
           {Array.from({ length: numDashedLines }, (_, i) => (
             <line
               key={`dashed-line-${i}`}

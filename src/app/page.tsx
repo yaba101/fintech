@@ -1,5 +1,5 @@
-import SideBar from "./sidebar";
 import ColumnContainer from "@/components/ColumnContainer";
+import SideBar from "@/components/SidebarContainer";
 
 async function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -7,58 +7,38 @@ async function delay(ms: number) {
 
 export const dynamic = "force-dynamic";
 
-async function getBarGraphData() {
-  // await delay(2000);
-  const response = await fetch(process.env.URL + "/api/barchart", {
-    method: "GET",
-    cache: "no-store",
-  });
-  if (response.ok) {
-    const data = await response.json();
-    return data;
-  }
-  return [];
-}
+const fetchData = async (url: string) => {
+  try {
+    await delay(2000);
+    const response = await fetch(url, {
+      method: "GET",
+      cache: "no-store",
+    });
 
-async function getCashInData() {
-  // await delay(2000);
-  const response = await fetch(process.env.URL + "/api/cashin", {
-    method: "GET",
-    cache: "no-store",
-  });
-  if (response.ok) {
-    const data = await response.json();
-    return data;
-  }
-  return [];
-}
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-async function getCashOutData() {
-  // await delay(2000);
-  const response = await fetch(process.env.URL + "/api/cashout", {
-    method: "GET",
-    cache: "no-store",
-  });
-  if (response.ok) {
-    const data = await response.json();
-    return data;
+    return response.json();
+  } catch (error) {
+    console.error("Error while fetching data:", error);
+    return [];
   }
-  return [];
-}
+};
 
 export default async function Home() {
-  const bargraphData = await getBarGraphData();
-  const cashInData = await getCashInData();
-  const cashOutData = await getCashOutData();
-  await delay(6000);
+  const barGraphPromise = fetchData(`${process.env.URL}/api/barchart`);
+  const cashInPromise = fetchData(`${process.env.URL}/api/cashin`);
+  const cashOutPromise = fetchData(`${process.env.URL}/api/cashout`);
+
+  const [bargraphData, cashInData, cashOutData] = await Promise.all([
+    barGraphPromise,
+    cashInPromise,
+    cashOutPromise,
+  ]);
 
   return (
     <>
-      {/* <div className="mx-auto w-96">
-        <Suspense fallback={<DetailCardSkeleton />}>
-          <DetailCard colors={cashInData} title="Cash in Activity" />
-        </Suspense>
-      </div> */}
       <SideBar>
         <ColumnContainer
           bargraphData={bargraphData}

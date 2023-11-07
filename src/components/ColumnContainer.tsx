@@ -6,11 +6,10 @@ import Stats from "@/components/Stats";
 import SearchInput from "@/components/SearchInput";
 import Table from "@/components/Table";
 import GroupedBarChart, { IGroupedData } from "./GroupedBar";
-import { Suspense } from "react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-type CashProps = {
-  color: string;
+export type CashProps = {
+  value: number;
   title: string;
 };
 
@@ -81,7 +80,7 @@ export default async function Column({
             <PlusIcon className="text-green-600 w-4 h-4 dark:text-green-600" />
           }
         />
-        <DetailCard colors={cashInData} title="Cash in Activity" />
+        <DetailCard data={cashInData} title="Cash in Activity" />
       </div>
       <div className="w-full px-2 xl:w-1/2 xl:-mt-40 xs:-order-3 xl:order-none">
         <GroupedBarChart data={bargraphData} />
@@ -101,7 +100,7 @@ export default async function Column({
             <MinusIcon className="text-red-600 w-4 h-4 dark:text-red-600" />
           }
         />
-        <DetailCard colors={cashOutData} title="Cash out Activity" />
+        <DetailCard data={cashOutData} title="Cash out Activity" />
       </div>
 
       <div className="xl:hidden block w-full px-2 mx-auto xl:w-1/2 h-fit xs:order-last xl:order-none mt-8">

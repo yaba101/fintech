@@ -10,7 +10,6 @@ type RecentTransactionData = {
 };
 
 async function getRecentTransactionData() {
-  // await delay(2000);
   const response = await fetch(process.env.URL + "/api/recent-transaction", {
     method: "GET",
     cache: "no-store",

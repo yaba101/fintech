@@ -2,16 +2,17 @@ import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import HalfDonutChart from "@/components/HalfPieChart";
 import Dropdown from "./Dropdown";
 import { Button } from "./ui/button";
+import { CashProps } from "./ColumnContainer";
 
 export default async function DetailCard({
-  colors,
+  data,
   title,
 }: {
-  colors: any[];
+  data: CashProps[];
   title: string;
 }) {
   const CurrentColors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
-  const sortedData = [...colors].sort((a, b) => b.value - a.value);
+  const sortedData = [...data].sort((a, b) => b.value - a.value);
 
   const top4Data = sortedData.slice(0, 4);
 

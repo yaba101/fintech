@@ -9,7 +9,7 @@ import {
 import React, { Children, useContext, useEffect, useState } from "react";
 import SidebarItem from "./SideBarItem";
 import ThemeSwitcher from "./ThemeSwitcher";
-import { ExpandContext } from "@/components/ExpandProvider";
+import { SidebarContext } from "@/components/SidebarProvider";
 
 const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
   const {
@@ -17,7 +17,7 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
     handleMouseEnter = () => {},
     handleMouseLeave = () => {},
     setIsExpanded = () => {},
-  } = useContext(ExpandContext) || {};
+  } = useContext(SidebarContext) || {};
 
   useEffect(() => {
     const sidebarContainer = document.getElementById("sidebar-container");
@@ -36,7 +36,10 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
   }, [handleMouseEnter, handleMouseLeave]);
 
   const renderChildren = Children.map(children, (child, index) =>
-    React.cloneElement(child as any, { key: index, isExpanded })
+    React.cloneElement(child as any, {
+      key: index,
+      isexpanded: isExpanded,
+    })
   );
 
   return (
@@ -47,7 +50,9 @@ const SideBarMenu = ({ children }: { children: React.ReactNode[] }) => {
       }`}
     >
       <nav
-        className={` dark:bg-dark  h-full flex flex-col absolute top-0 transition-all duration-300 ease-in-out `}
+        className={` dark:bg-dark  h-full flex flex-col absolute top-0 transition-all duration-300 ease-in-out ${
+          isExpanded ? "shadow shadow-slate-500" : ""
+        } `}
       >
         <div className="flex items-center justify-between p-4 pb-2">
           <button

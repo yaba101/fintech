@@ -1,16 +1,14 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 
-interface ExpandContextType {
+interface SidebarContextType {
   isExpanded: boolean;
   handleMouseEnter: () => void;
   handleMouseLeave: () => void;
   setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ExpandContext = createContext<ExpandContextType | undefined>(
-  undefined
-);
+export const SidebarContext = createContext<SidebarContextType | null>(null);
 
 const ExpandProvider = ({ children }: { children: React.ReactNode }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -24,11 +22,11 @@ const ExpandProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <ExpandContext.Provider
+    <SidebarContext.Provider
       value={{ isExpanded, handleMouseEnter, handleMouseLeave, setIsExpanded }}
     >
       {children}
-    </ExpandContext.Provider>
+    </SidebarContext.Provider>
   );
 };
 
