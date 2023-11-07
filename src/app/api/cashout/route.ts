@@ -1,10 +1,8 @@
-// Import the data from the JSON file
 import cashOutData from "../../../../data/cashout.json";
-import type { NextApiRequest, NextApiResponse } from "next";
 type ResponseData = {
-  color: string;
+  value: string;
   title: string;
 };
-export async function GET(req: NextApiRequest) {
+export async function GET() {
   return Response.json(cashOutData);
 }

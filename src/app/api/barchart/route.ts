@@ -1,10 +1,8 @@
-// Import the data from the JSON file
 import groupedBarChartData from "../../../../data/groupedBarChart.json";
-import type { NextApiRequest, NextApiResponse } from "next";
 type ResponseData = {
   lable: string;
-  value: number[];
+  values: number[];
 };
-export async function GET(req: NextApiRequest) {
+export async function GET() {
   return Response.json(groupedBarChartData);
 }
