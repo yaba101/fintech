@@ -67,21 +67,23 @@ export default async function Table() {
                             </div>
                             <div className="ml-4">
                               <div
-                                className={`font-medium dark:text-gray-100 xs:text-xs text-sm sm:text-base`}
+                                className={`font-medium dark:text-gray-100 md:text-base xs:text-xs sm:text-sm   `}
                               >
-                                {item.company}
+                                <span className="md:text-sm  xs:text-xs">
+                                  {item.company}
+                                </span>
                               </div>
                             </div>
                           </div>
                         </td>
-                        <td className="px-3 py-3 text-sm text-gray-500 whitespace-nowrap xs:px-1 xs:text-xs sm:py-2">
-                          <div className="text-sm xs:text-xs sm:text-base">
+                        <td className="px-3 py-3 s text-gray-500 whitespace-nowrap xs:px-1 xs:text-xs sm:py-2">
+                          <div className="md:text-sm  xs:text-xs">
                             {item.date}
                           </div>
                         </td>
-                        <td className="px-3 py-3 text-sm text-gray-300 whitespace-nowrap xs:px-1 sm:py-2">
+                        <td className="px-3 py-3  text-gray-300 whitespace-nowrap xs:px-1 sm:py-2">
                           <span
-                            className={`inline-flex items-center rounded-md px-2 py-1 xs:text-xs text-sm font-medium sm:text-base`}
+                            className={`inline-flex items-center rounded-md px-2 py-1 md:text-sm xs:text-xs font-medium `}
                           >
                             {item.amount}
                           </span>
