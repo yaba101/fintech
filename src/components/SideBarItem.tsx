@@ -39,8 +39,8 @@ const SidebarItem = ({
         >
           {text}
         </h4>
-        <span className="-ml-8">{children}</span>
       </div>
+      <div className="mx-auto">{children}</div>
       {alert && (
         <div
           className={`absolute right-2 w-2 h-2 rounded bg-indigo-200 ${

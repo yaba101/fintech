@@ -39,7 +39,7 @@ export default async function Table() {
   return (
     <div className="overflow-x-hidden overflow-y-hidden rounded-md shadow-lg dark:bg-dark bg-gray-50">
       <div className="flex items-center justify-between flex-grow px-2 py-3 my-3 space-x-2 xs:pr-5">
-        <h4 className="px-2 py-2 font-bold tracking-tight text-center md:text-lg xs:text-lg xs:text-bold whitespace-nowrap sm:mx-auto xs:mx-auto md:mx-0">
+        <h4 className="px-2 py-2 font-bold tracking-tight text-center md:text-xl xs:text-lg xs:text-bold whitespace-nowrap sm:mx-auto xs:mx-auto md:mx-0">
           Recent Transactions
         </h4>
         <div className="hidden min-w-fit md:block">
@@ -82,7 +82,7 @@ export default async function Table() {
                               <div
                                 className={`font-medium dark:text-gray-100 md:text-base xs:text-xs sm:text-sm   `}
                               >
-                                <span className="md:text-sm  xs:text-xs">
+                                <span className="md:text-sm xl:text-base 2xl:text-lg xs:text-xs">
                                   {item.company}
                                 </span>
                               </div>
@@ -90,13 +90,13 @@ export default async function Table() {
                           </div>
                         </td>
                         <td className="px-3 py-3 s text-gray-500 whitespace-nowrap xs:px-1 xs:text-xs sm:py-2">
-                          <div className="md:text-sm  xs:text-xs">
+                          <div className="md:text-sm 2xl:text-lg xl:text-base xs:text-xs">
                             {item.date}
                           </div>
                         </td>
                         <td className="px-3 py-3  text-gray-300 whitespace-nowrap xs:px-1 sm:py-2">
                           <span
-                            className={`inline-flex items-center rounded-md px-2 py-1 md:text-sm xs:text-xs font-medium `}
+                            className={`inline-flex items-center rounded-md px-2 py-1 md:text-sm xl:text-base 2xl:text-lg xs:text-xs font-medium `}
                           >
                             {item.amount}
                           </span>
@@ -107,8 +107,8 @@ export default async function Table() {
                 </table>
               </div>
             </div>
-            <div className="pb-5 text-center">
-              <button className="px-4 py-1 font-medium text-white bg-green-500 rounded-lg hover:bg-green-700">
+            <div className="w-1/3 mx-auto py-6">
+              <button className="px-4 py-2 text-center font-medium text-white bg-green-500 rounded-lg hover:bg-green-700 w-full whitespace-nowrap">
                 View More
               </button>
             </div>

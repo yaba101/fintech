@@ -6,7 +6,7 @@ import {
   Moon,
   MoreVertical,
 } from "lucide-react";
-import React, { Children, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import SidebarItem from "./SideBarItem";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { SidebarContext } from "@/components/SidebarProvider";
@@ -38,12 +38,12 @@ const SideBarMenu = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       id="sidebar-container"
-      className={`h-screen dark:bg-dark relative transition-all duration-300 ease-in-out  ${
+      className={`h-screen dark:bg-dark relative transition-all duration-300 ease-in-out   ${
         isExpanded ? "w-30 space-y-4 " : "w-20"
       }`}
     >
       <nav
-        className={` dark:bg-dark  h-full flex flex-col absolute top-0 transition-all duration-300 ease-in-out ${
+        className={` dark:bg-dark  h-full flex flex-col absolute top-0 transition-all duration-300 ease-in-out  px-2 ${
           isExpanded ? "shadow shadow-slate-500" : ""
         } `}
       >
@@ -66,15 +66,7 @@ const SideBarMenu = ({ children }: { children: React.ReactNode }) => {
               isExpanded ? "xl:w-40 lg:w-44" : "w-0"
             }`}
           >
-            <SidebarItem
-              icon={<Moon size={0} />}
-              active={false}
-              alert={false}
-              text={"Dark Mode"}
-              isExpanded={isExpanded}
-            >
-              <ThemeSwitcher />
-            </SidebarItem>
+            <ThemeSwitcher />
           </div>
           <div
             className={`flex justify-between items-center overflow-hidden ${

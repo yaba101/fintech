@@ -23,16 +23,16 @@ export default async function Column({
   cashOutData: CashProps[];
 }) {
   return (
-    <div className="flex flex-row flex-wrap mx-auto lg:pl-20 overflow-hidden">
+    <div className="flex flex-row flex-wrap mx-auto lg:pl-20 2xl:w-11/12 overflow-hidden">
       <div className="w-full px-2 md:w-3/5 mx-auto xl:w-1/4 xs:-order-5 xl:order-none">
-        <h1 className="hidden mb-5 text-2xl font-bold tracking-tight text-center scroll-m-20 lg:text-2xl xl:block">
+        <h1 className="hidden mb-5  font-bold tracking-tight text-center scroll-m-20 lg:text-3xl xl:block">
           Availability
         </h1>
         <Card title="Net Worth" text="$45,032.00" buttonText="View Details" />
       </div>
       <div className="w-full px-2 xl:w-1/2 h-fit xs:order-first xl:order-none">
         <div className="">
-          <h1 className="text-2xl font-bold tracking-tight text-center scroll-m-20 lg:text-2xl">
+          <h1 className="text-2xl font-bold tracking-tight text-center scroll-m-20 lg:text-3xl">
             Welcome Back, Issac👋!
           </h1>
           <p className="m-0 leading-7 text-center text-gray-400 ">

@@ -12,7 +12,7 @@ export default function SearchInput() {
         </div>
         <input
           id="desktop-search"
-          className="block w-full whitespace-nowrap overflow-hidden text-ellipsis rounded-md sm:text-xs border-0 py-1.5 pl-2 dark:text-white text-gray-800 dark:placeholder:text-white dark:focus:text-gray-200 focus:ring-0 focus:placeholder:text-gray-500  sm:leading-6 shadow-lg dark:bg-dark"
+          className="block w-full whitespace-nowrap overflow-hidden text-ellipsis rounded-md sm:text-sm md:text-lg border-0 py-1.5 pl-2 dark:text-white text-gray-800 dark:placeholder:text-white dark:focus:text-gray-200 focus:ring-0 focus:placeholder:text-gray-500  sm:leading-6 shadow-lg dark:bg-dark"
           placeholder="Search For"
           type="search"
           name="search"

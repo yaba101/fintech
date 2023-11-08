@@ -6,31 +6,28 @@ type DataItem = {
   value: number;
 };
 type DonutChartProps = {
-  width: number;
-  height: number;
   data: DataItem[];
 };
 
-const MARGIN = 40;
-
-const HalfDonutChart = ({ width, height, data }: DonutChartProps) => {
+const HalfDonutChart = ({ data }: DonutChartProps) => {
   const colors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
-  const radius = Math.min(width, height) / 2 - MARGIN;
-
-  const arc = d3.arc().innerRadius(90).outerRadius(radius);
 
   const totalValue = d3.sum(data, (d) => d.value);
 
   let startAngle = -90;
 
+  const margin = { top: 20, right: 0, bottom: 0, left: 0 };
+  const width = 300 - margin.left - margin.right;
+  const height = 300 - margin.top - margin.bottom;
+  const radius = Math.min(width, height) / 2;
+  const arc = d3.arc().innerRadius(90).outerRadius(radius);
+
   return (
-    <>
+    <div className=" w-full mx-auto py-6">
       <svg
-        viewBox={`0 0 ${width} ${height}`}
-        width="100%"
-        height={height}
-        className="mx-auto text-center"
-        style={{ display: "inline-block" }}
+        className="w-auto px-3 overflow-x-hidden "
+        viewBox={`0 0 ${width + margin.left + margin.right} ${height / 2}`}
+        style={{ width: "100%", height: "auto" }}
       >
         <g transform={`translate(${width / 2}, ${height / 2})`}>
           {data.map((item, i) => {
@@ -49,7 +46,7 @@ const HalfDonutChart = ({ width, height, data }: DonutChartProps) => {
           })}
         </g>
       </svg>
-    </>
+    </div>
   );
 };
 

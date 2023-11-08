@@ -21,11 +21,11 @@ export default function Stats({
         </span>
 
         <div>
-          <p className="md:text-lg sm:text-xs dark:text-gray-400 whitespace-nowrap">
+          <p className="md:text-xl 2xl:text-2xl sm:text-xs dark:text-gray-400 whitespace-nowrap">
             Total Income
           </p>
 
-          <p className="font-medium md:text-xl sm:text-sm dark:text-gray-200">
+          <p className="font-medium md:text-xl 2xl:text-2xl sm:text-sm dark:text-gray-200">
             $632.00
           </p>
         </div>

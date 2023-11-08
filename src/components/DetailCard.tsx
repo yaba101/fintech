@@ -20,14 +20,14 @@ export default async function DetailCard({
     <div className="p-4 my-3 border rounded-md shadow-md dark:text-gray-100 dark:border-gray-900 dark:bg-dark bg-gray-50">
       <div className="flex justify-between border-bottom">
         <div className="flex items-center">
-          <p className="mb-0 font-bold capitalize dark:text-gray-100">
+          <p className="mb-0 font-bold xl:text-lg 2xl:text-xl capitalize dark:text-gray-100">
             {title}
           </p>
         </div>
         <Dropdown />
       </div>
-      <HalfDonutChart data={top4Data} width={360} height={400} />
-      <div className="flex flex-wrap items-center justify-center mb-3 -mt-28">
+      <HalfDonutChart data={top4Data} />
+      <div className="flex flex-wrap items-center justify-center mb-3 ">
         {CurrentColors.map((color, index) => (
           <div key={index} className="w-1/2 p-2">
             <div className="flex flex-nowrap items-center justify-center space-x-2">
@@ -52,13 +52,14 @@ export default async function DetailCard({
           </div>
         ))}
       </div>
-
-      <Button variant="outline" className="w-full">
-        <span className="px-10 text-center whitespace-nowrap">
-          View All Activity
-        </span>
-        <ArrowRightIcon className="w-6 h-6 shrink dark:text-gray-100 " />
-      </Button>
+      <div className="w-3/4 mx-auto">
+        <Button variant="outline" className=" w-full">
+          <span className=" whitespace-nowrap mx-auto text-center">
+            View All Activity
+          </span>
+          <ArrowRightIcon className="w-6 h-6 shrink dark:text-gray-100 " />
+        </Button>
+      </div>
     </div>
   );
 }

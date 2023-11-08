@@ -9,20 +9,20 @@ const AddAccountCard = async () => {
         <div className="w-3/4 mx-auto my-6">
           <div className="my-5 ">
             <div className="flex justify-between">
-              <span>Savings</span>
-              <span className="text-sm font-medium">$597.39</span>
+              <span className="md:text-lg">Savings</span>
+              <span className="text-sm md:text-lg font-medium">$597.39</span>
             </div>
           </div>
           <div className="my-5">
             <div className="flex justify-between">
-              <span>Checking</span>
-              <span className="text-sm font-medium">$15,595</span>
+              <span className="md:text-lg">Checking</span>
+              <span className="text-sm md:text-lg font-medium">$15,595</span>
             </div>
           </div>
           <div className="my-5">
             <div className="flex justify-between">
-              <span>Investment</span>
-              <span className="text-sm font-medium">$129.15</span>
+              <span className="md:text-lg">Investment</span>
+              <span className="text-sm md:text-lg font-medium">$129.15</span>
             </div>
           </div>
         </div>

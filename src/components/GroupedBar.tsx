@@ -114,14 +114,14 @@ export default function GroupedBarChart({ data }: Props) {
   return (
     <div className="py-1 my-3 overflow-x-hidden rounded-md shadow-lg dark:bg-dark bg-gray-50">
       <div className="flex justify-between py-1 my-3 md:px-3 min-w-fit">
-        <h4 className="px-1 mt-1 font-bold tracking-tight text-center md:mr-5 xs:text-sm lg:text-medium whitespace-nowrap sm:text-sm lg:text-xl">
+        <h4 className="px-1 mt-1 font-bold tracking-tight text-center md:mr-5 xs:text-sm md:text-2xl capitalize whitespace-nowrap ">
           Insights
         </h4>
         <div className="flex justify-between mt-1 md:mr-5 ">
-          <button className="w-4 h-4 mt-2 font-medium text-white bg-green-600 rounded-full sm:mx-3 xs:mx-1 xs:w-2 xs:h-2" />
-          <p className="mt-1 text-sm xs:text-xs lg:text-base">Income</p>
-          <button className="w-4 h-4 mt-2 font-medium text-white bg-red-600 rounded-full sm:mx-3 xs:mx-1 xs:w-2 xs:h-2" />
-          <p className="mt-1 text-sm xs:text-xs lg:text-base">Expenses</p>
+          <button className="md:w-4 md:h-4 mt-2 font-medium text-white bg-green-600 rounded-full sm:mx-3 xs:mx-1 xs:w-2 xs:h-2" />
+          <p className="mt-1 text-sm xs:text-xs md:text-base">Income</p>
+          <button className="md:w-4 md:h-4 mt-2 font-medium text-white bg-red-600 rounded-full sm:mx-3 xs:mx-1 xs:w-2 xs:h-2" />
+          <p className="mt-1 text-sm xs:text-xs md:text-base">Expenses</p>
         </div>
         <div className="xs:mr-l">
           <Dropdown />
