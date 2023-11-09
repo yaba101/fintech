@@ -17,29 +17,29 @@ export default async function DetailCard({
   const top4Data = sortedData.slice(0, 4);
 
   return (
-    <div className="p-4 my-3 border rounded-md shadow-md dark:text-gray-100 dark:border-gray-900 dark:bg-dark bg-gray-50">
-      <div className="flex justify-between border-bottom">
+    <div className="my-3 rounded-md border bg-gray-50 p-4 shadow-md dark:border-gray-900 dark:bg-dark dark:text-gray-100">
+      <div className="border-bottom flex justify-between">
         <div className="flex items-center">
-          <p className="mb-0 font-bold xl:text-lg 2xl:text-xl capitalize dark:text-gray-100">
+          <p className="mb-0 font-bold capitalize antialiased dark:text-gray-100 xl:text-lg 2xl:text-xl">
             {title}
           </p>
         </div>
         <Dropdown />
       </div>
       <HalfDonutChart data={top4Data} />
-      <div className="flex flex-wrap items-center justify-center mb-3 ">
+      <div className="mb-3 flex flex-wrap items-center justify-center ">
         {CurrentColors.map((color, index) => (
           <div key={index} className="w-1/2 p-2">
             <div className="flex flex-nowrap items-center justify-center space-x-2">
               <button
-                className="w-4 h-4 mr-2 font-medium text-white rounded-full xl:text-xs xs:w-3 xs:h-3 xs:mr-1"
+                className="mr-2 h-4 w-4 rounded-full font-medium text-white xs:mr-1 xs:h-3 xs:w-3 xl:text-xs"
                 style={{ background: color }}
               />
               <div className="flex flex-col">
-                <h4 className="dark:text-gray-200 xl:text-sm xs:text-sm xs:whitespace-nowrap">
+                <h4 className="antialiased dark:text-gray-200 xs:whitespace-nowrap xs:text-sm xl:text-sm">
                   {top4Data[index]?.title.toString()}
                 </h4>
-                <h4 className="dark:text-gray-400 xl:text-xs xs:text-xs xs:pl-1 xs:py-1">
+                <h4 className="antialiased dark:text-gray-400 xs:py-1 xs:pl-1 xs:text-xs xl:text-xs">
                   {(
                     (top4Data[index]?.value /
                       top4Data.reduce((acc, item) => acc + item.value, 0)) *
@@ -52,12 +52,12 @@ export default async function DetailCard({
           </div>
         ))}
       </div>
-      <div className="w-3/4 mx-auto">
-        <Button variant="outline" className=" w-full">
-          <span className=" whitespace-nowrap mx-auto text-center">
+      <div className="mx-auto w-3/4">
+        <Button variant="outline" className="w-full ">
+          <span className="mx-auto whitespace-nowrap text-center">
             View All Activity
           </span>
-          <ArrowRightIcon className="w-6 h-6 shrink dark:text-gray-100 " />
+          <ArrowRightIcon className="h-6 w-6 shrink dark:text-gray-100 " />
         </Button>
       </div>
     </div>

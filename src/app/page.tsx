@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 const fetchData = async (url: string) => {
   try {
-    await delay(2000);
+    // await delay(2000);
     const response = await fetch(url, {
       method: "GET",
       cache: "no-store",
