@@ -23,7 +23,7 @@ export default async function Column({
   cashOutData: CashProps[];
 }) {
   return (
-    <div className="mx-auto flex flex-row flex-wrap overflow-hidden xl:pl-20 2xl:w-11/12 ">
+    <div className="mx-auto flex flex-row flex-wrap overflow-hidden xl:pl-24 2xl:w-11/12 ">
       <div className="mx-auto w-full px-2 xs:-order-5 md:w-3/5 lg:order-none lg:w-1/4">
         <h1 className="mb-5 hidden scroll-m-20 text-center text-2xl font-bold tracking-tight lg:block lg:text-2xl">
           Availability
