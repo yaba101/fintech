@@ -17,15 +17,15 @@ const HalfDonutChart = ({ data }: DonutChartProps) => {
   let startAngle = -90;
 
   const margin = { top: 20, right: 0, bottom: 0, left: 0 };
-  const width = 300 - margin.left - margin.right;
-  const height = 300 - margin.top - margin.bottom;
+  const width = 280 - margin.left - margin.right;
+  const height = 280 - margin.top - margin.bottom;
   const radius = Math.min(width, height) / 2;
   const arc = d3.arc().innerRadius(90).outerRadius(radius);
 
   return (
-    <div className=" w-full mx-auto py-6">
+    <div className="mx-auto w-full py-6 ">
       <svg
-        className="w-auto px-3 overflow-x-hidden "
+        className="w-auto overflow-x-hidden px-3 "
         viewBox={`0 0 ${width + margin.left + margin.right} ${height / 2}`}
         style={{ width: "100%", height: "auto" }}
       >
