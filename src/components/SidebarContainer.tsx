@@ -76,7 +76,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as="div"
-            className="relative z-50 lg:hidden"
+            className="relative z-50 xl:hidden"
             onClose={setSidebarOpen}
           >
             <Transition.Child
@@ -101,7 +101,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <Dialog.Panel className="relative flex flex-1 w-full max-w-xs mr-16">
+                <Dialog.Panel className="relative mr-16 flex w-full max-w-xs flex-1">
                   <Transition.Child
                     as={Fragment}
                     enter="ease-in-out duration-300"
@@ -111,7 +111,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
-                    <div className="absolute top-0 flex justify-center w-16 pt-5 left-full">
+                    <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
                       <button
                         type="button"
                         className="-m-2.5 p-2.5"
@@ -119,15 +119,15 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                       >
                         <span className="sr-only">Close sidebar</span>
                         <XMarkIcon
-                          className="w-6 h-6 text-white"
+                          className="h-6 w-6 text-white"
                           aria-hidden="true"
                         />
                       </button>
                     </div>
                   </Transition.Child>
-                  <div className="flex flex-col px-6 pb-2 overflow-y-hidden grow gap-y-5 dark:bg-dark bg-slate-50 dark:text-gray-50">
-                    <nav className="flex flex-col flex-1">
-                      <ul role="list" className="flex flex-col flex-1 gap-y-7">
+                  <div className="flex grow flex-col gap-y-5 overflow-y-hidden bg-slate-50 px-6 pb-2 dark:bg-dark dark:text-gray-50">
+                    <nav className="flex flex-1 flex-col">
+                      <ul role="list" className="flex flex-1 flex-col gap-y-7">
                         <li>
                           <ul
                             role="list"
@@ -140,16 +140,16 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                                   className={classNames(
                                     item.active
                                       ? " mt-4 bg-indigo-800 text-gray-100"
-                                      : "dark:text-gray-200 hover:text-indigo-600 dark:hover:bg-indigo-500  ",
-                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                      : "hover:text-indigo-600 dark:text-gray-200 dark:hover:bg-indigo-500  ",
+                                    "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                                   )}
                                 >
                                   <item.icon
                                     className={classNames(
                                       item.active
                                         ? "text-gray-300"
-                                        : "dark:text-gray-200 text-gray-800 group-hover:text-indigo-600",
-                                      "h-6 w-6 shrink-0"
+                                        : "text-gray-800 group-hover:text-indigo-600 dark:text-gray-200",
+                                      "h-6 w-6 shrink-0",
                                     )}
                                     aria-hidden="true"
                                   />
@@ -167,17 +167,17 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                                   href={item.href}
                                   className={classNames(
                                     item.active
-                                      ? "dark:bg-gray-900 bg-slate-50 text-indigo-600"
-                                      : "dark:text-gray-100 text-gray-800 hover:text-indigo-600 dark:hover:bg-gray-500 ",
-                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                      ? "bg-slate-50 text-indigo-600 dark:bg-gray-900"
+                                      : "text-gray-800 hover:text-indigo-600 dark:text-gray-100 dark:hover:bg-gray-500 ",
+                                    "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                                   )}
                                 >
                                   <item.icon
                                     className={classNames(
                                       item.active
                                         ? "text-indigo-600"
-                                        : "dark:text-gray-200 text-gray-800 group-hover:text-indigo-600",
-                                      "h-6 w-6 shrink-0"
+                                        : "text-gray-800 group-hover:text-indigo-600 dark:text-gray-200",
+                                      "h-6 w-6 shrink-0",
                                     )}
                                     aria-hidden="true"
                                   />
@@ -200,8 +200,8 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 xl:w-42 ">
-          <div className="flex min-h-screen w-30  shadow-md shadow-slate-500">
+        <div className="xl:w-42 hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-64 ">
+          <div className="w-30 flex min-h-screen shadow-md shadow-slate-500">
             <SideBarMenu>
               {FirstNavSection.map((item) => (
                 <SidebarItem
@@ -228,15 +228,15 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
           </div>
         </div>
 
-        <div className="sticky top-0 z-40 flex items-center px-4 py-4 bg-white shadow-sm gap-x-6 dark:bg-dark sm:px-6 lg:hidden">
+        <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm dark:bg-dark sm:px-6 xl:hidden">
           <button
             type="button"
-            className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
+            className="-m-2.5 p-2.5 text-gray-700 xl:hidden"
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon
-              className="w-6 h-6 dark:text-gray-200"
+              className="h-6 w-6 dark:text-gray-200"
               aria-hidden="true"
             />
           </button>
@@ -246,12 +246,8 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
 
           <MobileDropdown />
         </div>
-        <main
-          className={`py-10 ${
-            isExpanded ? "lg:pl-40 xl:pl-28" : "lg:pl-10 xl:pl-0"
-          } `}
-        >
-          <div className="px-4 overflow-auto sm:px-6">{children}</div>
+        <main className={`py-10 ${isExpanded ? " xl:pl-28" : " xl:pl-0"} `}>
+          <div className="overflow-auto px-4 sm:px-6">{children}</div>
         </main>
       </div>
     </>

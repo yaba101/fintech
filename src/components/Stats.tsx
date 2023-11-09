@@ -35,9 +35,7 @@ export default function Stats({
         className={`-ml-5 flex rounded py-0.5 xs:px-1 ${textColor} ${textBgColor} bg-opacity-40 `}
       >
         {signIcon}
-        <span className="ml-1 font-medium xs:text-xs md:text-[0.575rem] xl:text-sm ">
-          67.81%
-        </span>
+        <span className="ml-1 font-medium xs:text-xs xl:text-sm ">67.81%</span>
       </div>
     </div>
   );

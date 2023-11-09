@@ -23,26 +23,26 @@ export default async function Column({
   cashOutData: CashProps[];
 }) {
   return (
-    <div className="mx-auto flex flex-row flex-wrap overflow-hidden lg:pl-20 2xl:w-11/12">
-      <div className="mx-auto w-full px-2 xs:-order-5 sm:w-5/6 md:w-3/5 xl:order-none xl:w-1/4">
-        <h1 className="mb-5 hidden scroll-m-20 text-center font-bold tracking-tight antialiased lg:text-3xl xl:block">
+    <div className="mx-auto flex flex-row flex-wrap overflow-hidden xl:pl-20 2xl:w-11/12 ">
+      <div className="mx-auto w-full px-2 xs:-order-5 md:w-3/5 lg:order-none lg:w-1/4">
+        <h1 className="mb-5 hidden scroll-m-20 text-center text-2xl font-bold tracking-tight lg:block lg:text-2xl">
           Availability
         </h1>
         <Card title="Net Worth" text="$45,032.00" buttonText="View Details" />
       </div>
-      <div className="mx-auto h-fit w-full px-2 xs:order-first sm:w-5/6 md:w-3/5 xl:order-none xl:w-1/2">
+      <div className="h-fit w-full px-2 xs:order-first lg:order-none lg:w-1/2">
         <div className="">
-          <h1 className="scroll-m-20 text-center text-2xl font-bold tracking-tight antialiased lg:text-3xl">
+          <h1 className="scroll-m-20 text-center text-2xl font-bold tracking-tight lg:text-2xl">
             Welcome Back, Issac👋!
           </h1>
-          <p className="m-0 text-center leading-7 text-gray-400 antialiased">
+          <p className="m-0 text-center leading-7 text-gray-400 ">
             Here is {"what's"} up with your finances today
           </p>
         </div>
         <div className="mb-6 mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2 xl:mb-0">
           <Stats
             icon={
-              <ArrowDownLeftIcon className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 lg:h-8 lg:w-8" />
+              <ArrowDownLeftIcon className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 md:h-8 md:w-8" />
             }
             iconBgColor="bg-green-600"
             textBgColor="bg-green-400"
@@ -53,7 +53,7 @@ export default async function Column({
           />
           <Stats
             icon={
-              <ArrowUpRightIcon className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 lg:h-8 lg:w-8" />
+              <ArrowUpRightIcon className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 md:h-8 md:w-8" />
             }
             iconBgColor="bg-red-600"
             textBgColor="bg-red-400"
@@ -64,11 +64,11 @@ export default async function Column({
           />
         </div>
       </div>
-      <div className="mx-auto w-full px-2 xs:-order-4 xs:mt-4 sm:w-5/6 md:w-3/5 lg:grid xl:order-none xl:mt-12 xl:w-1/4 ">
+      <div className="mx-auto w-full px-2 xs:-order-4 xs:mt-4 md:w-3/5 lg:order-none lg:mt-12 lg:grid lg:w-1/4 ">
         <SearchInput />
         <AddAccountCard />
       </div>
-      <div className="mx-auto w-full space-y-10 px-2 xs:-order-2 xs:mt-4 sm:w-5/6 md:w-3/5 xl:order-none xl:-mt-20 xl:w-1/4 ">
+      <div className="mx-auto w-full space-y-10 px-2 xs:-order-2 xs:mt-4 md:w-3/5 lg:order-none lg:-mt-20 lg:w-1/4">
         <Stats
           icon={
             <ArrowDownLeftIcon className="h-5 w-5 text-gray-100 dark:text-gray-100 md:h-8 md:w-8" />
@@ -82,13 +82,13 @@ export default async function Column({
         />
         <DetailCard data={cashInData} title="Cash in Activity" />
       </div>
-      <div className="mx-auto w-full px-2 xs:-order-3 sm:w-5/6 md:w-3/5 xl:order-none xl:-mt-40 xl:w-1/2 ">
+      <div className="w-full px-2 xs:-order-3 lg:order-none lg:-mt-40 lg:w-1/2">
         <GroupedBarChart data={bargraphData} />
-        <div className="mx-auto mt-10 hidden h-fit w-full xs:order-last xl:order-none xl:block">
+        <div className="mx-auto mt-10 hidden h-fit w-full xs:order-last lg:order-none lg:block">
           <Table />
         </div>
       </div>
-      <div className="mx-auto h-full w-full space-y-10 px-2 xs:mt-8 sm:w-5/6 md:w-3/5 xl:mt-6 xl:w-1/4 ">
+      <div className="mx-auto h-full w-full space-y-10 px-2 xs:mt-8 md:w-3/5 lg:mt-6 lg:w-1/4">
         <Stats
           icon={
             <ArrowUpRightIcon className="h-5 w-5 text-gray-100 dark:text-gray-100 md:h-8 md:w-8" />
@@ -103,7 +103,7 @@ export default async function Column({
         <DetailCard data={cashOutData} title="Cash out Activity" />
       </div>
 
-      <div className="mx-auto mt-8 block h-fit w-full px-2 xs:order-last sm:w-5/6 md:w-3/5 xl:order-none xl:hidden xl:w-1/2 ">
+      <div className="mx-auto mt-8 block h-fit w-full px-2 xs:order-last lg:order-none lg:hidden lg:w-1/2">
         <Table />
       </div>
     </div>
