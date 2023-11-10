@@ -24,25 +24,43 @@ const FirstNavSection = [
     active: true,
     icon: LayoutDashboard,
     alert: true,
-    href: "#",
+    href: "/dashboard",
   },
-  { text: "Account", active: false, icon: User, alert: false, href: "#" },
-  { text: "Analytics", active: false, icon: Activity, alert: false, href: "#" },
+  {
+    text: "Account",
+    active: false,
+    icon: User,
+    alert: false,
+    href: "/account",
+  },
+  {
+    text: "Analytics",
+    active: false,
+    icon: Activity,
+    alert: false,
+    href: "/analytics",
+  },
   {
     text: "My Bill",
     active: false,
     icon: Wallet2Icon,
     alert: false,
-    href: "#",
+    href: "/my-bill",
   },
   {
     text: "My Budgets",
     active: false,
     icon: Banknote,
     alert: false,
-    href: "#",
+    href: "/my-budgets",
   },
-  { text: "Settings", active: false, icon: Settings, alert: false, href: "#" },
+  {
+    text: "Settings",
+    active: false,
+    icon: Settings,
+    alert: false,
+    href: "/settings",
+  },
 ];
 
 const SecondNavSection = [
@@ -51,14 +69,14 @@ const SecondNavSection = [
     active: false,
     icon: LockIcon,
     alert: false,
-    href: "#",
+    href: "/security",
   },
   {
     text: "Help Center",
     active: false,
     icon: MessageCircle,
     alert: false,
-    href: "#",
+    href: "/help-center",
   },
 ];
 

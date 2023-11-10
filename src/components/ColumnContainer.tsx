@@ -1,7 +1,7 @@
 import { ArrowDownLeftIcon, ArrowUpRightIcon } from "@heroicons/react/20/solid";
 import AddAccountCard from "@/components/SummaryCard";
 import Card from "@/components/Card";
-import DetailCard from "@/components/DetailCard";
+import CashActivity from "@/components/CashActivity";
 import Stats from "@/components/Stats";
 import SearchInput from "@/components/SearchInput";
 import Table from "@/components/Table";
@@ -11,6 +11,7 @@ import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 export type CashProps = {
   value: number;
   title: string;
+  year: number;
 };
 
 export default async function Column({
@@ -41,46 +42,49 @@ export default async function Column({
         </div>
         <div className="mb-6 mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2 xl:mb-0">
           <Stats
+            title="Total Income"
             icon={
-              <ArrowDownLeftIcon className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 md:h-8 md:w-8" />
+              <ArrowDownLeftIcon className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
             }
-            iconBgColor="bg-green-600"
+            iconBgColor="bg-[#27674a]"
             textBgColor="bg-green-400"
             textColor="text-emerald-400"
             signIcon={
-              <PlusIcon className="h-4 w-2 text-green-600 dark:text-green-600" />
+              <PlusIcon className="text-green-600 dark:text-green-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
             }
           />
           <Stats
             icon={
-              <ArrowUpRightIcon className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 md:h-8 md:w-8" />
+              <ArrowUpRightIcon className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
             }
+            title="Total Expenses"
             iconBgColor="bg-red-600"
             textBgColor="bg-red-400"
             textColor="text-red-400"
             signIcon={
-              <MinusIcon className="h-4 w-2 text-red-600 dark:text-red-600" />
+              <MinusIcon className="text-red-600 dark:text-red-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
             }
           />
         </div>
       </div>
       <div className="mx-auto w-full px-2 xs:-order-4 xs:mt-4 md:w-3/5 lg:order-none lg:mt-12 lg:grid lg:w-1/4 ">
-        <SearchInput />
+        <SearchInput placeholder="search for account" />
         <AddAccountCard />
       </div>
-      <div className="mx-auto w-full space-y-10 px-2 xs:-order-2 xs:mt-4 md:w-3/5 lg:order-none lg:-mt-20 lg:w-1/4">
+      <div className="mx-auto w-full px-2 pt-10 xs:-order-2 xs:mt-4 md:w-3/5 lg:order-none lg:-mt-20 lg:w-1/4">
         <Stats
           icon={
-            <ArrowDownLeftIcon className="h-5 w-5 text-gray-100 dark:text-gray-100 md:h-8 md:w-8" />
+            <ArrowDownLeftIcon className="h-5 w-5 text-gray-100 dark:text-gray-100 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
           }
-          iconBgColor="bg-green-600"
+          title="Total Income"
+          iconBgColor="bg-[#27674a]"
           textBgColor="bg-green-400"
           textColor="text-emerald-400"
           signIcon={
-            <PlusIcon className="h-4 w-4 text-green-600 dark:text-green-600" />
+            <PlusIcon className="font-bold text-green-600 dark:text-green-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
           }
         />
-        <DetailCard data={cashInData} title="Cash in Activity" />
+        <CashActivity data={cashInData} title="Cash in Activity" url="" />
       </div>
       <div className="w-full px-2 xs:-order-3 lg:order-none lg:-mt-40 lg:w-1/2">
         <GroupedBarChart data={bargraphData} />
@@ -88,19 +92,20 @@ export default async function Column({
           <Table />
         </div>
       </div>
-      <div className="mx-auto h-full w-full space-y-10 px-2 xs:mt-8 md:w-3/5 lg:mt-6 lg:w-1/4">
+      <div className="mx-auto h-full w-full px-2 pt-10 xs:mt-8 md:w-3/5 lg:mt-6 lg:w-1/4">
         <Stats
           icon={
-            <ArrowUpRightIcon className="h-5 w-5 text-gray-100 dark:text-gray-100 md:h-8 md:w-8" />
+            <ArrowUpRightIcon className="h-5 w-5 text-gray-100 dark:text-gray-100 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
           }
+          title="Total Expenses"
           iconBgColor="bg-red-600"
           textBgColor="bg-red-400"
           textColor="text-red-400"
           signIcon={
-            <MinusIcon className="h-4 w-4 text-red-600 dark:text-red-600" />
+            <MinusIcon className="font-bold text-red-600 dark:text-red-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
           }
         />
-        <DetailCard data={cashOutData} title="Cash out Activity" />
+        <CashActivity data={cashOutData} title="Cash out Activity" url="" />
       </div>
 
       <div className="mx-auto mt-8 block h-fit w-full px-2 xs:order-last lg:order-none lg:hidden lg:w-1/2">

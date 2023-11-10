@@ -10,7 +10,7 @@ const Card = ({ title, text, buttonText }: any) => {
         </p>
       </div>
       <div className="py-2 text-center">
-        <button className="rounded-lg bg-green-500 px-4 py-2 font-semibold text-white antialiased hover:bg-green-700">
+        <button className="rounded-lg bg-[#27674a] px-4 py-2 font-semibold text-white antialiased hover:bg-green-700">
           {buttonText}
         </button>
       </div>

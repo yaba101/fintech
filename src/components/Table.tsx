@@ -1,4 +1,4 @@
-import DatePicker from "@/components/DatePicker";
+import { DatePickerWithRange } from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
 import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
 
@@ -42,19 +42,19 @@ export default async function Table() {
         <h4 className="xs:text-bold whitespace-nowrap px-2 py-2 text-center font-bold tracking-tight xs:mx-auto xs:text-lg sm:mx-auto md:text-xl lg:mx-0">
           Recent Transactions
         </h4>
-        <div className="hidden min-w-fit lg:block">
-          <DatePicker />
+        <div className="hidden min-w-fit xl:block">
+          <DatePickerWithRange />
         </div>
-        <div className="hidden w-2/5 lg:block">
-          <SearchInput />
+        <div className="hidden w-2/5 xl:block">
+          <SearchInput placeholder="search for transaction" />
         </div>
       </div>
-      <div className="flex w-full ">
-        <div className="mx-auto mb-3 w-1/2 px-1 lg:hidden">
-          <DatePicker />
+      <div className="flex w-full xs:flex-col sm:flex-row ">
+        <div className="mx-auto mb-3 px-1 xs:w-5/6 sm:w-1/2 xl:hidden">
+          <DatePickerWithRange />
         </div>
-        <div className="mx-auto w-1/2 px-1 lg:hidden">
-          <SearchInput />
+        <div className="mx-auto px-1 xs:w-5/6 sm:w-1/2 xl:hidden">
+          <SearchInput placeholder="search for transaction" />
         </div>
       </div>
 
@@ -108,7 +108,7 @@ export default async function Table() {
               </div>
             </div>
             <div className="mx-auto w-1/3 py-6">
-              <button className="w-full whitespace-nowrap rounded-lg bg-green-500 px-4 py-2 text-center font-medium text-white hover:bg-green-700">
+              <button className="w-full whitespace-nowrap rounded-lg bg-[#27674a] px-4 py-2 text-center font-medium text-white hover:bg-green-700">
                 View More
               </button>
             </div>
