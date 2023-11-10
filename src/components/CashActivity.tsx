@@ -103,21 +103,21 @@ export default async function CashActivity<T>({
   title: string;
   url: string;
 }) {
-  const currentDate = new Date();
-  const fromDate = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth(),
-    1,
-  );
-  const toDate = currentDate;
+  // const currentDate = new Date();
+  // const fromDate = new Date(
+  //   currentDate.getFullYear(),
+  //   currentDate.getMonth(),
+  //   1,
+  // );
+  // const toDate = currentDate;
 
-  const response = await fetchData<CashOutResponse | CashInResponse>(
-    `${process.env.URL}${url}`,
-    {
-      fromDate,
-      toDate,
-    },
-  );
+  // const response = await fetchData<CashOutResponse | CashInResponse>(
+  //   `${process.env.URL}${url}`,
+  //   {
+  //     fromDate,
+  //     toDate,
+  //   },
+  // );
 
   const CurrentColors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
   const sortedData = [...data].sort((a, b) => b.value - a.value);
