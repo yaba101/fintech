@@ -1,6 +1,15 @@
 {
   "recentTransactions": [
     {
+      "transactionDate": "2022-04-27",
+      "amount": 5.4,
+      "merchant": "Uber",
+      "transactionName": "Uber 063015 SF**POOL**",
+      "category": "Travel",
+      "personalFinanceCategory": "",
+      "personalFinanceCategoryIconUrl": null
+    },
+    {
       "transactionDate": "2023-09-27",
       "amount": 5.4,
       "merchant": "Uber",

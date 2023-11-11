@@ -13,6 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useRouter } from "next/navigation";
 
 export function DatePickerWithRange({
   className,
@@ -21,6 +22,12 @@ export function DatePickerWithRange({
     from: new Date(2022, 0, 20),
     to: addDays(new Date(2022, 0, 20), 20),
   });
+
+  const router = useRouter();
+
+  const formatDate = (date: Date | undefined) => {
+    return date ? format(date, "dd/MM/yy") : "";
+  };
 
   return (
     <div className={cn("grid w-fit gap-2 ", className)}>
@@ -38,10 +45,10 @@ export function DatePickerWithRange({
             {date?.from ? (
               date.to ? (
                 <>
-                  {format(date.from, "LLL dd")} - {format(date.to, "LLL dd")}
+                  {formatDate(date.from)} - {formatDate(date.to)}
                 </>
               ) : (
-                format(date.from, "LLL dd")
+                formatDate(date.from)
               )
             ) : (
               <span>Pick a date</span>
@@ -57,7 +64,12 @@ export function DatePickerWithRange({
             mode="range"
             defaultMonth={date?.from}
             selected={date}
-            onSelect={setDate}
+            onSelect={(e) => {
+              setDate(e);
+              router.push(
+                `/?from=${formatDate(e?.from)}&to=${formatDate(e?.to)}`,
+              );
+            }}
             numberOfMonths={2}
           />
         </PopoverContent>

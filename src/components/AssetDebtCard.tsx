@@ -20,7 +20,7 @@ const getData = async (url: string): Promise<AssetDebtResponse> => {
   try {
     await delay(2000);
     const response = await fetch(url, {
-      method: "GET",
+      method: "POST",
       cache: "no-store",
     });
 
@@ -48,10 +48,10 @@ const AssetDebtCard = async ({
   return (
     <div className="mx-auto mb-3 overflow-hidden rounded-lg border bg-gray-50 py-2 shadow-lg dark:border-gray-900 dark:bg-dark">
       <div className="px-6 py-4 text-center">
-        <h4 className="font-semibold antialiased dark:text-gray-100 2xl:text-2xl">
+        <h4 className="font-semibold antialiased dark:text-gray-300 2xl:text-2xl">
           {title}
         </h4>
-        <p className="my-3 text-xl font-semibold antialiased dark:text-gray-300 2xl:text-2xl">
+        <p className="my-3 text-xl font-semibold antialiased dark:text-gray-50 2xl:text-2xl">
           ${response.asset}
         </p>
       </div>

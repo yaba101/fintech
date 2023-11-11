@@ -1,6 +1,7 @@
 import { DatePickerWithRange } from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
 import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
+import { parse, parseISO } from "date-fns";
 import { z } from "zod";
 
 type RecentTransactionData = {
@@ -76,9 +77,26 @@ const getRecentTransactionData = async (url: string, body?: RequestBody) => {
   }
 };
 
-export default async function Table() {
+export default async function Table({
+  from,
+  to,
+}: {
+  from: string;
+  to: string;
+}) {
+  const fromDate = from ? parse(from, "dd/MM/yy", new Date()) : null;
+  const toDate = to ? parse(to, "dd/MM/yy", new Date()) : null;
+
+  // Create the RequestBody object with fromDate and toDate
+  const requestBody: RequestBody = {
+    fromDate,
+    toDate,
+  };
+
+  // Fetch recent transaction data using the created RequestBody
   const data = await getRecentTransactionData(
     `${process.env.URL}/api/transactions`,
+    requestBody,
   );
 
   return (
@@ -130,14 +148,14 @@ export default async function Table() {
                                 <div
                                   className={`font-medium dark:text-gray-100 xs:text-xs sm:text-sm md:text-base   `}
                                 >
-                                  <span className="xs:text-xs md:text-sm xl:text-base 2xl:text-lg">
+                                  <span className="xs:text-xs md:text-sm xl:text-base">
                                     {item.transactionName}
                                   </span>
                                 </div>
                               </div>
                             </div>
                           </td>
-                          <td className="s whitespace-nowrap px-3 py-3 text-gray-500 xs:px-1 xs:text-xs sm:py-2">
+                          <td className="whitespace-nowrap px-3 py-3 text-gray-400 xs:px-1 xs:text-xs sm:py-2">
                             <div className="xs:text-xs md:text-sm xl:text-base 2xl:text-lg">
                               {item.transactionDate}
                             </div>
@@ -146,7 +164,7 @@ export default async function Table() {
                             <span
                               className={`inline-flex items-center rounded-md px-2 py-1 font-medium xs:text-xs md:text-sm xl:text-base 2xl:text-lg `}
                             >
-                              {item.amount}
+                              ${item.amount}
                             </span>
                           </td>
                         </tr>
