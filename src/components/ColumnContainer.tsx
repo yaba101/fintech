@@ -1,35 +1,21 @@
 import { ArrowDownLeftIcon, ArrowUpRightIcon } from "@heroicons/react/20/solid";
 import AddAccountCard from "@/components/SummaryCard";
-import Card from "@/components/Card";
+import AssetDebtCard from "@/components/AssetDebtCard";
 import CashActivity from "@/components/CashActivity";
 import Stats from "@/components/Stats";
 import SearchInput from "@/components/SearchInput";
 import Table from "@/components/Table";
-import GroupedBarChart, { IGroupedData } from "./GroupedBar";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import GroupedBarContainer from "./GroupedBarContainer";
 
-export type CashProps = {
-  value: number;
-  title: string;
-  year: number;
-};
-
-export default async function Column({
-  bargraphData,
-  cashInData,
-  cashOutData,
-}: {
-  bargraphData: IGroupedData[];
-  cashInData: CashProps[];
-  cashOutData: CashProps[];
-}) {
+export default async function Column() {
   return (
     <div className="mx-auto flex flex-row flex-wrap overflow-hidden xl:pl-24 2xl:w-11/12 ">
       <div className="mx-auto w-full px-2 xs:-order-5 md:w-3/5 lg:order-none lg:w-1/4">
         <h1 className="mb-5 hidden scroll-m-20 text-center text-2xl font-bold tracking-tight lg:block lg:text-2xl">
           Availability
         </h1>
-        <Card title="Net Worth" text="$45,032.00" buttonText="View Details" />
+        <AssetDebtCard title="Net Worth" buttonText="View Details" />
       </div>
       <div className="h-fit w-full px-2 xs:order-first lg:order-none lg:w-1/2">
         <div className="">
@@ -84,10 +70,10 @@ export default async function Column({
             <PlusIcon className="font-bold text-green-600 dark:text-green-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
           }
         />
-        <CashActivity data={cashInData} title="Cash in Activity" url="" />
+        <CashActivity title="Cash in Activity" url="/api/cash-in-activity" />
       </div>
       <div className="w-full px-2 xs:-order-3 lg:order-none lg:-mt-40 lg:w-1/2">
-        <GroupedBarChart data={bargraphData} />
+        <GroupedBarContainer />
         <div className="mx-auto mt-10 hidden h-fit w-full xs:order-last lg:order-none lg:block">
           <Table />
         </div>
@@ -105,7 +91,7 @@ export default async function Column({
             <MinusIcon className="font-bold text-red-600 dark:text-red-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
           }
         />
-        <CashActivity data={cashOutData} title="Cash out Activity" url="" />
+        <CashActivity title="Cash out Activity" url="/api/cash-out-activity" />
       </div>
 
       <div className="mx-auto mt-8 block h-fit w-full px-2 xs:order-last lg:order-none lg:hidden lg:w-1/2">

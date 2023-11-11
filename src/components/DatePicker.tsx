@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-// import { CalendarIcon } from "@radix-ui/react-icons";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { addDays, format } from "date-fns";
 import { DateRange } from "react-day-picker";
@@ -24,7 +23,7 @@ export function DatePickerWithRange({
   });
 
   return (
-    <div className={cn("grid w-fit gap-2", className)}>
+    <div className={cn("grid w-fit gap-2 ", className)}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -49,7 +48,10 @@ export function DatePickerWithRange({
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-full p-0" align="start">
+        <PopoverContent
+          className="w-full border border-gray-600 p-0 shadow-2xl shadow-gray-400 dark:shadow-black "
+          align="start"
+        >
           <Calendar
             initialFocus
             mode="range"

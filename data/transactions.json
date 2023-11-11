@@ -1,0 +1,41 @@
+{
+  "recentTransactions": [
+    {
+      "transactionDate": "2023-09-27",
+      "amount": 5.4,
+      "merchant": "Uber",
+      "transactionName": "Uber 063015 SF**POOL**",
+      "category": "Travel",
+      "personalFinanceCategory": "",
+      "personalFinanceCategoryIconUrl": null
+    },
+    {
+      "transactionDate": "2023-09-27",
+      "amount": 25.0,
+      "merchant": "",
+      "transactionName": "CREDIT CARD 3333 PAYMENT",
+      "category": "Payment",
+      "personalFinanceCategory": "",
+      "personalFinanceCategoryIconUrl": null
+    },
+    {
+      "transactionDate": "2023-09-27",
+      "amount": 5.4,
+      "merchant": "Uber",
+      "transactionName": "Uber 063015 SF**POOL**",
+      "category": "Travel",
+      "personalFinanceCategory": "",
+      "personalFinanceCategoryIconUrl": null
+    },
+    {
+      "transactionDate": "2023-09-06",
+      "amount": 500.0,
+      "merchant": "KFC",
+      "transactionName": "KFC",
+      "category": "Food and Drink",
+      "personalFinanceCategory": "",
+      "personalFinanceCategoryIconUrl": null
+    }
+  ],
+  "succeeded": true
+}

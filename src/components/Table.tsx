@@ -1,6 +1,7 @@
 import { DatePickerWithRange } from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
 import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
+import { z } from "zod";
 
 type RecentTransactionData = {
   icon?: any;
@@ -8,34 +9,78 @@ type RecentTransactionData = {
   date: string;
   amount: string;
 };
+type RecentTransaction = {
+  transactionDate: string;
+  amount: number;
+  merchant: string;
+  transactionName: string;
+  category: string;
+  personalFinanceCategory: string;
+  personalFinanceCategoryIconUrl: string | null;
+};
+type RecentTransactionResponse = {
+  recentTransactions: RecentTransaction[];
+  succeeded: boolean;
+};
+type RequestBody = {
+  toDate: Date | null;
+  fromDate: Date | null;
+};
+
+const RecentTransactionSchema = z.object({
+  transactionDate: z.string(),
+  amount: z.number(),
+  merchant: z.string(),
+  transactionName: z.string(),
+  category: z.string(),
+  personalFinanceCategory: z.string(),
+  personalFinanceCategoryIconUrl: z.string().nullable(),
+});
+
+const RecentTransactionResponseSchema = z.object({
+  recentTransactions: z.array(RecentTransactionSchema),
+  succeeded: z.boolean(),
+});
+
+const RequestBodySchema = z.object({
+  toDate: z.date(),
+  fromDate: z.date(),
+});
 
 async function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const getRecentTransactionData = async (url: string) => {
+const getRecentTransactionData = async (url: string, body?: RequestBody) => {
   try {
     await delay(2000);
     const response = await fetch(url, {
-      method: "GET",
+      method: "POST",
       cache: "no-store",
+      body: JSON.stringify(body),
     });
-
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    return response.json();
+    const responseData = await response.json();
+    RecentTransactionResponseSchema.parse(responseData);
+
+    return responseData as RecentTransactionResponse;
   } catch (error) {
     console.error("Error while fetching data:", error);
-    return [];
+    return {
+      recentTransactions: [],
+      succeeded: false,
+    } as RecentTransactionResponse;
   }
 };
 
 export default async function Table() {
   const data = await getRecentTransactionData(
-    `${process.env.URL}/api/recent-transaction`,
+    `${process.env.URL}/api/transactions`,
   );
+
   return (
     <div className="overflow-x-hidden overflow-y-hidden rounded-md bg-gray-50 shadow-lg dark:bg-dark">
       <div className="my-3 flex flex-grow items-center justify-between space-x-2 px-2 py-3 xs:pr-5">
@@ -63,48 +108,52 @@ export default async function Table() {
           <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               <div className="overflow-x-hidden">
-                <table className="min-w-full divide-y divide-gray-300">
-                  <tbody>
-                    {data.map((item: RecentTransactionData) => (
-                      <tr key={item.company}>
-                        <td className="whitespace-nowrap py-3 pl-4 pr-3 sm:py-2 sm:pl-0">
-                          <div className="flex items-center">
-                            <div className="px-4 xs:px-0 sm:px-2">
-                              {item.icon === "" ? (
-                                <div className="ml-6"></div>
-                              ) : (
-                                <div className="rounded-full">
-                                  <ArrowDownCircleIcon className="h-6 w-6" />
+                {data.recentTransactions.length === 0 ? (
+                  <p className="text-center text-gray-500">No data available</p>
+                ) : (
+                  <table className="min-w-full divide-y divide-gray-300">
+                    <tbody>
+                      {data.recentTransactions.map((item) => (
+                        <tr key={item.transactionName}>
+                          <td className="whitespace-nowrap py-3 pl-4 pr-3 sm:py-2 sm:pl-0">
+                            <div className="flex items-center">
+                              <div className="px-4 xs:px-0 sm:px-2">
+                                {item.personalFinanceCategoryIconUrl === "" ? (
+                                  <div className="ml-6"></div>
+                                ) : (
+                                  <div className="rounded-full">
+                                    <ArrowDownCircleIcon className="h-6 w-6" />
+                                  </div>
+                                )}
+                              </div>
+                              <div className="ml-4">
+                                <div
+                                  className={`font-medium dark:text-gray-100 xs:text-xs sm:text-sm md:text-base   `}
+                                >
+                                  <span className="xs:text-xs md:text-sm xl:text-base 2xl:text-lg">
+                                    {item.transactionName}
+                                  </span>
                                 </div>
-                              )}
-                            </div>
-                            <div className="ml-4">
-                              <div
-                                className={`font-medium dark:text-gray-100 xs:text-xs sm:text-sm md:text-base   `}
-                              >
-                                <span className="xs:text-xs md:text-sm xl:text-base 2xl:text-lg">
-                                  {item.company}
-                                </span>
                               </div>
                             </div>
-                          </div>
-                        </td>
-                        <td className="s whitespace-nowrap px-3 py-3 text-gray-500 xs:px-1 xs:text-xs sm:py-2">
-                          <div className="xs:text-xs md:text-sm xl:text-base 2xl:text-lg">
-                            {item.date}
-                          </div>
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-3 text-gray-300 xs:px-1 sm:py-2">
-                          <span
-                            className={`inline-flex items-center rounded-md px-2 py-1 font-medium xs:text-xs md:text-sm xl:text-base 2xl:text-lg `}
-                          >
-                            {item.amount}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                          </td>
+                          <td className="s whitespace-nowrap px-3 py-3 text-gray-500 xs:px-1 xs:text-xs sm:py-2">
+                            <div className="xs:text-xs md:text-sm xl:text-base 2xl:text-lg">
+                              {item.transactionDate}
+                            </div>
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-3 text-gray-300 xs:px-1 sm:py-2">
+                            <span
+                              className={`inline-flex items-center rounded-md px-2 py-1 font-medium xs:text-xs md:text-sm xl:text-base 2xl:text-lg `}
+                            >
+                              {item.amount}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
               </div>
             </div>
             <div className="mx-auto w-1/3 py-6">

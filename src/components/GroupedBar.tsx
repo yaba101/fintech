@@ -3,19 +3,21 @@ import * as d3 from "d3";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import YearDropDown from "./YearDropDown";
 
-export interface IData {
-  label: string;
-  value: number;
-}
-
-export interface IGroupedData {
-  label: string;
-  values: number[];
+type GroupedBarChart = {
   year: number;
-}
+  month: number;
+  month_name: string;
+  income: number;
+  expense: number;
+};
+
+type GroupedBarChartResponse = {
+  incomeExpense: GroupedBarChart[];
+  succeeded: boolean;
+};
 
 interface Props {
-  data: IGroupedData[];
+  data: GroupedBarChartResponse;
 }
 
 interface BarProps {
@@ -26,12 +28,14 @@ interface BarProps {
   color: string;
   onMouseEnter: (e: MouseEvent<SVGPathElement>) => void;
   onMouseLeave: () => void;
+  data: GroupedBarChart;
 }
 
 interface Tooltip {
   x: number;
   y: number;
   index: number;
+  type: "income" | "expense";
 }
 
 function Bar({
@@ -42,41 +46,45 @@ function Bar({
   color,
   onMouseEnter,
   onMouseLeave,
+  data,
 }: BarProps) {
   const radius = height === 0 ? 0 : width * 0.5;
 
   return (
-    <path
-      d={`
-      m${x},${y + radius}
-      a${radius},${radius} 0 0 1 ${radius},${-radius}
-      h${width - 2 * radius}
-      a${radius},${radius} 0 0 1 ${radius},${radius}
-      v${height - radius}
-      h-${width}
-      z
-    `}
-      fill={color}
-      onMouseEnter={(event) => onMouseEnter(event)}
-      onMouseLeave={onMouseLeave}
-    />
+    <g>
+      <path
+        d={`
+        m${x},${y + radius}
+        a${radius},${radius} 0 0 1 ${radius},${-radius}
+        h${width - 2 * radius}
+        a${radius},${radius} 0 0 1 ${radius},${radius}
+        v${height - radius}
+        h-${width}
+        z
+      `}
+        fill={color}
+        onMouseEnter={(event) => onMouseEnter(event)}
+        onMouseLeave={onMouseLeave}
+      />
+    </g>
   );
 }
 
 export default function GroupedBarChart({ data }: Props) {
   const [selectedYear, setSelectedYear] = useState<number>(
-    Math.min(...data.map((entry) => entry.year)),
+    Math.min(...data.incomeExpense.map((entry) => entry.year)),
   );
 
-  const minYear = Math.min(...data.map((entry) => entry.year));
-  const maxYear = Math.max(...data.map((entry) => entry.year));
-
+  const minYear = Math.min(...data.incomeExpense.map((entry) => entry.year));
+  const maxYear = Math.max(...data.incomeExpense.map((entry) => entry.year));
   const years = Array.from(
     { length: maxYear - minYear + 1 },
     (_, i) => minYear + i,
   );
 
-  const filteredData = data.filter((entry) => entry.year === selectedYear);
+  const filteredData = data.incomeExpense.filter(
+    (entry) => entry.year === selectedYear,
+  );
 
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
   const axisBottomRef = useRef<SVGGElement>(null);
@@ -86,10 +94,12 @@ export default function GroupedBarChart({ data }: Props) {
   const width = 700 - margin.left - margin.right;
   const height = 300 - margin.top - margin.bottom;
 
-  const labels = data?.map(({ label }) => label);
-  const sublabels = Object.keys(data[0]?.values);
+  const labels = data?.incomeExpense.map(({ month_name }) => month_name);
+  const sublabels = ["income", "expense"];
 
-  const values = data?.map(({ values }) => values).flat();
+  const values = filteredData
+    .map(({ income, expense }) => [income, expense])
+    .flat();
 
   const scaleY = d3
     .scaleLinear()
@@ -129,7 +139,7 @@ export default function GroupedBarChart({ data }: Props) {
         .style("display", "none");
     }
   }, [scaleX, yAxis]);
-  console.log({ scaleY });
+
   return (
     <div className="my-3 overflow-x-hidden rounded-md bg-gray-50 py-1 shadow-lg dark:bg-dark">
       <div className="my-3 flex min-w-fit justify-between py-1 md:px-3">
@@ -162,29 +172,60 @@ export default function GroupedBarChart({ data }: Props) {
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           <g ref={axisBottomRef} transform={`translate(0, ${height})`} />
           <g ref={axisLeftRef} />
-          {filteredData.map(({ label, values }, groupIndex) => (
+          {filteredData.map(({ month_name, income, expense }, groupIndex) => (
             <g
               key={`rect-group-${groupIndex}`}
-              transform={`translate(${scaleX(label)}, 0)`}
+              transform={`translate(${scaleX(month_name)}, 0)`}
             >
-              {values.map((value, barIndex) => (
-                <Bar
-                  key={`rect-${barIndex}`}
-                  x={subscaleX(String(barIndex)) || 0}
-                  y={scaleY(value)}
-                  width={subscaleX.bandwidth()}
-                  height={height - scaleY(value)}
-                  color={barIndex === 0 ? "#27674a" : "#df2433"}
-                  onMouseEnter={(event) => {
-                    setTooltip({
-                      x: event.clientX,
-                      y: event.clientY,
-                      index: groupIndex,
-                    });
-                  }}
-                  onMouseLeave={() => setTooltip(null)}
-                />
-              ))}
+              <Bar
+                key={`rect-income-${groupIndex}`}
+                x={subscaleX("income") || 0}
+                y={scaleY(income)}
+                width={subscaleX.bandwidth()}
+                height={height - scaleY(income)}
+                color="#27674a"
+                onMouseEnter={(event) => {
+                  setTooltip({
+                    x: event.clientX,
+                    y: event.clientY,
+                    index: groupIndex,
+                    type: "income",
+                  });
+                }}
+                onMouseLeave={() => setTooltip(null)}
+                data={{
+                  year: selectedYear,
+                  month: filteredData[groupIndex].month,
+                  month_name,
+                  income,
+                  expense,
+                }}
+              />
+
+              <Bar
+                key={`rect-expense-${groupIndex}`}
+                x={subscaleX("expense") || 0}
+                y={scaleY(expense)}
+                width={subscaleX.bandwidth()}
+                height={height - scaleY(expense)}
+                color="#df2433"
+                onMouseEnter={(event) => {
+                  setTooltip({
+                    x: event.clientX,
+                    y: event.clientY,
+                    index: groupIndex,
+                    type: "expense",
+                  });
+                }}
+                onMouseLeave={() => setTooltip(null)}
+                data={{
+                  year: selectedYear,
+                  month_name,
+                  income,
+                  expense,
+                  month: filteredData[groupIndex].month,
+                }}
+              />
             </g>
           ))}
 
@@ -207,11 +248,17 @@ export default function GroupedBarChart({ data }: Props) {
           style={{ top: tooltip.y, left: tooltip.x, background: "#454687" }}
         >
           <span className="mb-2 block text-xs font-medium">
-            {labels[tooltip.index]} {selectedYear}
+            {filteredData[tooltip.index].month_name} {selectedYear}
           </span>
-          <span className="mb-2 block text-xs font-medium">
-            ${data[tooltip.index].values[0]}
-          </span>
+          {tooltip.type === "income" ? (
+            <span className="mb-2 block text-xs font-semibold">
+              ${filteredData[tooltip.index].income}
+            </span>
+          ) : (
+            <span className="mb-2 block text-xs font-semibold">
+              ${filteredData[tooltip.index].expense}
+            </span>
+          )}
         </div>
       ) : null}
     </div>

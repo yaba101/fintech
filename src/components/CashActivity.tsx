@@ -1,18 +1,22 @@
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import HalfDonutChart from "@/components/HalfPieChart";
 import { Button } from "./ui/button";
-import { CashProps } from "./ColumnContainer";
-import MonthDropDown from "./MonthDropDown";
 import { z, ZodError } from "zod";
+import MonthDropDown from "./MonthDropDown";
 
-type CashOutResponse = {
+type CommonResponse = {
+  totalExpense?: number;
+  totalIncome?: number;
+};
+
+type CashOutResponse = CommonResponse & {
   totalExpense: number;
   fourExpenseCategories: { category: string; sum: number }[];
   succeeded: boolean;
 };
 
-type CashInResponse = {
-  totalIcome: number;
+type CashInResponse = CommonResponse & {
+  totalIncome: number;
   fourIncomeCategories: { category: string; sum: number }[];
   succeeded: boolean;
 };
@@ -34,7 +38,7 @@ const CashOutResponseSchema = z.object({
 });
 
 const CashInResponseSchema = z.object({
-  totalIcome: z.number(),
+  totalIncome: z.number(),
   fourIncomeCategories: z.array(
     z.object({
       category: z.string(),
@@ -68,11 +72,12 @@ const validateResponse = <T,>(
 const fetchData = async <T,>(
   url: string,
   body: RequestBody,
+  schema: z.ZodType<T, any, any>,
 ): Promise<T | undefined> => {
   try {
     const response = await fetch(url, {
       method: "POST",
-      cache: "force-cache",
+      cache: "no-store",
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
@@ -84,43 +89,68 @@ const fetchData = async <T,>(
     }
 
     const responseData = await response.json();
-    return validateResponse(
-      responseData,
-      CashOutResponseSchema.or(CashInResponseSchema),
-    ) as T;
+    return validateResponse(responseData, schema);
   } catch (error) {
     console.error("Error while fetching data:", error);
     return {} as T;
   }
 };
 
+type ActivityType = "/api/cash-out-activity" | "/api/cash-in-activity";
+
+type ActivityResponseMap = {
+  "cash-out-activity": CashOutResponse;
+  "cash-in-activity": CashInResponse;
+};
+
 export default async function CashActivity<T>({
-  data,
   title,
   url,
 }: {
-  data: CashProps[];
   title: string;
-  url: string;
+  url: ActivityType;
 }) {
-  // const currentDate = new Date();
-  // const fromDate = new Date(
-  //   currentDate.getFullYear(),
-  //   currentDate.getMonth(),
-  //   1,
-  // );
-  // const toDate = currentDate;
+  const currentDate = new Date();
+  const fromDate = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1,
+  );
+  const toDate = currentDate;
 
-  // const response = await fetchData<CashOutResponse | CashInResponse>(
-  //   `${process.env.URL}${url}`,
-  //   {
-  //     fromDate,
-  //     toDate,
-  //   },
-  // );
+  type ResponseType = CommonResponse & (CashOutResponse | CashInResponse);
+
+  let response: ResponseType | undefined;
+  if (url === "/api/cash-out-activity") {
+    response = await fetchData<CashOutResponse>(
+      `${process.env.URL}${url}`,
+      { fromDate, toDate },
+      CashOutResponseSchema,
+    );
+  } else if (url === "/api/cash-in-activity") {
+    response = await fetchData<CashInResponse>(
+      `${process.env.URL}${url}`,
+      { fromDate, toDate },
+      CashInResponseSchema,
+    );
+  }
 
   const CurrentColors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
-  const sortedData = [...data].sort((a, b) => b.value - a.value);
+  const isCashOut =
+    (response as CashOutResponse)?.fourExpenseCategories !== undefined;
+  const isCashIn =
+    (response as CashInResponse)?.fourIncomeCategories !== undefined;
+
+  let sortedData: { category: string; sum: number }[] = [];
+  if (isCashOut) {
+    sortedData = (response as CashOutResponse).fourExpenseCategories.sort(
+      (a, b) => b.sum - a.sum,
+    );
+  } else if (isCashIn) {
+    sortedData = (response as CashInResponse).fourIncomeCategories.sort(
+      (a, b) => b.sum - a.sum,
+    );
+  }
 
   const top4Data = sortedData.slice(0, 4);
 
@@ -135,34 +165,39 @@ export default async function CashActivity<T>({
         <MonthDropDown />
       </div>
       <HalfDonutChart data={top4Data} />
-      <div className="mb-3 flex flex-wrap items-center justify-center ">
-        {CurrentColors.map((color, index) => (
-          <div key={index} className="w-1/2 p-2">
-            <div className="flex flex-nowrap items-center justify-center space-x-2">
-              <button
-                className="mr-2 h-4 w-4 rounded-full font-medium text-white xs:mr-1 xs:h-3 xs:w-3 xl:text-xs"
-                style={{ background: color }}
-              />
-              <div className="flex flex-col">
-                <h4 className="antialiased dark:text-gray-200 xs:whitespace-nowrap xs:text-sm xl:text-sm">
-                  {top4Data[index]?.title.toString()}
-                </h4>
-                <h4 className="antialiased dark:text-gray-400 xs:py-1 xs:pl-1 xs:text-xs xl:text-xs">
-                  {(
-                    (top4Data[index]?.value /
-                      top4Data.reduce((acc, item) => acc + item.value, 0)) *
-                    100
-                  ).toFixed(2)}
-                  %
-                </h4>
+      <ul className="mb-3 flex list-none flex-wrap py-3 lg:-mx-2 xl:-mx-0">
+        {top4Data.map((item, index) => (
+          <li key={index} className="w-full">
+            {isNaN(item.sum) ? null : (
+              <div className="flex space-x-2 p-1">
+                <button
+                  className={` h-3 w-3 rounded-full font-medium text-white lg:h-2 lg:w-2 xl:h-3 xl:w-3 ${
+                    index > 0 ? "sm:mt-2" : ""
+                  }`}
+                  style={{ background: CurrentColors[index] }}
+                />
+                <div className="flex space-x-2">
+                  <h4 className="text-sm antialiased dark:text-gray-200 lg:text-xs 2xl:text-base">
+                    {item.category.toString()}
+                  </h4>
+                  <h4 className="text-xs antialiased dark:text-gray-400 lg:text-[0.6rem] xl:text-sm">
+                    {(
+                      (item.sum /
+                        sortedData.reduce((acc, item) => acc + item.sum, 0)) *
+                      100
+                    ).toFixed(2)}
+                    %
+                  </h4>
+                </div>
               </div>
-            </div>
-          </div>
+            )}
+          </li>
         ))}
-      </div>
+      </ul>
+
       <div className="mx-auto w-3/4">
-        <Button variant="outline" className="tran w-full">
-          <span className="mx-auto whitespace-nowrap text-center">
+        <Button variant="outline" className="w-full ">
+          <span className="mx-auto whitespace-nowrap text-center lg:text-xs xl:text-sm">
             View All Activity
           </span>
           <ArrowRightIcon className="h-6 w-6 shrink dark:text-gray-100 " />

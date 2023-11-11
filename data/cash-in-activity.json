@@ -1,0 +1,14 @@
+{
+  "totalIncome": -15008.44,
+  "fourIncomeCategories": [
+    {
+      "category": "Travel,Airlines and Aviation Services",
+      "sum": 15000.0
+    },
+    {
+      "category": "Transfer,Credit",
+      "sum": 822.44
+    }
+  ],
+  "succeeded": true
+}

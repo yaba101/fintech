@@ -1,0 +1,26 @@
+{
+  "totalExpense": 25575.8,
+  "fourExpenseCategories": [
+    {
+      "category": "Payment,Rent",
+      "sum": 17857.0
+    },
+    {
+      "category": "Food and Drink,Restaurants",
+      "sum": 2682.0
+    },
+    {
+      "category": "Transfer,Deposit",
+      "sum": 2000.0
+    },
+    {
+      "category": "Food and Drink,Restaurants,Fast Food",
+      "sum": 1348.0
+    },
+    {
+      "category": "Necessary,Restaurants",
+      "sum": 1348.0
+    }
+  ],
+  "succeeded": true
+}
