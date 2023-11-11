@@ -3,6 +3,8 @@ import HalfDonutChart from "@/components/HalfPieChart";
 import { Button } from "./ui/button";
 import { z, ZodError } from "zod";
 import MonthDropDown from "./MonthDropDown";
+import Cookies from "js-cookie";
+import { cookies } from "next/headers";
 
 type CommonResponse = {
   totalExpense?: number;
@@ -134,7 +136,13 @@ export default async function CashActivity<T>({
       CashInResponseSchema,
     );
   }
+  if (response) {
+    Cookies.set("cashActivityResponse", JSON.stringify(response), {
+      expires: 30, // 30 days
+    });
 
+    console.log(JSON.stringify(response), cookies);
+  }
   const CurrentColors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
   const isCashOut =
     (response as CashOutResponse)?.fourExpenseCategories !== undefined;

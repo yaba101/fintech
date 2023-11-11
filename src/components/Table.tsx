@@ -112,11 +112,11 @@ export default async function Table({
           <SearchInput placeholder="search for transaction" />
         </div>
       </div>
-      <div className="flex w-full xs:flex-col sm:flex-row ">
+      <div className="flex w-full xs:flex-col md:flex-row ">
         <div className="mx-auto mb-3 px-1 xs:w-5/6 sm:w-1/2 xl:hidden">
           <DatePickerWithRange />
         </div>
-        <div className="mx-auto px-1 xs:w-5/6 sm:w-1/2 xl:hidden">
+        <div className="mx-auto px-1 xs:w-5/6 sm:w-3/4 xl:hidden">
           <SearchInput placeholder="search for transaction" />
         </div>
       </div>

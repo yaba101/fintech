@@ -1,13 +1,12 @@
 "use client";
-
-import * as React from "react";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { addDays, format } from "date-fns";
-import { DateRange } from "react-day-picker";
-
+import React, { useState } from "react";
+import { DateRange as DatePicker } from "react-date-range";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
@@ -18,17 +17,16 @@ import { useRouter } from "next/navigation";
 export function DatePickerWithRange({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20),
+  const [selectedRange, setSelectedRange] = useState({
+    startDate: new Date(),
+    endDate: addDays(new Date(), 7),
   });
-
   const router = useRouter();
 
   const formatDate = (date: Date | undefined) => {
     return date ? format(date, "dd/MM/yy") : "";
   };
-
+  console.log({ selectedRange });
   return (
     <div className={cn("grid w-fit gap-2 ", className)}>
       <Popover>
@@ -38,18 +36,15 @@ export function DatePickerWithRange({
             variant={"outline"}
             className={cn(
               "w-full justify-start bg-transparent text-left font-normal",
-              !date && "text-muted-foreground",
+              !selectedRange && "text-muted-foreground",
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
-            {date?.from ? (
-              date.to ? (
-                <>
-                  {formatDate(date.from)} - {formatDate(date.to)}
-                </>
-              ) : (
-                formatDate(date.from)
-              )
+            {selectedRange?.startDate && selectedRange?.endDate ? (
+              <>
+                {formatDate(selectedRange.startDate)} -{" "}
+                {formatDate(selectedRange.endDate)}
+              </>
             ) : (
               <span>Pick a date</span>
             )}
@@ -59,18 +54,19 @@ export function DatePickerWithRange({
           className="w-full border border-gray-600 p-0 shadow-2xl shadow-gray-400 dark:shadow-black "
           align="start"
         >
-          <Calendar
-            initialFocus
-            mode="range"
-            defaultMonth={date?.from}
-            selected={date}
-            onSelect={(e) => {
-              setDate(e);
+          <DatePicker
+            editableDateInputs={true}
+            onChange={(item) => {
+              setSelectedRange(item?.selection as any);
+              console.log("start", item.selection);
               router.push(
-                `/?from=${formatDate(e?.from)}&to=${formatDate(e?.to)}`,
+                `/?from=${formatDate(
+                  item?.selection?.startDate,
+                )}&to=${formatDate(item?.selection.endDate)}`,
               );
             }}
-            numberOfMonths={2}
+            moveRangeOnFirstSelection={false}
+            ranges={[{ ...selectedRange, key: "selection" }]}
           />
         </PopoverContent>
       </Popover>
