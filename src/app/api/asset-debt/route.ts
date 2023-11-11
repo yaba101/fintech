@@ -1,8 +1,5 @@
 import assetDebt from "../../../../data/asset-debt.json";
-type ResponseData = {
-  lable: string;
-  values: number[];
-};
-export async function GET() {
+
+export async function POST() {
   return Response.json(assetDebt);
 }
