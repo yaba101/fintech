@@ -5,7 +5,6 @@ export async function POST(req: NextRequest) {
   try {
     const requestBody = await req.json();
     const { fromDate, toDate } = requestBody;
-    console.log(fromDate, toDate);
 
     const filteredCashInActivity = cashInActivity.filter((activity) => {
       const activityDate = new Date(activity.activityDate);

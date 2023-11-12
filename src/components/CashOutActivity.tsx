@@ -85,33 +85,44 @@ export default async function CashOutActivity({
         </div>
         <HalfDonutChart colors={CurrentColors} data={top4Data} />
         <ul className="mb-3 flex list-none flex-wrap py-3 lg:-mx-2 xl:-mx-0">
-          {top4Data.map((item, index) => (
-            <li key={index} className="w-full">
-              {isNaN(item.sum) ? null : (
-                <div className="flex space-x-2 p-1">
-                  <button
-                    className={` h-3 w-3 rounded-full font-medium text-white lg:h-2 lg:w-2 xl:h-3 xl:w-3 ${
-                      index > 0 ? "sm:mt-2" : ""
-                    }`}
-                    style={{ background: CurrentColors[index] }}
-                  />
-                  <div className="flex space-x-2">
-                    <h4 className="text-sm antialiased dark:text-gray-200 lg:text-xs 2xl:text-base">
-                      {item.category.toString()}
-                    </h4>
-                    <h4 className="text-xs antialiased dark:text-gray-400 lg:text-[0.6rem] xl:text-sm">
-                      {(
-                        (item.sum /
-                          sortedData.reduce((acc, item) => acc + item.sum, 0)) *
-                        100
-                      ).toFixed(2)}
-                      %
-                    </h4>
-                  </div>
-                </div>
-              )}
-            </li>
-          ))}
+          {top4Data.length === 0 ? (
+            <p className="mx-auto text-center text-gray-500">
+              No data available
+            </p>
+          ) : (
+            <>
+              {top4Data.map((item, index) => (
+                <li key={index} className="w-full">
+                  {isNaN(item.sum) ? null : (
+                    <div className="flex space-x-2 p-1">
+                      <button
+                        className={` h-3 w-3 rounded-full font-medium text-white lg:h-2 lg:w-2 xl:h-3 xl:w-3 ${
+                          index > 0 ? "sm:mt-2" : ""
+                        }`}
+                        style={{ background: CurrentColors[index] }}
+                      />
+                      <div className="flex space-x-2">
+                        <h4 className="text-sm antialiased dark:text-gray-200 lg:text-xs 2xl:text-base">
+                          {item.category.toString()}
+                        </h4>
+                        <h4 className="text-xs antialiased dark:text-gray-400 lg:text-[0.6rem] xl:text-sm">
+                          {(
+                            (item.sum /
+                              sortedData.reduce(
+                                (acc, item) => acc + item.sum,
+                                0,
+                              )) *
+                            100
+                          ).toFixed(2)}
+                          %
+                        </h4>
+                      </div>
+                    </div>
+                  )}
+                </li>
+              ))}
+            </>
+          )}
         </ul>
 
         <div className="mx-auto w-3/4">
