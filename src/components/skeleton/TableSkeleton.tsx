@@ -1,6 +1,6 @@
 function TableSkeleton() {
   return (
-    <div className="my-3 rounded-md p-4" style={{ background: "#1d1d41" }}>
+    <div className="my-3 rounded-md p-4 dark:bg-dark">
       <div className="my-3 flex flex-grow items-center justify-between space-x-2 px-2 py-3 ">
         <div className="h-8 w-20 rounded-md bg-gray-300"></div>
         <div className="text-center">
