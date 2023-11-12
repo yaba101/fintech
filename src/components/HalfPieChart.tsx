@@ -36,12 +36,12 @@ const HalfDonutChart = ({
               d={
                 arc({
                   startAngle: 180,
-                  endAngle: Math.PI, // 180 degrees
+                  endAngle: Math.PI,
                   innerRadius: 0,
                   outerRadius: 0,
                 })!
               }
-              fill="black"
+              fill="#282a2e"
               stroke="none"
             />
           ) : (

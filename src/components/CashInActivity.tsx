@@ -125,7 +125,6 @@ export default async function CashInActivity({
             </>
           )}
         </ul>
-
         <div className="mx-auto w-3/4">
           <Button variant="outline" className="w-full ">
             <span className="mx-auto whitespace-nowrap text-center lg:text-xs xl:text-sm">

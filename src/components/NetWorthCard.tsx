@@ -36,7 +36,7 @@ const getData = async (url: string): Promise<AssetDebtResponse> => {
   }
 };
 
-const AssetDebtCard = async ({
+const NetWorthCard = async ({
   title,
   buttonText,
 }: {
@@ -44,6 +44,7 @@ const AssetDebtCard = async ({
   buttonText: string;
 }) => {
   const response = await getData(`${process.env.URL}/api/asset-debt`);
+  const netWorth = response.asset - response.debt;
 
   return (
     <div className="mx-auto mb-3 overflow-hidden rounded-lg border bg-gray-50 py-2 shadow-lg dark:border-gray-900 dark:bg-dark">
@@ -52,7 +53,7 @@ const AssetDebtCard = async ({
           {title}
         </h4>
         <p className="my-3 text-xl font-semibold antialiased dark:text-gray-50 2xl:text-2xl">
-          ${response.asset}
+          ${netWorth}
         </p>
       </div>
       <div className="py-2 text-center">
@@ -64,4 +65,4 @@ const AssetDebtCard = async ({
   );
 };
 
-export default AssetDebtCard;
+export default NetWorthCard;

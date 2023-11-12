@@ -1,7 +1,8 @@
-import AssetDebtCard from "@/components/AssetDebtCard";
+import AssetDebtStats from "@/components/AssetDebtStats";
 import CashInActivity from "@/components/CashInActivity";
 import CashOutActivity from "@/components/CashOutActivity";
 import GroupedBarContainer from "@/components/GroupedBarContainer";
+import NetWorthCard from "@/components/NetWorthCard";
 import SearchInput from "@/components/SearchInput";
 import SideBar from "@/components/SidebarContainer";
 import Stats from "@/components/Stats";
@@ -38,7 +39,7 @@ export default async function Dashboard({
             <h1 className="mb-5 hidden scroll-m-20 text-center text-2xl font-bold tracking-tight lg:block lg:text-2xl">
               Availability
             </h1>
-            <AssetDebtCard title="Net Worth" buttonText="View Details" />
+            <NetWorthCard title="Net Worth" buttonText="View Details" />
           </div>
           <div className="h-fit w-full px-2 xs:order-first lg:order-none lg:w-1/2">
             <div className="">
@@ -50,32 +51,7 @@ export default async function Dashboard({
               </p>
             </div>
             <div className="mb-6 mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2 xl:mb-0">
-              <Stats
-                title="Total Income"
-                icon={
-                  <ArrowDownLeftIcon className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
-                }
-                iconBgColor="bg-[#27674a]"
-                textBgColor="bg-green-400"
-                textColor="text-emerald-400"
-                amount={632}
-                signIcon={
-                  <PlusIcon className="text-green-600 dark:text-green-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
-                }
-              />
-              <Stats
-                icon={
-                  <ArrowUpRightIcon className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
-                }
-                title="Total Expenses"
-                iconBgColor="bg-red-600"
-                textBgColor="bg-red-400"
-                textColor="text-red-400"
-                amount={632}
-                signIcon={
-                  <MinusIcon className="text-red-600 dark:text-red-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
-                }
-              />
+              <AssetDebtStats />
             </div>
           </div>
           <div className="mx-auto w-full px-2 xs:-order-4 xs:mt-4 md:w-3/5 lg:order-none lg:mt-12 lg:grid lg:w-1/4 ">
