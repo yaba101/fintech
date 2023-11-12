@@ -8,12 +8,19 @@ import SideBar from "@/components/SidebarContainer";
 import Stats from "@/components/Stats";
 import SummaryCard from "@/components/SummaryCard";
 import Table from "@/components/Table";
+import AssetDebtStatsSkeleton from "@/components/skeleton/AssetDebtStatsSkeleton";
+import CashActivitySkeleton from "@/components/skeleton/CashActivity";
+import GroupedBarChartSkeleton from "@/components/skeleton/GroupedBarSkeleton";
+import NetWorthCardSkeleton from "@/components/skeleton/NetWorthSkeleton";
+import SummaryCardSkeleton from "@/components/skeleton/SkeletonSummaryCard";
+import TableSkeleton from "@/components/skeleton/TableSkeleton";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import {
   ArrowDownLeftIcon,
   ArrowUpRightIcon,
   MinusIcon,
 } from "@heroicons/react/24/outline";
+import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -39,7 +46,9 @@ export default async function Dashboard({
             <h1 className="mb-5 hidden scroll-m-20 text-center text-2xl font-bold tracking-tight lg:block lg:text-2xl">
               Availability
             </h1>
-            <NetWorthCard title="Net Worth" buttonText="View Details" />
+            <Suspense fallback={<NetWorthCardSkeleton />}>
+              <NetWorthCard title="Net Worth" buttonText="View Details" />
+            </Suspense>
           </div>
           <div className="h-fit w-full px-2 xs:order-first lg:order-none lg:w-1/2">
             <div className="">
@@ -51,40 +60,54 @@ export default async function Dashboard({
               </p>
             </div>
             <div className="mb-6 mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2 xl:mb-0">
-              <AssetDebtStats />
+              <Suspense fallback={<AssetDebtStatsSkeleton />}>
+                <AssetDebtStats />
+              </Suspense>
             </div>
           </div>
           <div className="mx-auto w-full px-2 xs:-order-4 xs:mt-4 md:w-3/5 lg:order-none lg:mt-12 lg:grid lg:w-1/4 ">
-            <SearchInput placeholder="search for account" />
-            <SummaryCard />
+            <Suspense fallback={<SummaryCardSkeleton />}>
+              <SearchInput placeholder="search for account" />
+              <SummaryCard />
+            </Suspense>
           </div>
           <div className="mx-auto w-full px-2 xs:-order-2 xs:mt-4 md:w-3/5 lg:order-none lg:-mt-20 lg:w-1/4">
-            <CashInActivity
-              from={searchParams.cashInFrom}
-              to={searchParams.cashInTo}
-            />
+            <Suspense fallback={<CashActivitySkeleton />}>
+              <CashInActivity
+                from={searchParams.cashInFrom}
+                to={searchParams.cashInTo}
+              />
+            </Suspense>
           </div>
           <div className="w-full px-2 xs:-order-3 lg:order-none lg:-mt-40 lg:w-1/2">
-            <GroupedBarContainer />
+            <Suspense fallback={<GroupedBarChartSkeleton />}>
+              <GroupedBarContainer />
+            </Suspense>
             <div className="mx-auto mt-10 hidden h-fit w-full xs:order-last lg:order-none lg:block">
+              <Suspense fallback={<TableSkeleton />}>
+                <Table
+                  from={searchParams.transacFrom}
+                  to={searchParams.transacTo}
+                />
+              </Suspense>
+            </div>
+          </div>
+          <div className="mx-auto h-full w-full px-2 xs:mt-8 md:w-3/5 lg:mt-6 lg:w-1/4">
+            <Suspense fallback={<CashActivitySkeleton />}>
+              <CashOutActivity
+                from={searchParams.cashOutFrom}
+                to={searchParams.cashOutTo}
+              />
+            </Suspense>
+          </div>
+
+          <div className="mx-auto mt-8 block h-fit w-full px-2 xs:order-last lg:order-none lg:hidden lg:w-1/2">
+            <Suspense fallback={<TableSkeleton />}>
               <Table
                 from={searchParams.transacFrom}
                 to={searchParams.transacTo}
               />
-            </div>
-          </div>
-          <div className="mx-auto h-full w-full px-2 xs:mt-8 md:w-3/5 lg:mt-6 lg:w-1/4">
-            <CashOutActivity
-              from={searchParams.cashOutFrom}
-              to={searchParams.cashOutTo}
-            />
-          </div>
-
-          <div className="mx-auto mt-8 block h-fit w-full px-2 xs:order-last lg:order-none lg:hidden lg:w-1/2">
-            <Table
-              from={searchParams.transacFrom}
-              to={searchParams.transacTo}
-            />
+            </Suspense>
           </div>
         </div>
       </SideBar>

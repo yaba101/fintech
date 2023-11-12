@@ -17,6 +17,9 @@ type CashInResponse = {
   fourIncomeCategories: { category: string; sum: number }[];
   succeeded: boolean;
 };
+async function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 export default async function CashInActivity({
   from,
@@ -25,6 +28,7 @@ export default async function CashInActivity({
   from: string;
   to: string;
 }) {
+  await delay(5000);
   const title = "Cash In Activity";
   const url = "/api/cash-in-activity";
 

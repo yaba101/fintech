@@ -17,6 +17,10 @@ type RequestBody = {
   fromDate: Date | null;
 };
 
+async function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export default async function CashOutActivity({
   from,
   to,
@@ -24,6 +28,7 @@ export default async function CashOutActivity({
   from: string;
   to: string;
 }) {
+  await delay(7000);
   const title = "Cash Out Activity";
   const url = "/api/cash-out-activity";
 

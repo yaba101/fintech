@@ -44,7 +44,7 @@ async function delay(ms: number) {
 
 const getData = async (url: string, body?: RequestBody) => {
   try {
-    await delay(2000);
+    await delay(10000);
     const response = await fetch(url, {
       method: "POST",
       cache: "no-store",
