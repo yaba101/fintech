@@ -36,7 +36,6 @@ export default async function CashInActivity({
     toDate,
   };
 
-
   const response = await fetchData<CashInResponse>(
     `${process.env.URL}${url}`,
     requestBody,
@@ -60,7 +59,7 @@ export default async function CashInActivity({
     <>
       <Stats
         icon={
-          <ArrowDownLeftIcon className="w-5 h-5 text-gray-100 dark:text-gray-100 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
+          <ArrowDownLeftIcon className="h-5 w-5 text-gray-100 dark:text-gray-100 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
         }
         title="Total Income"
         iconBgColor="bg-[#27674a]"
@@ -71,21 +70,26 @@ export default async function CashInActivity({
           <PlusIcon className="font-bold text-green-600 dark:text-green-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
         }
       />
-      <div className="p-4 my-1 border rounded-md shadow-md bg-gray-50 dark:border-gray-900 dark:bg-dark dark:text-gray-100">
-        <div className="flex justify-between border-bottom">
-          <div className="flex items-center">
-            <p className="mb-0 antialiased font-bold capitalize dark:text-gray-100 xl:text-lg 2xl:text-xl">
+      <div className="my-1 rounded-md border bg-gray-50 p-4 shadow-md dark:border-gray-900 dark:bg-dark dark:text-gray-100">
+        <div className="border-bottom flex justify-between">
+          <div className="flex flex-wrap items-center">
+            <p className="mb-0 font-bold capitalize antialiased dark:text-gray-100 xl:text-lg 2xl:text-xl">
               {title}
             </p>
           </div>
+          <div className="hidden xl:block">
+            <DatePickerWithRange fromParam="cashInFrom" toParam="cashInTo" />
+          </div>
+        </div>
+        <div className="block py-4 xl:hidden">
           <DatePickerWithRange fromParam="cashInFrom" toParam="cashInTo" />
         </div>
         <HalfDonutChart colors={CurrentColors} data={top4Data} />
-        <ul className="flex flex-wrap py-3 mb-3 list-none lg:-mx-2 xl:-mx-0">
+        <ul className="mb-3 flex list-none flex-wrap py-3 lg:-mx-2 xl:-mx-0">
           {top4Data.map((item, index) => (
             <li key={index} className="w-full">
               {isNaN(item.sum) ? null : (
-                <div className="flex p-1 space-x-2">
+                <div className="flex space-x-2 p-1">
                   <button
                     className={` h-3 w-3 rounded-full font-medium text-white lg:h-2 lg:w-2 xl:h-3 xl:w-3 ${
                       index > 0 ? "sm:mt-2" : ""
@@ -111,12 +115,12 @@ export default async function CashInActivity({
           ))}
         </ul>
 
-        <div className="w-3/4 mx-auto">
+        <div className="mx-auto w-3/4">
           <Button variant="outline" className="w-full ">
-            <span className="mx-auto text-center whitespace-nowrap lg:text-xs xl:text-sm">
+            <span className="mx-auto whitespace-nowrap text-center lg:text-xs xl:text-sm">
               View All Activity
             </span>
-            <ArrowRightIcon className="w-6 h-6 shrink dark:text-gray-100 " />
+            <ArrowRightIcon className="h-6 w-6 shrink dark:text-gray-100 " />
           </Button>
         </div>
       </div>

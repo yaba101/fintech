@@ -92,9 +92,9 @@ export default async function Table({
   );
 
   return (
-    <div className="overflow-x-hidden overflow-y-hidden rounded-md shadow-lg bg-gray-50 dark:bg-dark">
-      <div className="flex items-center justify-between flex-grow px-2 py-3 my-3 space-x-2 xs:pr-5">
-        <h4 className="px-2 py-2 font-bold tracking-tight text-center xs:text-bold whitespace-nowrap xs:mx-auto xs:text-lg sm:mx-auto md:text-xl lg:mx-0">
+    <div className="overflow-x-hidden overflow-y-hidden rounded-md bg-gray-50 shadow-lg dark:bg-dark">
+      <div className="my-3 flex flex-grow items-center justify-between space-x-2 px-2 py-3 xs:pr-5">
+        <h4 className="xs:text-bold whitespace-nowrap px-2 py-2 text-center font-bold tracking-tight xs:mx-auto xs:text-lg sm:mx-auto md:text-xl lg:mx-0">
           Recent Transactions
         </h4>
         <div className="hidden min-w-fit xl:block">
@@ -105,16 +105,16 @@ export default async function Table({
         </div>
       </div>
       <div className="flex w-full xs:flex-col md:flex-row ">
-        <div className="px-1 mx-auto mb-3 xs:w-5/6 sm:w-1/2 xl:hidden">
+        <div className="mx-auto mb-3 px-1 xs:w-5/6 sm:w-1/2 xl:hidden">
           <DatePickerWithRange fromParam="transacFrom" toParam="transacTo" />
         </div>
-        <div className="px-1 mx-auto xs:w-5/6 sm:w-3/4 xl:hidden">
+        <div className="mx-auto px-1 xs:w-5/6 sm:w-3/4 xl:hidden">
           <SearchInput placeholder="search for transaction" />
         </div>
       </div>
 
-      <div className="px-4 rounded-md xs:px-1 sm:px-6 lg:px-8">
-        <div className="flow-root mt-8">
+      <div className="rounded-md px-4 xs:px-1 sm:px-6 lg:px-8">
+        <div className="mt-8 flow-root">
           <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               <div className="overflow-x-hidden">
@@ -125,14 +125,14 @@ export default async function Table({
                     <tbody>
                       {data.recentTransactions.slice(0, 5).map((item) => (
                         <tr key={item.transactionName}>
-                          <td className="py-3 pl-4 pr-3 whitespace-nowrap sm:py-2 sm:pl-0">
+                          <td className="whitespace-nowrap py-3 pl-4 pr-3 sm:py-2 sm:pl-0">
                             <div className="flex items-center">
                               <div className="px-4 xs:px-0 sm:px-2">
                                 {item.personalFinanceCategoryIconUrl === "" ? (
                                   <div className="ml-6"></div>
                                 ) : (
                                   <div className="rounded-full">
-                                    <ArrowDownCircleIcon className="w-6 h-6" />
+                                    <ArrowDownCircleIcon className="h-6 w-6" />
                                   </div>
                                 )}
                               </div>
@@ -140,21 +140,21 @@ export default async function Table({
                                 <div
                                   className={`font-medium dark:text-gray-100 xs:text-xs sm:text-sm md:text-base   `}
                                 >
-                                  <span className="xs:text-xs md:text-sm xl:text-base">
+                                  <span className="xs:text-[0.575rem] sm:text-xs md:text-sm xl:text-base">
                                     {item.transactionName}
                                   </span>
                                 </div>
                               </div>
                             </div>
                           </td>
-                          <td className="px-3 py-3 text-gray-400 whitespace-nowrap xs:px-1 xs:text-xs sm:py-2">
-                            <div className="xs:text-xs md:text-sm xl:text-base 2xl:text-lg">
+                          <td className="whitespace-nowrap px-3 py-3 text-gray-400 xs:px-1 xs:text-xs sm:py-2">
+                            <div className="xs:text-[0.575rem] sm:text-xs md:text-sm xl:text-base 2xl:text-lg">
                               {item.transactionDate}
                             </div>
                           </td>
-                          <td className="px-3 py-3 text-gray-300 whitespace-nowrap xs:px-1 sm:py-2">
+                          <td className="whitespace-nowrap px-3 py-3 text-gray-300 xs:px-1 sm:py-2">
                             <span
-                              className={`inline-flex items-center rounded-md px-2 py-1 font-medium xs:text-xs md:text-sm xl:text-base 2xl:text-lg `}
+                              className={`inline-flex items-center rounded-md px-2 py-1 font-medium xs:text-[0.575rem] sm:text-xs md:text-sm xl:text-base 2xl:text-lg `}
                             >
                               ${item.amount}
                             </span>
@@ -166,7 +166,7 @@ export default async function Table({
                 )}
               </div>
             </div>
-            <div className="w-1/3 py-6 mx-auto">
+            <div className="mx-auto w-1/3 py-6">
               <button className="w-full whitespace-nowrap rounded-lg bg-[#27674a] px-4 py-2 text-center font-medium text-white hover:bg-green-700">
                 View More
               </button>

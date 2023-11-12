@@ -58,7 +58,7 @@ export default async function Dashboard({
                 iconBgColor="bg-[#27674a]"
                 textBgColor="bg-green-400"
                 textColor="text-emerald-400"
-                amount={0}
+                amount={632}
                 signIcon={
                   <PlusIcon className="text-green-600 dark:text-green-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
                 }
@@ -71,7 +71,7 @@ export default async function Dashboard({
                 iconBgColor="bg-red-600"
                 textBgColor="bg-red-400"
                 textColor="text-red-400"
-                amount={0}
+                amount={632}
                 signIcon={
                   <MinusIcon className="text-red-600 dark:text-red-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
                 }

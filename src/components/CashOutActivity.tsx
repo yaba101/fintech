@@ -76,7 +76,12 @@ export default async function CashOutActivity({
               {title}
             </p>
           </div>
-          <DatePickerWithRange fromParam="cashOutFrom" toParam="cashOutTo" />
+          <div className="hidden xl:block">
+            <DatePickerWithRange fromParam="cashInFrom" toParam="cashInTo" />
+          </div>
+        </div>
+        <div className="block py-4 xl:hidden">
+          <DatePickerWithRange fromParam="cashInFrom" toParam="cashInTo" />
         </div>
         <HalfDonutChart colors={CurrentColors} data={top4Data} />
         <ul className="mb-3 flex list-none flex-wrap py-3 lg:-mx-2 xl:-mx-0">
