@@ -3,9 +3,51 @@
   "incomeExpense": [
     {
       "year": 2022,
+      "month": 1,
+      "month_name": "Jan",
+      "income": 335.0,
+      "expense": 330.0
+    },
+    {
+      "year": 2022,
+      "month": 2,
+      "month_name": "Feb",
+      "income": 3340.0,
+      "expense": 770.0
+    },
+    {
+      "year": 2022,
+      "month": 3,
+      "month_name": "Mar",
+      "income": 234.0,
+      "expense": 120.0
+    },
+    {
+      "year": 2022,
+      "month": 4,
+      "month_name": "Apr",
+      "income": 123.0,
+      "expense": 110.0
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "month_name": "May",
+      "income": 100.0,
+      "expense": 20.0
+    },
+    {
+      "year": 2022,
+      "month": 6,
+      "month_name": "Jun",
+      "income": 120.0,
+      "expense": 110.0
+    },
+    {
+      "year": 2022,
       "month": 7,
       "month_name": "Jul",
-      "income": 0.0,
+      "income": 230.0,
       "expense": 224.12
     },
     {
@@ -19,14 +61,14 @@
       "year": 2022,
       "month": 9,
       "month_name": "Sep",
-      "income": 1000.0,
+      "income": 100.0,
       "expense": 234.92
     },
     {
       "year": 2022,
       "month": 10,
       "month_name": "Oct",
-      "income": 1000.0,
+      "income": 1300.0,
       "expense": 234.92
     },
     {

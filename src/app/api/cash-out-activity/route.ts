@@ -1,5 +1,52 @@
+import { NextRequest, NextResponse } from "next/server";
 import cashOutActivity from "../../../../data/cash-out-activity.json";
 
-export async function POST() {
-  return Response.json(cashOutActivity);
+export async function POST(req: NextRequest) {
+  try {
+    const requestBody = await req.json();
+    const { fromDate, toDate } = requestBody;
+    console.log(fromDate, toDate);
+
+    const filteredCashOutActivity = cashOutActivity.filter((activity) => {
+      const activityDate = new Date(activity.activityDate);
+
+      return (
+        (!fromDate || activityDate >= new Date(fromDate)) &&
+        (!toDate || activityDate <= new Date(toDate))
+      );
+    });
+
+    const sortedCashOutActivity = filteredCashOutActivity.sort(
+      (a, b) => b.sum - a.sum,
+    );
+
+    const fourExpenseCategories = sortedCashOutActivity.slice(0, 4);
+
+    const totalExpense = fourExpenseCategories.reduce(
+      (total, category) => total + category.sum,
+      0,
+    );
+
+    const responseObject = {
+      totalExpense: Number(totalExpense.toFixed(2)),
+      fourExpenseCategories,
+      succeeded: true,
+    };
+
+    const response = NextResponse.json(responseObject);
+
+    response.cookies.set({
+      name: "cashOutActivity",
+      value: JSON.stringify(filteredCashOutActivity),
+      maxAge: 60 * 60,
+      path: "/dashboard",
+    });
+    return response;
+  } catch (error) {
+    console.error("Error parsing JSON from request body:", error);
+
+    return new Response("Error parsing JSON from request body", {
+      status: 400,
+    });
+  }
 }

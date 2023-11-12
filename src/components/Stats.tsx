@@ -5,6 +5,7 @@ export default function Stats({
   textColor,
   signIcon,
   title,
+  amount,
 }: {
   icon: any;
   iconBgColor: string;
@@ -12,6 +13,7 @@ export default function Stats({
   textColor: string;
   signIcon: any;
   title: string;
+  amount: number;
 }) {
   return (
     <div className="flex flex-grow items-end justify-between rounded-lg bg-gray-50 px-4 py-6 shadow-lg dark:bg-dark sm:px-1 sm:py-4 md:py-6">
@@ -28,7 +30,7 @@ export default function Stats({
           </p>
 
           <p className="font-semibold antialiased dark:text-gray-200 sm:text-sm md:text-base 2xl:text-xl">
-            $632.00
+            ${amount}
           </p>
         </div>
       </div>

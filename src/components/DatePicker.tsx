@@ -1,7 +1,7 @@
 "use client";
+import { useEffect, useState } from "react";
 import { Calendar as CalendarIcon } from "lucide-react";
-import { addDays, format } from "date-fns";
-import React, { useState } from "react";
+import { format } from "date-fns";
 import { DateRange as DatePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -12,21 +12,53 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+
+interface DatePickerWithRangeProps {
+  className?: string;
+  fromParam: string;
+  toParam: string;
+}
 
 export function DatePickerWithRange({
   className,
-}: React.HTMLAttributes<HTMLDivElement>) {
+  fromParam,
+  toParam,
+}: DatePickerWithRangeProps) {
   const [selectedRange, setSelectedRange] = useState({
-    startDate: new Date(),
-    endDate: addDays(new Date(), 7),
+    startDate: null as Date | null,
+    endDate: null as Date | null,
   });
-  const router = useRouter();
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const from = searchParams.get(fromParam);
+  const to = searchParams.get(toParam);
+
+  console.log();
   const formatDate = (date: Date | undefined) => {
     return date ? format(date, "dd/MM/yy") : "";
   };
-  console.log({ selectedRange });
+
+  useEffect(() => {
+    const fromDate = searchParams.get(fromParam);
+    const toDate = searchParams.get(toParam);
+
+    if (fromDate && toDate) {
+      const startDate = new Date(fromDate);
+      const endDate = new Date(toDate);
+
+      if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+        setSelectedRange({
+          startDate,
+          endDate,
+        });
+      } else {
+        console.error("Invalid date format in URL");
+      }
+    }
+  }, [searchParams, fromParam, toParam]);
+
   return (
     <div className={cn("grid w-fit gap-2 ", className)}>
       <Popover>
@@ -58,15 +90,24 @@ export function DatePickerWithRange({
             editableDateInputs={true}
             onChange={(item) => {
               setSelectedRange(item?.selection as any);
-              console.log("start", item.selection);
-              router.push(
-                `/?from=${formatDate(
-                  item?.selection?.startDate,
-                )}&to=${formatDate(item?.selection.endDate)}`,
+
+              const currentSearchParams = new URLSearchParams(
+                window.location.search,
               );
+
+              currentSearchParams.set(
+                fromParam,
+                formatDate(item?.selection?.startDate) || "",
+              );
+              currentSearchParams.set(
+                toParam,
+                formatDate(item?.selection?.endDate) || "",
+              );
+
+              router.push(`?${currentSearchParams.toString()}`);
             }}
             moveRangeOnFirstSelection={false}
-            ranges={[{ ...selectedRange, key: "selection" }]}
+            ranges={[{ ...selectedRange, key: "selection" } as any]}
           />
         </PopoverContent>
       </Popover>

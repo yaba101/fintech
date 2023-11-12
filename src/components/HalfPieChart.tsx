@@ -6,9 +6,13 @@ type DonutChartProps = {
   sum: number;
 }[];
 
-const HalfDonutChart = ({ data }: { data: DonutChartProps }) => {
-  const colors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
-
+const HalfDonutChart = ({
+  data,
+  colors,
+}: {
+  data: DonutChartProps;
+  colors: string[];
+}) => {
   const totalValue = d3.sum(data, (d) => d.sum);
 
   let startAngle = -90;
@@ -27,20 +31,35 @@ const HalfDonutChart = ({ data }: { data: DonutChartProps }) => {
         style={{ width: "100%", height: "auto" }}
       >
         <g transform={`translate(${width / 2}, ${height / 2})`}>
-          {data.map((item, i) => {
-            const endAngle = startAngle + (item.sum / totalValue) * 180;
+          {data.length === 0 ? (
+            <path
+              d={
+                arc({
+                  startAngle: 180,
+                  endAngle: Math.PI, // 180 degrees
+                  innerRadius: 0,
+                  outerRadius: 0,
+                })!
+              }
+              fill="black"
+              stroke="none"
+            />
+          ) : (
+            data.map((item, i) => {
+              const endAngle = startAngle + (item.sum / totalValue) * 180;
 
-            const path = arc({
-              startAngle: (startAngle * Math.PI) / 180,
-              endAngle: (endAngle * Math.PI) / 180,
-              innerRadius: 0,
-              outerRadius: 0,
-            });
+              const path = arc({
+                startAngle: (startAngle * Math.PI) / 180,
+                endAngle: (endAngle * Math.PI) / 180,
+                innerRadius: 0,
+                outerRadius: 0,
+              });
 
-            startAngle = endAngle;
+              startAngle = endAngle;
 
-            return <path key={i} d={path!} fill={colors[i]} />;
-          })}
+              return <path key={i} d={path!} fill={colors[i]} />;
+            })
+          )}
         </g>
       </svg>
     </div>

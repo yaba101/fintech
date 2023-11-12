@@ -1,9 +1,9 @@
+import { NextRequest, NextResponse } from "next/server";
 import transactions from "../../../../data/transactions.json";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const requestBody = await req.json();
-
     const { fromDate, toDate } = requestBody;
 
     const filteredTransactions = transactions.recentTransactions.filter(
@@ -17,17 +17,19 @@ export async function POST(req: Request) {
       },
     );
 
-    return new Response(
-      JSON.stringify({
-        recentTransactions: filteredTransactions,
-        succeeded: true,
-      }),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
+    const response = NextResponse.json({
+      recentTransactions: filteredTransactions,
+      succeeded: true,
+    });
+
+    response.cookies.set({
+      name: "transactions",
+      value: JSON.stringify(filteredTransactions),
+      maxAge: 60 * 60,
+      path: "/dashboard",
+    });
+
+    return response;
   } catch (error) {
     console.error("Error parsing JSON from request body:", error);
 

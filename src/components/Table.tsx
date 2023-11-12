@@ -1,15 +1,9 @@
 import { DatePickerWithRange } from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
 import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
-import { parse, parseISO } from "date-fns";
+import { parse } from "date-fns";
 import { z } from "zod";
 
-type RecentTransactionData = {
-  icon?: any;
-  company: string;
-  date: string;
-  amount: string;
-};
 type RecentTransaction = {
   transactionDate: string;
   amount: number;
@@ -87,42 +81,40 @@ export default async function Table({
   const fromDate = from ? parse(from, "dd/MM/yy", new Date()) : null;
   const toDate = to ? parse(to, "dd/MM/yy", new Date()) : null;
 
-  // Create the RequestBody object with fromDate and toDate
   const requestBody: RequestBody = {
     fromDate,
     toDate,
   };
 
-  // Fetch recent transaction data using the created RequestBody
   const data = await getRecentTransactionData(
     `${process.env.URL}/api/transactions`,
     requestBody,
   );
 
   return (
-    <div className="overflow-x-hidden overflow-y-hidden rounded-md bg-gray-50 shadow-lg dark:bg-dark">
-      <div className="my-3 flex flex-grow items-center justify-between space-x-2 px-2 py-3 xs:pr-5">
-        <h4 className="xs:text-bold whitespace-nowrap px-2 py-2 text-center font-bold tracking-tight xs:mx-auto xs:text-lg sm:mx-auto md:text-xl lg:mx-0">
+    <div className="overflow-x-hidden overflow-y-hidden rounded-md shadow-lg bg-gray-50 dark:bg-dark">
+      <div className="flex items-center justify-between flex-grow px-2 py-3 my-3 space-x-2 xs:pr-5">
+        <h4 className="px-2 py-2 font-bold tracking-tight text-center xs:text-bold whitespace-nowrap xs:mx-auto xs:text-lg sm:mx-auto md:text-xl lg:mx-0">
           Recent Transactions
         </h4>
         <div className="hidden min-w-fit xl:block">
-          <DatePickerWithRange />
+          <DatePickerWithRange fromParam="transacFrom" toParam="transacTo" />
         </div>
         <div className="hidden w-2/5 xl:block">
           <SearchInput placeholder="search for transaction" />
         </div>
       </div>
       <div className="flex w-full xs:flex-col md:flex-row ">
-        <div className="mx-auto mb-3 px-1 xs:w-5/6 sm:w-1/2 xl:hidden">
-          <DatePickerWithRange />
+        <div className="px-1 mx-auto mb-3 xs:w-5/6 sm:w-1/2 xl:hidden">
+          <DatePickerWithRange fromParam="transacFrom" toParam="transacTo" />
         </div>
-        <div className="mx-auto px-1 xs:w-5/6 sm:w-3/4 xl:hidden">
+        <div className="px-1 mx-auto xs:w-5/6 sm:w-3/4 xl:hidden">
           <SearchInput placeholder="search for transaction" />
         </div>
       </div>
 
-      <div className="rounded-md px-4 xs:px-1 sm:px-6 lg:px-8">
-        <div className="mt-8 flow-root">
+      <div className="px-4 rounded-md xs:px-1 sm:px-6 lg:px-8">
+        <div className="flow-root mt-8">
           <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               <div className="overflow-x-hidden">
@@ -131,16 +123,16 @@ export default async function Table({
                 ) : (
                   <table className="min-w-full divide-y divide-gray-300">
                     <tbody>
-                      {data.recentTransactions.map((item) => (
+                      {data.recentTransactions.slice(0, 5).map((item) => (
                         <tr key={item.transactionName}>
-                          <td className="whitespace-nowrap py-3 pl-4 pr-3 sm:py-2 sm:pl-0">
+                          <td className="py-3 pl-4 pr-3 whitespace-nowrap sm:py-2 sm:pl-0">
                             <div className="flex items-center">
                               <div className="px-4 xs:px-0 sm:px-2">
                                 {item.personalFinanceCategoryIconUrl === "" ? (
                                   <div className="ml-6"></div>
                                 ) : (
                                   <div className="rounded-full">
-                                    <ArrowDownCircleIcon className="h-6 w-6" />
+                                    <ArrowDownCircleIcon className="w-6 h-6" />
                                   </div>
                                 )}
                               </div>
@@ -155,12 +147,12 @@ export default async function Table({
                               </div>
                             </div>
                           </td>
-                          <td className="whitespace-nowrap px-3 py-3 text-gray-400 xs:px-1 xs:text-xs sm:py-2">
+                          <td className="px-3 py-3 text-gray-400 whitespace-nowrap xs:px-1 xs:text-xs sm:py-2">
                             <div className="xs:text-xs md:text-sm xl:text-base 2xl:text-lg">
                               {item.transactionDate}
                             </div>
                           </td>
-                          <td className="whitespace-nowrap px-3 py-3 text-gray-300 xs:px-1 sm:py-2">
+                          <td className="px-3 py-3 text-gray-300 whitespace-nowrap xs:px-1 sm:py-2">
                             <span
                               className={`inline-flex items-center rounded-md px-2 py-1 font-medium xs:text-xs md:text-sm xl:text-base 2xl:text-lg `}
                             >
@@ -174,7 +166,7 @@ export default async function Table({
                 )}
               </div>
             </div>
-            <div className="mx-auto w-1/3 py-6">
+            <div className="w-1/3 py-6 mx-auto">
               <button className="w-full whitespace-nowrap rounded-lg bg-[#27674a] px-4 py-2 text-center font-medium text-white hover:bg-green-700">
                 View More
               </button>
