@@ -1,5 +1,6 @@
 import { DatePickerWithRange } from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
+import delay from "@/utils/delay";
 import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
 import { parse } from "date-fns";
 import { z } from "zod";
@@ -41,10 +42,6 @@ const RequestBodySchema = z.object({
   toDate: z.date(),
   fromDate: z.date(),
 });
-
-async function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 const getRecentTransactionData = async (url: string, body?: RequestBody) => {
   try {

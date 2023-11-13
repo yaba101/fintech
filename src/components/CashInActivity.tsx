@@ -6,6 +6,7 @@ import Stats from "./Stats";
 import { ArrowDownLeftIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { DatePickerWithRange } from "./DatePicker";
 import { parse } from "date-fns";
+import delay from "@/utils/delay";
 
 type RequestBody = {
   toDate: Date | null;
@@ -17,9 +18,6 @@ type CashInResponse = {
   fourIncomeCategories: { category: string; sum: number }[];
   succeeded: boolean;
 };
-async function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 export default async function CashInActivity({
   from,

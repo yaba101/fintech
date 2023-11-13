@@ -1,3 +1,4 @@
+import delay from "@/utils/delay";
 import { z } from "zod";
 
 type AssetDebtResponse = {
@@ -11,10 +12,6 @@ const AssetDebtResponseSchema = z.object({
   debt: z.number(),
   succeeded: z.boolean(),
 });
-
-async function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 const getData = async (url: string): Promise<AssetDebtResponse> => {
   try {

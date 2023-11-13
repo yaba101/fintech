@@ -6,6 +6,7 @@ import Stats from "./Stats";
 import { ArrowUpRightIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { DatePickerWithRange } from "./DatePicker";
 import { parse } from "date-fns";
+import delay from "@/utils/delay";
 
 type CashOutResponse = {
   totalExpense: number;
@@ -16,10 +17,6 @@ type RequestBody = {
   toDate: Date | null;
   fromDate: Date | null;
 };
-
-async function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 export default async function CashOutActivity({
   from,

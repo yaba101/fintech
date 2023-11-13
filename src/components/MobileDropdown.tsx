@@ -1,5 +1,4 @@
-import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/24/outline";
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const MobileDropdown = () => {
   const months = [
@@ -45,7 +44,7 @@ const MobileDropdown = () => {
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="inline-flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md dark:border-gray-700 dark:bg-dark dark:text-gray-100"
+          className="inline-flex w-full justify-between rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 dark:border-gray-700 dark:bg-dark dark:text-gray-100"
           id="options-menu"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
@@ -54,7 +53,7 @@ const MobileDropdown = () => {
         </button>
       </div>
       {isOpen && (
-        <div className="absolute right-0 w-24 mt-2 overflow-y-auto origin-top-right bg-white border border-gray-300 rounded-md shadow-lg dark:bg-dark dark:border-gray-700 max-h-60">
+        <div className="absolute right-0 mt-2 max-h-60 w-24 origin-top-right overflow-y-auto rounded-md border border-gray-300 bg-white shadow-lg dark:border-gray-700 dark:bg-dark">
           <div
             className="py-1"
             role="menu"
@@ -63,7 +62,7 @@ const MobileDropdown = () => {
           >
             <button
               //   onClick={() => handleMonthChange(month)}
-              className={`block px-4 py-2 text-sm dark:text-gray-100  text-gray-700 w-full text-left hover:bg-gray-100 hover:dark:bg-slate-800 hover:text-gray-900 dark:hover:bg-dark dark:hover:text-gray-100 focus:outline-none `}
+              className={`block w-full px-4 py-2 text-left  text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none dark:text-gray-100 dark:hover:bg-dark hover:dark:bg-slate-800 dark:hover:text-gray-100 `}
               role="menuitem"
             >
               Issac
@@ -71,7 +70,7 @@ const MobileDropdown = () => {
             <hr className="mx-2 text-gray-50" />
             <button
               //   onClick={() => handleMonthChange(month)}
-              className={`block px-4 py-2 text-sm dark:text-gray-100 text-gray-700 w-full text-left hover:bg-gray-100 hover:dark:bg-slate-800 hover:text-gray-900 dark:hover:bg-dark dark:hover:text-gray-100 focus:outline-none `}
+              className={`block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none dark:text-gray-100 dark:hover:bg-dark hover:dark:bg-slate-800 dark:hover:text-gray-100 `}
               role="menuitem"
             >
               Logout

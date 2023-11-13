@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { z } from "zod";
+import delay from "@/utils/delay";
 
 type AssetDebtResponse = {
   asset: number;
@@ -20,10 +21,6 @@ const AssetDebtResponseSchema = z.object({
   debt: z.number(),
   succeeded: z.boolean(),
 });
-
-async function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 const getData = async (url: string): Promise<AssetDebtResponse> => {
   try {

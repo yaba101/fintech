@@ -5,7 +5,6 @@ import GroupedBarContainer from "@/components/GroupedBarContainer";
 import NetWorthCard from "@/components/NetWorthCard";
 import SearchInput from "@/components/SearchInput";
 import SideBar from "@/components/SidebarContainer";
-import Stats from "@/components/Stats";
 import SummaryCard from "@/components/SummaryCard";
 import Table from "@/components/Table";
 import AssetDebtStatsSkeleton from "@/components/skeleton/AssetDebtStatsSkeleton";
@@ -14,12 +13,6 @@ import GroupedBarChartSkeleton from "@/components/skeleton/GroupedBarSkeleton";
 import NetWorthCardSkeleton from "@/components/skeleton/NetWorthSkeleton";
 import SummaryCardSkeleton from "@/components/skeleton/SkeletonSummaryCard";
 import TableSkeleton from "@/components/skeleton/TableSkeleton";
-import { PlusIcon } from "@heroicons/react/20/solid";
-import {
-  ArrowDownLeftIcon,
-  ArrowUpRightIcon,
-  MinusIcon,
-} from "@heroicons/react/24/outline";
 import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
