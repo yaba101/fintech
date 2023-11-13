@@ -45,7 +45,7 @@ const RequestBodySchema = z.object({
 
 const getRecentTransactionData = async (url: string, body?: RequestBody) => {
   try {
-    await delay(10000);
+    // await delay(10000);
     const response = await fetch(url, {
       method: "POST",
       cache: "no-store",

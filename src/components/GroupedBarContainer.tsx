@@ -1,6 +1,7 @@
 import React from "react";
 import GroupedBarChart from "./GroupedBar";
 import { z } from "zod";
+import delay from "@/utils/delay";
 
 type RequestBody = {
   toDate: Date | null;
@@ -37,10 +38,6 @@ const GroupedBarChartResponseSchema = z.object({
   incomeExpense: z.array(GroupedBarChartSchema),
   succeeded: z.boolean(),
 });
-
-async function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 const getData = async (url: string, body?: RequestBody) => {
   try {

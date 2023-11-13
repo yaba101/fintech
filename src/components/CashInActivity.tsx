@@ -26,7 +26,8 @@ export default async function CashInActivity({
   from: string;
   to: string;
 }) {
-  await delay(5000);
+  // await delay(5000);
+
   const title = "Cash In Activity";
   const url = "/api/cash-in-activity";
 
@@ -43,6 +44,7 @@ export default async function CashInActivity({
     requestBody,
     CashInResponseSchema,
   );
+  console.log("response", response);
 
   const CurrentColors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
   const isCashIn =

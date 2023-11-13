@@ -1,8 +1,5 @@
-async function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 const SummaryCardSkeleton = async () => {
-  await delay(7000);
+  // await delay(7000);
   return (
     <div
       className="my-3 animate-pulse overflow-hidden rounded-md border border-gray-900 shadow-lg"
