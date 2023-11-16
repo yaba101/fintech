@@ -77,7 +77,7 @@ export default async function CashOutActivity({
             {title}
           </p>
           <div className="flex-shrink-0 ">
-            <DatePickerWithRange fromParam="cashInFrom" toParam="cashInTo" />
+            <DatePickerWithRange fromParam="cashOutFrom" toParam="cashOutTo" />
           </div>
         </div>
         <HalfDonutChart colors={CurrentColors} data={top4Data} />
