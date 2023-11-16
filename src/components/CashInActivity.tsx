@@ -7,6 +7,7 @@ import { ArrowDownLeftIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { DatePickerWithRange } from "./DatePicker";
 import { parse } from "date-fns";
 import delay from "@/utils/delay";
+import IncomeExpenseStats from "./IncomeExpenseStats";
 
 type RequestBody = {
   toDate: Date | null;
@@ -60,9 +61,9 @@ export default async function CashInActivity({
 
   return (
     <>
-      <Stats
+      <IncomeExpenseStats
         icon={
-          <ArrowDownLeftIcon className="h-5 w-5 text-gray-100 dark:text-gray-100 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
+          <ArrowDownLeftIcon className=" h-8 w-8 text-gray-100 dark:text-gray-100" />
         }
         title="Total Income"
         iconBgColor="bg-[#27674a]"
@@ -70,9 +71,10 @@ export default async function CashInActivity({
         textColor="text-emerald-400"
         amount={response?.totalIncome!}
         signIcon={
-          <PlusIcon className="font-bold text-green-600 dark:text-green-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
+          <PlusIcon className="h-5 w-5 font-bold text-green-600 dark:text-green-600" />
         }
       />
+
       <div className="my-1 rounded-md border bg-gray-50 p-4 shadow-md dark:border-gray-900 dark:bg-dark dark:text-gray-100">
         <div className="flex flex-wrap items-center justify-between py-1">
           <p className="mb-0 font-bold capitalize antialiased dark:text-gray-100 xl:text-lg 2xl:text-xl">

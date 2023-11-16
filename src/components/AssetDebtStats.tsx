@@ -44,7 +44,6 @@ const getData = async (url: string): Promise<AssetDebtResponse> => {
 
 const AssetDebtStats = async () => {
   const { asset, debt } = await getData(`${process.env.URL}/api/asset-debt`);
-  console.log(asset, debt);
 
   return (
     <>

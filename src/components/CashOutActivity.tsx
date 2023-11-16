@@ -7,6 +7,7 @@ import { ArrowUpRightIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { DatePickerWithRange } from "./DatePicker";
 import { parse } from "date-fns";
 import delay from "@/utils/delay";
+import IncomeExpenseStats from "./IncomeExpenseStats";
 
 type CashOutResponse = {
   totalExpense: string;
@@ -58,17 +59,17 @@ export default async function CashOutActivity({
 
   return (
     <>
-      <Stats
+      <IncomeExpenseStats
         icon={
-          <ArrowUpRightIcon className="h-5 w-5 text-gray-100 dark:text-gray-100 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
+          <ArrowUpRightIcon className=" h-8 w-8 text-gray-100 dark:text-gray-100 " />
         }
         title="Total Expenses"
         iconBgColor="bg-red-600"
         textBgColor="bg-red-400"
-        textColor="text-red-400"
+        textColor="text-red-600"
         amount={response?.totalExpense!}
         signIcon={
-          <MinusIcon className="font-bold text-red-600 dark:text-red-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
+          <MinusIcon className="h-5 w-5 font-bold text-red-600 dark:text-red-600" />
         }
       />
       <div className="my-1 rounded-md border bg-gray-50 p-4 shadow-md dark:border-gray-900 dark:bg-dark dark:text-gray-100">
