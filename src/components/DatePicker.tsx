@@ -110,6 +110,7 @@ export function DatePickerWithRange({
           align="start"
         >
           <DatePicker
+            className="dark:bg-gray-200 "
             editableDateInputs={true}
             onChange={(item) => {
               setSelectedRange(item?.selection as any);

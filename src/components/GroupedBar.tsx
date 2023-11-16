@@ -72,9 +72,10 @@ function Bar({
 }
 
 export default function GroupedBarChart({ data }: Props) {
-  const [selectedYear, setSelectedYear] = useState<number>(
+  const [selectedYear, setSelectedYear] = useState<number | null>(
     Math.min(...(data.incomeExpense.map((entry) => entry.year) ?? 2020)),
   );
+  const [tooltip, setTooltip] = useState<Tooltip | null>(null);
 
   const minYear = Math.min(...data.incomeExpense.map((entry) => entry.year));
   const maxYear = Math.max(...data.incomeExpense.map((entry) => entry.year));
@@ -87,7 +88,6 @@ export default function GroupedBarChart({ data }: Props) {
     (entry) => entry.year === selectedYear,
   );
 
-  const [tooltip, setTooltip] = useState<Tooltip | null>(null);
   const axisBottomRef = useRef<SVGGElement>(null);
   const axisLeftRef = useRef<SVGGElement>(null);
 
@@ -156,7 +156,7 @@ export default function GroupedBarChart({ data }: Props) {
         <div className="xs:mr-l">
           <YearDropDown
             years={years}
-            selectedYear={selectedYear}
+            selectedYear={selectedYear!}
             onSelectYear={setSelectedYear}
           />
         </div>
@@ -195,7 +195,7 @@ export default function GroupedBarChart({ data }: Props) {
                 }}
                 onMouseLeave={() => setTooltip(null)}
                 data={{
-                  year: selectedYear,
+                  year: selectedYear!,
                   month: filteredData[groupIndex].month,
                   month_name,
                   income,
@@ -220,7 +220,7 @@ export default function GroupedBarChart({ data }: Props) {
                 }}
                 onMouseLeave={() => setTooltip(null)}
                 data={{
-                  year: selectedYear,
+                  year: selectedYear!,
                   month_name,
                   income,
                   expense,
