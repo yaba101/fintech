@@ -36,14 +36,16 @@ const SummaryCard = () => {
               </span>
             </div>
           </div>
-        </div>
-        <div className="mx-auto flex w-full justify-center space-x-3">
-          <button className="whitespace-nowrap rounded-lg bg-[#27674a] px-2 py-1 text-sm font-medium text-white hover:bg-[#133425]">
-            View All
-          </button>
-          <button className="whitespace-nowrap rounded-lg bg-[#5e54e6] px-2 py-1 text-sm font-medium text-white hover:bg-[#4941b3]">
-            Add Account
-          </button>
+          <div className="my-5 ">
+            <div className="flex justify-between">
+              <button className="whitespace-nowrap rounded-lg bg-[#27674a] px-2 py-1 text-sm font-medium text-white hover:bg-[#133425]">
+                View All
+              </button>
+              <button className="whitespace-nowrap rounded-lg bg-[#5e54e6] px-2 py-1 text-sm font-medium text-white hover:bg-[#4941b3]">
+                Add Account
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
