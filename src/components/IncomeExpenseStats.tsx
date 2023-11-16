@@ -18,7 +18,7 @@ const IncomeExpenseStats = ({
   amount: string;
 }) => {
   return (
-    <div className="flex items-end justify-between rounded-lg  bg-gray-50 p-6 dark:bg-dark">
+    <div className="flex items-end justify-between rounded-lg bg-gray-50 p-6 shadow-xl dark:bg-dark">
       <div className="flex items-center gap-4">
         <span
           className={`hidden rounded-md p-2 text-gray-600 sm:block ${iconBgColor}`}
@@ -27,9 +27,11 @@ const IncomeExpenseStats = ({
         </span>
 
         <div>
-          <p className="text-xl text-gray-300">{title}</p>
+          <p className="text-xl text-gray-900 dark:text-gray-300 ">{title}</p>
 
-          <p className="text-2xl font-medium text-gray-100">${amount}</p>
+          <p className="text-2xl font-medium text-gray-950 dark:text-gray-200">
+            ${amount}
+          </p>
         </div>
       </div>
 
