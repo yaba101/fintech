@@ -101,7 +101,7 @@ export function DatePickerWithRange({
                 )}
               </>
             ) : (
-              <span className="text-xs">Pick a date</span>
+              <span className="text-sm">Pick a date</span>
             )}
           </Button>
         </PopoverTrigger>

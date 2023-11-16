@@ -95,14 +95,14 @@ export default async function Table({
         <h4 className="xs:text-bold whitespace-nowrap px-2 py-2 text-center font-bold tracking-tight xs:mx-auto xs:text-lg sm:mx-auto md:text-xl lg:mx-0">
           Recent Transactions
         </h4>
-        <div className="hidden min-w-fit xl:block">
+        <div className="hidden min-w-fit px-1.5 xl:block">
           <DatePickerWithRange fromParam="transacFrom" toParam="transacTo" />
         </div>
         <div className="hidden w-2/5 xl:block">
           <SearchInput placeholder="search for transaction" />
         </div>
       </div>
-      <div className="flex w-full flex-row ">
+      <div className="flex w-full flex-row px-1.5 ">
         <div className="mx-auto mb-3 px-1 xs:w-5/6 sm:w-1/2 xl:hidden">
           <DatePickerWithRange fromParam="transacFrom" toParam="transacTo" />
         </div>
