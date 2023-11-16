@@ -44,7 +44,6 @@ export default async function CashInActivity({
     requestBody,
     CashInResponseSchema,
   );
-  console.log("response", response);
 
   const CurrentColors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
   const isCashIn =
@@ -75,19 +74,15 @@ export default async function CashInActivity({
         }
       />
       <div className="my-1 rounded-md border bg-gray-50 p-4 shadow-md dark:border-gray-900 dark:bg-dark dark:text-gray-100">
-        <div className="border-bottom flex justify-between">
-          <div className="flex flex-wrap items-center">
-            <p className="mb-0 font-bold capitalize antialiased dark:text-gray-100 xl:text-lg 2xl:text-xl">
-              {title}
-            </p>
-          </div>
-          <div className="hidden xl:block">
+        <div className="flex flex-wrap items-center justify-between py-1">
+          <p className="mb-0 font-bold capitalize antialiased dark:text-gray-100 xl:text-lg 2xl:text-xl">
+            {title}
+          </p>
+          <div className="flex-shrink-0 ">
             <DatePickerWithRange fromParam="cashInFrom" toParam="cashInTo" />
           </div>
         </div>
-        <div className="block py-4 xl:hidden">
-          <DatePickerWithRange fromParam="cashInFrom" toParam="cashInTo" />
-        </div>
+
         <HalfDonutChart colors={CurrentColors} data={top4Data} />
         <ul className="mb-3 flex list-none flex-wrap py-3 lg:-mx-2 xl:-mx-0">
           {top4Data.length === 0 ? (
