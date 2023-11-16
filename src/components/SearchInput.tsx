@@ -20,7 +20,7 @@ export default function SearchInput({ placeholder }: { placeholder: string }) {
         </div>
         <input
           id="desktop-search"
-          className="block w-full overflow-hidden whitespace-nowrap rounded-md  border-none py-1.5 pl-2 text-gray-900 antialiased shadow-lg placeholder:text-gray-400  focus:ring-0 focus:placeholder:text-gray-400 dark:bg-dark dark:placeholder:text-gray-400 dark:focus:text-gray-200 xs:placeholder:text-xs sm:text-sm sm:leading-6 sm:placeholder:text-sm md:text-lg"
+          className="block w-full overflow-hidden whitespace-nowrap rounded-md  border-none py-1.5 pl-2 text-gray-200 antialiased shadow-lg placeholder:text-gray-400  focus:ring-0 focus:placeholder:text-gray-400 dark:bg-dark dark:placeholder:text-gray-400 dark:focus:text-gray-200 xs:placeholder:text-xs sm:text-sm sm:leading-6 sm:placeholder:text-base md:text-lg"
           placeholder={placeholder}
           type="search"
           name="search"
