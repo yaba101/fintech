@@ -9,7 +9,7 @@ import { parse } from "date-fns";
 import delay from "@/utils/delay";
 
 type CashOutResponse = {
-  totalExpense: number;
+  totalExpense: string;
   fourExpenseCategories: { category: string; sum: number }[];
   succeeded: boolean;
 };

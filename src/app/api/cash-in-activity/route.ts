@@ -26,8 +26,16 @@ export async function POST(req: NextRequest) {
       0,
     );
 
+    const formattedTotalIncome =
+      totalIncome === null || totalIncome === 0
+        ? "0.00"
+        : totalIncome.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          });
+
     const responseObject = {
-      totalIncome: Number(totalIncome.toFixed(2)),
+      totalIncome: formattedTotalIncome,
       fourIncomeCategories,
       succeeded: true,
     };

@@ -1,18 +1,18 @@
 import { z, ZodError } from "zod";
 
 type CommonResponse = {
-  totalExpense?: number;
-  totalIncome?: number;
+  totalExpense?: string;
+  totalIncome?: string;
 };
 
 type CashOutResponse = CommonResponse & {
-  totalExpense: number;
+  totalExpense: string;
   fourExpenseCategories: { category: string; sum: number }[];
   succeeded: boolean;
 };
 
 type CashInResponse = CommonResponse & {
-  totalIncome: number;
+  totalIncome: string;
   fourIncomeCategories: { category: string; sum: number }[];
   succeeded: boolean;
 };
@@ -23,7 +23,7 @@ type RequestBody = {
 };
 
 export const CashOutResponseSchema = z.object({
-  totalExpense: z.number(),
+  totalExpense: z.string(),
   fourExpenseCategories: z.array(
     z.object({
       category: z.string(),
@@ -34,7 +34,7 @@ export const CashOutResponseSchema = z.object({
 });
 
 export const CashInResponseSchema = z.object({
-  totalIncome: z.number(),
+  totalIncome: z.string(),
   fourIncomeCategories: z.array(
     z.object({
       category: z.string(),

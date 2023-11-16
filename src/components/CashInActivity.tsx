@@ -14,7 +14,7 @@ type RequestBody = {
 };
 
 type CashInResponse = {
-  totalIncome: number;
+  totalIncome: string;
   fourIncomeCategories: { category: string; sum: number }[];
   succeeded: boolean;
 };

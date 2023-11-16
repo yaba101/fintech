@@ -20,14 +20,21 @@ export async function POST(req: NextRequest) {
     );
 
     const fourExpenseCategories = sortedCashOutActivity.slice(0, 4);
-
     const totalExpense = fourExpenseCategories.reduce(
       (total, category) => total + category.sum,
       0,
     );
 
+    const formattedTotalExpense =
+      totalExpense === null || totalExpense === 0
+        ? "0.00"
+        : totalExpense.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          });
+
     const responseObject = {
-      totalExpense: Number(totalExpense.toFixed(2)),
+      totalExpense: formattedTotalExpense,
       fourExpenseCategories,
       succeeded: true,
     };
