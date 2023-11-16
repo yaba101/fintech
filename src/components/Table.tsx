@@ -164,7 +164,7 @@ export default async function Table({
               </div>
             </div>
             <div className="mx-auto w-1/3 py-6">
-              <button className="w-full whitespace-nowrap rounded-lg bg-[#27674a] px-4 py-2 text-center font-medium text-white hover:bg-green-700">
+              <button className="w-full whitespace-nowrap rounded-lg bg-[#27674a] px-4 py-2 text-center text-sm font-medium text-white hover:bg-green-700">
                 View More
               </button>
             </div>

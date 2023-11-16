@@ -16,10 +16,10 @@ export default function Stats({
   amount: string;
 }) {
   return (
-    <div className="flex flex-grow items-end justify-between rounded-lg bg-gray-50 px-4 py-6 shadow-lg dark:bg-dark sm:px-1 sm:py-4 md:py-6 ">
-      <div className="flex xs:gap-2 sm:pl-1 md:gap-4 md:pl-2 lg:pl-1.5 xl:pl-2">
+    <div className="flex flex-grow items-end justify-between rounded-lg bg-gray-50 px-4 py-6 shadow-lg dark:bg-dark sm:px-1 sm:py-4 md:py-6">
+      <div className="flex xs:gap-1 sm:pl-0 md:gap-4 md:pl-2 lg:pl-1.5 xl:pl-2">
         <span
-          className={`rounded-lg ${iconBgColor} my-auto p-2 py-3 dark:text-gray-100   md:p-3`}
+          className={`rounded-lg ${iconBgColor} my-auto p-2 py-3 dark:text-gray-100 md:p-3`}
         >
           {icon}
         </span>
