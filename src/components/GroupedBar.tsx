@@ -73,7 +73,7 @@ function Bar({
 
 export default function GroupedBarChart({ data }: Props) {
   const [selectedYear, setSelectedYear] = useState<number>(
-    Math.min(...data.incomeExpense.map((entry) => entry.year)),
+    Math.min(...(data.incomeExpense.map((entry) => entry.year) ?? 2020)),
   );
 
   const minYear = Math.min(...data.incomeExpense.map((entry) => entry.year));
