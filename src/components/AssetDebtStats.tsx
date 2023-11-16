@@ -11,14 +11,14 @@ import { z } from "zod";
 import delay from "@/utils/delay";
 
 type AssetDebtResponse = {
-  asset: number;
-  debt: number;
+  asset: string;
+  debt: string;
   succeeded: boolean;
 };
 
 const AssetDebtResponseSchema = z.object({
-  asset: z.number(),
-  debt: z.number(),
+  asset: z.string(),
+  debt: z.string(),
   succeeded: z.boolean(),
 });
 
@@ -38,12 +38,13 @@ const getData = async (url: string): Promise<AssetDebtResponse> => {
     return AssetDebtResponseSchema.parse(responseData);
   } catch (error) {
     console.error("Error while fetching data:", error);
-    return { asset: 0, debt: 0, succeeded: false };
+    return { asset: "0.00", debt: "0.00", succeeded: false };
   }
 };
 
 const AssetDebtStats = async () => {
   const { asset, debt } = await getData(`${process.env.URL}/api/asset-debt`);
+  console.log(asset, debt);
 
   return (
     <>

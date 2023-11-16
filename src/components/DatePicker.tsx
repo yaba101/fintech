@@ -67,15 +67,17 @@ export function DatePickerWithRange({
             id="date"
             variant={"outline"}
             className={cn(
-              "w-full justify-start bg-transparent text-left font-normal",
+              "mb-0 w-full justify-start bg-transparent p-1 text-left font-normal",
               !selectedRange && "text-muted-foreground",
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {selectedRange?.startDate && selectedRange?.endDate ? (
               <>
-                {formatDate(selectedRange.startDate)} -{" "}
-                {formatDate(selectedRange.endDate)}
+                <span className="text-xs">
+                  {formatDate(selectedRange.startDate)} -{" "}
+                  {formatDate(selectedRange.endDate)}
+                </span>
                 {isPending && (
                   <div role="loading">
                     <svg
@@ -99,7 +101,7 @@ export function DatePickerWithRange({
                 )}
               </>
             ) : (
-              <span>Pick a date</span>
+              <span className="text-xs">Pick a date</span>
             )}
           </Button>
         </PopoverTrigger>

@@ -1,15 +1,16 @@
 import delay from "@/utils/delay";
+import { formatNumber } from "@/utils/moneyFormat";
 import { z } from "zod";
 
 type AssetDebtResponse = {
-  asset: number;
-  debt: number;
+  asset: string;
+  debt: string;
   succeeded: boolean;
 };
 
 const AssetDebtResponseSchema = z.object({
-  asset: z.number(),
-  debt: z.number(),
+  asset: z.string(),
+  debt: z.string(),
   succeeded: z.boolean(),
 });
 
@@ -29,7 +30,7 @@ const getData = async (url: string): Promise<AssetDebtResponse> => {
     return AssetDebtResponseSchema.parse(responseData);
   } catch (error) {
     console.error("Error while fetching data:", error);
-    return { asset: 0, debt: 0, succeeded: false };
+    return { asset: "0.00", debt: "0.00", succeeded: false };
   }
 };
 
@@ -41,7 +42,13 @@ const NetWorthCard = async ({
   buttonText: string;
 }) => {
   const response = await getData(`${process.env.URL}/api/asset-debt`);
-  const netWorth = response.asset - response.debt;
+
+  const assetValue = parseFloat(response.asset.replace(/,/g, ""));
+  const debtValue = parseFloat(response.debt.replace(/,/g, ""));
+
+  const netWorth = (assetValue || 0) - (debtValue || 0);
+
+  const formattedNetWorth = formatNumber(netWorth);
 
   return (
     <div className="mx-auto mb-3 overflow-hidden rounded-lg border bg-gray-50 py-2 shadow-lg dark:border-gray-900 dark:bg-dark">
@@ -50,7 +57,7 @@ const NetWorthCard = async ({
           {title}
         </h4>
         <p className="my-3 text-xl font-semibold antialiased dark:text-gray-50 2xl:text-2xl">
-          ${netWorth}
+          ${formattedNetWorth}
         </p>
       </div>
       <div className="py-2 text-center">
