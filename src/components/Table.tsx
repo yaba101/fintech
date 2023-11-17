@@ -1,7 +1,7 @@
 import { DatePickerWithRange } from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
 import delay from "@/utils/delay";
-import { formatNumber } from "@/utils/moneyFormat";
+import { formatCurrency } from "@/utils/moneyFormat";
 import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
 import { parse } from "date-fns";
 import { z } from "zod";
@@ -154,7 +154,7 @@ export default async function Table({
                             <span
                               className={`inline-flex items-center rounded-md px-2 py-1 font-medium xs:text-[0.575rem] sm:text-xs md:text-sm xl:text-base 2xl:text-lg `}
                             >
-                              ${formatNumber(item.amount)}
+                              ${formatCurrency(item.amount)}
                             </span>
                           </td>
                         </tr>

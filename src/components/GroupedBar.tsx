@@ -2,7 +2,7 @@
 import * as d3 from "d3";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import YearDropDown from "./YearDropDown";
-import { formatNumber } from "@/utils/moneyFormat";
+import { formatCurrency } from "@/utils/moneyFormat";
 
 type GroupedBarChart = {
   year: number;
@@ -253,11 +253,11 @@ export default function GroupedBarChart({ data }: Props) {
           </span>
           {tooltip.type === "income" ? (
             <span className="mb-2 block text-xs font-semibold">
-              ${formatNumber(filteredData[tooltip.index].income)}
+              ${formatCurrency(filteredData[tooltip.index].income)}
             </span>
           ) : (
             <span className="mb-2 block text-xs font-semibold">
-              ${formatNumber(filteredData[tooltip.index].expense)}
+              ${formatCurrency(filteredData[tooltip.index].expense)}
             </span>
           )}
         </div>

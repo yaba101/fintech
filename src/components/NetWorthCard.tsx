@@ -1,5 +1,5 @@
 import delay from "@/utils/delay";
-import { formatNumber } from "@/utils/moneyFormat";
+import { formatCurrency } from "@/utils/moneyFormat";
 import { z } from "zod";
 
 type AssetDebtResponse = {
@@ -48,7 +48,7 @@ const NetWorthCard = async ({
 
   const netWorth = (assetValue || 0) - (debtValue || 0);
 
-  const formattedNetWorth = formatNumber(netWorth);
+  const formattedNetWorth = formatCurrency(netWorth);
 
   return (
     <div className="mx-auto mb-3 overflow-hidden rounded-lg border bg-gray-50 py-2 shadow-lg dark:border-gray-900 dark:bg-dark">

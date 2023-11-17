@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import assetDebt from "../../../../data/asset-debt.json";
-import { formatNumber } from "@/utils/moneyFormat";
+import { formatCurrency } from "@/utils/moneyFormat";
 
 export async function POST() {
   const { asset, debt } = assetDebt;
 
-  const formattedAsset = formatNumber(asset);
-  const formattedDebt = formatNumber(debt);
+  const formattedAsset = formatCurrency(asset);
+  const formattedDebt = formatCurrency(debt);
 
   const formattedData = {
     asset: formattedAsset,
