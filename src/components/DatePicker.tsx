@@ -33,8 +33,6 @@ export function DatePickerWithRange({
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const from = searchParams.get(fromParam);
-  const to = searchParams.get(toParam);
 
   const formatDate = (date: Date | undefined) => {
     return date ? format(date, "dd/MM/yy") : "";
