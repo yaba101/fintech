@@ -1,4 +1,12 @@
 import React from "react";
+type SidebarItemProps = {
+  icon: any;
+  text: string;
+  active: boolean;
+  alert: boolean;
+  isExpanded: boolean;
+  children?: React.ReactNode;
+};
 
 const SidebarItem = ({
   icon,
@@ -7,20 +15,13 @@ const SidebarItem = ({
   alert,
   isExpanded,
   children,
-}: {
-  icon: any;
-  text: string;
-  active: boolean;
-  alert: boolean;
-  isExpanded: boolean;
-  children?: React.ReactNode;
-}) => {
+}: SidebarItemProps) => {
   return (
     <li
       className={`
-        relative flex items-center py-2 px-3 my-1
-        font-medium rounded-md cursor-pointer
-        transition-colors group
+        group relative my-1 flex cursor-pointer items-center
+        rounded-md px-3 py-2
+        font-medium transition-colors
         
         ${
           active
@@ -33,8 +34,8 @@ const SidebarItem = ({
 
       <div className="flex">
         <h4
-          className={`overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap  dark:text-gray-100 text-gray-900 ${
-            isExpanded ? "w-32 ml-3" : "w-0"
+          className={`overflow-hidden whitespace-nowrap text-gray-900 transition-all duration-300  ease-in-out dark:text-gray-100 ${
+            isExpanded ? "ml-3 w-32" : "w-0"
           }`}
         >
           {text}
@@ -43,7 +44,7 @@ const SidebarItem = ({
       <div className="mx-auto">{children}</div>
       {alert && (
         <div
-          className={`absolute right-2 w-2 h-2 rounded bg-indigo-200 ${
+          className={`absolute right-2 h-2 w-2 rounded bg-indigo-200 ${
             isExpanded ? "" : "top-2"
           }`}
         />

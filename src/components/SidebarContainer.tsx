@@ -1,7 +1,7 @@
 "use client";
 import { Fragment, useContext, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon, MoonIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import MobileDropdown from "@/components/MobileDropdown";
 import {

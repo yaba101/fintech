@@ -37,7 +37,7 @@ const SummaryCard = () => {
             </div>
           </div>
           <div className="my-5 ">
-            <div className="flex justify-between xs:space-x-2 sm:space-x-0">
+            <div className="flex justify-between xs:space-x-2.5">
               <button className="whitespace-nowrap rounded-lg bg-[#27674a] px-2 py-1 text-sm font-medium text-white hover:bg-[#133425]">
                 View All
               </button>
