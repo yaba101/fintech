@@ -126,7 +126,7 @@ export default async function Table({
                           <td className="whitespace-nowrap py-3 pl-4 pr-3 sm:py-2 sm:pl-0">
                             <div className="flex items-center">
                               <div className="px-4 xs:px-0 sm:px-2">
-                                {item.personalFinanceCategoryIconUrl === "" ? (
+                                {item.personalFinanceCategoryIconUrl == null ? (
                                   <div className="ml-6"></div>
                                 ) : (
                                   <div className="rounded-full">
