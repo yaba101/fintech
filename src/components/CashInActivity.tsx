@@ -63,15 +63,15 @@ export default async function CashInActivity({
     <>
       <IncomeExpenseStats
         icon={
-          <ArrowDownLeftIcon className=" h-8 w-8 text-gray-100 dark:text-gray-100" />
+          <ArrowDownLeftIcon className=" h-8 w-8 text-gray-100 dark:text-gray-100 lg:h-5 lg:w-5 xl:h-8 xl:w-8 " />
         }
         title="Total Income"
         iconBgColor="bg-[#27674a]"
         textBgColor="bg-green-400"
-        textColor="text-emerald-400"
+        textColor="text-emerald-200"
         amount={response?.totalIncome!}
         signIcon={
-          <PlusIcon className="h-5 w-5 font-bold text-green-600 dark:text-green-600" />
+          <PlusIcon className="h-3 w-3 font-bold text-green-500 dark:text-green-300" />
         }
       />
 

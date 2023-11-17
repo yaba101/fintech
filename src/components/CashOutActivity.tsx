@@ -61,7 +61,7 @@ export default async function CashOutActivity({
     <>
       <IncomeExpenseStats
         icon={
-          <ArrowUpRightIcon className=" h-8 w-8 text-gray-100 dark:text-gray-100 " />
+          <ArrowUpRightIcon className=" h-8 w-8 text-gray-100 dark:text-gray-100 lg:h-5 lg:w-5 xl:h-8 xl:w-8 " />
         }
         title="Total Expenses"
         iconBgColor="bg-red-600"
@@ -69,7 +69,7 @@ export default async function CashOutActivity({
         textColor="text-red-400"
         amount={response?.totalExpense!}
         signIcon={
-          <MinusIcon className="h-5 w-5 font-bold text-red-600 dark:text-red-600" />
+          <MinusIcon className="h-3 w-3 font-bold text-red-600 dark:text-red-300" />
         }
       />
       <div className="my-1 rounded-md border bg-gray-50 p-4 shadow-md dark:border-gray-900 dark:bg-dark dark:text-gray-100">
