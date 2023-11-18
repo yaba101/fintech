@@ -68,7 +68,7 @@ export default async function CashInActivity({
         title="Total Income"
         iconBgColor="bg-[#27674a]"
         textBgColor="bg-green-400"
-        textColor="text-emerald-200"
+        textColor="text-emerald-400"
         amount={response?.totalIncome!}
         signIcon={
           <PlusIcon className="h-3 w-3 font-bold text-green-500 dark:text-green-300" />
