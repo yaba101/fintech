@@ -1,3 +1,13 @@
+type StatsProps = {
+  icon: any;
+  iconBgColor: string;
+  textBgColor: string;
+  textColor: string;
+  signIcon: any;
+  title: string;
+  amount: string;
+};
+
 export default function Stats({
   icon,
   iconBgColor,
@@ -6,15 +16,7 @@ export default function Stats({
   signIcon,
   title,
   amount,
-}: {
-  icon: any;
-  iconBgColor: string;
-  textBgColor: string;
-  textColor: string;
-  signIcon: any;
-  title: string;
-  amount: string;
-}) {
+}: StatsProps) {
   return (
     <div className="flex flex-grow items-end justify-between rounded-lg bg-gray-50 px-4 py-6 shadow-lg dark:bg-dark sm:px-1 sm:py-4 md:py-6">
       <div className="flex xs:gap-1 sm:pl-0 md:gap-4 md:pl-2 lg:pl-1.5 xl:pl-2">
@@ -35,10 +37,10 @@ export default function Stats({
       </div>
 
       <div
-        className={` flex rounded xs:px-1 md:mr-5 lg:mr-2 xl:mr-5  ${textColor} ${textBgColor} bg-opacity-40 `}
+        className={` flex rounded xs:px-1 md:mr-5 lg:mr-2 xl:mr-5  ${textColor} ${textBgColor} items-center justify-center bg-opacity-40 `}
       >
         {signIcon}
-        <span className="ml-1 font-medium xs:text-xs sm:text-[0.5rem] md:text-sm lg:text-[0.6rem] xl:text-sm ">
+        <span className="ml-1 font-medium xs:text-xs sm:text-[0.5rem] md:text-sm lg:text-[0.6rem] xl:text-xs 2xl:text-sm ">
           67.81%
         </span>
       </div>

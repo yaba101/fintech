@@ -38,10 +38,10 @@ const SummaryCard = () => {
           </div>
           <div className="my-5 ">
             <div className="flex justify-between xs:space-x-2.5">
-              <button className="whitespace-nowrap rounded-lg bg-[#27674a] px-2 py-1 text-sm font-medium text-white hover:bg-[#133425]">
+              <button className="whitespace-nowrap rounded-lg bg-[#27674a] px-2 py-1 font-medium text-white  hover:bg-[#133425] xs:text-sm lg:text-xs">
                 View All
               </button>
-              <button className="whitespace-nowrap rounded-lg bg-[#5e54e6] px-2 py-1 text-sm font-medium text-white hover:bg-[#4941b3]">
+              <button className="whitespace-nowrap rounded-lg bg-[#5e54e6] px-2 py-1 font-medium text-white hover:bg-[#4941b3] xs:text-sm lg:text-xs">
                 Add Account
               </button>
             </div>
