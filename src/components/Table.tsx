@@ -1,5 +1,6 @@
 import { DatePickerWithRange } from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
+import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import delay from "@/utils/delay";
 import { formatCurrency } from "@/utils/moneyFormat";
 import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
@@ -85,7 +86,7 @@ export default async function Table({
   };
 
   const data = await getRecentTransactionData(
-    `${process.env.URL}/api/transactions`,
+    `${process.env.URL}/api/${urlEndpoints["transaction"]}`,
     requestBody,
   );
 

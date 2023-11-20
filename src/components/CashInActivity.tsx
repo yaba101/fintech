@@ -8,6 +8,7 @@ import { DatePickerWithRange } from "./DatePicker";
 import { parse } from "date-fns";
 import delay from "@/utils/delay";
 import IncomeExpenseStats from "./IncomeExpenseStats";
+import { urlEndpoints } from "@/endpoint/urlEndpoint";
 
 type RequestBody = {
   toDate: Date | null;
@@ -27,10 +28,7 @@ export default async function CashInActivity({
   from: string;
   to: string;
 }) {
-  // await delay(5000);
-
   const title = "Cash In Activity";
-  const url = "/api/cash-in-activity";
 
   const fromDate = from ? parse(from, "dd/MM/yy", new Date()) : null;
   const toDate = to ? parse(to, "dd/MM/yy", new Date()) : null;
@@ -41,7 +39,7 @@ export default async function CashInActivity({
   };
 
   const response = await fetchData<CashInResponse>(
-    `${process.env.URL}${url}`,
+    `${process.env.URL}/api/${urlEndpoints["cashInActivity"]}`,
     requestBody,
     CashInResponseSchema,
   );

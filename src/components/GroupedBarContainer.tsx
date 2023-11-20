@@ -2,6 +2,7 @@ import React from "react";
 import GroupedBarChart from "./GroupedBar";
 import { z } from "zod";
 import delay from "@/utils/delay";
+import { urlEndpoints } from "@/endpoint/urlEndpoint";
 
 type RequestBody = {
   toDate: Date | null;
@@ -64,7 +65,9 @@ const getData = async (url: string, body?: RequestBody) => {
 };
 
 const GroupedBarContainer = async () => {
-  const data = await getData(`${process.env.URL}/api/income-expense`);
+  const data = await getData(
+    `${process.env.URL}/api/${urlEndpoints["incomeExpense"]}`,
+  );
   return <GroupedBarChart data={data} />;
 };
 

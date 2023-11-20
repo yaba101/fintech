@@ -8,6 +8,7 @@ import { DatePickerWithRange } from "./DatePicker";
 import { parse } from "date-fns";
 import delay from "@/utils/delay";
 import IncomeExpenseStats from "./IncomeExpenseStats";
+import { urlEndpoints } from "@/endpoint/urlEndpoint";
 
 type CashOutResponse = {
   totalExpense: string;
@@ -28,7 +29,6 @@ export default async function CashOutActivity({
 }) {
   await delay(7000);
   const title = "Cash Out Activity";
-  const url = "/api/cash-out-activity";
 
   const fromDate = from ? parse(from, "dd/MM/yy", new Date()) : null;
   const toDate = to ? parse(to, "dd/MM/yy", new Date()) : null;
@@ -39,7 +39,7 @@ export default async function CashOutActivity({
   };
 
   const response = await fetchData<CashOutResponse>(
-    `${process.env.URL}${url}`,
+    `${process.env.URL}/api/${urlEndpoints["cashOutActivity"]}`,
     requestBody,
     CashOutResponseSchema,
   );
