@@ -1,9 +1,8 @@
 import { DatePickerWithRange } from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
 import { urlEndpoints } from "@/endpoint/urlEndpoint";
-import delay from "@/utils/delay";
 import { formatCurrency } from "@/utils/moneyFormat";
-import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
+import { Business } from "@mui/icons-material";
 import { parse } from "date-fns";
 import { z } from "zod";
 
@@ -47,7 +46,6 @@ const RequestBodySchema = z.object({
 
 const getRecentTransactionData = async (url: string, body?: RequestBody) => {
   try {
-    // await delay(10000);
     const response = await fetch(url, {
       method: "POST",
       cache: "no-store",
@@ -131,7 +129,7 @@ export default async function Table({
                                   <div className="ml-6"></div>
                                 ) : (
                                   <div className="rounded-full">
-                                    <ArrowDownCircleIcon className="h-6 w-6" />
+                                    <Business className="h-6 w-6" />
                                   </div>
                                 )}
                               </div>

@@ -1,14 +1,11 @@
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import HalfDonutChart from "@/components/HalfPieChart";
 import { Button } from "./ui/button";
 import { CashInResponseSchema, fetchData } from "@/utils/cashActivitiesUtils";
-import Stats from "./Stats";
-import { ArrowDownLeftIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { DatePickerWithRange } from "./DatePicker";
 import { parse } from "date-fns";
-import delay from "@/utils/delay";
 import IncomeExpenseStats from "./IncomeExpenseStats";
 import { urlEndpoints } from "@/endpoint/urlEndpoint";
+import { Add, ArrowForward, TrendingUp } from "@mui/icons-material";
 
 type RequestBody = {
   toDate: Date | null;
@@ -61,7 +58,7 @@ export default async function CashInActivity({
     <>
       <IncomeExpenseStats
         icon={
-          <ArrowDownLeftIcon className=" h-8 w-8 text-gray-100 dark:text-gray-100 lg:h-5 lg:w-5 xl:h-8 xl:w-8 " />
+          <TrendingUp className=" h-8 w-8 text-gray-100 dark:text-gray-100 lg:h-5 lg:w-5 xl:h-8 xl:w-8 " />
         }
         title="Total Income"
         iconBgColor="bg-[#27674a]"
@@ -69,7 +66,7 @@ export default async function CashInActivity({
         textColor="text-green-700 dark:text-green-200"
         amount={response?.totalIncome!}
         signIcon={
-          <PlusIcon className="h-3 w-3 font-bold text-green-500 dark:text-green-300" />
+          <Add className="h-3 w-3 font-bold text-green-500 dark:text-green-300" />
         }
       />
 
@@ -129,7 +126,7 @@ export default async function CashInActivity({
             <span className="mx-auto whitespace-nowrap text-center lg:text-xs xl:text-sm">
               View All Activity
             </span>
-            <ArrowRightIcon className="h-6 w-6 shrink dark:text-gray-100 " />
+            <ArrowForward className="h-6 w-6 shrink dark:text-gray-100 " />
           </Button>
         </div>
       </div>

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
-import { MoonIcon, SunIcon } from "@heroicons/react/20/solid";
+import { DarkMode, LightMode } from "@mui/icons-material";
 
 const TOGGLE_CLASSES =
   "text-sm font-medium flex items-center gap-2 px-2 md:pr-3.5 py-3 xs:py-1 md:py-1.5 transition-colors relative z-10";
@@ -31,7 +31,7 @@ const ThemeSwitcher = () => {
 
   return (
     <div
-      className={`grid gap-3 h-fit place-content-center xs:px-4 xl:px-0 transition-color`}
+      className={`transition-color grid h-fit place-content-center gap-3 xs:px-4 xl:px-0`}
     >
       <SliderToggle selected={selected} toggleTheme={toggleTheme} />
     </div>
@@ -46,15 +46,15 @@ const SliderToggle = ({
   toggleTheme: () => void;
 }) => {
   return (
-    <div className="relative flex w-fit items-center rounded-full border dark:border-gray-500 border-gray-400 ">
+    <div className="relative flex w-fit items-center rounded-full border border-gray-400 dark:border-gray-500 ">
       <button
         className={`${TOGGLE_CLASSES} ${
           selected === "light" ? "text-white" : "text-slate-300"
         }`}
         onClick={() => toggleTheme()}
       >
-        <SunIcon
-          className={`relative z-10 text-lg md:text-sm w-4 h-4  ${
+        <LightMode
+          className={`relative z-10 h-4 w-4 text-lg md:text-sm  ${
             selected === "light" ? "text-yellow-400" : ""
           }`}
         />
@@ -67,7 +67,7 @@ const SliderToggle = ({
         }`}
         onClick={() => toggleTheme()}
       >
-        <MoonIcon className="relative z-10 text-lg md:text-sm w-4 h-4" />
+        <DarkMode className="relative z-10 h-4 w-4 text-lg md:text-sm" />
         <span className="relative z-10 font-semibold">Dark</span>
       </button>
       <div

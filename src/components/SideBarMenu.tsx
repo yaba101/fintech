@@ -1,15 +1,14 @@
-import { BuildingOffice2Icon } from "@heroicons/react/24/outline";
-import {
-  ChevronFirst,
-  ChevronLast,
-  LogOut,
-  Moon,
-  MoreVertical,
-} from "lucide-react";
 import React, { useContext, useEffect } from "react";
 import SidebarItem from "./SideBarItem";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { SidebarContext } from "@/components/SidebarProvider";
+import {
+  Business,
+  FirstPage,
+  LastPage,
+  Logout,
+  MoreVert,
+} from "@mui/icons-material";
 
 const SideBarMenu = ({ children }: { children: React.ReactNode }) => {
   const {
@@ -38,43 +37,43 @@ const SideBarMenu = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       id="sidebar-container"
-      className={`h-screen dark:bg-dark relative transition-all duration-300 ease-in-out   ${
+      className={`relative h-screen transition-all duration-300 ease-in-out dark:bg-dark   ${
         isExpanded ? "w-30 space-y-4 " : "w-20"
       }`}
     >
       <nav
-        className={` dark:bg-dark  h-full flex flex-col absolute top-0 transition-all duration-300 ease-in-out  px-2 ${
+        className={` absolute  top-0 flex h-full flex-col px-2 transition-all duration-300 ease-in-out  dark:bg-dark ${
           isExpanded ? "shadow shadow-slate-500" : ""
         } `}
       >
         <div className="flex items-center justify-between p-4 pb-2">
           <button
             onClick={() => setIsExpanded((curr) => !curr)}
-            className="p-1.5 rounded-lg "
+            className="rounded-lg p-1.5 "
           >
             {isExpanded ? (
-              <ChevronFirst className="font-bold dark:text-slate-100" />
+              <FirstPage className="font-bold dark:text-slate-100" />
             ) : (
-              <ChevronLast className="font-bold dark:text-slate-100" />
+              <LastPage className="font-bold dark:text-slate-100" />
             )}
           </button>
         </div>
-        <ul className="flex-1 px-3 space-y-5">
+        <ul className="flex-1 space-y-5 px-3">
           {children}
           <div
-            className={`flex justify-between items-center overflow-hidden  ${
-              isExpanded ? "xl:w-40 lg:w-44" : "w-0"
+            className={`flex items-center justify-between overflow-hidden  ${
+              isExpanded ? "lg:w-44 xl:w-40" : "w-0"
             }`}
           >
             <ThemeSwitcher />
           </div>
           <div
-            className={`flex justify-between items-center overflow-hidden ${
+            className={`flex items-center justify-between overflow-hidden ${
               isExpanded ? "" : "w-0"
             }`}
           >
             <SidebarItem
-              icon={<LogOut size={20} />}
+              icon={<Logout />}
               active={false}
               alert={false}
               text={"Log Out"}
@@ -83,14 +82,14 @@ const SideBarMenu = ({ children }: { children: React.ReactNode }) => {
           </div>
         </ul>
 
-        <div className="flex p-3 border-t">
-          <BuildingOffice2Icon className="w-10 h-10 rounded-md" />
+        <div className="flex border-t p-3">
+          <Business className="h-10 w-10 rounded-md" />
           <div
-            className={`flex justify-between items-center overflow-hidden transition-all duration-300 ease-in-out ${
-              isExpanded ? "xl:w-32 lg:w-44 ml-3" : "w-0"
+            className={`flex items-center justify-between overflow-hidden transition-all duration-300 ease-in-out ${
+              isExpanded ? "ml-3 lg:w-44   xl:w-32" : "w-0"
             }`}
           >
-            <MoreVertical size={20} className="ml-auto cursor-pointer" />
+            <MoreVert className="ml-auto cursor-pointer" />
           </div>
         </div>
       </nav>

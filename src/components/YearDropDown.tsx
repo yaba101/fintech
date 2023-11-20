@@ -1,6 +1,6 @@
 "use client";
-import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/24/outline";
-import React, { useState, useRef, useEffect } from "react";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { useState, useRef, useEffect } from "react";
 
 interface YearDropDownProps {
   years: number[];
@@ -47,9 +47,9 @@ function YearDropDown({
         >
           {selectedYear}
           {isOpen ? (
-            <ArrowUpIcon className="ml-1 mt-1 h-3 w-3 text-end xs:mt-0.5" />
+            <ExpandMore className="ml-1 mt-1 h-3 w-3 text-end xs:mt-0.5" />
           ) : (
-            <ArrowDownIcon className="ml-1 mt-1 h-3 w-3 text-end xs:mt-0.5" />
+            <ExpandLess className="ml-1 mt-1 h-3 w-3 text-end xs:mt-0.5" />
           )}
         </button>
       </div>

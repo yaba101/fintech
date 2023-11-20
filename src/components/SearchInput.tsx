@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { Search } from "@mui/icons-material";
 
 export default function SearchInput({ placeholder }: { placeholder: string }) {
   const [isFocused, setIsFocused] = useState(false);
@@ -16,7 +16,7 @@ export default function SearchInput({ placeholder }: { placeholder: string }) {
             isFocused ? "xs:hidden" : ""
           }`}
         >
-          <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
+          <Search className="h-5 w-5" aria-hidden="true" />
         </div>
         <input
           id="desktop-search"

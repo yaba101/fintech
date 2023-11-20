@@ -42,7 +42,6 @@ const GroupedBarChartResponseSchema = z.object({
 
 const getData = async (url: string, body?: RequestBody) => {
   try {
-    await delay(10000);
     const response = await fetch(url, {
       method: "POST",
       cache: "no-store",

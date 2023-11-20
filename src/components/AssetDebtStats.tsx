@@ -1,15 +1,9 @@
 import React from "react";
 import Stats from "./Stats";
-import {
-  ArrowDownLeftIcon,
-  ArrowUpRightIcon,
-  MinusIcon,
-  PlusIcon,
-} from "@heroicons/react/24/outline";
-
 import { z } from "zod";
 import delay from "@/utils/delay";
 import { urlEndpoints } from "@/endpoint/urlEndpoint";
+import { Add, Remove, TrendingDown, TrendingUp } from "@mui/icons-material";
 
 type AssetDebtResponse = {
   asset: string;
@@ -25,7 +19,6 @@ const AssetDebtResponseSchema = z.object({
 
 const getData = async (url: string): Promise<AssetDebtResponse> => {
   try {
-    await delay(5000);
     const response = await fetch(url, {
       method: "POST",
       cache: "no-store",
@@ -53,19 +46,19 @@ const AssetDebtStats = async () => {
       <Stats
         title="Total Assets"
         icon={
-          <ArrowDownLeftIcon className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
+          <TrendingDown className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
         }
         iconBgColor="bg-[#27674a]"
         textBgColor="bg-green-400"
         textColor="text-emerald-400"
         amount={asset}
         signIcon={
-          <PlusIcon className="text-green-600 dark:text-green-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
+          <Add className="text-green-600 dark:text-green-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
         }
       />
       <Stats
         icon={
-          <ArrowUpRightIcon className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
+          <TrendingUp className="text-gray-100 dark:text-gray-100 xs:h-4 xs:w-4 md:h-8 md:w-8 lg:h-5 lg:w-5 xl:h-8 xl:w-8" />
         }
         title="Total Debt"
         iconBgColor="bg-red-600"
@@ -73,7 +66,7 @@ const AssetDebtStats = async () => {
         textColor="text-red-400"
         amount={debt}
         signIcon={
-          <MinusIcon className="text-red-600 dark:text-red-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
+          <Remove className="text-red-600 dark:text-red-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
         }
       />
     </>

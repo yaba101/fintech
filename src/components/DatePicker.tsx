@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState, useTransition } from "react";
-import { Calendar as CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { DateRange as DatePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
@@ -13,6 +12,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useRouter, useSearchParams } from "next/navigation";
+import { CalendarToday } from "@mui/icons-material";
 
 interface DatePickerWithRangeProps {
   className?: string;
@@ -69,7 +69,7 @@ export function DatePickerWithRange({
               !selectedRange && "text-muted-foreground",
             )}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
+            <CalendarToday className="mr-2 h-4 w-4" />
             {selectedRange?.startDate && selectedRange?.endDate ? (
               <>
                 <span className="text-xs">

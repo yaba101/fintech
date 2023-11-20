@@ -1,14 +1,11 @@
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import HalfDonutChart from "@/components/HalfPieChart";
 import { Button } from "./ui/button";
 import { CashOutResponseSchema, fetchData } from "@/utils/cashActivitiesUtils";
-import Stats from "./Stats";
-import { ArrowUpRightIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { DatePickerWithRange } from "./DatePicker";
 import { parse } from "date-fns";
-import delay from "@/utils/delay";
 import IncomeExpenseStats from "./IncomeExpenseStats";
 import { urlEndpoints } from "@/endpoint/urlEndpoint";
+import { ArrowForward, Remove, TrendingDown } from "@mui/icons-material";
 
 type CashOutResponse = {
   totalExpense: string;
@@ -27,7 +24,6 @@ export default async function CashOutActivity({
   from: string;
   to: string;
 }) {
-  await delay(7000);
   const title = "Cash Out Activity";
 
   const fromDate = from ? parse(from, "dd/MM/yy", new Date()) : null;
@@ -61,7 +57,7 @@ export default async function CashOutActivity({
     <>
       <IncomeExpenseStats
         icon={
-          <ArrowUpRightIcon className=" h-8 w-8 text-gray-100 dark:text-gray-100 lg:h-5 lg:w-5 xl:h-8 xl:w-8 " />
+          <TrendingDown className=" h-8 w-8 text-gray-100 dark:text-gray-100 lg:h-5 lg:w-5 xl:h-8 xl:w-8 " />
         }
         title="Total Expenses"
         iconBgColor="bg-red-600"
@@ -69,7 +65,7 @@ export default async function CashOutActivity({
         textColor="text-red-800 dark:text-red-100"
         amount={response?.totalExpense!}
         signIcon={
-          <MinusIcon className="h-3 w-3 font-bold text-red-600 dark:text-red-300" />
+          <Remove className="h-3 w-3 font-bold text-red-600 dark:text-red-300" />
         }
       />
       <div className="my-1 rounded-md border bg-gray-50 p-4 shadow-md dark:border-gray-900 dark:bg-dark dark:text-gray-100">
@@ -128,7 +124,7 @@ export default async function CashOutActivity({
             <span className="mx-auto whitespace-nowrap text-center lg:text-xs xl:text-sm">
               View All Activity
             </span>
-            <ArrowRightIcon className="h-6 w-6 shrink dark:text-gray-100 " />
+            <ArrowForward className="h-6 w-6 shrink dark:text-gray-100 " />
           </Button>
         </div>
       </div>

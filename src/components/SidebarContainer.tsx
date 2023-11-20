@@ -1,56 +1,58 @@
 "use client";
 import { Fragment, useContext, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import MobileDropdown from "@/components/MobileDropdown";
-import {
-  LayoutDashboard,
-  LockIcon,
-  MessageCircle,
-  Settings,
-  User,
-  Wallet2Icon,
-  Activity,
-  Banknote,
-} from "lucide-react";
 import SideBarMenu from "@/components/SideBarMenu";
 import SidebarItem from "@/components/SideBarItem";
 import { SidebarContext } from "@/components/SidebarProvider";
+import {
+  Dashboard,
+  AccountCircle,
+  Analytics,
+  AccountBalanceWallet,
+  AccountBalance,
+  Settings,
+  Security,
+  HelpCenter,
+  MenuOpen,
+  Close,
+} from "@mui/icons-material";
+import { cn } from "@/lib/utils";
 
 const FirstNavSection = [
   {
     text: "Dashboard",
     active: true,
-    icon: LayoutDashboard,
+    icon: Dashboard,
     alert: true,
     href: "/dashboard",
   },
   {
     text: "Account",
     active: false,
-    icon: User,
+    icon: AccountCircle,
     alert: false,
     href: "/account",
   },
   {
     text: "Analytics",
     active: false,
-    icon: Activity,
+    icon: Analytics,
     alert: false,
     href: "/analytics",
   },
   {
     text: "My Bill",
     active: false,
-    icon: Wallet2Icon,
+    icon: AccountBalanceWallet,
     alert: false,
     href: "/my-bill",
   },
   {
     text: "My Budgets",
     active: false,
-    icon: Banknote,
+    icon: AccountBalance,
     alert: false,
     href: "/my-budgets",
   },
@@ -67,14 +69,14 @@ const SecondNavSection = [
   {
     text: "Security",
     active: false,
-    icon: LockIcon,
+    icon: Security,
     alert: false,
     href: "/security",
   },
   {
     text: "Help Center",
     active: false,
-    icon: MessageCircle,
+    icon: HelpCenter,
     alert: false,
     href: "/help-center",
   },
@@ -136,7 +138,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                         onClick={() => setSidebarOpen(false)}
                       >
                         <span className="sr-only">Close sidebar</span>
-                        <XMarkIcon
+                        <Close
                           className="h-6 w-6 text-white"
                           aria-hidden="true"
                         />
@@ -155,7 +157,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                               <li key={item.text}>
                                 <a
                                   href={item.href}
-                                  className={classNames(
+                                  className={cn(
                                     item.active
                                       ? " mt-4 bg-indigo-800 text-gray-100"
                                       : "hover:text-indigo-600 dark:text-gray-200 dark:hover:bg-indigo-500  ",
@@ -163,7 +165,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
                                   )}
                                 >
                                   <item.icon
-                                    className={classNames(
+                                    className={cn(
                                       item.active
                                         ? "text-gray-300"
                                         : "text-gray-800 group-hover:text-indigo-600 dark:text-gray-200",
@@ -224,7 +226,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
               {FirstNavSection.map((item) => (
                 <SidebarItem
                   key={item.text}
-                  icon={<item.icon size={20} />}
+                  icon={<item.icon />}
                   alert={item.alert}
                   text={item.text}
                   active={item.active}
@@ -235,7 +237,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
               {SecondNavSection.map((item) => (
                 <SidebarItem
                   key={item.text}
-                  icon={<item.icon size={20} />}
+                  icon={<item.icon />}
                   alert={item.alert}
                   text={item.text}
                   active={item.active}
@@ -253,7 +255,7 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
-            <Bars3Icon
+            <MenuOpen
               className="h-6 w-6 dark:text-gray-200"
               aria-hidden="true"
             />
