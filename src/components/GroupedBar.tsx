@@ -72,9 +72,9 @@ function Bar({
 }
 
 export default function GroupedBarChart({ data }: Props) {
-  const [selectedYear, setSelectedYear] = useState<number | null>(
-    Math.min(...data.incomeExpense.map((entry) => entry.year)),
-  );
+  const currentYear = new Date().getFullYear();
+  const [selectedYear, setSelectedYear] = useState<number | null>(currentYear);
+
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
 
   const minYear = Math.min(...data.incomeExpense.map((entry) => entry.year));
@@ -142,7 +142,7 @@ export default function GroupedBarChart({ data }: Props) {
   }, [scaleX, yAxis]);
 
   return (
-    <div className="my-3 overflow-x-hidden rounded-md bg-gray-50 py-1 shadow-lg dark:bg-dark">
+    <div className=" z-0 my-3 overflow-x-hidden rounded-md bg-gray-50 py-1 shadow-lg dark:bg-dark">
       <div className="my-3 flex min-w-fit justify-between py-1 md:px-3">
         <h4 className="mt-1 whitespace-nowrap px-1 text-center font-bold capitalize tracking-tight xs:text-sm md:mr-5 md:text-2xl ">
           Insights
@@ -163,7 +163,7 @@ export default function GroupedBarChart({ data }: Props) {
       </div>
 
       <svg
-        className="w-auto overflow-x-hidden px-3 "
+        className=" w-auto overflow-x-hidden px-3 "
         viewBox={`0 0 ${width + margin.left + margin.right} ${
           height + margin.top + margin.bottom
         }`}
@@ -246,7 +246,11 @@ export default function GroupedBarChart({ data }: Props) {
       {tooltip !== null ? (
         <div
           className="pointer-events-none fixed rounded px-3 py-1 text-sm text-gray-100 shadow-md"
-          style={{ top: tooltip.y, left: tooltip.x, background: "#454687" }}
+          style={{
+            top: tooltip.y,
+            left: tooltip.x,
+            background: tooltip.type === "income" ? "#27674a" : "#df2433",
+          }}
         >
           <span className="mb-2 block text-xs font-medium">
             {filteredData[tooltip.index].month_name} {selectedYear}
