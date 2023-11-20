@@ -72,7 +72,7 @@ export default async function Dashboard({
               />
             </Suspense>
           </div>
-          <div className="w-full px-2 xs:-order-3 lg:order-none lg:-mt-40 lg:w-1/2">
+          <div className="w-full xs:-order-3 xs:px-0 md:px-2 lg:order-none lg:-mt-40 lg:w-1/2">
             <Suspense fallback={<GroupedBarChartSkeleton />}>
               <GroupedBarContainer />
             </Suspense>

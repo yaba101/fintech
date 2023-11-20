@@ -65,8 +65,8 @@ export default async function CashOutActivity({
         }
         title="Total Expenses"
         iconBgColor="bg-red-600"
-        textBgColor="bg-red-400"
-        textColor="text-red-400"
+        textBgColor="bg-red-300"
+        textColor="text-red-800 dark:text-red-100"
         amount={response?.totalExpense!}
         signIcon={
           <MinusIcon className="h-3 w-3 font-bold text-red-600 dark:text-red-300" />

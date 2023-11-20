@@ -145,12 +145,12 @@ export default async function Table({
                               </div>
                             </div>
                           </td>
-                          <td className="whitespace-nowrap px-3 py-3 text-gray-400 xs:px-1 xs:text-xs sm:py-2">
+                          <td className="whitespace-nowrap px-3 py-3 text-gray-500 dark:text-gray-100 xs:px-1 xs:text-xs sm:py-2">
                             <div className="xs:text-[0.575rem] sm:text-xs md:text-sm xl:text-base 2xl:text-lg">
                               {item.transactionDate}
                             </div>
                           </td>
-                          <td className="whitespace-nowrap px-3 py-3 text-gray-300 xs:px-1 sm:py-2">
+                          <td className="whitespace-nowrap px-3 py-3 text-gray-600 dark:text-gray-100 xs:px-1 sm:py-2">
                             <span
                               className={`inline-flex items-center rounded-md px-2 py-1 font-medium xs:text-[0.575rem] sm:text-xs md:text-sm xl:text-base 2xl:text-lg `}
                             >
