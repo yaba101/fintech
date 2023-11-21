@@ -4,6 +4,7 @@ import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { formatCurrency } from "@/utils/moneyFormat";
 import { Business } from "@mui/icons-material";
 import { parse } from "date-fns";
+import Image from "next/image";
 import { z } from "zod";
 
 type RecentTransaction = {
@@ -126,10 +127,16 @@ export default async function Table({
                             <div className="flex items-center">
                               <div className="px-4 xs:px-0 sm:px-2">
                                 {item.personalFinanceCategoryIconUrl == null ? (
-                                  <div className="ml-6"></div>
+                                  <div className=" rounded-full bg-gray-400  dark:bg-gray-100 xs:ml-1 xs:h-4 xs:w-4 sm:ml-6 sm:h-8 sm:w-8"></div>
                                 ) : (
-                                  <div className="rounded-full">
-                                    <Business className="h-6 w-6" />
+                                  <div className="h-6 w-6 rounded-full">
+                                    <Image
+                                      src={item.personalFinanceCategoryIconUrl}
+                                      alt="Icon"
+                                      width={24}
+                                      height={24}
+                                      className="rounded-full"
+                                    />
                                   </div>
                                 )}
                               </div>
@@ -164,7 +171,7 @@ export default async function Table({
               </div>
             </div>
             <div className="mx-auto w-1/3 py-6">
-              <button className="w-full whitespace-nowrap rounded-lg bg-[#27674a] px-4 py-2 text-center text-sm font-medium text-white hover:bg-green-700">
+              <button className="w-full whitespace-nowrap rounded-lg bg-[#27674a] px-4 py-2 text-center font-medium text-white hover:bg-green-700 xs:text-xs sm:text-sm">
                 View More
               </button>
             </div>
