@@ -12,9 +12,7 @@ export async function POST() {
     }
 
     const data = await response.json();
-
-    console.log();
-    const { asset, debt } = data?.[0];
+    const { asset, debt } = data;
 
     const formattedAsset = formatCurrency(asset);
     const formattedDebt = formatCurrency(debt);
@@ -24,9 +22,8 @@ export async function POST() {
       debt: formattedDebt,
       succeeded: true,
     };
-    console.log({ formattedData });
-
     const jsonResponse = NextResponse.json(formattedData);
+    console.log(jsonResponse);
 
     jsonResponse.cookies.set({
       name: "assetDebt",

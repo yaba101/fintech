@@ -1,10 +1,7 @@
-import React from "react";
 import Stats from "./Stats";
 import { z } from "zod";
-import delay from "@/utils/delay";
 import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { Add, Remove, TrendingDown, TrendingUp } from "@mui/icons-material";
-
 type AssetDebtResponse = {
   asset: string;
   debt: string;
@@ -20,8 +17,9 @@ const AssetDebtResponseSchema = z.object({
 const getData = async (url: string): Promise<AssetDebtResponse> => {
   try {
     const response = await fetch(url, {
-      method: "POST",
+      method: "GET",
       cache: "no-store",
+      credentials: "include",
     });
 
     if (!response.ok) {
@@ -38,7 +36,7 @@ const getData = async (url: string): Promise<AssetDebtResponse> => {
 
 const AssetDebtStats = async () => {
   const { asset, debt } = await getData(
-    `${process.env.URL}/api/${urlEndpoints["assetDebt"]}`,
+    `${process.env.BASE_URL}/${urlEndpoints["assetDebt"]}`,
   );
 
   return (
