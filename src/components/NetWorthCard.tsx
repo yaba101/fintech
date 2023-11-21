@@ -1,3 +1,4 @@
+import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import delay from "@/utils/delay";
 import { formatCurrency } from "@/utils/moneyFormat";
 import { z } from "zod";
@@ -16,7 +17,6 @@ const AssetDebtResponseSchema = z.object({
 
 const getData = async (url: string): Promise<AssetDebtResponse> => {
   try {
-    await delay(10000);
     const response = await fetch(url, {
       method: "POST",
       cache: "no-store",
@@ -41,10 +41,12 @@ const NetWorthCard = async ({
   title: string;
   buttonText: string;
 }) => {
-  const response = await getData(`${process.env.BASE_URL}/asset-debt`);
+  const { asset, debt } = await getData(
+    `${process.env.URL}/api/${urlEndpoints["assetDebt"]}`,
+  );
 
-  const assetValue = parseFloat(response.asset.replace(/,/g, ""));
-  const debtValue = parseFloat(response.debt.replace(/,/g, ""));
+  const assetValue = parseFloat(asset.replace(/,/g, ""));
+  const debtValue = parseFloat(debt.replace(/,/g, ""));
 
   const netWorth = (assetValue || 0) - (debtValue || 0);
 
