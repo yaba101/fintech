@@ -41,7 +41,7 @@ const NetWorthCard = async ({
   title: string;
   buttonText: string;
 }) => {
-  const response = await getData(`${process.env.URL}/api/asset-debt`);
+  const response = await getData(`${process.env.BASE_URL}/asset-debt`);
 
   const assetValue = parseFloat(response.asset.replace(/,/g, ""));
   const debtValue = parseFloat(response.debt.replace(/,/g, ""));

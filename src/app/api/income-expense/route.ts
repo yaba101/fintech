@@ -1,15 +1,32 @@
+import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { NextResponse } from "next/server";
-import incomeExpense from "../../../../data/income-expense.json";
 
 export async function POST() {
-  const response = NextResponse.json(incomeExpense);
+  try {
+    const response = await fetch(
+      `${process.env.BASE_URL}/${urlEndpoints["incomeExpense"]}`,
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
 
-  response.cookies.set({
-    name: "incomeExpense",
-    value: JSON.stringify(incomeExpense),
-    maxAge: 60 * 60,
-    path: "/dashboard",
-  });
+    const remoteData = await response.json();
 
-  return response;
+    const jsonResponse = NextResponse.json(remoteData[0]);
+
+    jsonResponse.cookies.set({
+      name: "incomeExpense",
+      value: JSON.stringify(remoteData),
+      maxAge: 60 * 60,
+      path: "/dashboard",
+    });
+
+    return jsonResponse;
+  } catch (error) {
+    console.error("Error fetching or processing data:", error);
+
+    return new Response("Error fetching or processing data", {
+      status: 500,
+    });
+  }
 }

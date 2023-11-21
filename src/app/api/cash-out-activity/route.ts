@@ -1,27 +1,38 @@
+import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { NextRequest, NextResponse } from "next/server";
-import cashOutActivity from "../../../../data/cash-out-activity.json";
 
 export async function POST(req: NextRequest) {
   try {
     const requestBody = await req.json();
     const { fromDate, toDate } = requestBody;
 
-    const filteredCashOutActivity = cashOutActivity.filter((activity) => {
-      const activityDate = new Date(activity.activityDate);
+    const response = await fetch(
+      `${process.env.BASE_URL}/${urlEndpoints["cashOutActivity"]}`,
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
 
-      return (
-        (!fromDate || activityDate >= new Date(fromDate)) &&
-        (!toDate || activityDate <= new Date(toDate))
-      );
-    });
+    const remoteData = await response.json();
+
+    const filteredCashOutActivity = remoteData.filter(
+      (activity: { activityDate: string | number | Date }) => {
+        const activityDate = new Date(activity.activityDate);
+
+        return (
+          (!fromDate || activityDate >= new Date(fromDate)) &&
+          (!toDate || activityDate <= new Date(toDate))
+        );
+      },
+    );
 
     const sortedCashOutActivity = filteredCashOutActivity.sort(
-      (a, b) => b.sum - a.sum,
+      (a: { sum: number }, b: { sum: number }) => b.sum - a.sum,
     );
 
     const fourExpenseCategories = sortedCashOutActivity.slice(0, 4);
     const totalExpense = fourExpenseCategories.reduce(
-      (total, category) => total + category.sum,
+      (total: any, category: { sum: any }) => total + category.sum,
       0,
     );
 
@@ -39,20 +50,21 @@ export async function POST(req: NextRequest) {
       succeeded: true,
     };
 
-    const response = NextResponse.json(responseObject);
+    const jsonResponse = NextResponse.json(responseObject);
 
-    response.cookies.set({
+    jsonResponse.cookies.set({
       name: "cashOutActivity",
       value: JSON.stringify(filteredCashOutActivity),
       maxAge: 60 * 60,
       path: "/dashboard",
     });
-    return response;
-  } catch (error) {
-    console.error("Error parsing JSON from request body:", error);
 
-    return new Response("Error parsing JSON from request body", {
-      status: 400,
+    return jsonResponse;
+  } catch (error) {
+    console.error("Error fetching or processing data:", error);
+
+    return new Response("Error fetching or processing data", {
+      status: 500,
     });
   }
 }

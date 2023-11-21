@@ -1,27 +1,44 @@
 import { NextResponse } from "next/server";
-import assetDebt from "../../../../data/asset-debt.json";
 import { formatCurrency } from "@/utils/moneyFormat";
+import { urlEndpoints } from "@/endpoint/urlEndpoint";
 
 export async function POST() {
-  const { asset, debt } = assetDebt;
+  try {
+    const response = await fetch(
+      `${process.env.BASE_URL}/${urlEndpoints["assetDebt"]}`,
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
 
-  const formattedAsset = formatCurrency(asset);
-  const formattedDebt = formatCurrency(debt);
+    const data = await response.json();
 
-  const formattedData = {
-    asset: formattedAsset,
-    debt: formattedDebt,
-    succeeded: true,
-  };
+    console.log();
+    const { asset, debt } = data?.[0];
 
-  const response = NextResponse.json(formattedData);
+    const formattedAsset = formatCurrency(asset);
+    const formattedDebt = formatCurrency(debt);
 
-  response.cookies.set({
-    name: "assetDebt",
-    value: JSON.stringify(formattedData),
-    maxAge: 60 * 60,
-    path: "/dashboard",
-  });
+    const formattedData = {
+      asset: formattedAsset,
+      debt: formattedDebt,
+      succeeded: true,
+    };
+    console.log({ formattedData });
 
-  return response;
+    const jsonResponse = NextResponse.json(formattedData);
+
+    jsonResponse.cookies.set({
+      name: "assetDebt",
+      value: JSON.stringify(formattedData),
+      maxAge: 60 * 60,
+      path: "/dashboard",
+    });
+
+    return jsonResponse;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+
+    return NextResponse.error();
+  }
 }
