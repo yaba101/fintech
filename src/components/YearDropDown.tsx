@@ -15,7 +15,7 @@ function YearDropDown({
 }: YearDropDownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-
+  const sortedYears = years.slice().sort((a, b) => b - a);
   const handleYearChange = (year: number) => {
     onSelectYear(year);
     setIsOpen(false);
@@ -61,7 +61,7 @@ function YearDropDown({
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            {years.map((year, index) => (
+            {sortedYears.map((year, index) => (
               <button
                 key={index}
                 onClick={() => handleYearChange(year)}
