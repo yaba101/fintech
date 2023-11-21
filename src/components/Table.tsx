@@ -128,15 +128,13 @@ export default async function Table({
                                 {item.personalFinanceCategoryIconUrl == null ? (
                                   <div className=" rounded-full bg-gray-400  dark:bg-gray-100 xs:ml-1 xs:h-4 xs:w-4 sm:ml-6 sm:h-8 sm:w-8"></div>
                                 ) : (
-                                  <div className="h-6 w-6 rounded-full">
-                                    <Image
-                                      src={item.personalFinanceCategoryIconUrl}
-                                      alt="Icon"
-                                      width={24}
-                                      height={24}
-                                      className="rounded-full"
-                                    />
-                                  </div>
+                                  <Image
+                                    src={item.personalFinanceCategoryIconUrl}
+                                    alt="Icon"
+                                    width={20}
+                                    height={20}
+                                    className="rounded-full xs:ml-1 xs:h-4 xs:w-4 sm:ml-6 sm:h-8 sm:w-8"
+                                  />
                                 )}
                               </div>
                               <div className="ml-4">
