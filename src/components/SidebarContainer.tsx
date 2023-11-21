@@ -267,7 +267,9 @@ export default function SideBar({ children }: { children?: React.ReactNode }) {
           <MobileDropdown />
         </div>
         <main className={`py-10 ${isExpanded ? " xl:pl-28" : " xl:pl-0"} `}>
-          <div className="overflow-auto px-4 sm:px-4">{children}</div>
+          <div className="overflow-auto px-4 xs:px-1 sm:px-2 md:px-4">
+            {children}
+          </div>
         </main>
       </div>
     </>

@@ -92,8 +92,8 @@ export default function GroupedBarChart({ data }: Props) {
   const axisLeftRef = useRef<SVGGElement>(null);
 
   const margin = { top: 10, right: 0, bottom: 20, left: 40 };
-  const width = 700 - margin.left - margin.right;
-  const height = 300 - margin.top - margin.bottom;
+  const width = 600 - margin.left - margin.right;
+  const height = 320 - margin.top - margin.bottom;
 
   const labels = data?.incomeExpense.map(({ month_name }) => month_name);
   const sublabels = ["income", "expense"];
@@ -122,7 +122,7 @@ export default function GroupedBarChart({ data }: Props) {
     }
   });
 
-  const numDashedLines = 10;
+  const numDashedLines = 12;
   const dashedLineInterval = scaleY.domain()[1] / numDashedLines;
 
   useEffect(() => {
@@ -142,7 +142,7 @@ export default function GroupedBarChart({ data }: Props) {
   }, [scaleX, yAxis]);
 
   return (
-    <div className=" z-0 my-3 overflow-x-hidden rounded-md bg-gray-50 py-1 shadow-lg dark:bg-dark">
+    <div className=" z-0 my-3 overflow-x-hidden rounded-md bg-gray-50 py-1 shadow-lg dark:bg-dark ">
       <div className="my-3 flex min-w-fit justify-between py-1 md:px-3">
         <h4 className="mt-1 whitespace-nowrap px-1 text-center font-bold capitalize tracking-tight xs:text-sm md:mr-5 md:text-2xl ">
           Insights
@@ -163,7 +163,7 @@ export default function GroupedBarChart({ data }: Props) {
       </div>
 
       <svg
-        className=" w-auto overflow-x-hidden px-3 "
+        className=" w-auto overflow-x-hidden  "
         viewBox={`0 0 ${width + margin.left + margin.right} ${
           height + margin.top + margin.bottom
         }`}

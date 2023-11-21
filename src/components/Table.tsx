@@ -2,7 +2,6 @@ import { DatePickerWithRange } from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
 import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { formatCurrency } from "@/utils/moneyFormat";
-import { Business } from "@mui/icons-material";
 import { parse } from "date-fns";
 import Image from "next/image";
 import { z } from "zod";
