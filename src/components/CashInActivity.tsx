@@ -1,6 +1,5 @@
 import HalfDonutChart from "@/components/HalfPieChart";
 import { Button } from "./ui/button";
-import { CashInResponseSchema, fetchData } from "@/utils/cashActivitiesUtils";
 import { DatePickerWithRange } from "./DatePicker";
 import { parse } from "date-fns";
 import IncomeExpenseStats from "./IncomeExpenseStats";
@@ -16,6 +15,70 @@ type CashInResponse = {
   totalIncome: string;
   fourIncomeCategories: { category: string; sum: number }[];
   succeeded: boolean;
+};
+
+const getCashInActivityData = async (
+  url: RequestInfo,
+  body: { toDate: any; fromDate: any },
+) => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      cache: "no-store",
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const remoteData = await response.json();
+    const { fromDate, toDate } = body;
+
+    const filteredCashInActivity = remoteData.filter(
+      (activity: { activityDate: string | number | Date }) => {
+        const activityDate = new Date(activity.activityDate);
+
+        return (
+          (!fromDate || activityDate >= new Date(fromDate)) &&
+          (!toDate || activityDate <= new Date(toDate))
+        );
+      },
+    );
+
+    const sortedCashInActivity = filteredCashInActivity.sort(
+      (a: { sum: number }, b: { sum: number }) => b.sum - a.sum,
+    );
+
+    const fourIncomeCategories = sortedCashInActivity.slice(0, 4);
+
+    const totalIncome = fourIncomeCategories.reduce(
+      (total: any, category: { sum: any }) => total + category.sum,
+      0,
+    );
+
+    const formattedTotalIncome =
+      totalIncome === null || totalIncome === 0
+        ? "0.00"
+        : totalIncome.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          });
+
+    const responseObject = {
+      totalIncome: formattedTotalIncome,
+      fourIncomeCategories,
+      succeeded: true,
+    };
+    console.log({ responseObject });
+    return responseObject;
+  } catch (error) {
+    console.error("Error while fetching data:", error);
+    return {
+      recentTransactions: [],
+      succeeded: false,
+    };
+  }
 };
 
 export default async function CashInActivity({
@@ -35,11 +98,11 @@ export default async function CashInActivity({
     toDate,
   };
 
-  const response = await fetchData<CashInResponse>(
-    `${process.env.URL}/api/${urlEndpoints["cashInActivity"]}`,
+  const response = await getCashInActivityData(
+    `${process.env.BASE_URL}/${urlEndpoints["cashInActivity"]}`,
     requestBody,
-    CashInResponseSchema,
   );
+  console.log(response);
 
   const CurrentColors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
   const isCashIn =
