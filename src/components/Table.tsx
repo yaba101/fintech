@@ -4,6 +4,7 @@ import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { formatCurrency } from "@/utils/moneyFormat";
 import { parse } from "date-fns";
 import Image from "next/image";
+
 import { z } from "zod";
 
 type RecentTransaction = {
@@ -44,27 +45,48 @@ const RequestBodySchema = z.object({
   fromDate: z.date(),
 });
 
-const getRecentTransactionData = async (url: string, body?: RequestBody) => {
+const getRecentTransactionData = async (
+  url: RequestInfo,
+  body: { toDate: any; fromDate: any },
+) => {
   try {
     const response = await fetch(url, {
       method: "POST",
       cache: "no-store",
       body: JSON.stringify(body),
     });
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const responseData = await response.json();
-    RecentTransactionResponseSchema.parse(responseData);
+    const remoteData = await response.json();
 
-    return responseData as RecentTransactionResponse;
+    const { fromDate, toDate } = body;
+
+    const filteredTransactions = remoteData?.[0]?.recentTransactions?.filter(
+      (transaction: { transactionDate: string | number | Date }) => {
+        const transactionDate = new Date(transaction.transactionDate);
+
+        return (
+          (!fromDate || transactionDate >= new Date(fromDate)) &&
+          (!toDate || transactionDate <= new Date(toDate))
+        );
+      },
+    );
+    const filteredTransactionsData = {
+      recentTransactions: filteredTransactions || [],
+      succeeded: true,
+    };
+
+    RecentTransactionResponseSchema.parse(filteredTransactionsData);
+    return filteredTransactionsData;
   } catch (error) {
     console.error("Error while fetching data:", error);
     return {
       recentTransactions: [],
       succeeded: false,
-    } as RecentTransactionResponse;
+    };
   }
 };
 
@@ -84,7 +106,7 @@ export default async function Table({
   };
 
   const data = await getRecentTransactionData(
-    `${process.env.URL}/api/${urlEndpoints["transaction"]}`,
+    `${process.env.BASE_URL}/${urlEndpoints["transaction"]}`,
     requestBody,
   );
 
@@ -120,48 +142,51 @@ export default async function Table({
                 ) : (
                   <table className="min-w-full divide-y divide-gray-300">
                     <tbody>
-                      {data.recentTransactions.slice(0, 5).map((item) => (
-                        <tr key={item.transactionName}>
-                          <td className="whitespace-nowrap py-3 pl-4 pr-3 sm:py-2 sm:pl-0">
-                            <div className="flex items-center">
-                              <div className="px-4 xs:px-0 sm:px-2">
-                                {item.personalFinanceCategoryIconUrl == null ? (
-                                  <div className=" rounded-full bg-gray-400  dark:bg-gray-100 xs:ml-1 xs:h-4 xs:w-4 sm:ml-6 sm:h-8 sm:w-8"></div>
-                                ) : (
-                                  <Image
-                                    src={item.personalFinanceCategoryIconUrl}
-                                    alt="Icon"
-                                    width={20}
-                                    height={20}
-                                    className="rounded-full xs:ml-1 xs:h-4 xs:w-4 sm:ml-6 sm:h-8 sm:w-8"
-                                  />
-                                )}
-                              </div>
-                              <div className="ml-4">
-                                <div
-                                  className={`font-medium dark:text-gray-100 xs:text-xs sm:text-sm md:text-base   `}
-                                >
-                                  <span className="xs:text-[0.575rem] sm:text-xs md:text-sm xl:text-base">
-                                    {item.transactionName}
-                                  </span>
+                      {data.recentTransactions
+                        .slice(0, 5)
+                        .map((item: RecentTransaction) => (
+                          <tr key={item.transactionName}>
+                            <td className="whitespace-nowrap py-3 pl-4 pr-3 sm:py-2 sm:pl-0">
+                              <div className="flex items-center">
+                                <div className="px-4 xs:px-0 sm:px-2">
+                                  {item.personalFinanceCategoryIconUrl ==
+                                  null ? (
+                                    <div className=" rounded-full bg-gray-400  dark:bg-gray-100 xs:ml-1 xs:h-4 xs:w-4 sm:ml-6 sm:h-8 sm:w-8"></div>
+                                  ) : (
+                                    <Image
+                                      src={item.personalFinanceCategoryIconUrl}
+                                      alt="Icon"
+                                      width={20}
+                                      height={20}
+                                      className="rounded-full xs:ml-1 xs:h-4 xs:w-4 sm:ml-6 sm:h-8 sm:w-8"
+                                    />
+                                  )}
+                                </div>
+                                <div className="ml-4">
+                                  <div
+                                    className={`font-medium dark:text-gray-100 xs:text-xs sm:text-sm md:text-base   `}
+                                  >
+                                    <span className="xs:text-[0.575rem] sm:text-xs md:text-sm xl:text-base">
+                                      {item.transactionName}
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-3 text-gray-500 dark:text-gray-100 xs:px-1 xs:text-xs sm:py-2">
-                            <div className="xs:text-[0.575rem] sm:text-xs md:text-sm xl:text-base 2xl:text-lg">
-                              {item.transactionDate}
-                            </div>
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-3 text-gray-600 dark:text-gray-100 xs:px-1 sm:py-2">
-                            <span
-                              className={`inline-flex items-center rounded-md px-2 py-1 font-medium xs:text-[0.575rem] sm:text-xs md:text-sm xl:text-base 2xl:text-lg `}
-                            >
-                              ${formatCurrency(item.amount)}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-3 text-gray-500 dark:text-gray-100 xs:px-1 xs:text-xs sm:py-2">
+                              <div className="xs:text-[0.575rem] sm:text-xs md:text-sm xl:text-base 2xl:text-lg">
+                                {item.transactionDate}
+                              </div>
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-3 text-gray-600 dark:text-gray-100 xs:px-1 sm:py-2">
+                              <span
+                                className={`inline-flex items-center rounded-md px-2 py-1 font-medium xs:text-[0.575rem] sm:text-xs md:text-sm xl:text-base 2xl:text-lg `}
+                              >
+                                ${formatCurrency(item.amount)}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 )}
