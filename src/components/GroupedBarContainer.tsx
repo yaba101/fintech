@@ -1,7 +1,5 @@
-import React from "react";
 import GroupedBarChart from "./GroupedBar";
 import { z } from "zod";
-import delay from "@/utils/delay";
 import { urlEndpoints } from "@/endpoint/urlEndpoint";
 
 type RequestBody = {
@@ -43,7 +41,7 @@ const GroupedBarChartResponseSchema = z.object({
 const getData = async (url: string, body?: RequestBody) => {
   try {
     const response = await fetch(url, {
-      method: "POST",
+      method: "GET",
       cache: "no-store",
       body: JSON.stringify(body),
     });
@@ -65,8 +63,9 @@ const getData = async (url: string, body?: RequestBody) => {
 
 const GroupedBarContainer = async () => {
   const data = await getData(
-    `${process.env.URL}/api/${urlEndpoints["incomeExpense"]}`,
+    `${process.env.BASE_URL}/${urlEndpoints["incomeExpense"]}`,
   );
+
   return <GroupedBarChart data={data} />;
 };
 
