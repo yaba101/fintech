@@ -70,7 +70,6 @@ const getCashInActivityData = async (
       fourIncomeCategories,
       succeeded: true,
     };
-    console.log({ responseObject });
     return responseObject;
   } catch (error) {
     console.error("Error while fetching data:", error);
@@ -90,19 +89,18 @@ export default async function CashInActivity({
 }) {
   const title = "Cash In Activity";
 
-  const fromDate = from ? parse(from, "dd/MM/yy", new Date()) : null;
-  const toDate = to ? parse(to, "dd/MM/yy", new Date()) : null;
+  const fromDate = from ? parse(from, "MMM d, yyyy", new Date()) : null;
+  const toDate = to ? parse(to, "MMM d, yyyy", new Date()) : null;
 
   const requestBody: RequestBody = {
     fromDate,
     toDate,
   };
 
-  const response = await getCashInActivityData(
+  const response = (await getCashInActivityData(
     `${process.env.BASE_URL}/${urlEndpoints["cashInActivity"]}`,
     requestBody,
-  );
-  console.log(response);
+  )) as CashInResponse;
 
   const CurrentColors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
   const isCashIn =

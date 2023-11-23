@@ -69,7 +69,7 @@ const getCashOutActivityData = async (
       succeeded: true,
     };
 
-    return responseObject;
+    return responseObject as CashOutResponse;
   } catch (error) {
     console.error("Error while fetching data:", error);
     return {
@@ -88,18 +88,18 @@ export default async function CashOutActivity({
 }) {
   const title = "Cash Out Activity";
 
-  const fromDate = from ? parse(from, "dd/MM/yy", new Date()) : null;
-  const toDate = to ? parse(to, "dd/MM/yy", new Date()) : null;
+  const fromDate = from ? parse(from, "MMM d, yyyy", new Date()) : null;
+  const toDate = to ? parse(to, "MMM d, yyyy", new Date()) : null;
 
   const requestBody: RequestBody = {
     fromDate,
     toDate,
   };
 
-  const response = await getCashOutActivityData(
+  const response = (await getCashOutActivityData(
     `${process.env.BASE_URL}/${urlEndpoints["cashOutActivity"]}`,
     requestBody,
-  );
+  )) as CashOutResponse;
 
   const CurrentColors = ["#7c1515", "#c8e129", "#6029e1", "#29dee1"];
   const isCashOut =
@@ -124,7 +124,7 @@ export default async function CashOutActivity({
         iconBgColor="bg-red-600"
         textBgColor="bg-red-300"
         textColor="text-red-800 dark:text-red-100"
-        amount={response?.totalExpense!}
+        amount={response?.totalExpense}
         signIcon={
           <Remove className="h-3 w-3 font-bold text-red-600 dark:text-red-300" />
         }

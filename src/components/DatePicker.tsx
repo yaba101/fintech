@@ -35,7 +35,7 @@ export function DatePickerWithRange({
   const searchParams = useSearchParams();
 
   const formatDate = (date: Date | undefined) => {
-    return date ? format(date, "dd/MM/yy") : "";
+    return date ? format(date, "MMM d, yyyy") : "";
   };
 
   useEffect(() => {
@@ -101,8 +101,8 @@ export function DatePickerWithRange({
             ) : (
               <>
                 <span className="text-xs">
-                  {format(new Date(), "dd/MM/yy")} -{" "}
-                  {format(new Date(), "dd/MM/yy")}
+                  {format(new Date(), "MMM d, yyyy")} -{" "}
+                  {format(new Date(), "MMM d, yyyy")}
                 </span>
                 {isPending && (
                   <div role="loading">
