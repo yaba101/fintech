@@ -29,11 +29,11 @@ const IncomeExpenseStats = ({
         </span>
 
         <div>
-          <p className="whitespace-nowrap font-semibold text-gray-900 dark:text-gray-300 sm:text-xl lg:text-sm xl:text-lg 2xl:text-xl">
+          <p className="whitespace-nowrap font-semibold text-gray-900 dark:text-gray-400 sm:text-xl lg:text-sm xl:text-base 2xl:text-xl">
             {title}
           </p>
 
-          <p className="font-medium text-gray-950 dark:text-gray-200 sm:text-lg md:text-xl lg:text-sm xl:text-lg 2xl:text-xl">
+          <p className="font-medium text-gray-950 dark:text-gray-200 sm:text-lg md:text-xl lg:text-sm 2xl:text-xl">
             ${amount}
           </p>
         </div>
