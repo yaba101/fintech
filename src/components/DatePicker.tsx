@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useTransition } from "react";
-import { format } from "date-fns";
+import { endOfMonth, format, startOfMonth } from "date-fns";
 import { DateRange as DatePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -26,8 +26,8 @@ export function DatePickerWithRange({
   toParam,
 }: DatePickerWithRangeProps) {
   const [selectedRange, setSelectedRange] = useState({
-    startDate: null as Date | null,
-    endDate: null as Date | null,
+    startDate: startOfMonth(new Date()),
+    endDate: endOfMonth(new Date()),
   });
   const [isPending, startTransition] = useTransition();
 

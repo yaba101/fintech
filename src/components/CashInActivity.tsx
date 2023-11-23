@@ -1,10 +1,11 @@
 import HalfDonutChart from "@/components/HalfPieChart";
 import { Button } from "./ui/button";
 import { DatePickerWithRange } from "./DatePicker";
-import { parse } from "date-fns";
+import { endOfMonth, parse, startOfMonth } from "date-fns";
 import IncomeExpenseStats from "./IncomeExpenseStats";
 import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { Add, ArrowForward, TrendingUp } from "@mui/icons-material";
+import { formatCurrency } from "@/utils/moneyFormat";
 
 type RequestBody = {
   toDate: Date | null;
@@ -57,13 +58,7 @@ const getCashInActivityData = async (
       0,
     );
 
-    const formattedTotalIncome =
-      totalIncome === null || totalIncome === 0
-        ? "0.00"
-        : totalIncome.toLocaleString("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          });
+    const formattedTotalIncome = formatCurrency(totalIncome);
 
     const responseObject = {
       totalIncome: formattedTotalIncome,
@@ -89,8 +84,14 @@ export default async function CashInActivity({
 }) {
   const title = "Cash In Activity";
 
-  const fromDate = from ? parse(from, "MMM d, yyyy", new Date()) : null;
-  const toDate = to ? parse(to, "MMM d, yyyy", new Date()) : null;
+  const currentDate = new Date();
+  const startOfCurrentMonth = startOfMonth(currentDate);
+  const endOfCurrentMonth = endOfMonth(currentDate);
+
+  const fromDate = from
+    ? parse(from, "MMM d, yyyy", new Date())
+    : startOfCurrentMonth;
+  const toDate = to ? parse(to, "MMM d, yyyy", new Date()) : endOfCurrentMonth;
 
   const requestBody: RequestBody = {
     fromDate,

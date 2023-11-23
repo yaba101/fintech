@@ -1,10 +1,11 @@
 import HalfDonutChart from "@/components/HalfPieChart";
 import { Button } from "./ui/button";
 import { DatePickerWithRange } from "./DatePicker";
-import { parse } from "date-fns";
+import { endOfMonth, parse, startOfMonth } from "date-fns";
 import IncomeExpenseStats from "./IncomeExpenseStats";
 import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { ArrowForward, Remove, TrendingDown } from "@mui/icons-material";
+import { formatCurrency } from "@/utils/moneyFormat";
 
 type CashOutResponse = {
   totalExpense: string;
@@ -55,13 +56,7 @@ const getCashOutActivityData = async (
       0,
     );
 
-    const formattedTotalExpense =
-      totalExpense === null || totalExpense === 0
-        ? "0.00"
-        : totalExpense.toLocaleString("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          });
+    const formattedTotalExpense = formatCurrency(totalExpense);
 
     const responseObject = {
       totalExpense: formattedTotalExpense,
@@ -88,8 +83,14 @@ export default async function CashOutActivity({
 }) {
   const title = "Cash Out Activity";
 
-  const fromDate = from ? parse(from, "MMM d, yyyy", new Date()) : null;
-  const toDate = to ? parse(to, "MMM d, yyyy", new Date()) : null;
+  const currentDate = new Date();
+  const startOfCurrentMonth = startOfMonth(currentDate);
+  const endOfCurrentMonth = endOfMonth(currentDate);
+
+  const fromDate = from
+    ? parse(from, "MMM d, yyyy", new Date())
+    : startOfCurrentMonth;
+  const toDate = to ? parse(to, "MMM d, yyyy", new Date()) : endOfCurrentMonth;
 
   const requestBody: RequestBody = {
     fromDate,
