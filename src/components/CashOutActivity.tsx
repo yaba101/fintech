@@ -6,6 +6,7 @@ import IncomeExpenseStats from "./IncomeExpenseStats";
 import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { ArrowForward, Remove, TrendingDown } from "@mui/icons-material";
 import { formatCurrency } from "@/utils/moneyFormat";
+import MonthDropDown from "./monthDropdown";
 
 type CashOutResponse = {
   totalExpense: string;
@@ -88,9 +89,9 @@ export default async function CashOutActivity({
   const endOfCurrentMonth = endOfMonth(currentDate);
 
   const fromDate = from
-    ? parse(from, "MMM d, yyyy", new Date())
+    ? parse(from, "yyyy-MM-dd", new Date())
     : startOfCurrentMonth;
-  const toDate = to ? parse(to, "MMM d, yyyy", new Date()) : endOfCurrentMonth;
+  const toDate = to ? parse(to, "yyyy-MM-dd", new Date()) : endOfCurrentMonth;
 
   const requestBody: RequestBody = {
     fromDate,
@@ -136,7 +137,8 @@ export default async function CashOutActivity({
             {title}
           </p>
           <div className="flex-shrink-0 ">
-            <DatePickerWithRange fromParam="cashOutFrom" toParam="cashOutTo" />
+            {/* <DatePickerWithRange fromParam="cashOutFrom" toParam="cashOutTo" /> */}
+            <MonthDropDown fromParam="cashOutFrom" toParam="cashOutTo" />
           </div>
         </div>
         <HalfDonutChart colors={CurrentColors} data={top4Data} />

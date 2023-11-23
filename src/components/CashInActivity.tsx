@@ -6,6 +6,7 @@ import IncomeExpenseStats from "./IncomeExpenseStats";
 import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { Add, ArrowForward, TrendingUp } from "@mui/icons-material";
 import { formatCurrency } from "@/utils/moneyFormat";
+import MonthDropDown from "./monthDropdown";
 
 type RequestBody = {
   toDate: Date | null;
@@ -89,9 +90,9 @@ export default async function CashInActivity({
   const endOfCurrentMonth = endOfMonth(currentDate);
 
   const fromDate = from
-    ? parse(from, "MMM d, yyyy", new Date())
+    ? parse(from, "yyyy-MM-dd", new Date())
     : startOfCurrentMonth;
-  const toDate = to ? parse(to, "MMM d, yyyy", new Date()) : endOfCurrentMonth;
+  const toDate = to ? parse(to, "yyyy-MM-dd", new Date()) : endOfCurrentMonth;
 
   const requestBody: RequestBody = {
     fromDate,
@@ -138,7 +139,8 @@ export default async function CashInActivity({
             {title}
           </p>
           <div className="flex-shrink-0 ">
-            <DatePickerWithRange fromParam="cashInFrom" toParam="cashInTo" />
+            {/* <DatePickerWithRange fromParam="cashInFrom" toParam="cashInTo" /> */}
+            <MonthDropDown fromParam="cashInFrom" toParam="cashInTo" />
           </div>
         </div>
 
