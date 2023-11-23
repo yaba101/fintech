@@ -26,7 +26,7 @@ export default function Stats({
           {icon}
         </span>
         <div>
-          <p className="whitespace-nowrap font-medium antialiased dark:text-gray-400 sm:text-xs md:text-base 2xl:text-xl">
+          <p className="whitespace-nowrap font-semibold antialiased dark:text-gray-400 sm:text-xs md:text-base 2xl:text-xl">
             {title}
           </p>
 

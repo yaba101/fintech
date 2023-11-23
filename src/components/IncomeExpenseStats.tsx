@@ -29,7 +29,7 @@ const IncomeExpenseStats = ({
         </span>
 
         <div>
-          <p className="whitespace-nowrap text-gray-900 dark:text-gray-300 sm:text-xl lg:text-sm xl:text-lg 2xl:text-xl">
+          <p className="whitespace-nowrap font-semibold text-gray-900 dark:text-gray-300 sm:text-xl lg:text-sm xl:text-lg 2xl:text-xl">
             {title}
           </p>
 
@@ -44,7 +44,7 @@ const IncomeExpenseStats = ({
       >
         {signIcon}
         <span
-          className={`font-medium xs:text-xs lg:text-[0.6rem] xl:text-xs ${textColor}`}
+          className={`font-medium xs:text-xs lg:text-[0.6rem] 2xl:text-xs ${textColor}`}
         >
           67.81%
         </span>
