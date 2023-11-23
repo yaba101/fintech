@@ -2,6 +2,7 @@ import Stats from "./Stats";
 import { z } from "zod";
 import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { Add, Remove, TrendingDown, TrendingUp } from "@mui/icons-material";
+import { formatCurrency } from "@/utils/moneyFormat";
 type AssetDebtResponse = {
   asset: string;
   debt: string;
@@ -38,6 +39,8 @@ const AssetDebtStats = async () => {
   const { asset, debt } = await getData(
     `${process.env.BASE_URL}/${urlEndpoints["assetDebt"]}`,
   );
+  const formattedAsset = formatCurrency(Number(asset));
+  const formattedDebt = formatCurrency(Number(debt));
 
   return (
     <>
@@ -49,7 +52,7 @@ const AssetDebtStats = async () => {
         iconBgColor="bg-[#27674a]"
         textBgColor="bg-green-300"
         textColor="text-green-700 dark:text-green-200"
-        amount={asset}
+        amount={formattedAsset}
         signIcon={
           <Add className="text-green-600 dark:text-green-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
         }
@@ -62,7 +65,7 @@ const AssetDebtStats = async () => {
         iconBgColor="bg-red-600"
         textBgColor="bg-red-300"
         textColor="text-red-800 dark:text-red-100"
-        amount={debt}
+        amount={formattedDebt}
         signIcon={
           <Remove className="text-red-600 dark:text-red-600 xs:h-4 xs:w-2 md:h-5 md:w-3" />
         }
