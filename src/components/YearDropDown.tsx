@@ -40,16 +40,16 @@ function YearDropDown({
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="xs:w-18 inline-flex justify-between rounded-md border border-gray-300 bg-white px-4 text-sm font-medium text-gray-700 dark:border-gray-700 dark:bg-dark dark:text-gray-100 xs:mr-0.5 xs:px-1 xs:py-0.5 xs:text-xs sm:w-full sm:py-2"
+          className="flex items-center justify-center rounded-md border border-gray-300 bg-white px-6 text-sm font-medium text-gray-700 dark:border-gray-700 dark:bg-dark dark:text-gray-100 xs:mr-0.5 xs:w-16 xs:px-1 xs:py-0.5 xs:text-xs sm:w-fit"
           id="options-menu"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
         >
           {selectedYear}
           {isOpen ? (
-            <ExpandMore className="ml-1 mt-1 h-3 w-3 text-end " />
+            <ExpandMore className="ml-1 text-end " />
           ) : (
-            <ExpandLess className="ml-1 mt-1 h-3 w-3 text-end " />
+            <ExpandLess className="ml-1 text-end " />
           )}
         </button>
       </div>
