@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, useTransition } from "react";
-import { format, startOfMonth, endOfMonth } from "date-fns";
+import { format, startOfMonth, endOfMonth, getMonth } from "date-fns";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +13,9 @@ function MonthDropDown({ fromParam, toParam }: MonthDropDownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const months = Array.from({ length: 12 }, (_, i) => i);
-  const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
+  const [selectedMonth, setSelectedMonth] = useState<number | null>(
+    getMonth(new Date()),
+  );
   const [isPending, startTransition] = useTransition();
 
   const router = useRouter();
@@ -44,6 +46,7 @@ function MonthDropDown({ fromParam, toParam }: MonthDropDownProps) {
     const newToDate = new Date(newFromDate);
     newToDate.setMonth(month + 1);
     newToDate.setDate(0);
+
     startTransition(() => {
       const currentSearchParams = new URLSearchParams(window.location.search);
       currentSearchParams.set(
