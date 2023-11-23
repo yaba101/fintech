@@ -3,14 +3,14 @@ import { formatCurrency } from "@/utils/moneyFormat";
 import { z } from "zod";
 
 type AssetDebtResponse = {
-  asset: string;
-  debt: string;
+  asset: number;
+  debt: number;
   succeeded: boolean;
 };
 
 const AssetDebtResponseSchema = z.object({
-  asset: z.string(),
-  debt: z.string(),
+  asset: z.number(),
+  debt: z.number(),
   succeeded: z.boolean(),
 });
 
@@ -30,7 +30,11 @@ const getData = async (url: string): Promise<AssetDebtResponse> => {
     return AssetDebtResponseSchema.parse(responseData);
   } catch (error) {
     console.error("Error while fetching data:", error);
-    return { asset: "0.00", debt: "0.00", succeeded: false };
+    return {
+      asset: "0.00" as unknown as number,
+      debt: "0.00" as unknown as number,
+      succeeded: false,
+    };
   }
 };
 
@@ -44,12 +48,7 @@ const NetWorthCard = async ({
   const { asset, debt } = await getData(
     `${process.env.BASE_URL}/${urlEndpoints["assetDebt"]}`,
   );
-
-  const assetValue = parseFloat(asset.replace(/,/g, ""));
-  const debtValue = parseFloat(debt.replace(/,/g, ""));
-
-  const netWorth = (assetValue || 0) - (debtValue || 0);
-
+  const netWorth = (asset || 0) - (debt || 0);
   const formattedNetWorth = formatCurrency(netWorth);
 
   return (
