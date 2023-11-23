@@ -47,9 +47,9 @@ function YearDropDown({
         >
           {selectedYear}
           {isOpen ? (
-            <ExpandMore className="ml-1 mt-1 h-3 w-3 text-end xs:mt-0.5" />
+            <ExpandMore className="ml-1 mt-1 h-3 w-3 text-end " />
           ) : (
-            <ExpandLess className="ml-1 mt-1 h-3 w-3 text-end xs:mt-0.5" />
+            <ExpandLess className="ml-1 mt-1 h-3 w-3 text-end " />
           )}
         </button>
       </div>

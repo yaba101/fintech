@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { DarkMode, LightMode } from "@mui/icons-material";
 
 const TOGGLE_CLASSES =
-  "text-sm font-medium flex items-center gap-2 px-2 md:pr-3.5 py-3 xs:py-1 md:py-1.5 transition-colors relative z-10";
+  "text-sm font-medium flex items-center gap-1 px-1 md:pr-1.5 py-3 xs:py-1 md:py-1.5 transition-colors relative z-10";
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
@@ -31,7 +31,7 @@ const ThemeSwitcher = () => {
 
   return (
     <div
-      className={`transition-color grid h-fit place-content-center gap-3 xs:px-4 xl:px-0`}
+      className={`transition-color grid h-fit place-content-center gap-2 xs:px-4 xl:px-0`}
     >
       <SliderToggle selected={selected} toggleTheme={toggleTheme} />
     </div>
@@ -68,7 +68,13 @@ const SliderToggle = ({
         onClick={() => toggleTheme()}
       >
         <DarkMode className="relative z-10 h-4 w-4 text-lg md:text-sm" />
-        <span className="relative z-10 font-semibold">Dark</span>
+        <span
+          className={`} relative z-10 font-semibold ${
+            selected === "dark" ? "text-white" : "text-slate-800"
+          }`}
+        >
+          Dark
+        </span>
       </button>
       <div
         className={`absolute inset-0 z-0 flex ${
