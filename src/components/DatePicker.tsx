@@ -30,16 +30,16 @@ export function DatePickerWithRange({
 
   useEffect(() => {
     const today = new Date();
-    const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-    const lastDayOfMonth = new Date(
-      today.getFullYear(),
-      today.getMonth() + 1,
-      0,
-    );
+    const dayOfWeek = today.getDay();
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() - dayOfWeek);
+
+    const endDate = new Date(today);
+    endDate.setDate(today.getDate() + (6 - dayOfWeek));
 
     setSelectedRange({
-      startDate: firstDayOfMonth,
-      endDate: lastDayOfMonth,
+      startDate,
+      endDate,
     });
   }, []);
 
