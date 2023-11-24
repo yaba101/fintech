@@ -1,11 +1,10 @@
+"use client";
 import { DatePickerWithRange } from "@/components/DatePicker";
 import SearchInput from "@/components/SearchInput";
-import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { formatCurrency } from "@/utils/moneyFormat";
-import { parse } from "date-fns";
+import { endOfMonth, startOfMonth } from "date-fns";
 import Image from "next/image";
-
-import { z } from "zod";
+import { useState } from "react";
 
 type RecentTransaction = {
   transactionDate: string;
@@ -20,95 +19,40 @@ type RecentTransactionResponse = {
   recentTransactions: RecentTransaction[];
   succeeded: boolean;
 };
-type RequestBody = {
-  toDate: Date | null;
-  fromDate: Date | null;
-};
 
-const RecentTransactionSchema = z.object({
-  transactionDate: z.string(),
-  amount: z.number(),
-  merchant: z.string(),
-  transactionName: z.string(),
-  category: z.string(),
-  personalFinanceCategory: z.string(),
-  personalFinanceCategoryIconUrl: z.string().nullable(),
-});
-
-const RecentTransactionResponseSchema = z.object({
-  recentTransactions: z.array(RecentTransactionSchema),
-  succeeded: z.boolean(),
-});
-
-const RequestBodySchema = z.object({
-  toDate: z.date(),
-  fromDate: z.date(),
-});
-
-const getRecentTransactionData = async (
-  url: RequestInfo,
-  body: { toDate: any; fromDate: any },
-) => {
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      cache: "no-store",
-      body: JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const remoteData = await response.json();
-
-    const { fromDate, toDate } = body;
-
-    const filteredTransactions = remoteData?.[0]?.recentTransactions?.filter(
-      (transaction: { transactionDate: string | number | Date }) => {
-        const transactionDate = new Date(transaction.transactionDate);
-
-        return (
-          (!fromDate || transactionDate >= new Date(fromDate)) &&
-          (!toDate || transactionDate <= new Date(toDate))
-        );
-      },
-    );
-    const filteredTransactionsData = {
-      recentTransactions: filteredTransactions || [],
-      succeeded: true,
-    };
-
-    RecentTransactionResponseSchema.parse(filteredTransactionsData);
-    return filteredTransactionsData;
-  } catch (error) {
-    console.error("Error while fetching data:", error);
-    return {
-      recentTransactions: [],
-      succeeded: false,
-    };
-  }
-};
-
-export default async function Table({
-  from,
-  to,
+export default function Table({
+  responseData,
 }: {
-  from: string;
-  to: string;
+  responseData: RecentTransactionResponse;
 }) {
-  const fromDate = from ? parse(from, "dd/MM/yy", new Date()) : null;
-  const toDate = to ? parse(to, "dd/MM/yy", new Date()) : null;
+  const currentDate = new Date();
+  const startOfCurrentMonth = startOfMonth(currentDate);
+  const endOfCurrentMonth = endOfMonth(currentDate);
 
-  const requestBody: RequestBody = {
-    fromDate,
-    toDate,
-  };
-
-  const data = await getRecentTransactionData(
-    `${process.env.BASE_URL}/${urlEndpoints["transaction"]}`,
-    requestBody,
+  const [selectedFromDate, setSelectedFromDate] = useState<Date | null>(
+    startOfCurrentMonth,
   );
+  const [selectedToDate, setSelectedToDate] = useState<Date | null>(
+    endOfCurrentMonth,
+  );
+  const handleMonthSelect = (fromDate: Date, toDate: Date) => {
+    setSelectedFromDate(fromDate);
+    setSelectedToDate(toDate);
+  };
+  const filteredTransactions = responseData?.recentTransactions?.filter(
+    (transaction: { transactionDate: string | number | Date }) => {
+      const transactionDate = new Date(transaction.transactionDate);
+
+      return (
+        (!selectedFromDate || transactionDate >= new Date(selectedFromDate)) &&
+        (!selectedToDate || transactionDate <= new Date(selectedToDate))
+      );
+    },
+  );
+  const filteredTransactionsData = {
+    recentTransactions: filteredTransactions || [],
+    succeeded: true,
+  };
 
   return (
     <div className="overflow-x-hidden overflow-y-hidden rounded-md bg-gray-50 shadow-lg dark:bg-dark">
@@ -117,7 +61,7 @@ export default async function Table({
           Recent Transactions
         </h4>
         <div className="hidden min-w-fit px-1.5 xl:block">
-          <DatePickerWithRange fromParam="transacFrom" toParam="transacTo" />
+          <DatePickerWithRange onSelect={handleMonthSelect} />
         </div>
         <div className="hidden w-2/5 xl:block">
           <SearchInput placeholder="search for transaction" />
@@ -125,7 +69,7 @@ export default async function Table({
       </div>
       <div className="flex w-full flex-row px-1.5 ">
         <div className="mx-auto mb-3 px-1 xs:w-5/6 sm:w-1/2 xl:hidden">
-          <DatePickerWithRange fromParam="transacFrom" toParam="transacTo" />
+          <DatePickerWithRange onSelect={handleMonthSelect} />
         </div>
         <div className="mx-auto px-1 xs:w-5/6 sm:w-3/4 xl:hidden">
           <SearchInput placeholder="search for transaction" />
@@ -137,12 +81,12 @@ export default async function Table({
           <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               <div className="overflow-x-hidden">
-                {data.recentTransactions.length === 0 ? (
+                {filteredTransactionsData.recentTransactions.length === 0 ? (
                   <p className="text-center text-gray-500">No data available</p>
                 ) : (
                   <table className="min-w-full divide-y divide-gray-300">
                     <tbody>
-                      {data.recentTransactions
+                      {filteredTransactionsData.recentTransactions
                         .slice(0, 5)
                         .map((item: RecentTransaction) => (
                           <tr key={item.transactionName}>

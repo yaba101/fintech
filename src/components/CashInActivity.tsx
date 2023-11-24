@@ -1,115 +1,83 @@
+"use client";
 import HalfDonutChart from "@/components/HalfPieChart";
 import { Button } from "./ui/button";
-import { endOfMonth, parse, startOfMonth } from "date-fns";
 import IncomeExpenseStats from "./IncomeExpenseStats";
-import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { Add, ArrowForward, TrendingUp } from "@mui/icons-material";
-import { formatCurrency } from "@/utils/moneyFormat";
 import MonthDropDown from "./monthDropdown";
-
-type RequestBody = {
-  toDate: Date | null;
-  fromDate: Date | null;
-};
+import { useState } from "react";
+import { formatCurrency } from "@/utils/moneyFormat";
+import { endOfMonth, startOfMonth } from "date-fns";
 
 type CashInResponse = {
   totalIncome: string;
-  fourIncomeCategories: { category: string; sum: number }[];
+  fourIncomeCategories: {
+    category: string;
+    sum: number;
+    activityDate: string;
+  }[];
   succeeded: boolean;
 };
 
-const getCashInActivityData = async (
-  url: RequestInfo,
-  body: { toDate: any; fromDate: any },
-) => {
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      cache: "no-store",
-      body: JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const remoteData = await response.json();
-    const { fromDate, toDate } = body;
-
-    const filteredCashInActivity = remoteData.filter(
-      (activity: { activityDate: string | number | Date }) => {
-        const activityDate = new Date(activity.activityDate);
-
-        return (
-          (!fromDate || activityDate >= new Date(fromDate)) &&
-          (!toDate || activityDate <= new Date(toDate))
-        );
-      },
-    );
-
-    const sortedCashInActivity = filteredCashInActivity.sort(
-      (a: { sum: number }, b: { sum: number }) => b.sum - a.sum,
-    );
-
-    const fourIncomeCategories = sortedCashInActivity.slice(0, 4);
-
-    const totalIncome = fourIncomeCategories.reduce(
-      (total: any, category: { sum: any }) => total + category.sum,
-      0,
-    );
-
-    const formattedTotalIncome = formatCurrency(totalIncome);
-
-    const responseObject = {
-      totalIncome: formattedTotalIncome,
-      fourIncomeCategories,
-      succeeded: true,
-    };
-    return responseObject;
-  } catch (error) {
-    console.error("Error while fetching data:", error);
-    return {
-      recentTransactions: [],
-      succeeded: false,
-    };
-  }
-};
-
-export default async function CashInActivity({
-  from,
-  to,
+export default function CashInActivity({
+  responseData,
 }: {
-  from: string;
-  to: string;
+  responseData: any;
 }) {
   const title = "Cash In Activity";
+  const CurrentColors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
 
   const currentDate = new Date();
   const startOfCurrentMonth = startOfMonth(currentDate);
   const endOfCurrentMonth = endOfMonth(currentDate);
 
-  const fromDate = from
-    ? parse(from, "yyyy-MM-dd", new Date())
-    : startOfCurrentMonth;
-  const toDate = to ? parse(to, "yyyy-MM-dd", new Date()) : endOfCurrentMonth;
+  const [selectedFromDate, setSelectedFromDate] = useState<Date | null>(
+    startOfCurrentMonth,
+  );
+  const [selectedToDate, setSelectedToDate] = useState<Date | null>(
+    endOfCurrentMonth,
+  );
 
-  const requestBody: RequestBody = {
-    fromDate,
-    toDate,
+  const handleMonthSelect = (fromDate: Date, toDate: Date) => {
+    setSelectedFromDate(fromDate);
+    setSelectedToDate(toDate);
   };
 
-  const response = (await getCashInActivityData(
-    `${process.env.BASE_URL}/${urlEndpoints["cashInActivity"]}`,
-    requestBody,
-  )) as CashInResponse;
+  const filteredCashInActivity = responseData.filter(
+    (activity: { activityDate: string | number | Date }) => {
+      const activityDate = new Date(activity.activityDate);
 
-  const CurrentColors = ["#146f43", "#2d23c2", "#b3a641", "#eb34b4"];
+      return (
+        (!selectedFromDate || activityDate >= new Date(selectedFromDate)) &&
+        (!selectedToDate || activityDate <= new Date(selectedToDate))
+      );
+    },
+  );
+
+  const sortedCashInActivity = filteredCashInActivity.sort(
+    (a: { sum: number }, b: { sum: number }) => b.sum - a.sum,
+  );
+
+  const fourIncomeCategories = sortedCashInActivity.slice(0, 4);
+
+  const totalIncome = fourIncomeCategories.reduce(
+    (total: any, category: { sum: any }) => total + category.sum,
+    0,
+  );
+
+  const formattedTotalIncome = formatCurrency(totalIncome);
+
+  const responseObject = {
+    totalIncome: formattedTotalIncome,
+    fourIncomeCategories,
+    succeeded: true,
+  };
+
   const isCashIn =
-    (response as CashInResponse)?.fourIncomeCategories !== undefined;
+    (responseObject as CashInResponse)?.fourIncomeCategories !== undefined;
 
   let sortedData: { category: string; sum: number }[] = [];
   if (isCashIn) {
-    sortedData = (response as CashInResponse).fourIncomeCategories.sort(
+    sortedData = (responseObject as CashInResponse).fourIncomeCategories.sort(
       (a, b) => b.sum - a.sum,
     );
   }
@@ -126,7 +94,7 @@ export default async function CashInActivity({
         iconBgColor="bg-[#27674a]"
         textBgColor="bg-green-300"
         textColor="text-green-700 dark:text-green-200"
-        amount={response?.totalIncome!}
+        amount={responseObject?.totalIncome!}
         signIcon={
           <Add className="h-3 w-3 font-bold text-green-500 dark:text-green-300" />
         }
@@ -138,8 +106,7 @@ export default async function CashInActivity({
             {title}
           </p>
           <div className="flex-shrink-0 ">
-            {/* <DatePickerWithRange fromParam="cashInFrom" toParam="cashInTo" /> */}
-            <MonthDropDown fromParam="cashInFrom" toParam="cashInTo" />
+            <MonthDropDown onSelect={handleMonthSelect} />
           </div>
         </div>
 

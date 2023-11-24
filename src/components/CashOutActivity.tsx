@@ -1,114 +1,79 @@
-import HalfDonutChart from "@/components/HalfPieChart";
+"use client";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import { endOfMonth, parse, startOfMonth } from "date-fns";
 import IncomeExpenseStats from "./IncomeExpenseStats";
-import { urlEndpoints } from "@/endpoint/urlEndpoint";
 import { ArrowForward, Remove, TrendingDown } from "@mui/icons-material";
-import { formatCurrency } from "@/utils/moneyFormat";
 import MonthDropDown from "./monthDropdown";
+import { formatCurrency } from "@/utils/moneyFormat";
+import { startOfMonth, endOfMonth } from "date-fns";
+import HalfDonutChart from "./HalfPieChart";
 
 type CashOutResponse = {
   totalExpense: string;
   fourExpenseCategories: { category: string; sum: number }[];
   succeeded: boolean;
 };
-type RequestBody = {
-  toDate: Date | null;
-  fromDate: Date | null;
-};
 
-const getCashOutActivityData = async (
-  url: RequestInfo,
-  body: { toDate: any; fromDate: any },
-) => {
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      cache: "no-store",
-      body: JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const remoteData = await response.json();
-    const { fromDate, toDate } = body;
-
-    const filteredCashOutActivity = remoteData.filter(
-      (activity: { activityDate: string | number | Date }) => {
-        const activityDate = new Date(activity.activityDate);
-
-        return (
-          (!fromDate || activityDate >= new Date(fromDate)) &&
-          (!toDate || activityDate <= new Date(toDate))
-        );
-      },
-    );
-
-    const sortedCashOutActivity = filteredCashOutActivity.sort(
-      (a: { sum: number }, b: { sum: number }) => b.sum - a.sum,
-    );
-
-    const fourExpenseCategories = sortedCashOutActivity.slice(0, 4);
-    const totalExpense = fourExpenseCategories.reduce(
-      (total: any, category: { sum: any }) => total + category.sum,
-      0,
-    );
-
-    const formattedTotalExpense = formatCurrency(totalExpense);
-
-    const responseObject = {
-      totalExpense: formattedTotalExpense,
-      fourExpenseCategories,
-      succeeded: true,
-    };
-
-    return responseObject as CashOutResponse;
-  } catch (error) {
-    console.error("Error while fetching data:", error);
-    return {
-      recentTransactions: [],
-      succeeded: false,
-    };
-  }
-};
-
-export default async function CashOutActivity({
-  from,
-  to,
+export default function CashOutActivity({
+  responseData,
 }: {
-  from: string;
-  to: string;
+  responseData: any;
 }) {
   const title = "Cash Out Activity";
+  const CurrentColors = ["#7c1515", "#c8e129", "#6029e1", "#29dee1"];
 
   const currentDate = new Date();
   const startOfCurrentMonth = startOfMonth(currentDate);
   const endOfCurrentMonth = endOfMonth(currentDate);
 
-  const fromDate = from
-    ? parse(from, "yyyy-MM-dd", new Date())
-    : startOfCurrentMonth;
-  const toDate = to ? parse(to, "yyyy-MM-dd", new Date()) : endOfCurrentMonth;
+  const [selectedFromDate, setSelectedFromDate] = useState<Date | null>(
+    startOfCurrentMonth,
+  );
+  const [selectedToDate, setSelectedToDate] = useState<Date | null>(
+    endOfCurrentMonth,
+  );
 
-  const requestBody: RequestBody = {
-    fromDate,
-    toDate,
+  const handleMonthSelect = (fromDate: Date, toDate: Date) => {
+    setSelectedFromDate(fromDate);
+    setSelectedToDate(toDate);
   };
 
-  const response = (await getCashOutActivityData(
-    `${process.env.BASE_URL}/${urlEndpoints["cashOutActivity"]}`,
-    requestBody,
-  )) as CashOutResponse;
+  const filteredCashOutActivity = responseData.filter(
+    (activity: { activityDate: string | number | Date }) => {
+      const activityDate = new Date(activity.activityDate);
 
-  const CurrentColors = ["#7c1515", "#c8e129", "#6029e1", "#29dee1"];
+      return (
+        (!selectedFromDate || activityDate >= new Date(selectedFromDate)) &&
+        (!selectedToDate || activityDate <= new Date(selectedToDate))
+      );
+    },
+  );
+
+  const sortedCashOutActivity = filteredCashOutActivity.sort(
+    (a: { sum: number }, b: { sum: number }) => b.sum - a.sum,
+  );
+
+  const fourExpenseCategories = sortedCashOutActivity.slice(0, 4);
+
+  const totalExpense = fourExpenseCategories.reduce(
+    (total: any, category: { sum: any }) => total + category.sum,
+    0,
+  );
+
+  const formattedTotalExpense = formatCurrency(totalExpense);
+
+  const responseObject = {
+    totalExpense: formattedTotalExpense,
+    fourExpenseCategories,
+    succeeded: true,
+  };
+
   const isCashOut =
-    (response as CashOutResponse)?.fourExpenseCategories !== undefined;
+    (responseObject as CashOutResponse)?.fourExpenseCategories !== undefined;
 
   let sortedData: { category: string; sum: number }[] = [];
   if (isCashOut) {
-    sortedData = (response as CashOutResponse).fourExpenseCategories.sort(
+    sortedData = (responseObject as CashOutResponse).fourExpenseCategories.sort(
       (a, b) => b.sum - a.sum,
     );
   }
@@ -125,7 +90,7 @@ export default async function CashOutActivity({
         iconBgColor="bg-red-600"
         textBgColor="bg-red-300"
         textColor="text-red-800 dark:text-red-100"
-        amount={response?.totalExpense}
+        amount={responseObject?.totalExpense}
         signIcon={
           <Remove className="h-3 w-3 font-bold text-red-600 dark:text-red-300" />
         }
@@ -136,8 +101,7 @@ export default async function CashOutActivity({
             {title}
           </p>
           <div className="flex-shrink-0 ">
-            {/* <DatePickerWithRange fromParam="cashOutFrom" toParam="cashOutTo" /> */}
-            <MonthDropDown fromParam="cashOutFrom" toParam="cashOutTo" />
+            <MonthDropDown onSelect={handleMonthSelect} />
           </div>
         </div>
         <HalfDonutChart colors={CurrentColors} data={top4Data} />

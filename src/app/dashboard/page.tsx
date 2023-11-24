@@ -1,12 +1,12 @@
 import AssetDebtStats from "@/components/AssetDebtStats";
-import CashInActivity from "@/components/CashInActivity";
-import CashOutActivity from "@/components/CashOutActivity";
+import CashInActivityContainer from "@/components/CashInActivityContainer";
+import CashOutActivityContainer from "@/components/CashOutActivityContainer";
 import GroupedBarContainer from "@/components/GroupedBarContainer";
 import NetWorthCard from "@/components/NetWorthCard";
 import SearchInput from "@/components/SearchInput";
 import SideBar from "@/components/SidebarContainer";
 import SummaryCard from "@/components/SummaryCard";
-import Table from "@/components/Table";
+import TableContainer from "@/components/TableContainer";
 import AssetDebtStatsSkeleton from "@/components/skeleton/AssetDebtStatsSkeleton";
 import CashActivitySkeleton from "@/components/skeleton/CashActivity";
 import GroupedBarChartSkeleton from "@/components/skeleton/GroupedBarSkeleton";
@@ -17,20 +17,7 @@ import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
 
-type SearchParamsProps = {
-  transacFrom: string;
-  transacTo: string;
-  cashInFrom: string;
-  cashInTo: string;
-  cashOutFrom: string;
-  cashOutTo: string;
-};
-
-export default async function Dashboard({
-  searchParams,
-}: {
-  searchParams: SearchParamsProps;
-}) {
+export default async function Dashboard() {
   return (
     <>
       <SideBar>
@@ -66,10 +53,7 @@ export default async function Dashboard({
           </div>
           <div className="mx-auto w-full px-2 xs:-order-2 xs:mt-4 md:w-3/5 lg:order-none lg:-mt-20 lg:w-1/4">
             <Suspense fallback={<CashActivitySkeleton />}>
-              <CashInActivity
-                from={searchParams.cashInFrom}
-                to={searchParams.cashInTo}
-              />
+              <CashInActivityContainer />
             </Suspense>
           </div>
           <div className="w-full xs:-order-3 xs:px-0 md:px-2 lg:order-none lg:-mt-40 lg:w-1/2">
@@ -78,28 +62,19 @@ export default async function Dashboard({
             </Suspense>
             <div className="mx-auto mt-10 hidden h-fit w-full xs:order-last lg:order-none lg:block">
               <Suspense fallback={<TableSkeleton />}>
-                <Table
-                  from={searchParams.transacFrom}
-                  to={searchParams.transacTo}
-                />
+                <TableContainer />
               </Suspense>
             </div>
           </div>
           <div className="mx-auto h-full w-full px-2 xs:mt-8 md:w-3/5 lg:mt-6 lg:w-1/4">
             <Suspense fallback={<CashActivitySkeleton />}>
-              <CashOutActivity
-                from={searchParams.cashOutFrom}
-                to={searchParams.cashOutTo}
-              />
+              <CashOutActivityContainer />
             </Suspense>
           </div>
 
           <div className="mx-auto mt-8 block h-fit w-full px-2 xs:order-last lg:order-none lg:hidden lg:w-1/2">
             <Suspense fallback={<TableSkeleton />}>
-              <Table
-                from={searchParams.transacFrom}
-                to={searchParams.transacTo}
-              />
+              <TableContainer />
             </Suspense>
           </div>
         </div>
