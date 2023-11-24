@@ -3,7 +3,7 @@ import HalfDonutChart from "@/components/HalfPieChart";
 import { Button } from "./ui/button";
 import IncomeExpenseStats from "./IncomeExpenseStats";
 import { Add, ArrowForward, TrendingUp } from "@mui/icons-material";
-import MonthDropDown from "./monthDropdown";
+import MonthDropDown from "./MonthDropDown";
 import { useState } from "react";
 import { formatCurrency } from "@/utils/moneyFormat";
 import { endOfMonth, startOfMonth } from "date-fns";
@@ -106,6 +106,7 @@ export default function CashInActivity({
             {title}
           </p>
           <div className="flex-shrink-0 ">
+            {/* <MonthDropDown onSelect={handleMonthSelect} /> */}
             <MonthDropDown onSelect={handleMonthSelect} />
           </div>
         </div>

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import IncomeExpenseStats from "./IncomeExpenseStats";
 import { ArrowForward, Remove, TrendingDown } from "@mui/icons-material";
-import MonthDropDown from "./monthDropdown";
+import MonthDropDown from "./MonthDropDown";
 import { formatCurrency } from "@/utils/moneyFormat";
 import { startOfMonth, endOfMonth } from "date-fns";
 import HalfDonutChart from "./HalfPieChart";
@@ -95,7 +95,7 @@ export default function CashOutActivity({
           <Remove className="h-3 w-3 font-bold text-red-600 dark:text-red-300" />
         }
       />
-      <div className="my-1 rounded-md border bg-gray-50 p-4 shadow-md dark:border-gray-900 dark:bg-dark dark:text-gray-100">
+      <div className="my-1 rounded-md border bg-gray-50 p-2 shadow-md dark:border-gray-900 dark:bg-dark dark:text-gray-100">
         <div className="flex flex-wrap items-center justify-between py-1">
           <p className="mb-0 font-bold capitalize antialiased dark:text-gray-100 xl:text-lg 2xl:text-xl">
             {title}
