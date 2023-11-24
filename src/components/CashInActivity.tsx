@@ -42,7 +42,7 @@ export default function CashInActivity({
     setSelectedToDate(toDate);
   };
 
-  const filteredCashInActivity = responseData.filter(
+  const filteredCashInActivity = responseData?.filter(
     (activity: { activityDate: string | number | Date }) => {
       const activityDate = new Date(activity.activityDate);
 
@@ -53,11 +53,11 @@ export default function CashInActivity({
     },
   );
 
-  const sortedCashInActivity = filteredCashInActivity.sort(
+  const sortedCashInActivity = filteredCashInActivity?.sort(
     (a: { sum: number }, b: { sum: number }) => b.sum - a.sum,
   );
 
-  const fourIncomeCategories = sortedCashInActivity.slice(0, 4);
+  const fourIncomeCategories = sortedCashInActivity?.slice(0, 4);
 
   const totalIncome = fourIncomeCategories.reduce(
     (total: any, category: { sum: any }) => total + category.sum,
@@ -105,7 +105,7 @@ export default function CashInActivity({
           <p className="mb-0 font-bold capitalize antialiased dark:text-gray-100 xl:text-lg 2xl:text-xl">
             {title}
           </p>
-          <div className="flex-shrink-0 ">
+          <div className="">
             {/* <MonthDropDown onSelect={handleMonthSelect} /> */}
             <MonthDropDown onSelect={handleMonthSelect} />
           </div>

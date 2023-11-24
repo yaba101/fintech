@@ -100,7 +100,7 @@ export default function CashOutActivity({
           <p className="mb-0 font-bold capitalize antialiased dark:text-gray-100 xl:text-lg 2xl:text-xl">
             {title}
           </p>
-          <div className="flex-shrink-0 ">
+          <div className="xs:w-32 md:w-36 ">
             <MonthDropDown onSelect={handleMonthSelect} />
           </div>
         </div>
