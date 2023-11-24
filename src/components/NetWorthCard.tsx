@@ -17,7 +17,7 @@ const AssetDebtResponseSchema = z.object({
 const getData = async (url: string): Promise<AssetDebtResponse> => {
   try {
     const response = await fetch(url, {
-      method: "GET",
+      method: "POST",
       cache: "no-store",
       credentials: "include",
     });
