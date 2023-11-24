@@ -100,7 +100,7 @@ export default function MonthDropDown({ onSelect }: MonthDropDownProps) {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute mt-2 max-h-48 w-36 origin-top-right  overflow-y-auto rounded-md border border-gray-600  bg-white shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-dark xs:left-0 xl:right-0">
+          <Menu.Items className="absolute mt-2 max-h-48 w-36 origin-top-right  overflow-y-auto rounded-md border border-gray-300 bg-white  shadow-lg ring-1 ring-black/5 focus:outline-none dark:border-gray-600 dark:bg-dark xs:left-0 xl:right-0">
             {months.map((monthIndex) => (
               <Menu.Item key={monthIndex}>
                 {({ active }) => (
@@ -108,7 +108,7 @@ export default function MonthDropDown({ onSelect }: MonthDropDownProps) {
                     onClick={() => handleMonthChange(monthIndex)}
                     className={`${
                       active
-                        ? "bg-gray-400 text-white"
+                        ? "bg-gray-600 text-white"
                         : "text-gray-900 dark:text-gray-100"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
