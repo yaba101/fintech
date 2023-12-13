@@ -3,19 +3,16 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useState, useRef, useEffect } from "react";
 
 interface YearDropDownProps {
-  years: number[];
   selectedYear: number;
   onSelectYear: (year: number) => void;
 }
 
-function YearDropDown({
-  years,
-  selectedYear,
-  onSelectYear,
-}: YearDropDownProps) {
+function YearDropDown({ selectedYear, onSelectYear }: YearDropDownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const sortedYears = years.slice().sort((a, b) => b - a);
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
+
   const handleYearChange = (year: number) => {
     onSelectYear(year);
     setIsOpen(false);
@@ -61,7 +58,7 @@ function YearDropDown({
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            {sortedYears.map((year, index) => (
+            {years.map((year, index) => (
               <button
                 key={index}
                 onClick={() => handleYearChange(year)}

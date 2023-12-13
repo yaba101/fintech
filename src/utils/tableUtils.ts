@@ -1,39 +1,33 @@
+import { format } from "date-fns";
 import { z } from "zod";
-
-const RecentTransactionSchema = z.object({
-  transactionDate: z.string(),
-  amount: z.number(),
-  merchant: z.string(),
-  transactionName: z.string(),
-  category: z.string(),
-  personalFinanceCategory: z.string(),
-  personalFinanceCategoryIconUrl: z.string().nullable(),
-});
-
-const RecentTransactionResponseSchema = z.object({
-  recentTransactions: z.array(RecentTransactionSchema),
-});
 
 export const getRecentTransactionData = async (
   url: RequestInfo,
-  body?: { toDate: any; fromDate: any },
+  body: { toDate: any; fromDate: any }
 ) => {
   try {
+    const { toDate, fromDate } = body;
+    const parsedFromDate = fromDate
+      ? format(new Date(fromDate), "yyyy-MM-dd")
+      : null;
+    const parsedToDate = toDate ? format(new Date(toDate), "yyyy-MM-dd") : null;
     const response = await fetch(url, {
       method: "POST",
       cache: "no-store",
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        fromDate: parsedFromDate,
+        toDate: parsedToDate,
+      }),
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    RecentTransactionResponseSchema.parse(data);
-    return { recentTransactions: data.recentTransactions, succeeded: true };
+    const remoteData = await response.json();
+    return remoteData;
   } catch (error) {
-    console.error("Error while fetching data:", error);
+    console.error("Error occured. Try again.:", error);
     return {
       recentTransactions: [],
       succeeded: false,

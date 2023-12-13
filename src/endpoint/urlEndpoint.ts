@@ -4,4 +4,5 @@ export const urlEndpoints = {
   incomeExpense: "income-expense",
   transaction: "transactions",
   assetDebt: "asset-debt",
+  accounts: "accounts",
 };

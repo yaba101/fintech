@@ -1,21 +1,17 @@
 import AssetDebtStats from "@/components/AssetDebtStats";
-import CashInActivityContainer from "@/components/CashInActivityContainer";
-import CashOutActivityContainer from "@/components/CashOutActivityContainer";
-import GroupedBarContainer from "@/components/GroupedBarContainer";
+import CashInActivity from "@/components/CashInActivity";
+import CashOutActivity from "@/components/CashOutActivity";
+import GroupedBarChart from "@/components/GroupedBar";
 import NetWorthCard from "@/components/NetWorthCard";
 import SearchInput from "@/components/SearchInput";
 import SideBar from "@/components/SidebarContainer";
 import SummaryCard from "@/components/SummaryCard";
-import TableContainer from "@/components/TableContainer";
+import Table from "@/components/Table";
 import AssetDebtStatsSkeleton from "@/components/skeleton/AssetDebtStatsSkeleton";
-import CashActivitySkeleton from "@/components/skeleton/CashActivity";
 import GroupedBarChartSkeleton from "@/components/skeleton/GroupedBarSkeleton";
 import NetWorthCardSkeleton from "@/components/skeleton/NetWorthSkeleton";
 import SummaryCardSkeleton from "@/components/skeleton/SkeletonSummaryCard";
-import TableSkeleton from "@/components/skeleton/TableSkeleton";
 import { Suspense } from "react";
-
-export const dynamic = "force-dynamic";
 
 export default async function Dashboard() {
   return (
@@ -52,30 +48,22 @@ export default async function Dashboard() {
             </Suspense>
           </div>
           <div className="mx-auto w-full px-2 xs:-order-2 xs:mt-4 md:w-3/5 lg:order-none lg:-mt-20 lg:w-1/4">
-            <Suspense fallback={<CashActivitySkeleton />}>
-              <CashInActivityContainer />
-            </Suspense>
+            <CashInActivity />
           </div>
           <div className="w-full xs:-order-3 xs:px-0 md:px-2 lg:order-none lg:-mt-40 lg:w-1/2">
             <Suspense fallback={<GroupedBarChartSkeleton />}>
-              <GroupedBarContainer />
+              <GroupedBarChart />
             </Suspense>
             <div className="mx-auto mt-10 hidden h-fit w-full xs:order-last lg:order-none lg:block">
-              <Suspense fallback={<TableSkeleton />}>
-                <TableContainer />
-              </Suspense>
+              <Table />
             </div>
           </div>
           <div className="mx-auto h-full w-full px-2 xs:mt-8 md:w-3/5 lg:mt-6 lg:w-1/4">
-            <Suspense fallback={<CashActivitySkeleton />}>
-              <CashOutActivityContainer />
-            </Suspense>
+            <CashOutActivity />
           </div>
 
           <div className="mx-auto mt-8 block h-fit w-full px-2 xs:order-last lg:order-none lg:hidden lg:w-1/2">
-            <Suspense fallback={<TableSkeleton />}>
-              <TableContainer />
-            </Suspense>
+            <Table />
           </div>
         </div>
       </SideBar>

@@ -3,7 +3,6 @@ import StatsSkeleton from "./StatsSkeleton";
 const CashActivitySkeleton = () => {
   return (
     <>
-      <StatsSkeleton />
       <div className="my-3 animate-pulse rounded-md bg-gray-50 p-4 shadow-md dark:bg-dark dark:text-gray-100">
         <div className="border-bottom flex justify-between">
           <div className="flex items-center">

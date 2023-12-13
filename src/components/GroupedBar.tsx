@@ -3,6 +3,9 @@ import * as d3 from "d3";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import YearDropDown from "./YearDropDown";
 import { formatCurrency } from "@/utils/moneyFormat";
+import { getIncomeExpenseData } from "@/utils/incomeExpense";
+import { urlEndpoints } from "@/endpoint/urlEndpoint";
+import GroupedBarChartSkeleton from "./skeleton/GroupedBarSkeleton";
 
 type GroupedBarChart = {
   year: number;
@@ -71,21 +74,33 @@ function Bar({
   );
 }
 
-export default function GroupedBarChart({ data }: Props) {
+export default function GroupedBarChart() {
   const currentYear = new Date().getFullYear();
-  const [selectedYear, setSelectedYear] = useState<number | null>(currentYear);
-
+  const [selectedYear, setSelectedYear] = useState<number>(currentYear);
+  const [currentData, setCurrentData] = useState({
+    incomeExpense: [
+      {
+        year: currentYear,
+        month: 1,
+        income: 0,
+        expense: 0,
+        month_name: "",
+      },
+    ],
+    succeeded: true,
+  });
+  const [loading, setLoading] = useState(true);
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
 
-  const minYear = Math.min(...data.incomeExpense.map((entry) => entry.year));
-  const maxYear = Math.max(...data.incomeExpense.map((entry) => entry.year));
+  const minYear = Math.min(
+    ...currentData.incomeExpense.map((entry) => entry.year)
+  );
+  const maxYear = Math.max(
+    ...currentData.incomeExpense.map((entry) => entry.year)
+  );
   const years = Array.from(
     { length: maxYear - minYear + 1 },
-    (_, i) => minYear + i,
-  );
-
-  const filteredData = data.incomeExpense.filter(
-    (entry) => entry.year === selectedYear,
+    (_, i) => minYear + i
   );
 
   const axisBottomRef = useRef<SVGGElement>(null);
@@ -95,10 +110,31 @@ export default function GroupedBarChart({ data }: Props) {
   const width = 600 - margin.left - margin.right;
   const height = 320 - margin.top - margin.bottom;
 
-  const labels = data?.incomeExpense.map(({ month_name }) => month_name);
+  const labels = currentData?.incomeExpense.map(({ month_name }) => month_name);
   const sublabels = ["income", "expense"];
 
-  const values = filteredData
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const url = process.env.NEXT_PUBLIC_BASE_URL;
+
+        const data = await getIncomeExpenseData(
+          `${url}/${urlEndpoints["incomeExpense"]}`,
+          {
+            year: selectedYear,
+          }
+        );
+        setCurrentData(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, [selectedYear]);
+
+  const values = currentData.incomeExpense
     .map(({ income, expense }) => [income, expense])
     .flat();
 
@@ -142,130 +178,153 @@ export default function GroupedBarChart({ data }: Props) {
   }, [scaleX, yAxis]);
 
   return (
-    <div className=" z-0 my-3 overflow-x-hidden rounded-md bg-gray-50 py-1 shadow-lg dark:bg-dark ">
-      <div className="my-3 flex min-w-fit justify-between py-1 md:px-3">
-        <h4 className="mt-1 whitespace-nowrap px-1 text-center font-bold capitalize tracking-tight xs:text-sm md:mr-5 md:text-2xl ">
-          Insights
-        </h4>
-        <div className="mt-1 flex justify-between md:mr-5 ">
-          <button className="mt-2 rounded-full bg-green-600 font-medium text-white xs:mx-1 xs:h-2 xs:w-2 sm:mx-3 md:h-4 md:w-4" />
-          <p className="mt-1 text-sm xs:text-xs md:text-base">Income</p>
-          <button className="mt-2 rounded-full bg-red-600 font-medium text-white xs:mx-1 xs:h-2 xs:w-2 sm:mx-3 md:h-4 md:w-4" />
-          <p className="mt-1 text-sm xs:text-xs md:text-base">Expenses</p>
-        </div>
-        <div className="xs:mr-l">
-          <YearDropDown
-            years={years}
-            selectedYear={selectedYear!}
-            onSelectYear={setSelectedYear}
-          />
-        </div>
-      </div>
-
-      <svg
-        className=" w-auto overflow-x-hidden  "
-        viewBox={`0 0 ${width + margin.left + margin.right} ${
-          height + margin.top + margin.bottom
-        }`}
-        preserveAspectRatio="xMidYMid meet"
-        style={{ width: "100%", height: "auto" }}
-      >
-        <g transform={`translate(${margin.left}, ${margin.top})`}>
-          <g ref={axisBottomRef} transform={`translate(0, ${height})`} />
-          <g ref={axisLeftRef} />
-          {filteredData.map(({ month_name, income, expense }, groupIndex) => (
-            <g
-              key={`rect-group-${groupIndex}`}
-              transform={`translate(${scaleX(month_name)}, 0)`}
-            >
-              <Bar
-                key={`rect-income-${groupIndex}`}
-                x={subscaleX("income") || 0}
-                y={scaleY(income)}
-                width={subscaleX.bandwidth()}
-                height={height - scaleY(income)}
-                color="#27674a"
-                onMouseEnter={(event) => {
-                  setTooltip({
-                    x: event.clientX,
-                    y: event.clientY,
-                    index: groupIndex,
-                    type: "income",
-                  });
-                }}
-                onMouseLeave={() => setTooltip(null)}
-                data={{
-                  year: selectedYear!,
-                  month: filteredData[groupIndex].month,
-                  month_name,
-                  income,
-                  expense,
-                }}
+    <div className="my-3 overflow-x-hidden rounded-md bg-gray-50 py-1 shadow-lg dark:bg-dark">
+      {loading ? (
+        <GroupedBarChartSkeleton />
+      ) : !currentData.succeeded ? (
+        <p className="mx-auto text-center h-96 flex justify-center items-center text-gray-500">
+          Error occured. Try again.
+        </p>
+      ) : currentData.incomeExpense.length === 0 ? (
+        <p className="mx-auto text-center h-96 flex justify-center items-center text-gray-500">
+          No data Available
+        </p>
+      ) : (
+        <>
+          <div className="my-3 flex min-w-fit justify-between py-1 md:px-3">
+            <h4 className="mt-1 whitespace-nowrap px-1 text-center font-bold capitalize tracking-tight xs:text-sm md:mr-5 md:text-2xl">
+              Insights
+            </h4>
+            <div className="mt-1 flex justify-between md:mr-5">
+              <button className="mt-2 rounded-full bg-green-600 font-medium text-white xs:mx-1 xs:h-2 xs:w-2 sm:mx-3 md:h-4 md:w-4" />
+              <p className="mt-1 text-sm xs:text-xs md:text-base">Income</p>
+              <button className="mt-2 rounded-full bg-red-600 font-medium text-white xs:mx-1 xs:h-2 xs:w-2 sm:mx-3 md:h-4 md:w-4" />
+              <p className="mt-1 text-sm xs:text-xs md:text-base">Expenses</p>
+            </div>
+            <div className="xs:mr-l">
+              <YearDropDown
+                selectedYear={selectedYear!}
+                onSelectYear={setSelectedYear}
               />
+            </div>
+          </div>
 
-              <Bar
-                key={`rect-expense-${groupIndex}`}
-                x={subscaleX("expense") || 0}
-                y={scaleY(expense)}
-                width={subscaleX.bandwidth()}
-                height={height - scaleY(expense)}
-                color="#df2433"
-                onMouseEnter={(event) => {
-                  setTooltip({
-                    x: event.clientX,
-                    y: event.clientY,
-                    index: groupIndex,
-                    type: "expense",
-                  });
-                }}
-                onMouseLeave={() => setTooltip(null)}
-                data={{
-                  year: selectedYear!,
-                  month_name,
-                  income,
-                  expense,
-                  month: filteredData[groupIndex].month,
-                }}
-              />
+          <svg
+            className="w-auto overflow-x-hidden"
+            viewBox={`0 0 ${width + margin.left + margin.right} ${
+              height + margin.top + margin.bottom
+            }`}
+            preserveAspectRatio="xMidYMid meet"
+            style={{ width: "100%", height: "auto" }}
+          >
+            <g transform={`translate(${margin.left}, ${margin.top})`}>
+              <g ref={axisBottomRef} transform={`translate(0, ${height})`} />
+              <g ref={axisLeftRef} />
+              {currentData.incomeExpense.map(
+                ({ month_name, income, expense }, groupIndex) => (
+                  <g
+                    key={`rect-group-${groupIndex}`}
+                    transform={`translate(${scaleX(month_name)}, 0)`}
+                  >
+                    <Bar
+                      key={`rect-income-${groupIndex}`}
+                      x={subscaleX("income") || 0}
+                      y={scaleY(income)}
+                      width={subscaleX.bandwidth()}
+                      height={height - scaleY(income)}
+                      color="#27674a"
+                      onMouseEnter={(event) => {
+                        setTooltip({
+                          x: event.clientX,
+                          y: event.clientY,
+                          index: groupIndex,
+                          type: "income",
+                        });
+                      }}
+                      onMouseLeave={() => setTooltip(null)}
+                      data={{
+                        year: selectedYear!,
+                        month: currentData.incomeExpense[groupIndex].month,
+                        month_name,
+                        income,
+                        expense,
+                      }}
+                    />
+
+                    <Bar
+                      key={`rect-expense-${groupIndex}`}
+                      x={subscaleX("expense") || 0}
+                      y={scaleY(expense)}
+                      width={subscaleX.bandwidth()}
+                      height={height - scaleY(expense)}
+                      color="#df2433"
+                      onMouseEnter={(event) => {
+                        setTooltip({
+                          x: event.clientX,
+                          y: event.clientY,
+                          index: groupIndex,
+                          type: "expense",
+                        });
+                      }}
+                      onMouseLeave={() => setTooltip(null)}
+                      data={{
+                        year: selectedYear!,
+                        month_name,
+                        income,
+                        expense,
+                        month: currentData.incomeExpense[groupIndex].month,
+                      }}
+                    />
+                  </g>
+                )
+              )}
+
+              {Array.from({ length: numDashedLines }, (_, i) => (
+                <line
+                  key={`dashed-line-${i}`}
+                  x1="0"
+                  x2={width}
+                  y1={scaleY(dashedLineInterval * (i + 1))}
+                  y2={scaleY(dashedLineInterval * (i + 1))}
+                  stroke="#555"
+                  strokeDasharray="5,5"
+                />
+              ))}
             </g>
-          ))}
+          </svg>
 
-          {Array.from({ length: numDashedLines }, (_, i) => (
-            <line
-              key={`dashed-line-${i}`}
-              x1="0"
-              x2={width}
-              y1={scaleY(dashedLineInterval * (i + 1))}
-              y2={scaleY(dashedLineInterval * (i + 1))}
-              stroke="#555"
-              strokeDasharray="5,5"
-            />
-          ))}
-        </g>
-      </svg>
-      {tooltip !== null ? (
-        <div
-          className="pointer-events-none fixed rounded px-3 py-1 text-sm text-gray-100 shadow-md"
-          style={{
-            top: tooltip.y,
-            left: tooltip.x,
-            background: tooltip.type === "income" ? "#27674a" : "#df2433",
-          }}
-        >
-          <span className="mb-2 block text-xs font-medium">
-            {filteredData[tooltip.index].month_name} {selectedYear}
-          </span>
-          {tooltip.type === "income" ? (
-            <span className="mb-2 block text-xs font-semibold">
-              ${formatCurrency(filteredData[tooltip.index].income)}
-            </span>
-          ) : (
-            <span className="mb-2 block text-xs font-semibold">
-              ${formatCurrency(filteredData[tooltip.index].expense)}
-            </span>
-          )}
-        </div>
-      ) : null}
+          {tooltip !== null ? (
+            <div
+              className="pointer-events-none fixed rounded px-3 py-1 text-sm text-gray-100 shadow-md"
+              style={{
+                top: tooltip.y,
+                left: tooltip.x,
+                background: tooltip.type === "income" ? "#27674a" : "#df2433",
+              }}
+            >
+              <span className="mb-2 block text-xs font-medium">
+                {currentData.incomeExpense[tooltip.index].month_name}{" "}
+                {selectedYear}
+              </span>
+              {tooltip.type === "income" ? (
+                <span className="mb-2 block text-xs font-semibold">
+                  $
+                  {formatCurrency(
+                    currentData.incomeExpense[tooltip.index].income
+                  )}
+                </span>
+              ) : (
+                <span className="mb-2 block text-xs font-semibold">
+                  $
+                  {formatCurrency(
+                    currentData.incomeExpense[tooltip.index].expense
+                  )}
+                </span>
+              )}
+            </div>
+          ) : null}
+        </>
+      )}
     </div>
   );
 }

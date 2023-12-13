@@ -1,21 +1,15 @@
-import { format } from "date-fns";
-
-export const getCashInActivityData = async (
+export const getIncomeExpenseData = async (
   url: string,
-  body: { toDate: any; fromDate: any }
+  body: { year: number }
 ) => {
   try {
-    const { toDate, fromDate } = body;
-    const parsedFromDate = fromDate
-      ? format(new Date(fromDate), "yyyy-MM-dd")
-      : null;
-    const parsedToDate = toDate ? format(new Date(toDate), "yyyy-MM-dd") : null;
+    const { year } = body;
+
     const response = await fetch(url, {
       method: "POST",
       cache: "no-store",
       body: JSON.stringify({
-        fromDate: parsedFromDate,
-        toDate: parsedToDate,
+        year,
       }),
       credentials: "same-origin",
       headers: {
@@ -28,8 +22,7 @@ export const getCashInActivityData = async (
   } catch (error) {
     console.error("Error occured. Try again.:", error);
     return {
-      totalIncome: "0.00",
-      fourIncomeCategories: [],
+      incomeExpense: [],
       succeeded: false,
     };
   }
